@@ -6,8 +6,10 @@
   image: https://media.licdn.com/dms/image/v2/D4E03AQGlxycsyUPltg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1676027893027?e=1756944000&v=beta&t=N8SWmvidRGpSczzO4xHubCF92V2YX-WyQY9JSZEE160
   url: https://www.linkedin.com/in/johnanthonycoleman/
   contributions:
-    - creator
-    - author
+    - open-guide-to-kanban
+    - kanban-guide-2020-07
+    - kanban-guide-2020-12
+    - kanban-guide-2025
   role: creator
   founding: true
   weight: 1
@@ -17,18 +19,14 @@
   githubUsername: mrhinsh
   url: https://nkdagility.com/company/people/martin-hinshelwood/
   contributions:
-    - technical
-    - review
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   founding: true
 
 - name: Jim Benson
   url: https://www.linkedin.com/in/jimbenson/
   contributions:
-    - review
-    - advisor
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   founding: true
 
@@ -36,8 +34,7 @@
   url: https://magdalenafirlit.com/
   githubUsername: Magdalena-Firlit
   contributions:
-    - review
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   founding: true
 
@@ -45,29 +42,25 @@
   url: https://www.linkedin.com/in/Michaelforni/
   githubUsername: Michaelforni
   contributions:
-    - review
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   founding: true
 
 - name: Christian Neverdal
   contributions:
-    - review
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   founding: true
 
 - name: Nader Talai
   contributions:
-    - review
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   founding: true
 
 - name: Steve Tendon
   contributions:
-    - review
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   founding: true
 
@@ -75,8 +68,7 @@
   url: https://www.linkedin.com/in/nigelthurlow/
   githubUsername: nigelthurlow
   contributions:
-    - review
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   weight: 2
   founding: true
@@ -85,8 +77,7 @@
   url: https://www.linkedin.com/in/jcasal/
   githubUsername: darkewok
   contributions:
-    - review
-    - contributor
+    - open-guide-to-kanban
   role: contributor
   weight: 3
   founding: true
