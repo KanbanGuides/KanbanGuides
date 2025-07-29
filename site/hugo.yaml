@@ -33,7 +33,14 @@ languages:
       description: Bello! Kanban Guides para banana work! Poopaye me want open guide to kanban, banana kanban guide! Gelato work, banana flow optimizzazione, WIP-ay limitazione, banana delivery, agile banana, lean banana, continuo improvement-o! Bananaaaa!
       keywords: Kanban, banana, gelato, poopaye, bello, work banana, flow banana, WIP banana, value banana, agile banana, lean banana, improvement banana, kanban board banana, workflow banana, delivery banana
       status: reference
-
+  ja:
+    languageName: Japanese
+    weight: 2
+    title: オープンカンバンガイド
+    params:
+      description: オープンカンバンガイドは、ナレッジワークにおけるカンバンの適用のための無料のコミュニティ主導のリファレンスです。フローの改善、価値提供の最適化、チームの持続可能性向上に必要なコアプラクティス、メトリクス、原則を定義しています。
+      keywords: カンバン, オープンカンバンガイド
+  
 params:
   description: Authoritative and Open Resources for Flow-Based Work
   keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
@@ -44,12 +51,12 @@ params:
   previewSiteUrl: https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/
   productionSiteUrl: https://kanbanguides.org/
   brand:
-    bg_colour: "#135289"
-  logo_image: "/images/kanban-guides-logo-dark.png" # URL to the site logo image
-  menu_logo: "/images/kanban-guides-logo-dark.png" # URL to the main menu logo image
-  AzureSitesConfig: "#{Guides_AzureSitesConfig}#"
-  GitVersion_SemVer: "v#{GitVersion.SemVer}#"
-  GoogleTagManagerID: "GTM-T2KD2BNT" # Replace with your actual GTM ID
+    bg_colour: '#135289'
+  logo_image: /images/kanban-guides-logo-dark.png
+  menu_logo: /images/kanban-guides-logo-dark.png
+  AzureSitesConfig: '#{Guides_AzureSitesConfig}#'
+  GitVersion_SemVer: v#{GitVersion.SemVer}#
+  GoogleTagManagerID: GTM-T2KD2BNT
   features:
     guideDetails: false
 sitemap:
@@ -62,24 +69,24 @@ rss:
   description: Subscribe to our RSS feed
 outputs:
   home:
-    - html
-    - json
-    - rss
-    - languages
-    - translations
+  - html
+  - json
+  - rss
+  - languages
+  - translations
   section:
-    - html
-    - rss
-    - guide-translations
+  - html
+  - rss
+  - guide-translations
   taxonomy:
-    - html
-    - rss
+  - html
+  - rss
   term:
-    - html
-    - rss
+  - html
+  - rss
   page:
-    - html
-    - rss
+  - html
+  - rss
 outputFormats:
   json:
     mediaType: application/json
@@ -95,11 +102,9 @@ outputFormats:
     mediaType: application/json
     baseName: guide-translations
     isPlainText: true
-
 module:
   imports:
-    - path: github.com/nkdAgility/HugoGuides/module
-
+  - path: github.com/nkdAgility/HugoGuides/module
 markup:
   goldmark:
     renderer:
@@ -112,3 +117,4 @@ markup:
       attribute:
         block: true
         title: true
+

@@ -231,11 +231,27 @@ function New-TranslatedContent {
         $_.Name -match '^(index|_index)\.md$'
     }
     
-    # Files to skip (need manual translation)
-    $skipPatterns = @(
-        '*\guide\index.md',
-        '*\history\*\index.md'
-    )
+    # Files to skip (need manual translation) - dynamically build patterns
+    $skipPatterns = @()
+    
+    # Get all guide directories to build skip patterns
+    $guideDirectories = Get-ChildItem -Path $contentDir -Directory | Where-Object {
+        Test-Path (Join-Path $_.FullName "_index.md")
+    }
+    
+    foreach ($guideDir in $guideDirectories) {
+        $guideName = $guideDir.Name
+        # Skip main guide index files (need manual translation)
+        $skipPatterns += "*\$guideName\_index.md"
+        
+        # Skip versioned directories (e.g., 2025.7, 2020.12, etc.)
+        $versionedDirs = Get-ChildItem -Path $guideDir.FullName -Directory | Where-Object {
+            $_.Name -match '^\d{4}\.\d{1,2}$'
+        }
+        foreach ($versionDir in $versionedDirs) {
+            $skipPatterns += "*\$guideName\$($versionDir.Name)\*\index.md"
+        }
+    }
     
     foreach ($file in $englishFiles) {
         $relativePath = $file.FullName.Substring($contentDir.Length + 1)
@@ -313,13 +329,44 @@ function Test-LanguageSetup {
         $issues += "i18n file not found: $i18nFile"
     }
     
-    # Check for essential content files
-    $essentialFiles = @(
-        "content/_index.$LangCode.md",
-        "content/history/_index.$LangCode.md",
-        "content/translations/_index.$LangCode.md"
-    )
+    # Dynamically detect guide directories and build essential files list
+    $contentDir = Join-Path $siteDir "content"
+    $essentialFiles = @()
     
+    # Add root index file
+    $essentialFiles += "content/_index.$LangCode.md"
+    
+    # Find all guide directories (directories that contain _index.md files)
+    $guideDirectories = Get-ChildItem -Path $contentDir -Directory | Where-Object {
+        Test-Path (Join-Path $_.FullName "_index.md")
+    }
+    
+    foreach ($guideDir in $guideDirectories) {
+        $guideName = $guideDir.Name
+        
+        # Add main guide index file
+        $essentialFiles += "content/$guideName/_index.$LangCode.md"
+        
+        # Check for common subdirectories that should have translated index files
+        $commonSubdirs = @('history', 'translations')
+        foreach ($subdir in $commonSubdirs) {
+            $subdirPath = Join-Path $guideDir.FullName $subdir
+            if (Test-Path $subdirPath) {
+                # Check if there's an index.md in the subdirectory
+                $indexPath = Join-Path $subdirPath "index.md"
+                if (Test-Path $indexPath) {
+                    $essentialFiles += "content/$guideName/$subdir/index.$LangCode.md"
+                }
+            }
+        }
+    }
+    
+    Write-Host "   📋 Checking essential files:" -ForegroundColor Cyan
+    foreach ($file in $essentialFiles) {
+        Write-Host "      - $file" -ForegroundColor Cyan
+    }
+    
+    # Validate that essential files exist
     foreach ($file in $essentialFiles) {
         $fullPath = Join-Path $siteDir $file
         if (-not (Test-Path $fullPath)) {
@@ -497,10 +544,31 @@ try {
     Write-Host "Next steps:" -ForegroundColor Yellow
     Write-Host "1. Translate the content in the i18n/$LanguageCode.yaml file" -ForegroundColor Yellow
     Write-Host "2. Translate the content in the created .$LanguageCode.md files" -ForegroundColor Yellow
-    Write-Host "3. Manually create and translate guide/index.$LanguageCode.md" -ForegroundColor Yellow
-    Write-Host "4. Manually create and translate history/*/index.$LanguageCode.md files" -ForegroundColor Yellow
-    Write-Host "5. Test the site by running 'hugo server' from the site directory" -ForegroundColor Yellow
-    Write-Host "6. Commit and push your changes" -ForegroundColor Yellow
+    
+    # Dynamically generate manual translation instructions
+    $contentDir = Join-Path $siteDir "content"
+    $guideDirectories = Get-ChildItem -Path $contentDir -Directory | Where-Object {
+        Test-Path (Join-Path $_.FullName "_index.md")
+    }
+    
+    $stepNumber = 3
+    foreach ($guideDir in $guideDirectories) {
+        $guideName = $guideDir.Name
+        Write-Host "$stepNumber. Manually create and translate $guideName/_index.$LanguageCode.md" -ForegroundColor Yellow
+        $stepNumber++
+        
+        # Check for versioned directories that need translation
+        $versionedDirs = Get-ChildItem -Path $guideDir.FullName -Directory | Where-Object {
+            $_.Name -match '^\d{4}\.\d{1,2}$'
+        }
+        if ($versionedDirs.Count -gt 0) {
+            Write-Host "$stepNumber. Manually create and translate versioned content in $guideName/ (e.g., $(($versionedDirs | Select-Object -First 3 | ForEach-Object { $_.Name }) -join ', '))" -ForegroundColor Yellow
+            $stepNumber++
+        }
+    }
+    
+    Write-Host "$stepNumber. Test the site by running 'hugo server' from the site directory" -ForegroundColor Yellow
+    Write-Host "$($stepNumber + 1). Commit and push your changes" -ForegroundColor Yellow
     
     if (-not $validationResult) {
         Write-Host ""
