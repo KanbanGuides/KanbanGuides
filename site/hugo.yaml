@@ -54,6 +54,14 @@ languages:
       description: Aprende cómo aplicar Kanban para optimizar el flujo y la entrega de valor. El hogar de la Guía Abierta de Kanban y La Guía Kanban.
       keywords: Kanban, Guía Abierta de Kanban, guía de kanban, método kanban, trabajo del conocimiento, optimización del flujo, límites de WIP, entrega de valor, agile, lean, mejora continua, expectativa de nivel de servicio, flujo acumulativo, rendimiento, métricas, edad de elemento de trabajo (WIA), eficiencia de flujo, visualización, trabajo en curso (WIP), mejora de procesos, tablero kanban, definición de flujo de trabajo, entrega orientada a resultados
       status: reference
+  fa:
+    languageName: Farsi (Persian)
+    weight: 5
+    title: راهنماهای کانبان
+    params:
+      description: یاد بگیرید چگونه کانبان (Kanban) را برای بهینه‌سازی جریان و تحویل ارزش به‌کار ببرید. خانه‌ی «راهنمای آزاد کانبان (Open Guide to Kanban)» و «راهنمای کانبان (The Kanban Guide)».
+      keywords: کانبان, راهنمای آزاد کانبان, راهنمای کانبان, روش کانبان, کار دانش‌محور, بهینه‌سازی جریان, محدودیت‌های کار در جریان, تحویل ارزش, اجایل, ناب, بهبود مستمر, زمان انتظار, جریان تجمعی, توان عملیاتی, سن آیتم, کارایی جریان, بصری‌سازی, کار در جریان, بهبود فرایند, برد کانبان, تعریف جریان کار, تحویل نتیجه‌محور
+      status: reference
       
 params:
   description: Authoritative and Open Resources for Flow-Based Work
