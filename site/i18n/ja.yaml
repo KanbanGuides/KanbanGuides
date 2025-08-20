@@ -67,7 +67,7 @@
 
 - id: open_source_description
   # translation: "The Open Guide to Kanban is an open source project that thrives on community collaboration. Whether you want to suggest improvements, report issues, or contribute content, we welcome your participation. The Kanban Guide is not open to contributions here, but is included here for reference. Together, we can make these resources even more valuable for the Kanban community worldwide and anyone wishing to improve the flow of value (potential and actual realized value)."
-  translation: "カンバンガイドは、コミュニティの協力によって成り立っているオープンソースプロジェクトです。改善提案、問題報告、コンテンツへの貢献など、どなたでも参加できます。「カンバンガイド」については、ここでは貢献を受け付けていませんが、参考のために掲載しています。共に、これらのリソースを世界中のカンバンコミュニティや価値フロー（潜在的な価値や実際に実現した価値）を改善したいと考える人たちにとって、より価値あるものにしていきましょう。"
+  translation: "オープン版カンバンガイドは、コミュニティの協力によって成り立っているオープンソースプロジェクトです。改善提案、問題報告、コンテンツへの貢献など、どなたでも参加できます。「カンバンガイド」については、ここでは貢献を受け付けていませんが、参考のために掲載しています。共に、これらのリソースを世界中のカンバンコミュニティや価値フロー（潜在的な価値や実際に実現した価値）を改善したいと考える人たちにとって、より価値あるものにしていきましょう。"
 
 - id: at_a_glance_title
   # translation: "At a Glance"
@@ -596,7 +596,7 @@
 # Additional translations for version-card.html
 - id: current_open_guide_label
   # translation: "Current Open Guide"
-  translation: "現在のオープン版カンバンガイド"
+  translation: "現在公開中のガイド"
 
 - id: active_status_label
   # translation: "Active"

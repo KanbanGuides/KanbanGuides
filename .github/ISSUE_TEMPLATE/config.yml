@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Hugo / Structure issue
+    url: https://github.com/nkdAgility/HugoGuides/issues
+    about: If you find a problem with the structure of the site, please report it here. This module supports a number of sites.
+  - name: 日本語の翻訳に関する問題
+    url: https://github.com/tomoharunagasawa/KanbanGuides-ja/issues
+    about: 日本語の翻訳に問題がある場合は、こちらからお知らせください。

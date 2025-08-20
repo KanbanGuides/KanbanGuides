@@ -42,8 +42,8 @@ languages:
     # title: Open Guide to Kanban <- 英語がKanban Guidesのため、ここは日本語のカンバンガイドに合わせる
     title: カンバンガイド
     params:
-      # description: The Open Guide to Kanban is a free, community-driven reference for applying Kanban in knowledge work. It defines the core practices, metrics, and principles necessary to improve flow, optimise value delivery, and enhance team sustainability. This guide supports scalable Kanban implementations across diverse industries and complements other agile, lean, and flow-based approaches.
-      description: オープン版カンバンガイドは、ナレッジワークにカンバンを適用するためのコミュニティ主体の無料のリファレンスです。フローを改善し、価値提供を最適化し、チームの持続可能性を向上させるために必要なコアプラクティス、計測指標、および原則を定義しています。このガイドは、多様な業界でのスケーラブルなカンバンの導入を支援し、他のアジャイル、リーン、およびフローに基づくアプローチを補完するものです。
+      # description: Learn how to apply Kanban to optimise flow and value delivery. Home of the Open Guide to Kanban and The Kanban Guide
+      description: カンバンガイドとオープン版カンバンガイドの公式サイトです。カンバンを適用して、フローと価値のデリバリーを最適化する方法を学びましょう。
       # keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
       keywords: カンバン, オープン版カンバンガイド, カンバンガイド, カンバン手法, ナレッジワーク, フロー最適化, WIP制限, 価値提供, アジャイル, リーン, 継続的改善, サービスレベル期待値, 累積フロー, スループット, 計測指標, 作業項目の年齢, フロー効率, 可視化, 進行中の作業, プロセス改善, カンバンボード, ワークフローの定義, アウトカム指向の提供
   es-ES:

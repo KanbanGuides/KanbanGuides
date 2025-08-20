@@ -1,8 +1,8 @@
 ---
-# title: Kanban Guide (May 2025)
+# title: The Kanban Guide (May 2025)
 title: カンバンガイド (2025年5月)
-# description: This document aims to be a unifying reference for the community by offering the minimal guidance for Kanban. Depending on the context, various approaches can complement Kanban, allowing it to accommodate the full spectrum of value delivery and organizational challenges.
-description: 本ガイドは、カンバンに関する最小限の指針を提示することで、コミュニティにとっての統一的な参考資料となることを目指している。カンバンは、さまざまなアプローチによって補完することで、価値の提供や組織の課題に関する幅広いニーズに柔軟に適応できるようになる。本ガイドでは、いくつかの用語について特定の使い方を定めている。これらは既存の定義を置き換えることを意図したものではなく、本ガイドにおける用法を明確にするためのものである。
+# description: The Kanban Guide is the official, minimal reference for Kanban. Clear, stable, and focused, it defines the core practices and principles for managing flow and improving delivery across industries.
+description: カンバンガイドは、カンバンに関する公式かつ最小限のリファレンスです。明確で安定しており、焦点が定まった本ガイドは、業界を問わずフローの管理とデリバリーの改善のための中核となるプラクティスと原則を定義しています。
 date: 2025-05-01T09:00:00Z
 version: 2025.5
 keywords:
