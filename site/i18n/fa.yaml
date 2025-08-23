@@ -1,0 +1,510 @@
+# English translations
+- id: and
+  translation: "و"
+
+- id: breadcrumb_home
+  translation: "صفحه‌ی نخست"
+
+- id: read_online_title
+  translation: "مطالعه‌ی آنلاین"
+
+- id: read_online_description
+  translation: "به راهنمای کامل به‌صورت دیجیتال دسترسی پیدا کنید، همراه با قابلیت‌های تعاملی و مرور آسان."
+
+- id: read_online_button
+  translation: "مطالعه‌ی آنلاین"
+
+- id: translations_title
+  translation: "ترجمه‌ها"
+
+- id: translations_description
+  translation: "به این راهنما در زبان‌های مختلف دسترسی پیدا کنید و در ترجمه‌ها کمک کنید."
+
+- id: translators_label
+  translation: "ترجمه‌ها"
+
+- id: translations_button
+  translation: "مشاهده‌ی ترجمه‌ها"
+
+- id: guide_translation_preview_note
+  translation: "پیش‌نمایش ترجمه‌ها:"
+
+- id: guide_translation_preview_message
+  translation: "این راهنما نسخه‌ی پیش‌نمایش ترجمه است و ممکن است کامل یا دقیق نباشد. لطفاً در بازبینی و بهبود آن کمک کنید و به گفت‌وگو بپیوندید."
+  
+- id: guide_preview_link
+  translation: "مشارکت در نقد این ترجمه"
+
+- id: history_title
+  translation: "تاریخچه"
+
+- id: history_description
+  translation: "تکامل و تاریخچه‌ی توسعه‌ی این راهنما را بررسی کنید."
+
+- id: history_button
+  translation: "مشاهده‌ی تاریخچه"
+
+- id: what_is_guides_title
+  translation: "راهنماهای کانبان چیستند؟"
+
+- id: open_source_title
+  translation: "متن‌باز و کانون‌محور"
+
+- id: open_source_description
+  translation: "راهنمای باز کانبان (Open Guide to Kanban) یک پروژه‌ی متن‌باز است که بر پایه‌ی همکاری جامعه رشد می‌کند. چه بخواهید پیشنهادهایی برای بهبود بدهید، چه اشکالاتی را گزارش کنید یا محتوایی اضافه کنید، از مشارکت شما استقبال می‌کنیم. راهنمای کانبان (Kanban Guide) در اینجا برای مشارکت باز نیست، اما به عنوان مرجع گنجانده شده است. با هم می‌توانیم این منابع را برای جامعه‌ی کانبان در سراسر جهان و هر کسی که می‌خواهد جریان ارزش (چه بالقوه و چه بالفعل محقق‌شده) را بهبود دهد، ارزشمندتر کنیم."
+
+- id: at_a_glance_title
+  translation: "در یک نگاه"
+
+- id: join_discussion_button
+  translation: "مشارکت در بحث و گفتگو"
+
+- id: join_discussion_title
+  translation: "مشارکت در بحث و گفتگوی راهنماهای کانبان"
+
+- id: join_discussion_description
+  translation: "با جامعه تعامل کنید، دیدگاه‌های خود را به اشتراک بگذارید و در شکل‌دادن به آینده‌ی راهنماهای کانبان نقش داشته باشید. مشارکت‌های شما در تبدیل این راهنماها به منابعی جامع برای متخصصان کانبان، بی‌نهایت ارزشمند است."
+
+- id: guides_intro_text
+  translation: "یاد بگیرید که «کانبان (Kanban)» چیست و چگونه می‌توان از آن برای بهینه‌سازی جریان تحویل ارزش در یک فرایند استفاده کرد. این منبع جامع، دانش و اصول اجرایی «کانبان (Kanban)» را در اختیار شما قرار می‌دهد. وب‌سایت Kanban Guides خانه‌ی «راهنمای کانبان (The Kanban Guide)» و «راهنمای آزاد کانبان (The Open Guide to Kanban)» است. این وب‌سایت یک مرجع رایگان و مبتنی بر جامعه‌ی متخصصان است که برای به‌کارگیری «کانبان (Kanban)» در کار دانش‌محور (Knowledge Work) طراحی شده است. این راهنماها، اصول اجرایی (Practices) و شاخص‌های کلیدی (Metrics) لازم برای بهبود جریان، بهینه‌سازی تحویل ارزش، و افزایش پایداری تیم را تعریف می‌کنند. این راهنماها از پیاده‌سازی مقیاس‌پذیر «کانبان (Kanban)» در صنایع مختلف پشتیبانی کرده و با دیگر رویکردهای چابک (Agile)، ناب (Lean) و مبتنی بر جریان (Flow-based) نیز سازگار هستند."
+
+- id: download_title
+  translation: "دانلود {{ .Site.Title }}"
+
+- id: download_description
+  translation: "دانلود کامل {{ .Site.Title }} به صورت PDF برای مطالعه‌ی آفلاین و ارجاع‌دهی."
+
+- id: download_button
+  translation: "دانلود PDF"
+
+- id: about_creators_title
+  translation: "درباره‌ی مؤلفین {{ .Site.Title }}"
+
+- id: read_bio_button
+  translation: "مطالعه‌ی زندگی‌نامه‌ی {{ .Name }}"
+
+- id: guide_content_not_found
+  translation: "محتوای راهنما پیدا نشد"
+
+- id: reportTranslationError
+  translation: "گزارش خطای ترجمه"
+
+# Navigation translations
+- id: nav_read_online
+  translation: "مطالعه‌ی آنلاین"
+
+- id: nav_translations
+  translation: "ترجمه‌ها"
+
+- id: nav_versions
+  translation: "ورژن‌ها"
+
+- id: nav_pdf_version
+  translation: "نسخه‌ی PDF"
+
+- id: nav_creators
+  translation: "مؤلفین"
+
+- id: nav_all_creators
+  translation: "همه‌ی مؤلفین"
+
+- id: nav_faq
+  translation: "سوالات متداول"
+
+- id: nav_read_guide
+  translation: "مطالعه‌ی راهنما"
+
+- id: nav_history
+  translation: "تاریخچه"
+
+- id: nav_overview
+  translation: "Overview"
+
+# Guide page PDF download translations
+- id: guide_pdf_download_button
+  translation: "دانلود PDF"
+
+- id: guide_pdf_not_available
+  translation: "PDF در دسترس نیست"
+
+- id: guide_pdf_intro_text
+  translation: "می‌توانید این راهنما را به صورت PDF برای مطالعه‌ی آفلاین دانلود کنید."
+
+- id: guide_pdf_intro_link
+  translation: "دانلود PDF"
+
+# Preview Translations functionality
+- id: download_preview_translations
+  translation: "پیش‌نمایش ترجمه‌ها"
+
+- id: download_preview_description
+  translation: "این ترجمه‌ها در حالت پیش‌نمایش در دسترس هستند و برای انتقال به وب‌سایت اصلی، نیاز به تأیید حداقل ۵ بازبین از جامعه دارند. لطفاً به ما در بازبینی و بهبود این ترجمه‌ها کمک کنید!"
+
+- id: download_visit_preview
+  translation: "بازدید از پیش‌نمایش سایت"
+
+- id: download_table_status
+  translation: "وضعیت"
+
+- id: download_table_contributed_by
+  translation: "تنظیم‌شده توسط"
+
+- id: download_preview_status
+  translation: "پیش‌نمایش"
+
+- id: download_reference_status
+  translation: "مرجع"
+
+- id: download_pdf_only_status
+  translation: "فقط PDF"
+
+- id: download_preview_action
+  translation: "پیش‌نمایش"
+
+- id: download_discussion_action
+  translation: "بحث و گفتگو"
+
+# Download page translations
+- id: download_page_title
+  translation: "مطالعه و دانلود نسخه‌ی رسمی {{ .Title }}"
+
+- id: download_page_description
+  translation: "{{ .Title }} در اینجا تعریف شده توسط"
+
+- id: download_page_originators
+  translation: "پدیدآورندگان {{ .Title }}."
+
+- id: download_translations_provided
+  translation: "ترجمه‌ها با مشارکت سخاوتمندانه‌ی افراد و گروه‌های فهرست‌شده در ادامه تهیه شده‌اند. لطفاً راهنمای مورد نظر خود را به زبان دلخواه انتخاب و دانلود کنید."
+
+- id: download_translation_error
+  translation: "اگر به یک خطای احتمالی در ترجمه {{ .Title }} لطفاً مستقیماً با مترجم تماس بگیرید. در صورتی که به پشتیبانی بیشتری نیاز دارید، با ما تماس بگیرید."
+
+- id: download_official_version
+  translation: "نسخه‌ی رسمی"
+
+- id: download_community_translations
+  translation: "ترجمه‌های گروهی"
+
+- id: download_current_version_released
+  translation: "نسخه‌ی رسمی و فعلی {{ .Site.Title }} منتشر شده است در"
+
+- id: download_older_translations_notice
+  translation: "ترجمه‌ها {{ .Site.Title }} گذشته‌تر ممکن است حاوی آخرین مطالب نباشند."
+
+- id: download_table_language
+  translation: "زبان"
+
+- id: download_table_translations_by
+  translation: "ترجمه‌ها توسط"
+
+- id: download_table_written_by
+  translation: "نوشته‌شده توسط"
+
+- id: download_table_action
+  translation: "اقدام"
+
+- id: download_official_current_version
+  translation: "نسخه‌ی رسمی و فعلی"
+
+- id: download_button_text
+  translation: "دانلود"
+
+- id: download_coming_soon
+  translation: "به زودی"
+
+- id: download_missing_language
+  translation: "زبان خود را نمی‌بینید؟"
+
+- id: download_contribute_translation
+  translation: "به این گروه در ایجاد ترجمه‌ای جدید کمک کنید."
+
+- id: download_add_translation
+  translation: "اضافه کردن ترجمه"
+
+- id: download_community_contributors
+  translation: "اعضای گروه"
+
+- id: contributors_label
+  translation: "همکاران"
+
+- id: contributors_description
+  translation: "افراد فهرست‌شده در ادامه، مجموعه‌ای از تمامی همکاران در تمام راهنماها و نسخه‌ها هستند."
+
+- id: read_online_action
+  translation: "مطالعه‌ی آنلاین"
+
+# PDF Download functionality
+- id: guide_pdf_download_button
+  translation: "دانلود PDF"
+
+- id: guide_pdf_not_available
+  translation: "PDF در دسترس نیست"
+
+- id: guide_pdf_intro_text
+  translation: "این راهنما همچنین به‌صورت فایل PDF برای دانلود در دسترس است."
+
+- id: guide_pdf_intro_link
+  translation: "دانلود PDF"
+
+# History page translations
+- id: history_page_title
+  translation: "ورژن‌ها"
+
+- id: history_evolution_title
+  translation: "تکامل راهنما"
+
+- id: history_evolution_description
+  translation: 'نسخه‌ی فعلی <strong><a href="{{ .GuideLink }}">راهنمای آزاد کانبان</a></strong> یک سند زنده (Living Document) است که از نسخه‌های پیشین تاریخی تکامل یافته و بازخوردهای جامعه و اصول اجرایی مدرن «کانبان (Kanban)» را در خود جای داده است. برای ProKanban، <a href="/history/kanban-guide-2025/">راهنمای کانبان</a> راهنمای زنده‌اش است.'
+
+- id: history_fork_summary_historical
+  translation: "ورژن‌های قدیمی"
+
+- id: history_fork_summary_current
+  translation: "راهنمای آزاد"
+
+- id: history_fork_summary_description
+  translation: "راهنمای فعلی بر پایه نسخه‌های پیشین بنا شده و آن‌ها را گسترش می‌دهد."
+
+- id: history_fork_indicator
+  translation: "انشعاب‌یافته و بهبود یافته بر اساس این نسخه‌های قدیمی"
+
+- id: history_no_versions_available
+  translation: "در حال حاضر هیچ نسخه‌ای در دسترس نیست."
+
+# Guide template translations
+- id: guide_join_discussion
+  translation: "مشارکت در بحث"
+
+- id: guide_table_of_contents
+  translation: "فهرست"
+
+- id: guide_coming_soon
+  translation: "این راهنما به‌زودی منتشر خواهد شد! برای دریافت به‌روزرسانی‌ها همراه ما باشید."
+
+- id: guide_no_content_available
+  translation: "هیچ محتوایی هنوز برای این زبان در دسترس نیست. "
+
+- id: guide_pdf_en
+  translation: "PDF (انگلیسی)"
+
+- id: guide_pdf_en_us
+  translation: "PDF (انگلیسی آمریکایی)"
+
+- id: guide_pdf_en_not_available
+  translation: "PDF (انگلیسی) در دسترس نیست"
+
+- id: guide_pdf_en_us_not_available
+  translation: "PDF (انگلیسی آمریکایی) در دسترس نیست"
+
+- id: guide_coming_label
+  translation: "به زودی:"
+
+- id: guide_updated_label
+  translation: "به روز رسانی شده:"
+
+- id: guide_version_label
+  translation: "ورژن:"
+
+- id: guide_content_unavailable_note
+  translation: "یادداشت:"
+
+- id: guide_content_unavailable_message
+  translation: "محتوای این صفحه در حال حاضر به زبان {{ .Language }} در دسترس نیست. محتوای پیش‌فرض راهنما در ادامه نمایش داده می‌شود."
+
+- id: guide_content_unavailable_title
+  translation: "محتوا در دسترس نیست:"
+
+- id: guide_content_unavailable_description
+  translation: "محتوای این صفحه بارگذاری نشد و هیچ محتوای پیش‌فرضی نیز در دسترس نیست. لطفاً،"
+
+- id: guide_report_issue_link
+  translation: "این مشکل را گزارش دهید."
+
+- id: guide_report_issue_message
+  translation: "تا بتوانیم آن را برطرف کنیم."
+
+- id: guide_back_to_home
+  translation: "← بازگشت به صفحه‌ی نخست"
+  
+- id: guide_historical_version_notice_title
+  translation: "اطلاعیه نسخه قدیمی:"
+
+- id: guide_historical_version_notice_text
+  translation: "شما در حال مشاهده نسخه {{ .CurrentVersion }} از این راهنما هستید."
+
+- id: guide_historical_version_notice_link
+  translation: "مشاهده نسخه‌ی جدیدتر ({{ .LatestVersion }})"
+
+- id: guide_historical_version_notice_suffix
+  translation: "برای به‌روزترین اطلاعات."
+
+- id: not_sure_which_to_use_title
+  translation: "مطمئن نیستید کدام را استفاده کنید؟"
+
+# Additional translations for guide/list.html
+- id: get_started_title
+  translation: "شروع کنید"
+
+- id: community_driven_label
+  translation: "مبتنی بر جامعه‌ی کاربران"
+
+- id: coming_soon
+  translation: "به زودی"
+
+- id: purpose_title
+  translation: "هدف"
+
+- id: ethos_title
+  translation: "رویکرد"
+
+- id: audience_title
+  translation: "مخاطب"
+
+- id: use_case_title
+  translation: "کاربرد"
+
+- id: content_title
+  translation: "محتوا"
+
+- id: update_model_title
+  translation: "به‌روزرسانی مدل"
+
+- id: guide_overview_title
+  translation: "مرور کلی راهنما"
+
+- id: guide_overview_description
+  translation: "ویژگی‌های کلیدی این راهنما"
+
+- id: when_to_use_title
+  translation: "زمان استفاده از این راهنما"
+
+- id: when_to_use_description
+  translation: "رویکرد مناسب با زمینه‌ی کاری خود را انتخاب کنید"
+
+- id: quick_decision_guide_title
+  translation: "راهنمای تصمیم‌گیری سریع"
+
+- id: getting_started_title
+  translation: "شروع کنید"
+
+- id: for_practitioners_title
+  translation: "ویژه‌ی متخصصان اجرایی"
+
+- id: current_information_title
+  translation: "اطلاعات فعلی"
+
+- id: current_information_description
+  translation: "جزئیات نسخه و مشارکت‌کنندگان"
+
+- id: current_version_title
+  translation: "نسخه‌ی فعلی"
+
+- id: current_version_updated_label
+  translation: "به‌روزرسانی شده"
+
+- id: current_version_description
+  translation: "این نسخه‌ی فعلی و فعال راهنما است."
+
+- id: read_current_version_button
+  translation: "مطالعه‌ی نسخه‌ی فعلی"
+
+- id: version_info_not_available
+  translation: "اطلاعات ورژن در دسترس نیست"
+
+- id: contributors_title
+  translation: "مشارکت‌کنندگان"
+
+- id: contributors_description_card
+  translation: "اعضای جامعه که در شکل‌گیری این راهنما نقش داشته‌اند"
+
+- id: contributors_thank_you
+  translation: "سپاس از همه‌ی مشارکت‌کنندگانی که در بهبود این راهنما نقش داشته‌اند."
+
+- id: join_community_button
+  translation: "به جامعه بپیوندید"
+
+- id: no_contributors_found
+  translation: "هیچ مشارکت‌کننده‌ای یافت نشد"
+
+- id: version_history_title
+  translation: "تاریخ ورژن"
+
+- id: version_history_description
+  translation: "نسخه‌های پیشین و روند تکامل آن‌ها"
+
+- id: no_previous_versions_title
+  translation: "هیچ نسخه‌ی پیشینی وجود ندارد"
+
+- id: no_previous_versions_description
+  translation: "این راهنما به‌تازگی آغاز شده است. برای مشاهده نسخه‌های تاریخی بعداً دوباره مراجعه کنید."
+
+- id: what_is_guide_title
+  translation: "این راهنما چیست؟"
+
+- id: license_title
+  translation: "مجوز"
+
+- id: view_on_github_button
+  translation: "مشاهده از طریق گیت‌هاب"
+
+# Additional translations for version-card.html
+- id: current_open_guide_label
+  translation: "راهنمای آزاد فعلی"
+
+- id: active_status_label
+  translation: "فعال"
+
+- id: current_fork_label
+  translation: "انشعاب فعلی"
+
+- id: active_fork_label
+  translation: "انشعاب فعال"
+
+- id: fork_indicator
+  translation: "انشعاب:"
+
+- id: forked_from_indicator
+  translation: "انشعاب گرفته شده از:"
+
+- id: this_is_fork_label
+  translation: "این انشعابی است"
+
+- id: available_languages_label
+  translation: "زبان‌های موجود:"
+
+- id: pdf_downloads_label
+  translation: "دانلود PDFها:"
+
+- id: living_document_updated_label
+  translation: "سند زنده - به‌روزرسانی شده"
+
+- id: active_fork_updated_label
+  translation: "انشعاب فعال - به روزرسانی شده"
+
+- id: historical_fork_label
+  translation: "انشعاب قدیمی - "
+
+- id: historical_version_label
+  translation: "ورژن قدیمی - "
+
+- id: current_version_label
+  translation: "ورژن فعلی"
+
+- id: read_guide_button
+  translation: "مطالعه‌ی راهنما"
+
+- id: translations_button_small
+  translation: "ترجمه‌ها"
+
+- id: read_fork_button
+  translation: "مطالعه‌ی انشعاب"
+
+- id: view_archive_button
+  translation: "مشاهده‌ی آرشیو"
+- id: guide_version_current
+  translation: "فعلی"
+- id: guide_version_dropdown_label
+  translation: "انتخاب ورژن"
+- id: guide_version_latest
+  translation: "جدیدترین"
