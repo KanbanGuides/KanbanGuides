@@ -1,5 +1,5 @@
 ---
-name: tranguide.create
+name: guide.trans.create
 description: "Creates a new language translation for the KanbanGuides Hugo site. Scaffolds all wrapper/structural files translated from English, adds hugo.yaml and hugo.production.yaml config, creates i18n file, and creates guide content files with translated front matter but EMPTY body (ready for a human translator). Use when: adding a new language, begin translation, create translation, new language, translate guide, add language support, scaffold translation."
 argument-hint: "Language code (e.g. 'de') and optionally the language name (e.g. 'German')"
 ---

@@ -116,7 +116,7 @@ This is a **Hugo-based static website** for the Open Guide to Kanban, hosted on 
 - Focus on practical, actionable guidance
 - Maintain consistency with Kanban terminology
 - **Multilingual support**: Site supports multiple languages (currently English and Klingon)
-- Use the `/tranguide.create` skill for adding new language support
+- Use the `/guide.trans.create` skill for adding new language support
 - Ensure all content changes are reflected across all language versions
 - Test content rendering in all supported languages
 
@@ -218,10 +218,10 @@ This is a **Hugo-based static website** for the Open Guide to Kanban, hosted on 
 
 ### Adding New Language Translations
 
-Use the `/tranguide.create` skill in GitHub Copilot or Claude to scaffold a new language:
+Use the `/guide.trans.create` skill in GitHub Copilot or Claude to scaffold a new language:
 
 ```
-/tranguide.create de German
+/guide.trans.create de German
 ```
 
 The skill will:
@@ -232,19 +232,19 @@ The skill will:
 - Create versioned guide files with translated front matter and an empty body ready for a human translator
 - Validate the complete setup
 
-To check translation progress across all languages, use `/tranguide.status`:
+To check translation progress across all languages, use `/guide.trans.status`:
 
 ```
-/tranguide.status                # dashboard for all languages
-/tranguide.status de             # status for one language
+/guide.trans.status                # dashboard for all languages
+/guide.trans.status de             # status for one language
 ```
 
-To audit an existing translation for gaps or missing files, use `/tranguide.reconcile`:
+To audit an existing translation for gaps or missing files, use `/guide.trans.reconcile`:
 
 ```
-/tranguide.reconcile de          # report gaps for German
-/tranguide.reconcile all         # audit every language
-/tranguide.reconcile de fix      # report and repair
+/guide.trans.reconcile de          # report gaps for German
+/guide.trans.reconcile all         # audit every language
+/guide.trans.reconcile de fix      # report and repair
 ```
 
 ### Updating Styles

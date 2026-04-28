@@ -1,5 +1,5 @@
 ---
-name: tranguide.reconcile
+name: guide.trans.reconcile
 description: "Audits and reconciles existing language translations for the KanbanGuides Hugo site against the English source. Finds missing files, missing front matter keys, missing i18n strings, and missing hugo.yaml config. Can optionally create missing files. Use when: reconcile translation, check translation, audit translation, fix missing translation files, translation is incomplete, translation gaps, translation health check, sync translation."
 argument-hint: "Language code to reconcile (e.g. 'de'), or 'all' for every language"
 ---
@@ -124,7 +124,7 @@ Use ✅ for complete, ❌ for missing, ⚠️ for present but with issues.
 
 If mode is `fix`, after reporting, create or repair each identified issue:
 
-**For missing files**: Follow the same creation rules as the `tranguide.create` skill:
+**For missing files**: Follow the same creation rules as the `guide.trans.create` skill:
 - Structural files: translate front matter and body from English source
 - Section root `_index` files: translate front matter only
 - Versioned guide files: translate front matter only, leave body EMPTY

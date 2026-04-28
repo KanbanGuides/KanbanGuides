@@ -52,7 +52,7 @@ Add a new language translation or improve an existing one.
 1. **Read the [Translations Code of Conduct](./translations-code-of-conduct.md)** — agreement is required before starting any translation work
 2. **Open a discussion** at [kanbanguides.org](https://kanbanguides.org) or Slack to notify the translation guardian that you intend to translate
 3. **Follow the [Translation Guide](./translations.md)** for the full technical workflow, including:
-   - Using the `@tranguide.create` agent to scaffold all site infrastructure
+   - Using the `/guide.trans.create` skill to scaffold all site infrastructure
    - Translating the guide bodies (the manual, human-only work)
 4. **Submit a Pull Request** linking back to the discussion and referencing the CoC
 
