@@ -36,35 +36,38 @@ Please read the [Code of Conduct for Translation Contributors](translations-code
 
 ## 📋 What Needs Translation
 
-To add a new language to the site, you'll need to translate content for **both guides** plus the UI strings.
+Adding a new language involves **two distinct phases**. Understanding this split is important before you start.
 
-### 1. Open Guide to Kanban (current version: 2025.7)
+### Phase 1: Site Scaffolding (agent-handled)
 
-- **File:** `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md`
-- **Content:** The complete Open Guide to Kanban document
-- **Size:** ~900 lines of Markdown content
+The `@tranguide.create` agent handles all of this automatically. You do not need to do it manually:
 
-### 2. The Kanban Guide (current version: 2025.5)
+| What | File(s) | Notes |
+|---|---|---|
+| Language config | `site/hugo.yaml`, `site/hugo.production.yaml` | Adds language, disables in production until ready |
+| UI strings | `site/i18n/{LANG}.yaml` | ~40 navigation, button, and label strings |
+| Homepage index | `site/content/_index.{LANG}.md` | Section landing page |
+| Guide section indexes | `site/content/open-guide-to-kanban/_index.{LANG}.md`, `site/content/the-kanban-guide/_index.{LANG}.md` | Per-guide landing pages |
+| Guide version files | `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md`, `site/content/the-kanban-guide/2025.5/index.{LANG}.md` | Created with translated front matter and **empty body** |
 
-- **File:** `site/content/the-kanban-guide/2025.5/index.{LANG}.md`
-- **Content:** The complete Kanban Guide document
-- **Size:** ~400 lines of Markdown content
+> **Note:** Contributor attribution is managed in `site/data/contributions/` YAML files — see [Content Management](./content-management.md) for details.
 
-### 3. Section Index Pages
+### Phase 2: Guide Body Translation (always manual)
 
-Each guide has a section index that should also be translated:
+This is the work that **only a human translator can do**. The agent never translates guide body text.
 
-- `site/content/open-guide-to-kanban/_index.{LANG}.md`
-- `site/content/the-kanban-guide/_index.{LANG}.md`
-- `site/content/_index.{LANG}.md` (homepage)
+After site scaffolding, the guide version files exist but their body is empty. You must translate the full Markdown body of each guide into your language:
 
-### 4. User Interface Elements
+| What | File | Size |
+|---|---|---|
+| Open Guide to Kanban body | `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md` | ~900 lines |
+| The Kanban Guide body | `site/content/the-kanban-guide/2025.5/index.{LANG}.md` | ~400 lines |
 
-- **File:** `site/i18n/{LANG}.yaml`
-- **Content:** Navigation, buttons, labels, and interface text
-- **Size:** ~40 translation keys
+> These files are created by the agent with correct front matter already filled in. Your job is to add the translated body content below the front matter.
 
-> **Note:** There is no `creators/` or `download/` content directory. Contributor attribution is managed in `site/data/contributions/` YAML files — see [Content Management](./content-management.md) for details.
+---
+
+**In short:** The agent sets up the site infrastructure. You translate the guide text. Both are required for a complete translation.
 
 ---
 
@@ -96,90 +99,48 @@ git checkout -b translation/add-{LANG}-language
 
 Replace `{LANG}` with your language code (e.g., `pt` for Portuguese, `ja` for Japanese).
 
-### Step 3: Create Translation Files
+### Step 3: Site Scaffolding
 
-#### Option A: Agent-Assisted Setup (Recommended)
-
-Use the `@tranguide.create` agent in GitHub Copilot Chat. It will ask for any missing details and scaffold everything for you:
+This step sets up the site infrastructure for your language. **Use the `@tranguide.create` agent** — it handles all of this automatically:
 
 ```
 @tranguide.create de German
 ```
 
-**What the agent does:**
+**What the agent does (Phase 1 — Site Scaffolding):**
 
 - ✅ Adds language configuration to `hugo.yaml`
 - ✅ Disables it in `hugo.production.yaml` (until the translation is ready)
-- ✅ Creates `site/i18n/{LANG}.yaml` with all strings translated
+- ✅ Creates `site/i18n/{LANG}.yaml` with all UI strings translated
 - ✅ Creates all structural wrapper content files (`_index`, history, translations pages) fully translated
-- ✅ Creates versioned guide files with translated front matter and **empty body** ready for a human translator
+- ✅ Creates versioned guide files with translated front matter and **empty body** ready for you to fill in
 - ✅ Validates the complete setup and reports results
 
-#### Option B: Manual Setup
+> If you don't have access to GitHub Copilot Chat, see the [Manual Workflow](#manual-workflow) for how to set up the site scaffolding by hand.
 
-If you prefer manual setup:
+### Step 4: Translate the Guide Bodies
 
-**A. Guide Content Translation**
+This is **Phase 2 — the manual work that only you can do**. The agent has created the guide files but left the body empty. Now translate the actual guide content:
 
-1. Copy the English guide for each guide you're translating:
+1. **Open the scaffolded guide files:**
+   - `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md` (~900 lines)
+   - `site/content/the-kanban-guide/2025.5/index.{LANG}.md` (~400 lines)
 
-```bash
-# Open Guide to Kanban
-cp site/content/open-guide-to-kanban/2025.7/index.md \
-   site/content/open-guide-to-kanban/2025.7/index.{LANG}.md
+2. **The front matter is already translated** by the agent. Translate only the body content below the `---` closing the front matter.
 
-# The Kanban Guide
-cp site/content/the-kanban-guide/2025.5/index.md \
-   site/content/the-kanban-guide/2025.5/index.{LANG}.md
-```
-
-2. Edit the front matter in each file — at minimum translate `title`, `description`, `keywords`, and set `lang` to your language code.
-
-3. Translate the entire body content while preserving:
+3. **Preserve while translating:**
    - Markdown formatting (`##`, `**bold**`, `[links](url)`)
    - Hugo shortcodes
    - HTML comments and IDs
+   - Reference numbers exactly as-is (e.g. `(40)`, `(58)`)
 
-**B. UI Translation File**
-
-1. Copy the English translations:
-
-```bash
-cp site/i18n/en.yaml site/i18n/{LANG}.yaml
-```
-
-2. Translate each entry in `site/i18n/{LANG}.yaml`:
-
-```yaml
-# Example - keep the ID, translate the text
-- id: read_online_title
-  translation: "Your translated text here"
-```
-
-**C. Add Language to Hugo Configuration**
-
-Add your language to `site/hugo.yaml` in the `languages:` section:
-
-```yaml
-languages:
-  # ... existing languages
-  { LANG }:
-    languageName: Your Language Name
-    weight: 2 # Adjust as needed
-    title: Your Translated Site Title
-    params:
-      description: "Your translated description"
-      keywords: "Your translated keywords"
-```
-
-### Step 4: Test Your Translation
+### Step 5: Test Your Translation
 
 1. **Install Hugo** (see [Development Guide](development.md))
-2. **Start the development server:**
+2. **Start the development server** (from project root):
 
 ```bash
-cd site
-hugo server --config hugo.yaml,hugo.local.yaml
+hugo serve --source site --config hugo.yaml,hugo.local.yaml
 ```
 
 3. **View your translation:**
@@ -187,7 +148,7 @@ hugo server --config hugo.yaml,hugo.local.yaml
    - Check all pages and UI elements
    - Verify language switching works correctly
 
-### Step 5: Submit for Review
+### Step 6: Submit for Review
 
 1. **Commit your changes:**
 
@@ -214,7 +175,7 @@ git push origin translation/add-{LANG}-language
 
 ## 📝 Manual Workflow
 
-> 💡 **Tip:** Even if you prefer a manual workflow, you can still use the [`@tranguide.create` agent](#option-a-agent-assisted-setup-recommended) to scaffold all template files — then edit the generated files manually.
+> 💡 **Tip:** The manual workflow covers **site scaffolding by hand** for contributors without access to GitHub Copilot Chat. **Guide body translation is always manual regardless of which path you take** — see [Phase 2: Guide Body Translation](#phase-2-guide-body-translation-always-manual) above.
 
 ### Step 1: Get Translation Templates
 
@@ -228,19 +189,52 @@ git push origin translation/add-{LANG}-language
    - `index.{LANG}.md` for each guide (e.g., `index.pt.md`)
    - `{LANG}.yaml` (e.g., `pt.yaml`)
 
-### Step 2: Translate Content
+### Step 2: Site Scaffolding (manual)
 
-1. **Main Guide (`index.{LANG}.md`):**
+1. **Add language to `site/hugo.yaml`** in the `languages:` section:
 
-   - Translate title and description in the frontmatter
-   - Translate all body content
-   - Keep all Markdown formatting intact
-   - Preserve reference numbers and links
+```yaml
+languages:
+  # ... existing languages
+  {LANG}:
+    languageName: Your Language Name
+    weight: 2 # Adjust as needed
+    title: Your Translated Site Title
+    params:
+      description: "Your translated description"
+      keywords: "Your translated keywords"
+```
 
-2. **UI File (`{LANG}.yaml`):**
-   - Translate only the text after `translation:`
-   - Keep the `id:` values unchanged
-   - Maintain YAML formatting
+2. **Create the UI strings file:**
+
+```bash
+cp site/i18n/en.yaml site/i18n/{LANG}.yaml
+```
+
+   Translate each `translation:` value in the new file. Keep all `id:` values unchanged.
+
+3. **Create section index files** (copy English and translate front matter + body):
+
+```bash
+cp site/content/_index.md site/content/_index.{LANG}.md
+cp site/content/open-guide-to-kanban/_index.md site/content/open-guide-to-kanban/_index.{LANG}.md
+cp site/content/the-kanban-guide/_index.md site/content/the-kanban-guide/_index.{LANG}.md
+```
+
+4. **Create empty guide version files** (front matter only — body translation is a separate step):
+
+```bash
+cp site/content/open-guide-to-kanban/2025.7/index.md \
+   site/content/open-guide-to-kanban/2025.7/index.{LANG}.md
+cp site/content/the-kanban-guide/2025.5/index.md \
+   site/content/the-kanban-guide/2025.5/index.{LANG}.md
+```
+
+   Translate the front matter fields (`title`, `description`, `keywords`) and clear the body — you will translate it in the next step.
+
+### Step 3: Translate the Guide Bodies
+
+This is the same as the GitHub workflow [Step 4: Translate the Guide Bodies](#step-4-translate-the-guide-bodies) — translate the full body content of each guide file.
 
 ### Step 3: Collaborate (Optional)
 

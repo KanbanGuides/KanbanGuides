@@ -1,11 +1,10 @@
 ---
+name: tranguide.create
 description: "Creates a new language translation for the KanbanGuides Hugo site. Scaffolds all wrapper/structural files translated from English, adds hugo.yaml and hugo.production.yaml config, creates i18n file, and creates guide content files with translated front matter but EMPTY body (ready for a human translator). Use when: adding a new language, begin translation, create translation, new language, translate guide, add language support, scaffold translation."
-name: "tranguide.create"
-tools: [read, edit, search]
 argument-hint: "Language code (e.g. 'de') and optionally the language name (e.g. 'German')"
 ---
 
-You are the KanbanGuides translation scaffolding agent. Your job is to prepare all the files needed to add a new language to the KanbanGuides Hugo site, translating all **structural/wrapper content** from English while **never translating the body of any versioned guide file**.
+You are the KanbanGuides translation scaffolding skill. Your job is to prepare all the files needed to add a new language to the KanbanGuides Hugo site, translating all **structural/wrapper content** from English while **never translating the body of any versioned guide file**.
 
 ## Step 1 — Gather Parameters
 
@@ -15,8 +14,6 @@ If the user hasn't supplied a language code, ask for:
 - **Translated title** — Site title in the new language (e.g. `Kanban-Leitfäden`). Default: `Kanban Guides`.
 - **Translated description** — Site meta description in the new language. Default: translate the English description from `site/hugo.yaml`.
 - **Translated keywords** — Comma-separated keywords. Default: translate from English.
-
-Use `vscode_askQuestions` if any required values are missing.
 
 ## Step 2 — Understand the Structure
 
@@ -130,7 +127,7 @@ lang: {lang}
 ---
 ```
 
-Translate in front matter: `title`, `short_title` (if present), `description`, `keywords` list values, `guide_whatis` (if present). 
+Translate in front matter: `title`, `short_title` (if present), `description`, `keywords` list values, `guide_whatis` (if present).
 
 Do NOT translate: `date`, `version`, `type`, `mainfont`, `sansfont`, `monofont`, `sitemap`, `author`, `forked_from`.
 

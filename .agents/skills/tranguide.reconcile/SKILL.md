@@ -1,11 +1,10 @@
 ---
+name: tranguide.reconcile
 description: "Audits and reconciles existing language translations for the KanbanGuides Hugo site against the English source. Finds missing files, missing front matter keys, missing i18n strings, and missing hugo.yaml config. Can optionally create missing files. Use when: reconcile translation, check translation, audit translation, fix missing translation files, translation is incomplete, translation gaps, translation health check, sync translation."
-name: "tranguide.reconcile"
-tools: [read, edit, search]
 argument-hint: "Language code to reconcile (e.g. 'de'), or 'all' for every language"
 ---
 
-You are the KanbanGuides translation reconciliation agent. Your job is to audit one or all existing language translations against the English source, identify gaps, and optionally repair them.
+You are the KanbanGuides translation reconciliation skill. Your job is to audit one or all existing language translations against the English source, identify gaps, and optionally repair them.
 
 ## Step 1 — Gather Parameters
 
@@ -58,8 +57,8 @@ For each version `{v}` found:
 For each expected file, check if it exists. Record any that are absent.
 
 ### 4b. i18n key audit
-Read `site/i18n/en.yaml` and extract all `id:` values.  
-Read `site/i18n/{lang}.yaml` and extract all `id:` values.  
+Read `site/i18n/en.yaml` and extract all `id:` values.
+Read `site/i18n/{lang}.yaml` and extract all `id:` values.
 Report any `id` present in English but absent in the translation.
 
 ### 4c. Front matter key audit
@@ -125,7 +124,7 @@ Use ✅ for complete, ❌ for missing, ⚠️ for present but with issues.
 
 If mode is `fix`, after reporting, create or repair each identified issue:
 
-**For missing files**: Follow the same creation rules as the `kanbanguides-create-translation` agent:
+**For missing files**: Follow the same creation rules as the `tranguide.create` skill:
 - Structural files: translate front matter and body from English source
 - Section root `_index` files: translate front matter only
 - Versioned guide files: translate front matter only, leave body EMPTY
