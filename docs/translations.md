@@ -12,7 +12,7 @@ Adding a new language involves two distinct phases:
 
 ### Phase 1: Site Scaffolding (tooling-handled)
 
-The `/guide.trans.create` skill handles all of this automatically:
+The `/guide.transcreate` skill handles all of this automatically:
 
 | What | File(s) |
 |---|---|
@@ -49,10 +49,10 @@ git checkout -b translation/add-{LANG}-language
 
 ### Step 2: Scaffold the site (Phase 1)
 
-Use the `/guide.trans.create` skill in GitHub Copilot Chat:
+Use the `/guide.transcreate` skill in GitHub Copilot Chat:
 
 ```
-/guide.trans.create de German
+/guide.transcreate de German
 ```
 
 If you don't have Copilot Chat, do it manually — see [Manual scaffolding](#manual-scaffolding) below.
@@ -120,7 +120,7 @@ Translate the guide body content and all `translation:` values in the i18n YAML 
 
 ## Manual Scaffolding
 
-If you need to set up the site infrastructure without the `/guide.trans.create` skill:
+If you need to set up the site infrastructure without the `/guide.transcreate` skill:
 
 **1. Add language to `site/hugo.yaml`:**
 
@@ -207,17 +207,17 @@ You may also include a `Translator Acknowledgement` section in the translated do
 
 ## Auditing Existing Translations
 
-Use the `/guide.trans.reconcile` skill to check for gaps:
+Use the `/guide.transreconcile` skill to check for gaps:
 
 ```
-/guide.trans.reconcile de          # audit German
-/guide.trans.reconcile all         # audit all languages
-/guide.trans.reconcile de fix      # audit and repair German
+/guide.transreconcile de          # audit German
+/guide.transreconcile all         # audit all languages
+/guide.transreconcile de fix      # audit and repair German
 ```
 
-Or use `/guide.trans.status` for a dashboard view:
+Or use `/guide.transstatus` for a dashboard view:
 
 ```
-/guide.trans.status                # all languages
-/guide.trans.status de             # one language
+/guide.transstatus                # all languages
+/guide.transstatus de             # one language
 ```

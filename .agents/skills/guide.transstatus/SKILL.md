@@ -1,5 +1,5 @@
 ---
-name: guide.trans.status
+name: guide.transstatus
 description: "Reports the translation status of all (or one) language(s) for the KanbanGuides Hugo site. Shows which languages have complete scaffolding, which guide bodies are empty vs translated, and an overall progress summary. Use when: translation status, translation progress, what languages exist, which translations are complete, which guides need translating, translation dashboard, check progress."
 argument-hint: "Optional language code (e.g. 'de') — omit for all languages"
 ---
@@ -93,7 +93,7 @@ For any language with issues (missing scaffolding files or empty bodies), list e
     ⬜ site/content/open-guide-to-kanban/2025.7/index.{lang}.md
     ⬜ site/content/the-kanban-guide/2025.5/index.{lang}.md
 
-### Scaffolding incomplete — run `/guide.trans.reconcile {lang} fix`
+### Scaffolding incomplete — run `/guide.transreconcile {lang} fix`
 - {lang} ({LanguageName}) — {N} files missing
 
 ### Not started (no files exist at all)

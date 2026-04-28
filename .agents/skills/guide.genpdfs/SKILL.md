@@ -1,5 +1,5 @@
 ---
-name: create-guide-pdfs
+name: guide.genpdfs
 description: "Generates PDFs from the KanbanGuides markdown content files using Pandoc. Use when: generate PDFs, create PDFs, build PDFs, export PDF, pdf generation, create guide PDF, build guide PDF."
 argument-hint: "Optionally specify a language code (e.g. 'fa') and/or -Force to regenerate existing PDFs."
 ---
@@ -25,13 +25,13 @@ Run the PowerShell script directly or ask Copilot to run it:
 
 ```powershell
 # Generate all missing/outdated PDFs
-.agents/skills/create-guide-pdfs/Create-GuidePDFs.ps1
+.agents/skills/guide.genpdfs/Create-GuidePDFs.ps1
 
 # Force regenerate all PDFs
-.agents/skills/create-guide-pdfs/Create-GuidePDFs.ps1 -Force
+.agents/skills/guide.genpdfs/Create-GuidePDFs.ps1 -Force
 
 # Generate PDF for a single language
-.agents/skills/create-guide-pdfs/Create-GuidePDFs.ps1 -Language fa
+.agents/skills/guide.genpdfs/Create-GuidePDFs.ps1 -Language fa
 ```
 
 ## Bundled Assets
@@ -53,6 +53,6 @@ When the user asks to generate PDFs:
 1. Check that Pandoc is available (`pandoc --version`)
 2. Run the script from the project root:
    ```powershell
-   .\.agents\skills\create-guide-pdfs\Create-GuidePDFs.ps1
+   .\.agents\skills\guide.genpdfs\Create-GuidePDFs.ps1
    ```
 3. Report which PDFs were generated, skipped, or failed

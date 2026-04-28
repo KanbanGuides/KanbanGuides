@@ -123,16 +123,16 @@ This project includes PowerShell automation scripts to help with common tasks:
    - Requires Pandoc and LaTeX installation
    - See [PDF Generation Guide](./simple-pdf-generation.md) for details
 
-2. **`/guide.trans.create` skill** - Sets up new language translations
+2. **`/guide.transcreate` skill** - Sets up new language translations
    - Scaffolds all Hugo config, i18n, and content files
    - Translates structural content; leaves guide bodies empty for human translators
    - See [Translation Guide](./translations.md) for details
 
-3. **`/guide.trans.reconcile` skill** - Audits and repairs existing translations
+3. **`/guide.transreconcile` skill** - Audits and repairs existing translations
    - Detects missing files, missing i18n keys, and wrong `lang:` values
    - Can run in report-only or fix mode
 
-4. **`/guide.trans.status` skill** - Translation progress dashboard
+4. **`/guide.transstatus` skill** - Translation progress dashboard
    - Shows scaffolding completeness and guide body status for all languages
    - Read-only; safe to run at any time
 
@@ -178,8 +178,8 @@ From the project root directory:
 # Generate PDFs for all languages
 .\scripts\Create-GuidePDFs.ps1
 
-# Create a new translation — use the /guide.trans.create skill in Copilot or Claude Chat
-# /guide.trans.create de German
+# Create a new translation — use the /guide.transcreate skill in Copilot or Claude Chat
+# /guide.transcreate de German
 ```
 
 > 💡 **Note**: On macOS and Linux, you may need to use `pwsh` instead of `powershell` to run PowerShell 7+.

@@ -219,7 +219,7 @@ The site is deployed using Azure Static Web Apps with:
 1. Create new i18n file in `site/i18n/{lang}.yaml`
 2. Add language configuration in `site/hugo.yaml`
 3. Create translated content files in each guide's version directory
-4. Use the `/guide.trans.create` skill for automated setup
+4. Use the `/guide.transcreate` skill for automated setup
 
 ### Adding New Content Types
 
