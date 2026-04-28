@@ -9,7 +9,6 @@ author:
   - جان کولمن
   - دانیال وَکانتی
 type: guide
-lang: fa
 dir: rtl
 mainfont: HMXRoya
 sansfont: HMXRoya

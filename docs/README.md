@@ -1,109 +1,56 @@
-# Open Guide to Kanban Documentation
+# Kanban Guides Documentation
 
-Welcome to the documentation for the **Open Guide to Kanban** project. This documentation provides comprehensive information about the project structure, development workflow, and contribution guidelines.
+This repository hosts the canonical copies of two guides: **The Kanban Guide** and the **Open Guide to Kanban**, published at [kanbanguides.org](https://kanbanguides.org).
 
-## 🌐 Live Sites
+## About This Project
 
-- **Production**: [kanbanguides.org](https://kanbanguides.org) - **Live production site**
-- **Preview**: [red-pond-0d8225910-preview.centralus.2.azurestaticapps.net](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/) - **Test your contributions here before they go live**
+This is a community-maintained open source project. The guides are collaboratively authored and updated through structured community discussion and peer review. All changes — whether to guide content or translations — go through a discussion-first process before any pull request is submitted.
 
-## Quick Navigation
+## How to Contribute
 
-- [Getting Started](./getting-started.md)
-- [Contributing Guidelines](./contributing.md)
-- [Content Management](./content-management.md)
+There are two contribution paths:
 
-### Technical Documentation
+### Feedback & Content Changes
 
-- [Architecture Overview](./architecture.md)
-- [Development Guide](./development.md)
-- [Deployment Guide](./deployment.md)
-- [Configuration Reference](./configuration.md)
-- [Maintainer Guide](./maintainer-guide.md)
-- [Translation Guide](./translations.md)
-- [Troubleshooting](./troubleshooting.md)
+Suggest improvements to the guide content:
 
-> **🚨 Important**: This project uses Hugo's new template system (v0.146.0+). See the [Development Guide](./development.md) for details about template structure and migration.
+1. Use the **"Submit Ideas"** button at [kanbanguides.org](https://kanbanguides.org) to open a discussion
+2. Collaborate with the community and guide creators in that discussion
+3. Once there is consensus, submit a Pull Request referencing the discussion
 
-## Project Overview
+### Translations
 
-The Open Guide to Kanban is a multilingual static website built with Hugo. The project includes:
+Add or improve a language translation:
 
-- **Multi-language support** (English, German, Spanish, French)
-- **Modern responsive design** with Bootstrap 5
-- **Static site generation** with Hugo
-- **Automated deployment** via Azure Static Web Apps
-- **PDF generation** capabilities
-- **Community contribution features**
+1. Read the [Translations Code of Conduct](./translations-code-of-conduct.md) — agreement is required before starting
+2. Open a discussion at [kanbanguides.org](https://kanbanguides.org) or via the Slack channel to notify the translation guardian
+3. Follow the [Translation Guide](./translations.md) to scaffold and complete the translation
+4. Submit a Pull Request for community review
 
-## Key Features
+> **All PRs must be preceded by a site discussion.** Direct PRs without prior discussion may be closed.
 
-### 📚 Content Features
+## Documentation
 
-- Comprehensive Kanban guide
-- Multi-language translations
-- Downloadable PDF versions
-- Creator profiles and attribution
-- Structured navigation and table of contents
+| Document | Audience |
+|---|---|
+| [Contributing Guide](./contributing.md) | All contributors |
+| [Translation Guide](./translations.md) | Translators |
+| [Translations Code of Conduct](./translations-code-of-conduct.md) | Translators |
+| [Maintainer Guide](./maintainer.md) | Maintainers & developers |
 
-### 🔧 Technical Features
+## Live Sites
 
-- Hugo static site generator
-- Bootstrap 5 responsive design
-- Font Awesome icons
-- Google Analytics integration
-- Azure Static Web Apps hosting
-- GitHub Actions for CI/CD
-- Environment-specific configurations
-
-### 🌍 Internationalization
-
-- English (default)
-- German (Deutsch)
-- Spanish (Español)
-- French (Français)
-
-## Project Structure
-
-```text
-KanbanGuides/
-├── docs/                           # 📚 Documentation
-├── site/                           # 🏗️ Hugo site source
-│   ├── content/                    # 📝 Content files
-│   ├── layouts/                    # 🎨 HTML templates
-│   ├── static/                     # 📁 Static assets
-│   ├── data/                       # 🗃️ Data files
-│   ├── i18n/                       # 🌐 Translations
-│   └── hugo.yaml                   # ⚙️ Hugo configuration
-├── public/                         # 🚀 Generated site output
-├── .github/                        # 🔄 GitHub Actions workflows
-├── staticwebapp.config.*.json      # ⚙️ Azure SWA configs
-└── readme.md                       # 📖 Project README
-```
-
-## Quick Start
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/KanbanGuides/KanbanGuides.git
-   cd KanbanGuides
-   ```
-
-2. **Install Hugo**
-
-   ```bash
-   # Using package managers
-   choco install hugo-extended  # Windows (Chocolatey)
-   brew install hugo            # macOS (Homebrew)
+| Environment | URL |
+|---|---|
+| Production | [kanbanguides.org](https://kanbanguides.org) |
+| Preview | [red-pond-0d8225910-preview.centralus.2.azurestaticapps.net](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/) |
    snap install hugo           # Linux (Snap)
    ```
 
 3. **Run the development server**
 
    ```bash
-   cd site
-   hugo server -D --bind 0.0.0.0
+   hugo serve --source site --config hugo.yaml,hugo.local.yaml
    ```
 
 4. **Open your browser**

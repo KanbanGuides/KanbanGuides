@@ -35,7 +35,6 @@ author:
 date: 2025-07-02T09:00:00Z
 type: guide
 forked_from: the-kanban-guide/2025.5
-lang: min
 mainfont: "Times New Banana"
 sansfont: "Ari-Banana"
 monofont: "Courier Peel"

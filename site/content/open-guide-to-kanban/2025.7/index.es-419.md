@@ -27,7 +27,6 @@ author:
   - John Coleman
 date: 2025-07-02T09:00:00Z
 type: guide
-lang: es-419
 mainfont: "Times New Roman"
 sansfont: "Arial"
 monofont: "Courier New"

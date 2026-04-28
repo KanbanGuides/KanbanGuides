@@ -12,7 +12,6 @@ author:
   - Daniel Vacanti
 type: guide
 # lang: en
-lang: ja
 mainfont: "Times New Roman"
 # mainfont: "Noto Serif JP"
 sansfont: "Arial"

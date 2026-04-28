@@ -9,7 +9,6 @@ author:
   - John Coleman
   - Daniel Vacanti
 type: guide
-lang: es-419
 mainfont: "Times New Roman"
 sansfont: "Arial"
 monofont: "Courier New"
