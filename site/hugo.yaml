@@ -14,14 +14,14 @@ printI18nWarnings: true
 disableLanguages: []
 languages:
   en:
-    languageName: English
+    label: English
     weight: 1
     title: Kanban Guides
     params:
       description: Learn how to apply Kanban to optimise flow and value delivery. Home of the Open Guide to Kanban and The Kanban Guide
       keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
   es-419:
-    languageName: Spanish (Latin America)
+    label: Spanish (Latin America)
     weight: 3
     title: Guías de Kanban
     params:
@@ -29,7 +29,7 @@ languages:
       keywords: Kanban, Guía Abierta de Kanban, guía de kanban, método kanban, trabajo del conocimiento, optimización del flujo, límites de WIP, entrega de valor, ágil, lean, mejora continua, expectativa de nivel de servicio, flujo acumulativo, rendimiento, métricas, antigüedad de ítems de trabajo, eficiencia de flujo, visualización, trabajo en curso, mejora de procesos, tablero kanban, definición de flujo de trabajo, entrega orientada a resultados
       status: AI
   min:
-    languageName: Minionese
+    label: Minionese
     weight: 1001
     title: Banana Kanban Guides
     params:
@@ -37,7 +37,7 @@ languages:
       keywords: Kanban, banana, gelato, poopaye, bello, work banana, flow banana, WIP banana, value banana, agile banana, lean banana, improvement banana, kanban board banana, workflow banana, delivery banana
       status: reference
   ja:
-    languageName: Japanese
+    label: Japanese
     weight: 2
     # title: Open Guide to Kanban <- 英語がKanban Guidesのため、ここは日本語のカンバンガイドに合わせる
     title: カンバンガイド
@@ -47,7 +47,7 @@ languages:
       # keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
       keywords: カンバン, オープン版カンバンガイド, カンバンガイド, カンバン手法, ナレッジワーク, フロー最適化, WIP制限, 価値提供, アジャイル, リーン, 継続的改善, サービスレベル期待値, 累積フロー, スループット, 計測指標, 作業項目の年齢, フロー効率, 可視化, 進行中の作業, プロセス改善, カンバンボード, ワークフローの定義, アウトカム指向の提供
   es-ES:
-    languageName: Spanish (Spain)
+    label: Spanish (Spain)
     weight: 4
     title: Guías de Kanban
     params:
@@ -55,8 +55,8 @@ languages:
       keywords: Kanban, Guía Abierta de Kanban, guía de kanban, método kanban, trabajo del conocimiento, optimización del flujo, límites de WIP, entrega de valor, agile, lean, mejora continua, expectativa de nivel de servicio, flujo acumulativo, rendimiento, métricas, edad de elemento de trabajo (WIA), eficiencia de flujo, visualización, trabajo en curso (WIP), mejora de procesos, tablero kanban, definición de flujo de trabajo, entrega orientada a resultados
       status: reference
   fa:
-    languageName: Farsi (Persian)
-    languageDirection: rtl
+    label: Farsi (Persian)
+    direction: rtl
     weight: 5
     title: راهنماهای کانبان
     params:
@@ -64,7 +64,7 @@ languages:
       keywords: کانبان, راهنمای آزاد کانبان, راهنمای کانبان, روش کانبان, کار دانش‌محور, بهینه‌سازی جریان, محدودیت‌های کار در جریان, تحویل ارزش, اجایل, ناب, بهبود مستمر, زمان انتظار, جریان تجمعی, توان عملیاتی, سن آیتم, کارایی جریان, بصری‌سازی, کار در جریان, بهبود فرایند, برد کانبان, تعریف جریان کار, تحویل نتیجه‌محور
       status: reference
   pl:
-    languageName: Polish
+    label: Polish
     weight: 6
     title: Kanban Guides
     params:

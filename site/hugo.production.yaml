@@ -2,7 +2,8 @@ baseURL: https://kanbanguides.org
 Environment: production
 enableMissingTranslationPlaceholders: false
 printI18nWarnings: false
-minifyOutput: true
+minify:
+  minifyOutput: true
 languages:
   min:
     disabled: true
