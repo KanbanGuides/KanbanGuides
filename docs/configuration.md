@@ -8,337 +8,126 @@ The project uses environment-specific Hugo configuration files to manage differe
 
 ### Main Configuration (`hugo.yaml`)
 
+The main configuration at `site/hugo.yaml` defines site-wide settings. Key sections:
+
 ```yaml
-# Base URL for the production site
-baseURL: "https://kanbanguides.org"
+title: Kanban Guides
+buildFuture: true
+publishDir: ../public
+resourceDir: ../resources
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+enableMissingTranslationPlaceholders: true
 
-# Default language
-languageCode: "en-us"
-defaultContentLanguage: "en"
-
-# Site title
-title: "Open Guide to Kanban"
-
-# Theme (empty for custom theme)
-theme: ""
-
-# Hugo version compatibility
-module:
-  hugoVersion:
-    extended: true
-    min: "0.120.0"
-
-# Language configuration
 languages:
   en:
-    languageName: "English"
+    languageName: English
     weight: 1
-    title: "Open Guide to Kanban"
-    description: "The Open Guide to Kanban is a free, community-driven reference for applying Kanban in knowledge work."
-  de:
-    languageName: "Deutsch"
+    title: Kanban Guides
+  ja:
+    languageName: Japanese
     weight: 2
-    title: "Offener Leitfaden für Kanban"
-    description: "Der Offene Leitfaden für Kanban ist eine kostenlose, von der Community getragene Referenz für die Anwendung von Kanban in der Wissensarbeit."
-  es:
-    languageName: "Español"
+    title: カンバンガイド
+  es-419:
+    languageName: Spanish (Latin America)
     weight: 3
-    title: "Guía Abierta de Kanban"
-    description: "La Guía Abierta de Kanban es una referencia gratuita impulsada por la comunidad para aplicar Kanban en el trabajo del conocimiento."
-  fr:
-    languageName: "Français"
+    title: Guías de Kanban
+  es-ES:
+    languageName: Spanish (Spain)
     weight: 4
-    title: "Guide Ouvert de Kanban"
-    description: "Le Guide Ouvert de Kanban est une référence gratuite pilotée par la communauté pour appliquer Kanban dans le travail de la connaissance."
+    title: Guías de Kanban
+  fa:
+    languageName: Farsi (Persian)
+    languageDirection: rtl
+    weight: 5
+    title: راهنماهای کانبان
+  pl:
+    languageName: Polish
+    weight: 6
+    title: Kanban Guides
 
-# Menu configuration
-menu:
-  main:
-    - name: "Guide"
-      url: "/guide/"
-      weight: 10
-    - name: "Creators"
-      url: "/creators/"
-      weight: 20
-    - name: "Download"
-      url: "/download/"
-      weight: 30
-
-# Parameters for custom variables
 params:
-  # Site metadata
-  description: "An expanded interpretation of the 2020 Scrum Guide"
-  author: "Ralph Jocham, John Coleman, Jeff Sutherland"
+  siteProdUrl: https://kanbanguides.org
+  supportEmail: support@kanbanguides.org
+  githubUrl: https://github.com/KanbanGuides/KanbanGuides/
+  GoogleTagManagerID: "GTM-T2KD2BNT"
 
-  # Social media
-  github: "https://github.com/KanbanGuides/KanbanGuides"
+module:
+  imports:
+    - path: github.com/nkdAgility/HugoGuides/module
 
-  # Analytics
-  googleAnalytics: "G-XXXXXXXXXX"
-
-  # Features
-  enableSearch: true
-  enableComments: false
-  enableToc: true
-
-  # PDF settings
-  enablePdfDownload: true
-  pdfPath: "/pdf/"
-
-# Markup configuration
 markup:
   goldmark:
     renderer:
       unsafe: true
-      hardWraps: false
-    parser:
-      autoHeadingID: true
-      autoHeadingIDType: "github"
-  highlight:
-    style: "github"
-    noClasses: false
-    codeFences: true
-    guessSyntax: true
-    lineNos: true
-
-# Build configuration
-build:
-  writeStats: true
-  noJSConfigInAssets: true
-
-# Security configuration
-security:
-  enableInlineShortcodes: false
-  exec:
-    allow: ["^dart-sass-embedded$", "^go$", "^npx$", "^postcss$"]
-
-# Output formats
-outputs:
-  home: ["HTML", "RSS", "JSON"]
-  page: ["HTML"]
-  section: ["HTML", "RSS"]
-
-# Minification (production only)
-minify:
-  disableXML: true
-  minifyOutput: true
-
-# SEO and performance
-enableRobotsTXT: true
-enableGitInfo: true
-enableEmoji: true
-
-# Related content
-related:
-  includeNewer: true
-  indices:
-    - name: "keywords"
-      weight: 100
-    - name: "tags"
-      weight: 80
 ```
+
+> **Note:** The site title is **Kanban Guides** (not "Open Guide to Kanban"). There is no `theme:` setting; templates come from the Hugo module.
+
+### Hugo Module (`site/go.mod`)
+
+The project uses a Hugo module for all templates and layouts:
+
+```
+module github.com/KanbanGuides/KanbanGuides/site
+
+go 1.24.5
+
+require github.com/nkdAgility/HugoGuides/module v0.7.3 // indirect
+```
+
+After cloning, run `hugo mod download` (from `site/`) or let the build pipeline handle it automatically.
 
 ### Environment-Specific Configurations
 
 #### Local Development (`hugo.local.yaml`)
 
 ```yaml
-baseURL: "http://localhost:1313"
-title: "Open Guide to Kanban - Local"
-
-# Development settings
+Environment: "development"
 buildDrafts: true
 buildFuture: true
 buildExpired: true
-
-# Disable external services in local
-params:
-  googleAnalytics: ""
-  enableComments: false
-
-# Fast rebuilds
-enableGitInfo: false
-minify:
-  minifyOutput: false
-
-# Debug settings
-log: true
-verbose: true
+disableAliases: false
 ```
 
-#### Preview Environment (`hugo.preview.yaml`)
+Run locally with:
+
+```bash
+huge serve --source site --config hugo.yaml,hugo.local.yaml
+```
+
+#### Production (`hugo.production.yaml`)
 
 ```yaml
-baseURL: "https://agreeable-island-0c966e810-preview.centralus.6.azurestaticapps.net"
-title: "Open Guide to Kanban - Preview"
-
-# Preview settings
-buildDrafts: true
-buildFuture: true
-
-# Different analytics for preview
-params:
-  googleAnalytics: "G-PREVIEW-ID"
-
-# Disable robots in preview
-enableRobotsTXT: false
+baseURL: https://kanbanguides.org
+Environment: production
+enableMissingTranslationPlaceholders: false
+minifyOutput: true
+languages:
+  min:
+    disabled: true
+  pl:
+    disabled: true
+  ja:
+    disabled: false
+  es-ES:
+    disabled: false
 ```
 
-#### Canary Environment (`hugo.canary.yaml`)
-
-```yaml
-baseURL: 'https://agreeable-island-0c966e810-{PullRequestId}.centralus.6.azurestaticapps.net'
-title: 'Open Guide to Kanban - Canary'
-
-# Canary settings
-buildDrafts: true
-buildFuture: true
-
-# Separate analytics for canary
-params:
-  googleAnalytics: 'G-CANARY-ID'
-
-# Enable additional debugging
-params:
-  enableDebug: true
-  showVersionInfo: true
-
-# Disable robots in canary
-enableRobotsTXT: false
-```
+> Per-environment files control which languages are enabled in each deployment ring.
 
 ## Azure Static Web Apps Configuration
 
-### Production Configuration (`staticwebapp.config.json`)
+Each environment has its own config file. The real routing handles the actual language codes (`ja`, `es-419`, `es-ES`, `fa`, `pl`). See `staticwebapp.config.json` and `staticwebapp.config.production.json` in the repo root for the full routing rules.
+
+### Key headers applied globally
 
 ```json
 {
-  "routes": [
-    {
-      "route": "/",
-      "serve": "/index.html",
-      "statusCode": 200
-    },
-    {
-      "route": "/guide",
-      "serve": "/guide/index.html",
-      "statusCode": 200
-    },
-    {
-      "route": "/creators",
-      "serve": "/creators/index.html",
-      "statusCode": 200
-    },
-    {
-      "route": "/download",
-      "serve": "/download/index.html",
-      "statusCode": 200
-    },
-    {
-      "route": "/en/*",
-      "serve": "/en/index.html",
-      "statusCode": 200
-    },
-    {
-      "route": "/de/*",
-      "serve": "/de/index.html",
-      "statusCode": 200
-    },
-    {
-      "route": "/es/*",
-      "serve": "/es/index.html",
-      "statusCode": 200
-    },
-    {
-      "route": "/fr/*",
-      "serve": "/fr/index.html",
-      "statusCode": 200
-    }
-  ],
-  "responseOverrides": {
-    "404": {
-      "serve": "/404.html",
-      "statusCode": 404
-    },
-    "403": {
-      "serve": "/403.html",
-      "statusCode": 403
-    }
-  },
-  "mimeTypes": {
-    ".pdf": "application/pdf",
-    ".json": "application/json",
-    ".xml": "application/xml"
-  },
   "globalHeaders": {
     "X-Frame-Options": "DENY",
     "X-Content-Type-Options": "nosniff",
-    "Referrer-Policy": "strict-origin-when-cross-origin",
-    "Cache-Control": "public, max-age=31536000, immutable"
-  },
-  "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["/pdf/*", "/images/*", "/css/*", "/js/*", "*.{css,js,jpg,png,gif,svg,pdf,xml,json}"]
-  },
-  "trailingSlash": "auto"
-}
-```
-
-### Preview Configuration (`staticwebapp.config.preview.json`)
-
-```json
-{
-  "routes": [
-    {
-      "route": "/*",
-      "headers": {
-        "X-Robots-Tag": "noindex, nofollow"
-      }
-    }
-  ],
-  "responseOverrides": {
-    "404": {
-      "serve": "/404.html",
-      "statusCode": 404
-    }
-  },
-  "mimeTypes": {
-    ".pdf": "application/pdf"
-  },
-  "globalHeaders": {
-    "X-Frame-Options": "DENY",
-    "X-Content-Type-Options": "nosniff",
-    "Cache-Control": "no-cache, no-store, must-revalidate"
-  }
-}
-```
-
-### Canary Configuration (`staticwebapp.config.canary.json`)
-
-```json
-{
-  "routes": [
-    {
-      "route": "/*",
-      "headers": {
-        "X-Robots-Tag": "noindex, nofollow",
-        "X-Environment": "canary"
-      }
-    }
-  ],
-  "responseOverrides": {
-    "404": {
-      "serve": "/404.html",
-      "statusCode": 404
-    }
-  },
-  "mimeTypes": {
-    ".pdf": "application/pdf"
-  },
-  "globalHeaders": {
-    "X-Frame-Options": "DENY",
-    "X-Content-Type-Options": "nosniff",
-    "Cache-Control": "no-cache, no-store, must-revalidate"
+    "Referrer-Policy": "strict-origin-when-cross-origin"
   }
 }
 ```
@@ -347,177 +136,45 @@ enableRobotsTXT: false
 
 ### Translation Files
 
-Translation files are stored in the `i18n/` directory:
+Translation files are stored in `site/i18n/` — one file per language code matching the codes in `hugo.yaml`:
 
-#### English (`i18n/en.yaml`)
-
-```yaml
-# Navigation
-- id: "nav_home"
-  translation: "Home"
-- id: "nav_guide"
-  translation: "Guide"
-- id: "nav_creators"
-  translation: "Creators"
-- id: "nav_download"
-  translation: "Download"
-
-# Common elements
-- id: "read_more"
-  translation: "Read More"
-- id: "download_pdf"
-  translation: "Download PDF"
-- id: "share"
-  translation: "Share"
-- id: "print"
-  translation: "Print"
-
-# Guide sections
-- id: "table_of_contents"
-  translation: "Table of Contents"
-- id: "previous_section"
-  translation: "Previous Section"
-- id: "next_section"
-  translation: "Next Section"
-
-# Footer
-- id: "footer_copyright"
-  translation: "© 2025 Open Guide to Kanban"
-- id: "footer_license"
-  translation: "Licensed under CC BY-SA 4.0"
+```
+site/i18n/
+├── en.yaml       # English (default)
+├── ja.yaml       # Japanese
+├── es-419.yaml   # Spanish (Latin America)
+├── es-ES.yaml    # Spanish (Spain)
+├── fa.yaml       # Farsi/Persian
+├── pl.yaml       # Polish
+└── min.yaml      # Minionese (reference)
 ```
 
-#### German (`i18n/de.yaml`)
+Each file maps translation keys to localised strings. Use `en.yaml` as the template when adding a new language.
 
-```yaml
-# Navigation
-- id: "nav_home"
-  translation: "Start"
-- id: "nav_guide"
-  translation: "Leitfaden"
-- id: "nav_creators"
-  translation: "Autoren"
-- id: "nav_download"
-  translation: "Download"
+## Contributor / Attribution Configuration
 
-# Common elements
-- id: "read_more"
-  translation: "Weiterlesen"
-- id: "download_pdf"
-  translation: "PDF herunterladen"
-- id: "share"
-  translation: "Teilen"
-- id: "print"
-  translation: "Drucken"
+Creators, contributors, reviewers, and translators are stored in per-guide data files, **not** in content front matter:
 
-# Guide sections
-- id: "table_of_contents"
-  translation: "Inhaltsverzeichnis"
-- id: "previous_section"
-  translation: "Vorheriger Abschnitt"
-- id: "next_section"
-  translation: "Nächster Abschnitt"
-
-# Footer
-- id: "footer_copyright"
-  translation: "© 2025 Scrum Guide Erweiterungspaket"
-- id: "footer_license"
-  translation: "Lizenziert unter CC BY-SA 4.0"
+```text
+site/data/contributions/
+├── open-guide-to-kanban.yml
+└── the-kanban-guide.yml
 ```
 
-## Content Front Matter Configuration
-
-### Attribution Fields
-
-The guide supports three types of attribution through content front matter: **creators**, **contributors**, and **translators**. These fields are used to display recognition for different types of contributions to the guide.
-
-#### Loading Behavior
-
-- **Creators & Contributors**: Only loaded from the default language (English) page (`site/content/guide/index.md`)
-- **Translators**: Only loaded from language-specific pages (`site/content/guide/index.es.md`, `site/content/guide/index.de.md`, etc.)
-
-This design ensures consistent attribution across all languages while allowing language-specific translator recognition.
-
-#### Field Schema
-
-All attribution types support the same field structure:
+Each entry:
 
 ```yaml
-# Required field
-name: "Full Name"
-
-# Optional image fields (priority order)
-image: "https://direct-url-to-image.jpg" # Highest priority
-gravatarHash: "sha256-hash-of-email" # Medium priority
-githubUsername: "github-username" # Lowest priority
-
-# Optional profile link
-url: "https://profile-or-website-url.com"
-
-# Translator-specific field
-language: "es" # Only used in translators section
+- name: John Coleman
+  githubUsername: ViralGoodAgile
+  url: https://www.linkedin.com/in/johnanthonycoleman/
+  contributions:
+    - "2025.7"      # version this person contributed to
+  role: creator     # creator | contributor | reviewer | translator
+  founder: true
+  weight: 1
 ```
 
-#### Field Priority for Images
-
-The system attempts to load images in this priority order:
-
-1. **`image`** - Direct URL to profile image (highest priority)
-2. **`gravatarHash`** - SHA256 hash for Gravatar service
-3. **`githubUsername`** - GitHub username for GitHub avatar API
-4. **Default avatar** - System fallback if none available
-
-#### Example Configuration
-
-**Default Language (`site/content/guide/index.md`)**:
-
-```yaml
----
-title: Open Guide to Kanban
-# ... other front matter fields ...
-
-creators:
-  - name: John Coleman
-    image: https://media.linkedin.com/dms/image/v2/D4E03AQGlxycsyUPltg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1676027893027
-    url: https://www.linkedin.com/in/johnanthonycoleman/
-
-contributors:
-  - name: Martin Hinshelwood
-    gravatarHash: a9a55b4384e0420e376f441384d0c13fdadb9d39e72892ac60c3e89c3079d10d
-    githubUsername: mrhinsh
-    url: https://www.linkedin.com/in/martinhinshelwood/
-  - name: Jim Benson
-    url: https://www.linkedin.com/in/jimbenson/
-  - name: Magdalena Firlit
----
-```
-
-**Translated Language (`site/content/guide/index.es.md`)**:
-
-```yaml
----
-title: Guía Abierta de Kanban
-# ... other localized front matter fields ...
-
-# Do NOT include creators/contributors - loaded from default language
-
-translators:
-  - name: María García
-    language: es
-    gravatarHash: def789ghi012jkl345mno678pqr901stu234vwx567yz
-    url: https://www.linkedin.com/in/mariagarcia/
-  - name: Carlos Rodriguez
-    language: es
-    githubUsername: carlosrod
----
-```
-
-### Technical Implementation Notes
-
-- **Gravatar Hash Generation**: Use SHA256 hash of lowercase, trimmed email address
-- **GitHub Username**: Must match exact GitHub username (case-sensitive)
-- **URL Validation**: All URLs should be well-formed and preferably HTTPS
-- **Language Consistency**: Translator `language` field should match file's language code
+See [Content Management](./content-management.md) for the full schema.
 
 ## Git Configuration
 

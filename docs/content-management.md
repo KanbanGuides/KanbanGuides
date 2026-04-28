@@ -11,24 +11,36 @@ This guide covers all aspects of managing content in the Open Guide to Kanban pr
 
 ### File Organization
 
+The site hosts two guides, each with versioned releases:
+
 ```text
 site/content/
-├── guide/
-│   ├── index.md       # Default language (English) guide content
-│   ├── index.es.md    # Spanish translation
-│   ├── index.de.md    # German translation
-│   └── index.fr.md    # French translation
-├── creators/
-│   └── index.md       # Creator profiles (English only)
-└── download/
-    └── index.md       # Download page (multilingual)
+├── _index.md                          # Homepage
+├── open-guide-to-kanban/
+│   ├── _index.md                     # Guide section index (English)
+│   ├── _index.es-419.md              # Guide section index (Spanish LA)
+│   ├── 2025.7/                       # Current versioned release
+│   │   ├── index.md             # English content
+│   │   ├── index.es-419.md      # Spanish (Latin America)
+│   │   ├── index.ja.md          # Japanese
+│   │   └── index.{lang}.md      # Other languages
+│   ├── history/                      # Archived versions
+│   └── translations/                 # Translation index pages
+└── the-kanban-guide/
+    ├── _index.md
+    ├── 2025.5/                       # Current versioned release
+    ├── 2020.12/                      # Historical versions
+    ├── 2020.7/
+    ├── history/
+    └── translations/
 ```
 
 ### Language Handling
 
 - **Default Language**: English (`index.md`)
-- **Translations**: Language-specific files (`index.{lang}.md`)
+- **Translations**: Language-specific files (`index.{lang}.md`) within the same version directory
 - **Content Loading**: Default language content is used as fallback for missing translations
+- **Active languages**: `en`, `ja`, `es-419`, `es-ES`, `fa`, `pl` (controlled in `hugo.production.yaml`)
 
 ## Front Matter Configuration
 
@@ -53,96 +65,51 @@ draft: false
 ---
 ```
 
-### Attribution Fields
+### Attribution / Contributions
 
-The guide supports three types of attribution: **creators**, **contributors**, and **translators**.
+Creators, contributors, and reviewers are **not** stored in content front matter. They are managed in per-guide YAML data files:
 
-#### Loading Behavior
-
-- **Creators & Contributors**: Only loaded from the default language (English) page (`index.md`)
-- **Translators**: Only loaded from language-specific translation pages (`index.es.md`, `index.de.md`, etc.)
-
-This ensures consistent attribution across all languages while allowing language-specific translator recognition.
-
-#### Field Schema
-
-All attribution types support the same field structure:
-
-```yaml
-# Required field
-name: "Full Name"
-
-# Optional image fields (priority order: image > gravatarHash > githubUsername)
-image: "https://direct-url-to-image.jpg" # Highest priority
-gravatarHash: "sha256-hash-of-lowercase-email" # Medium priority
-githubUsername: "github-username" # Lowest priority
-
-# Optional profile link
-url: "https://profile-or-website-url.com"
-
-# Translator-specific field
-language: "es" # Only used in translators section
+```text
+site/data/contributions/
+├── open-guide-to-kanban.yml
+└── the-kanban-guide.yml
 ```
 
-#### Creators Section
-
-Creators are the original authors and founders of the guide content.
+Each entry in these files has the structure:
 
 ```yaml
-creators:
-  - name: John Coleman
-    image: https://media.linkedin.com/dms/image/v2/D4E03AQGlxycsyUPltg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1676027893027
-    url: https://www.linkedin.com/in/johnanthonycoleman/
+- name: John Coleman
+  githubUsername: ViralGoodAgile
+  url: https://www.linkedin.com/in/johnanthonycoleman/
+  contributions:
+    - "2025.7"      # version strings this person contributed to
+  role: creator     # creator | contributor | reviewer | translator
+  founder: true
+  weight: 1
 ```
 
-**Rules**:
+**Image resolution priority**: `image` URL → `gravatarHash` → `githubUsername` (GitHub avatar) → default avatar.
 
-- Only include in default language (`index.md`)
-- Creators are displayed on all language versions
-- At least one creator is required
+#### Generating a Gravatar Hash
 
-#### Contributors Section
+```bash
+# SHA256 of the lowercase, trimmed email address
+echo -n "email@example.com" | sha256sum
+```
 
-Contributors are people who have made significant contributions to the guide content.
+#### Translator entries
+
+Translators are also in the same data files with `role: translator` and a `language` field:
 
 ```yaml
-contributors:
-  - name: Martin Hinshelwood
-    gravatarHash: a9a55b4384e0420e376f441384d0c13fdadb9d39e72892ac60c3e89c3079d10d
-    githubUsername: mrhinsh
-    url: https://www.linkedin.com/in/martinhinshelwood/
-  - name: Jim Benson
-    url: https://www.linkedin.com/in/jimbenson/
-  - name: Magdalena Firlit
+- name: María García
+  language: es-419
+  githubUsername: mariagarcia
+  contributions:
+    - "2025.7"
+  role: translator
+  weight: 100
 ```
-
-**Rules**:
-
-- Only include in default language (`index.md`)
-- Contributors are displayed on all language versions
-- Order represents contribution priority/timing
-
-#### Translators Section
-
-Translators are recognized on language-specific pages only.
-
-```yaml
-# Example for Spanish translation (index.es.md)
-translators:
-  - name: María García
-    language: es
-    gravatarHash: def789ghi012jkl345mno678pqr901stu234vwx567yz
-    url: https://www.linkedin.com/in/mariagarcia/
-  - name: Carlos Rodriguez
-    language: es
-    githubUsername: carlosrod
-```
-
-**Rules**:
-
-- Only include in translated pages (`index.{lang}.md`)
-- Never include in default language page (`index.md`)
-- Language field should match the file's language code
 
 ### Image Priority System
 
@@ -164,17 +131,15 @@ echo -n "email@example.com" | sha256sum
 
 ### 1. Creating New Content
 
+Content lives inside the versioned subdirectory for each guide:
+
 ```bash
-# Navigate to content directory
-cd site/content/guide
+# Edit the English content for the Open Guide to Kanban
+nano site/content/open-guide-to-kanban/2025.7/index.md
 
-# Create or edit English content
-nano index.md
-
-# Create translations
-nano index.es.md  # Spanish
-nano index.de.md  # German
-nano index.fr.md  # French
+# Add a new translation
+cp site/content/open-guide-to-kanban/2025.7/index.md \
+   site/content/open-guide-to-kanban/2025.7/index.es-419.md
 ```
 
 ### 2. Front Matter Template
@@ -195,25 +160,10 @@ type: "guide"
 lang: "en"
 weight: 10
 draft: false
-
-# Only include creators/contributors in DEFAULT language (index.md)
-creators:
-  - name: Creator Name
-    image: https://example.com/image.jpg
-    url: https://example.com/profile
-
-contributors:
-  - name: Contributor Name
-    gravatarHash: sha256-hash-here
-    url: https://example.com/profile
-
-# Only include translators in TRANSLATED pages (index.{lang}.md)
-# translators:
-#   - name: Translator Name
-#     language: es
-#     githubUsername: username
 ---
 ```
+
+> Creators, contributors, and translators are managed in `site/data/contributions/`, not in content front matter.
 
 ### 3. Content Guidelines
 
@@ -242,47 +192,34 @@ contributors:
 
 ### Creating Translations
 
-1. **Copy base structure** from English version
-2. **Translate all content** including front matter
-3. **Add translator attribution** in the `translators` section
-4. **Never include** `creators` or `contributors` in translated versions
+1. **Copy base structure** from English version within the same version directory
+2. **Translate all content** including front matter fields (`title`, `description`, `keywords`)
+3. **Update `lang` field** to the target language code (e.g., `es-419`, `ja`)
+4. **Add translator attribution** to the guide's data file in `site/data/contributions/`
 
 ### Translation Example
 
-**English (`index.md`)**:
+**English** (`site/content/open-guide-to-kanban/2025.7/index.md`):
 
 ```yaml
 ---
-title: Open Guide to Kanban
+title: Open Guide to Kanban - In the Context of Knowledge Work
 description: Community-driven reference for Kanban in knowledge work
 lang: en
-
-creators:
-  - name: John Coleman
-    url: https://example.com
-
-contributors:
-  - name: Martin Hinshelwood
-    url: https://example.com
 ---
 ```
 
-**Spanish (`index.es.md`)**:
+**Spanish Latin America** (`site/content/open-guide-to-kanban/2025.7/index.es-419.md`):
 
 ```yaml
 ---
-title: Guía Abierta de Kanban
-description: Referencia comunitaria para Kanban en trabajo del conocimiento
-lang: es
-
-# Do NOT include creators/contributors here
-
-translators:
-  - name: María García
-    language: es
-    url: https://example.com
+title: Guía Abierta de Kanban - En el Contexto del Trabajo del Conocimiento
+description: Referencia comunitaria para Kanban en el trabajo del conocimiento
+lang: es-419
 ---
 ```
+
+Translator credit goes in `site/data/contributions/open-guide-to-kanban.yml`.
 
 ### Translation Quality Standards
 
@@ -324,7 +261,7 @@ translators:
 1. **Local Testing**:
 
    ```bash
-   hugo serve -D --bind 0.0.0.0
+   hugo serve --source site --config hugo.yaml,hugo.local.yaml
    ```
 
 2. **Preview Environment**: Test on [preview site](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/)

@@ -46,29 +46,40 @@ The main Hugo site directory containing all source files:
 
 ```text
 site/
-├── content/           # Markdown content files
-│   ├── _index.md     # Homepage content
-│   ├── creators/     # Creator profiles
-│   ├── download/     # Download pages
-│   └── guide/        # Main guide content
-├── layouts/          # HTML templates (Hugo v0.146.0+ structure)
-│   ├── baseof.html   # Base template (moved from _default/)
-│   ├── home.html     # Homepage template (renamed from index.html)
-│   ├── single.html   # Single page template (moved from _default/)
-│   ├── list.html     # List template (moved from _default/)
-│   ├── guide/        # Guide-specific layouts
-│   ├── creators/     # Creator-specific layouts
-│   ├── _partials/    # Reusable components (renamed from partials/)
-│   ├── _shortcodes/  # Custom shortcodes (renamed from shortcodes/)
-│   └── _markup/      # Render hooks for markdown elements
-├── static/           # Static assets
-│   ├── css/         # Custom stylesheets
-│   ├── images/      # Images and graphics
-│   └── pdf/         # PDF files
-├── data/            # Structured data files
-├── i18n/            # Translation files
-└── hugo.yaml        # Hugo configuration
+├── content/                        # Markdown content files
+│   ├── _index.md                  # Homepage content
+│   ├── open-guide-to-kanban/      # Open Guide to Kanban
+│   │   ├── _index.md             # Section index
+│   │   ├── 2025.7/               # Versioned release
+│   │   │   ├── index.md         # English content
+│   │   │   ├── index.es-419.md  # Spanish (Latin America)
+│   │   │   └── index.ja.md      # Japanese (etc.)
+│   │   ├── history/              # Archived versions
+│   │   └── translations/         # Translation index pages
+│   └── the-kanban-guide/          # The Kanban Guide
+│       ├── _index.md             # Section index
+│       ├── 2025.5/               # Latest versioned release
+│       ├── 2020.12/              # Historical versions
+│       ├── 2020.7/
+│       ├── history/
+│       └── translations/
+├── static/                         # Static assets
+│   ├── css/                       # Custom stylesheets
+│   └── images/                    # Images and graphics
+├── data/                           # Structured data files
+│   └── contributions/             # Contributor data per guide
+│       ├── open-guide-to-kanban.yml
+│       └── the-kanban-guide.yml
+├── i18n/                           # Translation files
+│   ├── en.yaml
+│   ├── es-419.yaml
+│   ├── ja.yaml
+│   └── ...                        # Other language files
+├── go.mod                          # Hugo module definition
+└── hugo.yaml                       # Hugo configuration
 ```
+
+> **Note**: This project has no local `layouts/` directory. All templates, partials, shortcodes, and render hooks are provided by the **HugoGuides Hugo module** (`github.com/nkdAgility/HugoGuides/module`), declared in `site/go.mod`. Run `hugo mod download` after cloning to fetch it.
 
 ### `/docs/` - Documentation
 
@@ -91,69 +102,45 @@ Auto-generated static site files (not committed to version control in production
 The site supports multiple languages using Hugo's built-in i18n features:
 
 - **English** (`en`) - Default language
-- **German** (`de`) - Deutsch
-- **Spanish** (`es`) - Español
-- **French** (`fr`) - Français
+- **Japanese** (`ja`) - 日本語
+- **Spanish Latin America** (`es-419`) - Español (Latinoamérica)
+- **Spanish Spain** (`es-ES`) - Español (España)
+- **Farsi/Persian** (`fa`) - فارسی (RTL)
+- **Polish** (`pl`) - Polski
+- **Minionese** (`min`) - reference/fun implementation
+
+Active languages per environment are controlled in `hugo.production.yaml` via `disabled: true/false`.
 
 ### Content Types
 
-1. **Guide Content** - Main Kanban content
-2. **Creator Profiles** - Information about authors
-3. **Download Pages** - PDF and resource downloads
-4. **Static Pages** - About, legal, etc.
+1. **Guide Content** - The two Kanban guides with versioned releases
+2. **History Pages** - Archived versions of each guide
+3. **Translation Index Pages** - Per-guide translation listings
 
-## Template Hierarchy
+## Template System
 
-Hugo's new template system (v0.146.0+) follows a streamlined lookup order that considers multiple identifiers:
+All templates are provided by the **HugoGuides module** (`github.com/nkdAgility/HugoGuides/module`). There is no local `layouts/` directory in this repo. The module uses Hugo v0.146.0+'s template system:
 
-### Template Lookup Order
+- Templates live in `_partials/`, `_shortcodes/`, `_markup/` within the module
+- Base template is `baseof.html`, homepage is `home.html`
+- Hugo's lookup order: custom layout → page kind → standard layouts → output format → language → path
 
-1. **Custom Layout** - Defined in front matter (`layout: myCustomLayout`)
-2. **Page Kinds** - `home`, `section`, `taxonomy`, `term`, `page`
-3. **Standard Layouts** - `list`, `single`, `all`
-4. **Output Format** - `html`, `rss`, `json`
-5. **Language** - `en`, `de`, `es`, etc.
-6. **Page Path** - Content-specific paths for targeted templates
-
-### Key Template Changes
-
-- **No `_default/` folder**: All default templates moved to `layouts/` root
-- **Renamed folders**: `partials/` → `_partials/`, `shortcodes/` → `_shortcodes/`
-- **New `_markup/` folder**: For render hooks (links, images, code blocks)
-- **Homepage template**: `index.html` → `home.html`
-- **Base templates**: `list-baseof.html` → `baseof.list.html`
-
-### Template Examples
-
-For a guide page (`/guide/my-guide/`), Hugo looks for templates in this order:
-
-1. `layouts/guide/my-guide/single.html` - Most specific
-2. `layouts/guide/single.html` - Content type specific
-3. `layouts/single.html` - Default single template
-4. `layouts/baseof.html` - Base template
-
-### Key Templates
-
-- **`baseof.html`** - Base template with common HTML structure
-- **`home.html`** - Homepage template (renamed from `index.html`)
-- **`single.html`** - Individual page template
-- **`list.html`** - List/index page template
-- **`all.html`** - New catch-all template for any page type
+To update templates, changes must be made in the [HugoGuides module repository](https://github.com/nkdAgility/HugoGuides) and a new version imported via `hugo mod get`.
 
 ## Build Process
 
 ### Development Build
 
 ```bash
-cd site
-hugo server -D --bind 0.0.0.0 --port 1313
+# From the project root
+hugo serve --source site --config hugo.yaml,hugo.local.yaml
 ```
 
 ### Production Build
 
 ```bash
-cd site
-hugo --minify --environment production
+# From the project root
+hugo --source site --config hugo.yaml,hugo.production.yaml --minify
 ```
 
 ### Environment Configurations
@@ -229,24 +216,18 @@ The site is deployed using Azure Static Web Apps with:
 
 ### Adding New Languages
 
-1. Create new i18n file in `i18n/[lang].yaml`
-2. Add language configuration in `hugo.yaml`
-3. Create translated content in `content/` directory
-4. Update navigation templates
+1. Create new i18n file in `site/i18n/{lang}.yaml`
+2. Add language configuration in `site/hugo.yaml`
+3. Create translated content files in each guide's version directory
+4. Use the `@tranguide.create` agent for automated setup
 
 ### Adding New Content Types
 
-1. Create content archetype in `archetypes/`
-2. Design specific layout in `layouts/`
-3. Configure front matter requirements
-4. Update navigation and menus
+New content types require template changes in the HugoGuides module, not in this repo. Raise an issue or PR against [github.com/nkdAgility/HugoGuides](https://github.com/nkdAgility/HugoGuides).
 
-### Custom Functionality
+### Custom CSS/JS
 
-- **Shortcodes** for reusable content components
-- **Partial templates** for shared functionality
-- **Data files** for structured content
-- **Custom CSS/JS** for enhanced features
+Custom styles go in `site/static/css/style.css`. The module provides the base Bootstrap 5 + Font Awesome setup.
 
 ## Future Considerations
 

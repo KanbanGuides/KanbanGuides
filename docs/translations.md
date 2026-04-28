@@ -36,24 +36,35 @@ Please read the [Code of Conduct for Translation Contributors](translations-code
 
 ## 📋 What Needs Translation
 
-To add a new language to the site, you'll need to translate:
+To add a new language to the site, you'll need to translate content for **both guides** plus the UI strings.
 
-### 1. Main Guide Content
+### 1. Open Guide to Kanban (current version: 2025.7)
 
-- **File:** `site/content/guide/index.{LANG}.md`
+- **File:** `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md`
 - **Content:** The complete Open Guide to Kanban document
 - **Size:** ~900 lines of Markdown content
 
-### 2. User Interface Elements
+### 2. The Kanban Guide (current version: 2025.5)
+
+- **File:** `site/content/the-kanban-guide/2025.5/index.{LANG}.md`
+- **Content:** The complete Kanban Guide document
+- **Size:** ~400 lines of Markdown content
+
+### 3. Section Index Pages
+
+Each guide has a section index that should also be translated:
+
+- `site/content/open-guide-to-kanban/_index.{LANG}.md`
+- `site/content/the-kanban-guide/_index.{LANG}.md`
+- `site/content/_index.{LANG}.md` (homepage)
+
+### 4. User Interface Elements
 
 - **File:** `site/i18n/{LANG}.yaml`
 - **Content:** Navigation, buttons, labels, and interface text
 - **Size:** ~40 translation keys
 
-### 3. Supporting Content (Optional)
-
-- Creator pages in `site/content/creators/`
-- Download page content
+> **Note:** There is no `creators/` or `download/` content directory. Contributor attribution is managed in `site/data/contributions/` YAML files — see [Content Management](./content-management.md) for details.
 
 ---
 
@@ -87,71 +98,46 @@ Replace `{LANG}` with your language code (e.g., `pt` for Portuguese, `ja` for Ja
 
 ### Step 3: Create Translation Files
 
-#### Option A: Automated Setup (PowerShell - Recommended)
+#### Option A: Agent-Assisted Setup (Recommended)
 
-**Prerequisites:** [PowerShell 7+](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell) (Windows, macOS, or Linux)
+Use the `@tranguide.create` agent in GitHub Copilot Chat. It will ask for any missing details and scaffold everything for you:
 
-Use our automated translation template script to set up all necessary files:
-
-> ⚠️ **Note:** The script will automatically install the required `powershell-yaml` module if it's not already available.
-
-```powershell
-# Basic usage
-.\scripts\Create-TranslationTemplate.ps1 -LanguageCode "de" -LanguageName "German"
-
-# Advanced usage with custom settings
-.\scripts\Create-TranslationTemplate.ps1 -LanguageCode "es" -LanguageName "Spanish" -Title "Guía Kanban Abierta" -Weight 3 -Force
+```
+@tranguide.create de German
 ```
 
-**What the script does:**
+**What the agent does:**
 
 - ✅ Adds language configuration to `hugo.yaml`
-- ✅ Creates `site/i18n/{LANG}.yaml` from English template
-- ✅ Creates all translated content files (`*.{LANG}.md`)
-- ✅ Sets up proper frontmatter with placeholders
-- ✅ Validates the complete setup
-- ✅ Provides next steps guidance
-
-> 🕒 **Time savings:** The script reduces setup time from ~30 minutes manual work to ~2 minutes automated setup.
-
-**Script Parameters:**
-
-- `LanguageCode` - ISO language code (e.g., 'de', 'es', 'fr')
-- `LanguageName` - Display name (e.g., 'German', 'Spanish')
-- `Title` - Translated site title (optional)
-- `Description` - Translated site description (optional)
-- `Keywords` - Translated site keywords (optional)
-- `Weight` - Language menu order (optional, auto-calculated)
-- `Force` - Overwrite existing files
-
-> 💡 **Don't have PowerShell?** Install it from [Microsoft's official guide](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell) - it's free and available for Windows, macOS, and Linux.
+- ✅ Disables it in `hugo.production.yaml` (until the translation is ready)
+- ✅ Creates `site/i18n/{LANG}.yaml` with all strings translated
+- ✅ Creates all structural wrapper content files (`_index`, history, translations pages) fully translated
+- ✅ Creates versioned guide files with translated front matter and **empty body** ready for a human translator
+- ✅ Validates the complete setup and reports results
 
 #### Option B: Manual Setup
 
-If you prefer manual setup or don't have PowerShell:
+If you prefer manual setup:
 
-**A. Main Guide Translation**
+**A. Guide Content Translation**
 
-1. Copy the English guide:
+1. Copy the English guide for each guide you're translating:
 
 ```bash
-cp site/content/guide/index.md site/content/guide/index.{LANG}.md
+# Open Guide to Kanban
+cp site/content/open-guide-to-kanban/2025.7/index.md \
+   site/content/open-guide-to-kanban/2025.7/index.{LANG}.md
+
+# The Kanban Guide
+cp site/content/the-kanban-guide/2025.5/index.md \
+   site/content/the-kanban-guide/2025.5/index.{LANG}.md
 ```
 
-2. Edit the frontmatter in `site/content/guide/index.{LANG}.md`:
+2. Edit the front matter in each file — at minimum translate `title`, `description`, `keywords`, and set `lang` to your language code.
 
-```yaml
----
-title: "Your Translated Title"
-description: "Your translated description"
-# ... translate other metadata
----
-```
-
-3. Translate the entire content while preserving:
+3. Translate the entire body content while preserving:
    - Markdown formatting (`##`, `**bold**`, `[links](url)`)
    - Hugo shortcodes
-   - Reference numbers (40), (58), etc.
    - HTML comments and IDs
 
 **B. UI Translation File**
@@ -197,7 +183,7 @@ hugo server --config hugo.yaml,hugo.local.yaml
 ```
 
 3. **View your translation:**
-   - Navigate to `http://localhost:1313/{LANG}/`
+   - Navigate to `http://localhost:1313/{LANG}/open-guide-to-kanban/`
    - Check all pages and UI elements
    - Verify language switching works correctly
 
@@ -228,17 +214,18 @@ git push origin translation/add-{LANG}-language
 
 ## 📝 Manual Workflow
 
-> 💡 **Tip:** Even if you're using the manual workflow, you can still use our [PowerShell automation script](#option-a-automated-setup-powershell---recommended) to generate the template files - just fork the repo temporarily, run the script, then download the generated files to work with locally.
+> 💡 **Tip:** Even if you prefer a manual workflow, you can still use the [`@tranguide.create` agent](#option-a-agent-assisted-setup-recommended) to scaffold all template files — then edit the generated files manually.
 
 ### Step 1: Get Translation Templates
 
 1. **Download files to translate:**
 
-   - [Main Guide Template](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/guide/index.md)
+   - [Open Guide to Kanban (English)](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/open-guide-to-kanban/2025.7/index.md)
+   - [The Kanban Guide (English)](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/the-kanban-guide/2025.5/index.md)
    - [UI Translations Template](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/i18n/en.yaml)
 
 2. **Save locally** with your language code:
-   - `index.{LANG}.md` (e.g., `index.pt.md`)
+   - `index.{LANG}.md` for each guide (e.g., `index.pt.md`)
    - `{LANG}.yaml` (e.g., `pt.yaml`)
 
 ### Step 2: Translate Content
@@ -288,20 +275,22 @@ git push origin translation/add-{LANG}-language
 
 ### Language Codes
 
-Use [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two-letter codes when available, or [ISO 639-2](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) three-letter codes for languages not covered:
+Use [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag) language tags. The project uses these formats:
 
-**Two-letter codes:**
+**Current languages:**
 
-- `de` - German (Deutsch)
-- `es` - Spanish (Español)
-- `fr` - French (Français)
-- `pt` - Portuguese
+- `en` - English (default)
 - `ja` - Japanese
-- `zh` - Chinese
+- `es-419` - Spanish (Latin America)
+- `es-ES` - Spanish (Spain)
+- `fa` - Farsi/Persian (RTL)
+- `pl` - Polish
 
-**Three-letter codes:**
+**Adding new languages:**
 
-- `min` - Minionese (example implementation available)
+- Use two-letter codes for most languages: `pt`, `de`, `fr`, `ko`
+- Use regional subtags when needed: `pt-BR` for Brazilian Portuguese
+- Three-letter codes for languages without two-letter codes: `min` (Minionese example)
 
 ### Content Guidelines
 

@@ -27,16 +27,19 @@ date: 2025-07-02T09:00:00Z # Date of this version
 
 ```text
 site/content/
-├── kanban-guide/
-│   ├── latest/index.md           # Current Kanban Guide
-│   └── history/
-│       ├── 2020-07/index.md     # Historical versions
-│       ├── 2020-12/index.md
-│       └── _index.md             # History page
-└── open-guide-for-kanban/
-    ├── latest/index.md           # Current Open Guide (forked_from: kanban-guide/latest)
+├── the-kanban-guide/
+│   ├── 2025.5/                    # Current version
+│   │   └── index.md
+│   ├── 2020.12/                   # Historical version
+│   ├── 2020.7/                    # Historical version
+│   ├── history/
+│   │   └── _index.md              # History page
+│   └── translations/
+└── open-guide-to-kanban/
+    ├── 2025.7/                    # Current version (forked_from: the-kanban-guide/2025.5)
+    │   └── index.md
     └── history/
-        └── _index.md             # History page
+        └── _index.md              # History page
 ```
 
 ## Visual Timeline
@@ -61,7 +64,7 @@ The history page displays a vertical timeline showing:
 
 ### `get-history-chain.html`
 
-Located at `site/layouts/_partials/functions/get-history-chain.html`, this function:
+This function is part of the HugoGuides module (not a local file). It:
 
 - Analyzes the current page to determine its guide type
 - Retrieves the complete history chain including fork relationships
@@ -80,14 +83,14 @@ Located at `site/layouts/_partials/functions/get-history-chain.html`, this funct
 Use the PowerShell script to create historical versions:
 
 ```powershell
-# Create a new historical version
-.\scripts\Create-HistoricalVersion.ps1 -Guide "open-guide-for-kanban" -Version "2025-07"
+# Create a new historical version of the Open Guide to Kanban
+.\scripts\Create-HistoricalVersion.ps1 -Guide "open-guide-to-kanban" -Version "2025.7"
 
 # With specific date
-.\scripts\Create-HistoricalVersion.ps1 -Guide "kanban-guide" -Version "2025.5.1" -Date "2025-05-15"
+.\scripts\Create-HistoricalVersion.ps1 -Guide "the-kanban-guide" -Version "2025.5" -Date "2025-05-15"
 
 # Force overwrite existing
-.\scripts\Create-HistoricalVersion.ps1 -Guide "open-guide-for-kanban" -Version "2025-07" -Force
+.\scripts\Create-HistoricalVersion.ps1 -Guide "open-guide-to-kanban" -Version "2025.7" -Force
 ```
 
 ### What the Script Does

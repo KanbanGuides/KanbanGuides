@@ -77,21 +77,20 @@ hugo server -D --verbose --debug
 
 ```text
 site/
-├── content/              # Content files (.md)
-├── layouts/              # Templates (.html) - Updated for Hugo v0.146.0+
-│   ├── _partials/       # Reusable template components (renamed from partials/)
-│   ├── _shortcodes/     # Custom shortcodes (renamed from shortcodes/)
-│   ├── _markup/         # Render hooks for markdown elements
-│   ├── baseof.html      # Base template (moved from _default/)
-│   ├── single.html      # Single page template (moved from _default/)
-│   ├── list.html        # List page template (moved from _default/)
-│   ├── home.html        # Homepage template (renamed from index.html)
-│   └── [content-type]/  # Content-specific templates
-├── static/               # Static assets
-├── data/                 # Data files (.yaml/.json)
-├── i18n/                 # Translations (.yaml)
-└── hugo.yaml            # Configuration
+├── content/                          # Content files (.md)
+│   ├── open-guide-to-kanban/        # Open Guide to Kanban
+│   │   └── 2025.7/               # Versioned release
+│   └── the-kanban-guide/            # The Kanban Guide
+│       └── 2025.5/               # Versioned release
+├── static/                           # Static assets (CSS, images, JS)
+├── data/                             # Data files (.yaml)
+│   └── contributions/               # Contributor data per guide
+├── i18n/                             # Translation strings (.yaml)
+├── go.mod                            # Hugo module (HugoGuides templates)
+└── hugo.yaml                         # Configuration
 ```
+
+> There is no local `layouts/` directory. All templates come from the HugoGuides module (`github.com/nkdAgility/HugoGuides/module`).
 
 ### Naming Conventions
 
@@ -129,14 +128,12 @@ Your markdown content here...
 ### Creating New Pages
 
 ```powershell
-# Create a new page
-hugo new content/your-page.md
+# Edit the English Open Guide to Kanban
+nano site/content/open-guide-to-kanban/2025.7/index.md
 
-# Create a new guide section
-hugo new content/guide/new-section.md
-
-# Create a creator profile
-hugo new content/creators/new-creator/index.md
+# Add a translation
+cp site/content/open-guide-to-kanban/2025.7/index.md \
+   site/content/open-guide-to-kanban/2025.7/index.pt.md
 ```
 
 ### Content Best Practices
@@ -158,220 +155,21 @@ hugo new content/creators/new-creator/index.md
    - Use descriptive filenames
    - Optimize for web (WebP preferred)
 
-### Content Attribution Fields
+### Contributor Attribution
 
-The guide supports three types of attribution through front matter: **creators**, **contributors**, and **translators**. Each serves a specific purpose and has different loading behavior.
+Creators, contributors, reviewers, and translators are managed in `site/data/contributions/` YAML files. See [Content Management](./content-management.md) for details.
 
-#### Loading Behavior
+## Working with Templates
 
-- **Creators & Contributors**: Only loaded from the default language (English) page (`index.md`)
-- **Translators**: Only loaded from language-specific pages (`index.es.md`, `index.de.md`, etc.)
+Templates are provided by the HugoGuides module (`github.com/nkdAgility/HugoGuides/module`). There is no local `layouts/` directory in this repo. Template changes require PRs to the module repository.
 
-This ensures consistent attribution across all languages while allowing language-specific translator recognition.
+For custom CSS, edit `site/static/css/style.css`.
 
-#### Creators Section
+## Working with Templates
 
-Creators are the original authors and founders of the guide content.
+Templates are provided by the HugoGuides module (`github.com/nkdAgility/HugoGuides/module`). There is no local `layouts/` directory. To customise templates, changes must go into the module repo.
 
-```yaml
-creators:
-  - name: John Coleman # Required: Full name
-    image: https://example.com/photo.jpg # Optional: Direct image URL (highest priority)
-    gravatarHash: abc123def456... # Optional: SHA256 hash for Gravatar
-    githubUsername: johncoleman # Optional: GitHub username for avatar
-    url: https://linkedin.com/in/john # Optional: Profile/website link
-```
-
-**Field Priority for Images**:
-
-1. `image` - Direct URL to profile image (highest priority)
-2. `gravatarHash` - SHA256 hash for Gravatar service
-3. `githubUsername` - GitHub username for GitHub avatar (lowest priority)
-
-#### Contributors Section
-
-Contributors are people who have contributed to the guide content, improvements, or maintenance.
-
-```yaml
-contributors:
-  - name: Martin Hinshelwood # Required: Full name
-    gravatarHash: a9a55b4384e0420e... # Optional: Gravatar hash
-    githubUsername: mrhinsh # Optional: GitHub username
-    url: https://linkedin.com/in/martin # Optional: Profile link
-  - name: Jim Benson # Minimal example with just name and URL
-    url: https://linkedin.com/in/jim
-  - name: Magdalena Firlit # Minimal example with just name
-```
-
-**Same image priority order applies**: `image` > `gravatarHash` > `githubUsername`
-
-#### Translators Section
-
-Translators are recognized on language-specific pages only. This section should **only** appear in translated content files (not in the default English `index.md`).
-
-```yaml
-# Example for Spanish translation (index.es.md)
-translators:
-  - name: María García # Required: Full name
-    language: es # Optional: Language code translated
-    gravatarHash: def789ghi012... # Optional: Gravatar hash
-    url: https://linkedin.com/in/maria # Optional: Profile link
-  - name: Carlos Rodriguez
-    language: es
-    githubUsername: carlosrod
-    url: https://github.com/carlosrod
-```
-
-#### Complete Front Matter Example
-
-**Default Language File (`index.md`)**:
-
-```yaml
----
-title: Open Guide to Kanban
-description: Community-driven reference for Kanban in knowledge work
-# ... other front matter fields ...
-
-creators:
-  - name: John Coleman
-    image: https://media.linkedin.com/dms/image/v2/D4E03AQGlxycsyUPltg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1676027893027
-    url: https://www.linkedin.com/in/johnanthonycoleman/
-
-contributors:
-  - name: Martin Hinshelwood
-    gravatarHash: a9a55b4384e0420e376f441384d0c13fdadb9d39e72892ac60c3e89c3079d10d
-    githubUsername: mrhinsh
-    url: https://www.linkedin.com/in/martinhinshelwood/
-  - name: Jim Benson
-    url: https://www.linkedin.com/in/jimbenson/
----
-```
-
-**Translated File (`index.es.md`)**:
-
-```yaml
----
-title: Guía Abierta de Kanban
-description: Referencia comunitaria para Kanban en trabajo del conocimiento
-# ... other localized front matter fields ...
-
-# Do NOT include creators/contributors here - they're loaded from default language
-
-translators:
-  - name: María García
-    language: es
-    gravatarHash: def789ghi012jkl345mno678pqr901stu234vwx567yz
-    url: https://www.linkedin.com/in/mariagarcia/
-  - name: Carlos Rodriguez
-    language: es
-    githubUsername: carlosrod
----
-```
-
-#### Implementation Notes
-
-1. **Image Resolution Priority**: The system will attempt to load images in this order:
-
-   - `image` field (direct URL)
-   - `gravatarHash` (Gravatar service)
-   - `githubUsername` (GitHub avatar API)
-   - Fall back to default avatar if none available
-
-2. **Gravatar Hash Generation**: Use SHA256 hash of the lowercase, trimmed email address:
-
-   ```bash
-   echo -n "email@example.com" | sha256sum
-   ```
-
-3. **GitHub Username**: Should be the exact GitHub username (case-sensitive)
-
-4. **URL Validation**: URLs should be well-formed and preferably HTTPS
-
-5. **Language Consistency**: Ensure translator `language` field matches the file's language code
-
-## Working with Layouts
-
-### Template Development (Hugo v0.146.0+ New Template System)
-
-Hugo's new template system uses a simplified structure with enhanced template lookup. The key changes include:
-
-#### Template Structure Changes
-
-- **No more `_default/` folder**: All default templates are now in the root `layouts/` directory
-- **Renamed folders**: `partials/` → `_partials/`, `shortcodes/` → `_shortcodes/`
-- **New `_markup/` folder**: For render hooks (links, images, code blocks, etc.)
-- **Simplified naming**: `index.html` → `home.html`, page-kind-specific templates
-
-#### Template Development
-
-Hugo uses Go templates with the following structure:
-
-```html
-{{ define "main" }}
-<main class="container">
-  <h1>{{ .Title }}</h1>
-  <div class="content">{{ .Content }}</div>
-</main>
-{{ end }}
-```
-
-#### New Template Lookup Order
-
-The new template lookup considers these identifiers in order of importance:
-
-1. **Custom Layout** - Set in front matter (`layout: myCustomLayout`)
-2. **Page Kinds** - `home`, `section`, `taxonomy`, `term`, `page`
-3. **Standard Layouts** - `list`, `single`
-4. **Output Format** - `html`, `rss`, `json`
-5. **Language** - `en`, `de`, `es`, etc.
-6. **Page Path** - Specific content paths
-
-### Key Template Variables
-
-- `{{ .Title }}` - Page title
-- `{{ .Content }}` - Page content
-- `{{ .Params }}` - Front matter parameters
-- `{{ .Site }}` - Site configuration
-- `{{ .Language }}` - Current language
-
-### Partial Templates
-
-Create reusable components in `/layouts/_partials/` (note the underscore prefix):
-
-```html
-<!-- layouts/_partials/components/my-component.html -->
-<div class="my-component">
-  <h2>{{ .title }}</h2>
-  <p>{{ .content }}</p>
-</div>
-```
-
-Use in templates:
-
-```html
-{{ partial "components/my-component.html" (dict "title" "My Title" "content" "My content") }}
-```
-
-### Content-Specific Templates
-
-With the new template system, you can organize templates by content path:
-
-```text
-layouts/
-├── baseof.html              # Base template for all pages
-├── home.html                # Homepage template
-├── single.html              # Default single page template
-├── list.html                # Default list page template
-├── guide/                   # Guide-specific templates
-│   ├── single.html         # Guide single page template
-│   └── list.html           # Guide list template
-└── _partials/
-    ├── components/
-    │   ├── navigation.html
-    │   └── language-switcher.html
-    └── functions/
-        └── get-page-param.html
-```
+For custom CSS, edit `site/static/css/style.css`. The module handles Bootstrap 5 + Font Awesome setup.
 
 ## Internationalization (i18n)
 
@@ -486,11 +284,11 @@ Test the site in:
 # Check Hugo version
 hugo version
 
-# Verify you're in the correct directory
-cd site
+# Verify modules are downloaded
+cd site && hugo mod download
 
 # Check configuration
-hugo config
+huge config --source site
 ```
 
 #### Content Not Appearing
@@ -620,84 +418,9 @@ Access in templates:
 {{ end }}
 ```
 
-## Hugo Template System Migration (v0.146.0+)
+## Hugo Template System
 
-This project has been updated to use Hugo's new template system introduced in v0.146.0. Here's what you need to know:
-
-### Key Changes Summary
-
-| **Old System**        | **New System**         | **Action Required**                   |
-| --------------------- | ---------------------- | ------------------------------------- |
-| `layouts/_default/`   | `layouts/` (root)      | Move all `_default` templates to root |
-| `layouts/partials/`   | `layouts/_partials/`   | Rename folder with underscore prefix  |
-| `layouts/shortcodes/` | `layouts/_shortcodes/` | Rename folder with underscore prefix  |
-| `layouts/index.html`  | `layouts/home.html`    | Rename homepage template              |
-| `list-baseof.html`    | `baseof.list.html`     | Move identifier after first dot       |
-
-### Migration Examples
-
-#### Before (Old Template System)
-
-```text
-layouts/
-├── _default/
-│   ├── baseof.html
-│   ├── single.html
-│   ├── list.html
-│   └── index.html
-├── partials/
-│   └── header.html
-└── shortcodes/
-    └── button.html
-```
-
-#### After (New Template System)
-
-```text
-layouts/
-├── baseof.html          # Moved from _default/
-├── single.html          # Moved from _default/
-├── list.html           # Moved from _default/
-├── home.html           # Renamed from index.html
-├── _partials/          # Renamed from partials/
-│   └── header.html
-└── _shortcodes/        # Renamed from shortcodes/
-    └── button.html
-```
-
-### Template Lookup Changes
-
-The new system uses a more intuitive lookup order:
-
-1. **Custom Layout** - Set in front matter (`layout: custom`)
-2. **Page Kind** - `home`, `section`, `taxonomy`, `term`, `page`
-3. **Standard Layout** - `list`, `single`, `all`
-4. **Output Format** - `html`, `rss`, `json`
-5. **Language** - `en`, `de`, `es`
-6. **Page Path** - Content-specific paths
-
-### Path-Based Templates
-
-You can now organize templates by content structure:
-
-```text
-layouts/
-├── baseof.html              # Global base template
-├── home.html               # Homepage
-├── single.html             # Default single page
-├── guide/                  # Guide-specific templates
-│   ├── single.html        # Override for guide pages
-│   └── list.html          # Override for guide lists
-└── creators/               # Creator-specific templates
-    └── single.html        # Override for creator pages
-```
-
-### Internal Template Changes
-
-Replace internal template calls with partials:
-
-```html
-<!-- Old Way -->
+This project uses the HugoGuides module for all templates. There is no local `layouts/` directory. The module uses Hugo's v0.146.0+ template system (renamed folders, new lookup order). Template changes require updating the module at [github.com/nkdAgility/HugoGuides](https://github.com/nkdAgility/HugoGuides).
 {{ template "_internal/opengraph.html" . }}
 
 <!-- New Way -->

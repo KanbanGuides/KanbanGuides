@@ -151,10 +151,11 @@ git push origin feature/your-feature-name
 
 ### Editing Guide Content
 
-The main guide content is located in:
+The guides are located in versioned subdirectories:
 
 ```
-site/content/guide/index.md
+site/content/open-guide-to-kanban/2025.7/index.md
+site/content/the-kanban-guide/2025.5/index.md
 ```
 
 #### Content Structure
@@ -271,16 +272,18 @@ According to Smith (42), ...
 
 ```
 site/
-├── layouts/
-│   ├── _default/          # Default templates
-│   ├── partials/          # Reusable components
-│   └── shortcodes/        # Content shortcodes
+├── content/               # Markdown content (two guides, versioned)
 ├── static/
 │   ├── css/               # Custom styles
 │   ├── js/                # Custom scripts
 │   └── images/            # Static images
-└── content/               # Markdown content
+├── data/
+│   └── contributions/     # Contributor data per guide
+├── i18n/                  # Translation strings
+└── go.mod                 # Hugo module (provides all templates)
 ```
+
+> Templates come from the HugoGuides module — there is no local `layouts/` directory.
 
 #### Performance Considerations
 

@@ -116,7 +116,7 @@ This is a **Hugo-based static website** for the Open Guide to Kanban, hosted on 
 - Focus on practical, actionable guidance
 - Maintain consistency with Kanban terminology
 - **Multilingual support**: Site supports multiple languages (currently English and Klingon)
-- Use `scripts\Create-TranslationTemplate.ps1` for adding new language support
+- Use the `/tranguide.create` agent for adding new language support
 - Ensure all content changes are reflected across all language versions
 - Test content rendering in all supported languages
 
@@ -218,22 +218,27 @@ This is a **Hugo-based static website** for the Open Guide to Kanban, hosted on 
 
 ### Adding New Language Translations
 
-Use the PowerShell script to create complete translation templates:
+Use the `@tranguide.create` agent in GitHub Copilot to scaffold a new language:
 
-```powershell
-# Create a new language translation (from project root)
-.\scripts\Create-TranslationTemplate.ps1 -LanguageCode "de" -LanguageName "German" -Title "Open Guide to Kanban"
-
-# Create translation with all optional parameters
-.\scripts\Create-TranslationTemplate.ps1 -LanguageCode "es" -LanguageName "Spanish" -Weight 3 -Description "Guía Abierta de Kanban" -Keywords "Kanban, guía" -Force
+```
+@tranguide.create de German
 ```
 
-This script automatically:
+The agent will:
 
-- Adds language configuration to `hugo.yaml`
-- Creates i18n translation files in `site/i18n/`
-- Creates translated content files based on English defaults
-- Validates the translation setup
+- Add language configuration to `hugo.yaml` (and disable it in `hugo.production.yaml`)
+- Create `site/i18n/{lang}.yaml` with all strings translated
+- Create all structural wrapper content files (`_index`, history, translations pages) with full translation
+- Create versioned guide files with translated front matter and an empty body ready for a human translator
+- Validate the complete setup
+
+To audit an existing translation for gaps or missing files, use `@tranguide.reconcile`:
+
+```
+@tranguide.reconcile de          # report gaps for German
+@tranguide.reconcile all         # audit every language
+@tranguide.reconcile de fix      # report and repair
+```
 
 ### Updating Styles
 

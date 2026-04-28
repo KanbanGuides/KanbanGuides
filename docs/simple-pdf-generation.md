@@ -71,10 +71,10 @@ scripts/
 ├── cover-page.tex         # LaTeX cover page template
 └── simple-template.tex    # Minimal LaTeX template (optional)
 
-site/content/guide/
+site/content/open-guide-to-kanban/2025.7/
 ├── index.md               # English version
-├── index.fa.md            # Farsi version
-└── index.tlh.md           # Klingon version
+├── index.es-419.md        # Spanish (Latin America)
+└── index.ja.md            # Japanese
 ```
 
 ## Markdown Frontmatter

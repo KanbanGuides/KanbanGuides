@@ -28,7 +28,7 @@ Before you begin, ensure you have the following installed on your system:
    - **Windows**: [Install PowerShell 7+](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows)
    - **macOS**: [Install PowerShell on macOS](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos)
    - **Linux**: [Install PowerShell on Linux](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-linux)
-   - **Purpose**: Required for running `Create-GuidePDFs.ps1` and `Create-TranslationTemplate.ps1`
+   - **Purpose**: Required for running `Create-GuidePDFs.ps1`
    - Verify installation: `pwsh --version`
 
 4. **Text Editor** (recommended)
@@ -74,17 +74,21 @@ If you plan to use additional tooling:
 npm install
 ```
 
+### 3. Install Hugo Module Dependencies
+
+```bash
+cd site
+huge mod download
+cd ..
+```
+
+> This downloads the HugoGuides module that provides all templates. Hugo will also do this automatically on first serve/build.
+
 ### 4. Run the Development Server
 
 ```bash
-# Navigate to the Hugo site directory
-cd site
-
-# Start the development server
-hugo server -D --bind 0.0.0.0
-
-# Alternative with live reload and drafts
-hugo server --buildDrafts --buildFuture --bind 0.0.0.0
+# From the project root
+huge serve --source site --config hugo.yaml,hugo.local.yaml
 ```
 
 ### 5. Open Your Browser
@@ -100,13 +104,12 @@ To see how your local changes compare with the live sites:
 
 ## Development Server Options
 
-| Command                      | Description                               |
-| ---------------------------- | ----------------------------------------- |
-| `hugo server`                | Basic development server                  |
-| `hugo server -D`             | Include draft content                     |
-| `hugo server --buildFuture`  | Include future-dated content              |
-| `hugo server --bind 0.0.0.0` | Make server accessible from other devices |
-| `hugo server --port 8080`    | Use custom port                           |
+| Command | Description |
+| ------------------------------------------- | ----------------------------------------- |
+| `hugo serve --source site --config hugo.yaml,hugo.local.yaml` | Standard local server with drafts |
+| `... --buildDrafts` | Include draft content |
+| `... --buildFuture` | Include future-dated content |
+| `... --port 8080` | Use custom port |
 
 ## PowerShell Automation Scripts
 
@@ -120,10 +123,14 @@ This project includes PowerShell automation scripts to help with common tasks:
    - Requires Pandoc and LaTeX installation
    - See [PDF Generation Guide](./simple-pdf-generation.md) for details
 
-2. **`scripts/Create-TranslationTemplate.ps1`** - Sets up new language translations
-   - Automatically configures Hugo for new languages
-   - Creates translation template files
+2. **`@tranguide.create` agent** - Sets up new language translations
+   - Scaffolds all Hugo config, i18n, and content files
+   - Translates structural content; leaves guide bodies empty for human translators
    - See [Translation Guide](./translations.md) for details
+
+3. **`@tranguide.reconcile` agent** - Audits and repairs existing translations
+   - Detects missing files, missing i18n keys, and wrong `lang:` values
+   - Can run in report-only or fix mode
 
 ### Quick PowerShell Installation
 
@@ -167,8 +174,8 @@ From the project root directory:
 # Generate PDFs for all languages
 .\scripts\Create-GuidePDFs.ps1
 
-# Create a new translation template
-.\scripts\Create-TranslationTemplate.ps1 -LanguageCode "de" -LanguageName "German"
+# Create a new translation (use the Copilot agent instead — see translations.md)
+# @tranguide.create de German
 ```
 
 > 💡 **Note**: On macOS and Linux, you may need to use `pwsh` instead of `powershell` to run PowerShell 7+.
@@ -248,18 +255,14 @@ KanbanGuides/
 ├── site/                    # Hugo site source
 │   ├── content/            # Markdown content files
 │   │   ├── _index.md      # Homepage content
-│   │   ├── guide/         # Main guide content
-│   │   ├── creators/      # Creator profiles
-│   │   └── download/      # Download page
-│   ├── layouts/           # HTML templates
-│   │   ├── _default/      # Default layouts
-│   │   ├── guide/         # Guide-specific layouts
-│   │   └── partials/      # Reusable components
-│   ├── static/            # Static assets (CSS, images, PDFs)
-│   ├── data/              # Data files (YAML/JSON)
+│   │   ├── open-guide-to-kanban/  # Open Guide (versioned)
+│   │   └── the-kanban-guide/      # Kanban Guide (versioned)
+│   ├── static/            # Static assets (CSS, images)
+│   ├── data/              # Data files (contributions per guide)
 │   ├── i18n/              # Translation files
+│   ├── go.mod             # Hugo module definition
 │   └── hugo.yaml          # Hugo configuration
-├── public/                # Generated site (git-ignored)
+├── public/                # Generated site (git-ignored in dev)
 ├── docs/                  # Project documentation
 └── .github/               # GitHub Actions workflows
 ```

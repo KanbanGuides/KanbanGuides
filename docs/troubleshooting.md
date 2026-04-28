@@ -116,13 +116,8 @@ hugo list expired
 **Solutions**:
 
 ```powershell
-# Start server with explicit live reload
-hugo server -D --liveReload --watch
-
-# Try binding to all interfaces
-hugo server -D --bind 0.0.0.0 --liveReload
-
-# Clear browser cache (Ctrl+F5)
+# Start server with explicit live reload (from project root)
+huge serve --source site --config hugo.yaml,hugo.local.yaml
 ```
 
 ### 🌐 Multi-language Issues

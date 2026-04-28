@@ -23,15 +23,15 @@ Welcome to the documentation for the **Open Guide to Kanban** project. This docu
 - [Translation Guide](./translations.md)
 - [Troubleshooting](./troubleshooting.md)
 
-> **🚨 Important**: This project uses Hugo's new template system (v0.146.0+). See the [Development Guide](./development.md) for details about template structure and migration.
+> **🚨 Important**: This project uses Hugo's new template system (v0.146.0+) via the [HugoGuides module](https://github.com/nkdAgility/HugoGuides). There is no local `layouts/` directory. See the [Architecture Overview](./architecture.md) for details.
 
 ## Project Overview
 
-The Open Guide to Kanban is a multilingual static website built with Hugo. The project includes:
+The **Kanban Guides** site is a multilingual static website hosting two guides: the **Open Guide to Kanban** and **The Kanban Guide**. Built with Hugo, it includes:
 
-- **Multi-language support** (English, German, Spanish, French)
+- **Multi-language support** (English, Japanese, Spanish, Farsi, Polish, and more)
 - **Modern responsive design** with Bootstrap 5
-- **Static site generation** with Hugo
+- **Static site generation** with Hugo + external HugoGuides module
 - **Automated deployment** via Azure Static Web Apps
 - **PDF generation** capabilities
 - **Community contribution features**
@@ -59,9 +59,11 @@ The Open Guide to Kanban is a multilingual static website built with Hugo. The p
 ### 🌍 Internationalization
 
 - English (default)
-- German (Deutsch)
-- Spanish (Español)
-- French (Français)
+- Japanese
+- Spanish Latin America (`es-419`)
+- Spanish Spain (`es-ES`)
+- Farsi/Persian (`fa`, RTL)
+- Polish
 
 ## Project Structure
 
@@ -69,11 +71,11 @@ The Open Guide to Kanban is a multilingual static website built with Hugo. The p
 KanbanGuides/
 ├── docs/                           # 📚 Documentation
 ├── site/                           # 🏗️ Hugo site source
-│   ├── content/                    # 📝 Content files
-│   ├── layouts/                    # 🎨 HTML templates
-│   ├── static/                     # 📁 Static assets
-│   ├── data/                       # 🗃️ Data files
-│   ├── i18n/                       # 🌐 Translations
+│   ├── content/                    # 📝 Content files (two guides, versioned)
+│   ├── static/                     # 📁 Static assets (CSS, images)
+│   ├── data/                       # 🗃️ Contributor data files
+│   ├── i18n/                       # 🌐 Translation strings
+│   ├── go.mod                      # ⚙️ Hugo module definition
 │   └── hugo.yaml                   # ⚙️ Hugo configuration
 ├── public/                         # 🚀 Generated site output
 ├── .github/                        # 🔄 GitHub Actions workflows
@@ -102,8 +104,7 @@ KanbanGuides/
 3. **Run the development server**
 
    ```bash
-   cd site
-   hugo server -D --bind 0.0.0.0
+   hugo serve --source site --config hugo.yaml,hugo.local.yaml
    ```
 
 4. **Open your browser**
