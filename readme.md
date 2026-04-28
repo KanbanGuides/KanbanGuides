@@ -2,13 +2,6 @@
 
 The Kanban Guides is a free, community-driven reference for applying Kanban in knowledge work. It defines the core practices, and metrics, necessary to improve flow, optimise value delivery, and enhance team sustainability. This guide supports scalable Kanban implementations across diverse industries and complements other agile, lean, and flow-based approaches.
 
-## Visit the Guide
-
-### 🌐 Live Sites
-
-- **Production**: [kanbanguides.org](https://kanbanguides.org) - **Start reading now!**
-- **Preview**: [red-pond-0d8225910-preview.centralus.2.azurestaticapps.net](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/) - **Test latest changes before production**
-
 ## What is This?
 
 The Kanban Guides are living document that aims to provide clear, actionable guidance for implementing Kanban in knowledge work. It is designed to evolve over time, incorporating feedback and insights from the community.
@@ -58,8 +51,9 @@ Making Kanban knowledge accessible globally is essential.
 
 ### Content Contributors
 
-- Default English: `site/content/guide/_index.md`
-- Language versions: `site/content/guide/_index.{lang}.md`
+- Open Guide to Kanban: `site/content/open-guide-to-kanban/`
+- The Kanban Guide: `site/content/the-kanban-guide/`
+- Language versions use file suffixes: `index.{lang}.md` (e.g. `index.ja.md`)
 
 Contributions include:
 
