@@ -23,9 +23,9 @@ param(
     [string]$Language
 )
 
-# Basic setup
+# Basic setup — script lives at .agents/skills/create-guide-pdfs/, so project root is 3 levels up
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$projectRoot = Split-Path -Parent $scriptDir
+$projectRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $scriptDir))
 $guideDir = Join-Path $projectRoot "site/content/guide"
 $pdfOutputDir = Join-Path $guideDir "pdf"
 
@@ -106,7 +106,8 @@ foreach ($file in $files) {
         }
     }
     
-    Write-Host "📄 Generating PDF for $langCode..." -ForegroundColor Blue    # Get front matter
+    Write-Host "📄 Generating PDF for $langCode..." -ForegroundColor Blue
+
     $pdfEngine = "xelatex"
     
     # Build pandoc command - let front matter handle everything
@@ -130,4 +131,4 @@ foreach ($file in $files) {
     }
 }
 
-Write-Host "� PDF generation complete!" -ForegroundColor Green
+Write-Host "🎉 PDF generation complete!" -ForegroundColor Green

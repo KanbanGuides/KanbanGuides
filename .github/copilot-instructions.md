@@ -116,7 +116,7 @@ This is a **Hugo-based static website** for the Open Guide to Kanban, hosted on 
 - Focus on practical, actionable guidance
 - Maintain consistency with Kanban terminology
 - **Multilingual support**: Site supports multiple languages (currently English and Klingon)
-- Use the `/tranguide.create` agent for adding new language support
+- Use the `/tranguide.create` skill for adding new language support
 - Ensure all content changes are reflected across all language versions
 - Test content rendering in all supported languages
 
@@ -218,13 +218,13 @@ This is a **Hugo-based static website** for the Open Guide to Kanban, hosted on 
 
 ### Adding New Language Translations
 
-Use the `@tranguide.create` agent in GitHub Copilot to scaffold a new language:
+Use the `/tranguide.create` skill in GitHub Copilot or Claude to scaffold a new language:
 
 ```
-@tranguide.create de German
+/tranguide.create de German
 ```
 
-The agent will:
+The skill will:
 
 - Add language configuration to `hugo.yaml` (and disable it in `hugo.production.yaml`)
 - Create `site/i18n/{lang}.yaml` with all strings translated
@@ -232,12 +232,19 @@ The agent will:
 - Create versioned guide files with translated front matter and an empty body ready for a human translator
 - Validate the complete setup
 
-To audit an existing translation for gaps or missing files, use `@tranguide.reconcile`:
+To check translation progress across all languages, use `/tranguide.status`:
 
 ```
-@tranguide.reconcile de          # report gaps for German
-@tranguide.reconcile all         # audit every language
-@tranguide.reconcile de fix      # report and repair
+/tranguide.status                # dashboard for all languages
+/tranguide.status de             # status for one language
+```
+
+To audit an existing translation for gaps or missing files, use `/tranguide.reconcile`:
+
+```
+/tranguide.reconcile de          # report gaps for German
+/tranguide.reconcile all         # audit every language
+/tranguide.reconcile de fix      # report and repair
 ```
 
 ### Updating Styles

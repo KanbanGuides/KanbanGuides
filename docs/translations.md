@@ -38,9 +38,9 @@ Please read the [Code of Conduct for Translation Contributors](translations-code
 
 Adding a new language involves **two distinct phases**. Understanding this split is important before you start.
 
-### Phase 1: Site Scaffolding (agent-handled)
+### Phase 1: Site Scaffolding (skill-handled)
 
-The `@tranguide.create` agent handles all of this automatically. You do not need to do it manually:
+The `/tranguide.create` skill handles all of this automatically. You do not need to do it manually:
 
 | What | File(s) | Notes |
 |---|---|---|
@@ -54,7 +54,7 @@ The `@tranguide.create` agent handles all of this automatically. You do not need
 
 ### Phase 2: Guide Body Translation (always manual)
 
-This is the work that **only a human translator can do**. The agent never translates guide body text.
+This is the work that **only a human translator can do**. The skill never translates guide body text.
 
 After site scaffolding, the guide version files exist but their body is empty. You must translate the full Markdown body of each guide into your language:
 
@@ -67,7 +67,7 @@ After site scaffolding, the guide version files exist but their body is empty. Y
 
 ---
 
-**In short:** The agent sets up the site infrastructure. You translate the guide text. Both are required for a complete translation.
+**In short:** The skill sets up the site infrastructure. You translate the guide text. Both are required for a complete translation.
 
 ---
 
@@ -101,13 +101,13 @@ Replace `{LANG}` with your language code (e.g., `pt` for Portuguese, `ja` for Ja
 
 ### Step 3: Site Scaffolding
 
-This step sets up the site infrastructure for your language. **Use the `@tranguide.create` agent** — it handles all of this automatically:
+This step sets up the site infrastructure for your language. **Use the `/tranguide.create` skill** in Copilot or Claude Chat — it handles all of this automatically:
 
 ```
-@tranguide.create de German
+/tranguide.create de German
 ```
 
-**What the agent does (Phase 1 — Site Scaffolding):**
+**What the skill does (Phase 1 — Site Scaffolding):**
 
 - ✅ Adds language configuration to `hugo.yaml`
 - ✅ Disables it in `hugo.production.yaml` (until the translation is ready)
@@ -116,7 +116,7 @@ This step sets up the site infrastructure for your language. **Use the `@trangui
 - ✅ Creates versioned guide files with translated front matter and **empty body** ready for you to fill in
 - ✅ Validates the complete setup and reports results
 
-> If you don't have access to GitHub Copilot Chat, see the [Manual Workflow](#manual-workflow) for how to set up the site scaffolding by hand.
+> If you don't have access to GitHub Copilot or Claude Chat, see the [Manual Workflow](#manual-workflow) for how to set up the site scaffolding by hand.
 
 ### Step 4: Translate the Guide Bodies
 
