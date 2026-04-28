@@ -11,7 +11,6 @@ author:
   - John Coleman
   - Daniel Vacanti
 type: guide
-# lang: en
 mainfont: "Times New Roman"
 # mainfont: "Noto Serif JP"
 sansfont: "Arial"
