@@ -173,18 +173,25 @@ This is a **Hugo-based static website** for the Open Guide to Kanban, hosted on 
 
 ### Local Development
 
-1. **Development server** (from project root):
-   ```bash
-   hugo serve --source site --config hugo.yaml,hugo.local.yaml
-   ```
-2. **Build only** (from project root):
+> **Always run a build after making any content, template, or configuration changes** to verify there are no Hugo errors before committing.
+
+1. **Build** (always do this after any change, from project root):
    ```bash
    hugo --source site --config hugo.yaml,hugo.local.yaml
+   ```
+2. **Development server** (from project root):
+   ```bash
+   hugo serve --source site --config hugo.yaml,hugo.local.yaml
    ```
 3. Use `hugo.local.yaml` for local configuration overrides
 4. Test responsive Bootstrap 5 design across devices
 5. Test content in all supported languages
 6. **UX Validation** - Use Playwright MCP server for automated testing and validation
+
+### Front Matter Notes
+
+- **`lang:` is removed** — Hugo v0.144.0+ removed the `lang:` front matter field. Do **not** add `lang:` to any content file. Hugo determines language from the file suffix (e.g. `index.fa.md`).
+- For PDF generation, `lang` is passed via `--metadata lang=...` in the Pandoc script — it must **not** be in front matter.
 
 ### Content Creation
 

@@ -93,7 +93,7 @@ These files are short and should be fully translated (both front matter and body
 | `site/content/the-kanban-guide/history/index.md` | `site/content/the-kanban-guide/history/index.{lang}.md` |
 | `site/content/the-kanban-guide/translations/index.md` | `site/content/the-kanban-guide/translations/index.{lang}.md` |
 
-For each: copy the file, translate all human-readable string values in front matter, translate the body text. Update `lang: en` → `lang: {lang}`. Remove any `content:` front matter key if present.
+For each: copy the file, translate all human-readable string values in front matter, translate the body text. Do NOT add a `lang:` field — Hugo v0.144.0+ removed it (language is determined from the file suffix). Remove any `content:` front matter key if present.
 
 ### 3e. Content files — Section roots (translate front matter only, body is empty)
 
@@ -104,7 +104,7 @@ These `_index.md` files contain only front matter (no body to translate):
 | `site/content/open-guide-to-kanban/_index.md` | `site/content/open-guide-to-kanban/_index.{lang}.md` |
 | `site/content/the-kanban-guide/_index.md` | `site/content/the-kanban-guide/_index.{lang}.md` |
 
-For each: copy the file, translate all human-readable string values (titles, descriptions, guide_whatis, guide_overview, guide_license, guide_comparison items, which_to_use_summary, layman_description, practitioner_description). Update `lang: en` → `lang: {lang}` if present. Keep `slug:`, `Type:`, `Layout:`, `brand:`, `weight:` unchanged.
+For each: copy the file, translate all human-readable string values (titles, descriptions, guide_whatis, guide_overview, guide_license, guide_comparison items, which_to_use_summary, layman_description, practitioner_description). Remove any `lang:` field if present — Hugo v0.144.0+ removed it. Keep `slug:`, `Type:`, `Layout:`, `brand:`, `weight:` unchanged.
 
 ### 3f. Content files — Versioned guides (translate front matter ONLY, leave body EMPTY)
 
@@ -123,15 +123,14 @@ For each versioned guide:
 ```markdown
 ---
 {translated front matter}
-lang: {lang}
 ---
 ```
+
+⚠️ **Do NOT include `lang:` in front matter.** Hugo v0.144.0+ removed this field. Hugo determines language from the file suffix (e.g. `index.fa.md` → Farsi).
 
 Translate in front matter: `title`, `short_title` (if present), `description`, `keywords` list values, `guide_whatis` (if present).
 
 Do NOT translate: `date`, `version`, `type`, `mainfont`, `sansfont`, `monofont`, `sitemap`, `author`, `forked_from`.
-
-Update `lang: en` → `lang: {lang}`.
 
 For `aliases:`, update any `/the-kanban-guide/latest` → `/{lang}/the-kanban-guide/latest` or `/{lang}/open-guide-to-kanban/latest` as appropriate.
 

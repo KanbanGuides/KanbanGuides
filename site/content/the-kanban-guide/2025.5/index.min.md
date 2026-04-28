@@ -13,7 +13,6 @@ author:
   - Danny Banana Vacanti
 
 type: guide
-lang: min
 mainfont: "Times New Banana"
 sansfont: "Ari-Banana"
 monofont: "Courier Peel"

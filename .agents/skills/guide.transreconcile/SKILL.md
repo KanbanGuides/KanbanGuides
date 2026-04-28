@@ -135,7 +135,7 @@ If mode is `fix`, after reporting, create or repair each identified issue:
   translation: "{english value}"  # TODO: translate
 ```
 
-**For `lang` still set to `en`**: Update the `lang:` value to `{lang}`.
+**For `lang:` present in any file**: Remove the `lang:` field entirely — Hugo v0.144.0+ removed it. Hugo determines language from the file suffix. Do not replace it with another value.
 
 **For missing front matter keys**: Add the key with the English value as placeholder followed by a `# TODO: translate` comment.
 

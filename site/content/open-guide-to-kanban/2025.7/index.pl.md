@@ -29,7 +29,6 @@ author:
 date: 2025-07-02T09:00:00Z
 type: guide
 forked_from: the-kanban-guide/2025.5
-lang: pl
 mainfont: "Times New Roman"
 sansfont: "Arial"
 monofont: "Courier New"

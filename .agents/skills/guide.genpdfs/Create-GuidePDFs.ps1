@@ -110,10 +110,11 @@ foreach ($file in $files) {
 
     $pdfEngine = "xelatex"
     
-    # Build pandoc command - let front matter handle everything
+    # Build pandoc command - pass lang via --metadata since Hugo v0.144.0 removed lang: from front matter
     $pandocArgs = @(
         $inputPath
         "--pdf-engine=$pdfEngine"
+        "--metadata", "lang=$langCode"
         "-o", $outputPath
     )
     
