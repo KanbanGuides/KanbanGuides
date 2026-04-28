@@ -14,9 +14,9 @@ Suggest improvements, corrections, or additions to the guide content.
 2. **Collaborate** with the community and guide creators — reach consensus on the proposed change
 3. **Fork the repository** and make your changes on a branch:
 
-   ```bash
+   ```powershell
    git clone https://github.com/KanbanGuides/KanbanGuides.git
-   cd KanbanGuides
+   Set-Location KanbanGuides
    git checkout -b feedback/your-short-description
    ```
 

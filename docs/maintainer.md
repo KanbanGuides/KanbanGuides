@@ -21,7 +21,7 @@ pwsh --version
 
 ### Run the development server
 
-```bash
+```powershell
 # From project root
 hugo serve --source site --config hugo.yaml,hugo.local.yaml
 ```
@@ -30,10 +30,10 @@ Navigate to `http://localhost:1313`. The preview environment is at [red-pond-0d8
 
 ### Module dependencies
 
-```bash
-cd site
+```powershell
+Set-Location site
 hugo mod download
-cd ..
+Set-Location ..
 ```
 
 Hugo also downloads the module automatically on first serve/build.
@@ -166,7 +166,7 @@ Deployments are triggered automatically by GitHub Actions (Azure Static Web Apps
 
 ### Production build command
 
-```bash
+```powershell
 hugo --source site --config hugo.yaml,hugo.production.yaml --minify
 ```
 
@@ -251,8 +251,10 @@ Translator entries also include `language: es-419`.
 **Profile image priority:** `image` URL → `gravatarHash` → `githubUsername` (GitHub avatar) → default.
 
 To generate a Gravatar hash:
-```bash
-echo -n "email@example.com" | sha256sum
+```powershell
+$email = "email@example.com"
+$bytes = [System.Text.Encoding]::UTF8.GetBytes($email.ToLower().Trim())
+[System.BitConverter]::ToString([System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes)).Replace("-","").ToLower()
 ```
 
 ---
@@ -314,8 +316,8 @@ Select-String -Path "site/**/*.html" -Pattern '{{ i18n'
 
 ### Module download fails
 
-```bash
-cd site
+```powershell
+Set-Location site
 hugo mod download
 # or
 hugo mod tidy

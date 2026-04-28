@@ -41,9 +41,9 @@ For translators familiar with Git and [Pull Requests](https://docs.github.com/en
 
 ### Step 1: Fork and branch
 
-```bash
+```powershell
 git clone https://github.com/YOUR-USERNAME/KanbanGuides.git
-cd KanbanGuides
+Set-Location KanbanGuides
 git checkout -b translation/add-{LANG}-language
 ```
 
@@ -74,7 +74,7 @@ See [Reserved Words](#reserved-words) for terms that require special handling.
 
 ### Step 4: Test locally
 
-```bash
+```powershell
 # From project root
 hugo serve --source site --config hugo.yaml,hugo.local.yaml
 ```
@@ -83,7 +83,7 @@ Navigate to `http://localhost:1313/{LANG}/open-guide-to-kanban/` and verify all 
 
 ### Step 5: Submit a Pull Request
 
-```bash
+```powershell
 git add .
 git commit -m "Add {Language Name} translation"
 git push origin translation/add-{LANG}-language
@@ -134,26 +134,26 @@ languages:
 
 **2. Create the UI strings file:**
 
-```bash
-cp site/i18n/en.yaml site/i18n/{LANG}.yaml
+```powershell
+Copy-Item site/i18n/en.yaml site/i18n/{LANG}.yaml
 # Translate each translation: value; keep all id: values unchanged
 ```
 
 **3. Create section index files** (copy English, translate front matter and body):
 
-```bash
-cp site/content/_index.md site/content/_index.{LANG}.md
-cp site/content/open-guide-to-kanban/_index.md site/content/open-guide-to-kanban/_index.{LANG}.md
-cp site/content/the-kanban-guide/_index.md site/content/the-kanban-guide/_index.{LANG}.md
+```powershell
+Copy-Item site/content/_index.md site/content/_index.{LANG}.md
+Copy-Item site/content/open-guide-to-kanban/_index.md site/content/open-guide-to-kanban/_index.{LANG}.md
+Copy-Item site/content/the-kanban-guide/_index.md site/content/the-kanban-guide/_index.{LANG}.md
 ```
 
 **4. Create versioned guide files** (copy English, translate front matter, clear body):
 
-```bash
-cp site/content/open-guide-to-kanban/2025.7/index.md \
-   site/content/open-guide-to-kanban/2025.7/index.{LANG}.md
-cp site/content/the-kanban-guide/2025.5/index.md \
-   site/content/the-kanban-guide/2025.5/index.{LANG}.md
+```powershell
+Copy-Item site/content/open-guide-to-kanban/2025.7/index.md `
+          site/content/open-guide-to-kanban/2025.7/index.{LANG}.md
+Copy-Item site/content/the-kanban-guide/2025.5/index.md `
+          site/content/the-kanban-guide/2025.5/index.{LANG}.md
 ```
 
 ---
