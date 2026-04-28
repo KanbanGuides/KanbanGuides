@@ -1,219 +1,145 @@
 # Translation Guide
 
-Help us make the Open Guide to Kanban accessible to everyone worldwide by contributing translations!
+Help make the guides accessible worldwide by contributing a translation. Before starting, you must read and agree to the [Translations Code of Conduct](./translations-code-of-conduct.md).
 
-Please read the [Code of Conduct for Translation Contributors](translations-code-of-conduct.md) before starting.
-
-## 🎯 Quick Start - Choose Your Path
-
-### Option 1: GitHub Collaboration (for contributors familiar with GitHub)
-
-**Best for:** Translators familiar with Git, GitHub, and the [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests) Workflow.
-
-**Process:**
-
-1. Fork the repository
-2. Create translation files with our [Automated Setup](#option-a-automated-setup-powershell---recommended)
-3. Collaborate with other translators
-4. Submit Pull Request for review
-
-[📖 Skip to GitHub Workflow](#github-workflow) →
-
-### Option 2: Manual Submission (for contributors who don't understand GitHub)
-
-**Best for:** Translators who are non-technical and dont want to [collaborating with pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests).
-
-**Process:**
-
-1. Download translation templates
-2. Work independently or collaborate via email/messaging
-3. Submit completed translations via GitHub Issues
-4. We'll create the Pull Request for community review
-
-[📖 Skip to Manual Workflow](#manual-workflow) →
+> Open a discussion at [kanbanguides.org](https://kanbanguides.org) or via the KanbanGuides Slack channel to notify the translation guardian **before** starting any translation work.
 
 ---
 
-## 📋 What Needs Translation
+## What Needs Translating
 
-Adding a new language involves **two distinct phases**. Understanding this split is important before you start.
+Adding a new language involves two distinct phases:
 
-### Phase 1: Site Scaffolding (skill-handled)
+### Phase 1: Site Scaffolding (tooling-handled)
 
-The `/tranguide.create` skill handles all of this automatically. You do not need to do it manually:
+The `@tranguide.create` agent handles all of this automatically:
 
-| What | File(s) | Notes |
-|---|---|---|
-| Language config | `site/hugo.yaml`, `site/hugo.production.yaml` | Adds language, disables in production until ready |
-| UI strings | `site/i18n/{LANG}.yaml` | ~40 navigation, button, and label strings |
-| Homepage index | `site/content/_index.{LANG}.md` | Section landing page |
-| Guide section indexes | `site/content/open-guide-to-kanban/_index.{LANG}.md`, `site/content/the-kanban-guide/_index.{LANG}.md` | Per-guide landing pages |
-| Guide version files | `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md`, `site/content/the-kanban-guide/2025.5/index.{LANG}.md` | Created with translated front matter and **empty body** |
-
-> **Note:** Contributor attribution is managed in `site/data/contributions/` YAML files — see [Content Management](./content-management.md) for details.
+| What | File(s) |
+|---|---|
+| Language config | `site/hugo.yaml`, `site/hugo.production.yaml` |
+| UI strings | `site/i18n/{LANG}.yaml` (~40 strings) |
+| Homepage index | `site/content/_index.{LANG}.md` |
+| Guide section indexes | `site/content/open-guide-to-kanban/_index.{LANG}.md`, `site/content/the-kanban-guide/_index.{LANG}.md` |
+| Versioned guide files | Created with translated front matter and **empty body** |
 
 ### Phase 2: Guide Body Translation (always manual)
 
-This is the work that **only a human translator can do**. The skill never translates guide body text.
+The agent never translates guide body text — that is your work:
 
-After site scaffolding, the guide version files exist but their body is empty. You must translate the full Markdown body of each guide into your language:
+| File | Size |
+|---|---|
+| `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md` | ~900 lines |
+| `site/content/the-kanban-guide/2025.5/index.{LANG}.md` | ~400 lines |
 
-| What | File | Size |
-|---|---|---|
-| Open Guide to Kanban body | `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md` | ~900 lines |
-| The Kanban Guide body | `site/content/the-kanban-guide/2025.5/index.{LANG}.md` | ~400 lines |
-
-> These files are created by the agent with correct front matter already filled in. Your job is to add the translated body content below the front matter.
+The front matter is already translated by the agent. Translate only the body content below the closing `---`.
 
 ---
 
-**In short:** The skill sets up the site infrastructure. You translate the guide text. Both are required for a complete translation.
+## GitHub Workflow
 
----
+For translators familiar with Git and [Pull Requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests).
 
-## 🔧 GitHub Workflow
-
-### Prerequisites
-
-- GitHub account
-- Basic understanding of Git/GitHub
-- Markdown knowledge helpful but not required
-
-### Step 1: Set Up Your Fork
-
-1. **Fork the repository**
-   - Go to [KanbanGuides](https://github.com/KanbanGuides/KanbanGuides)
-   - Click "Fork" button
-   - Clone your fork locally
+### Step 1: Fork and branch
 
 ```bash
 git clone https://github.com/YOUR-USERNAME/KanbanGuides.git
 cd KanbanGuides
-```
-
-### Step 2: Create Translation Branch
-
-```bash
 git checkout -b translation/add-{LANG}-language
 ```
 
-Replace `{LANG}` with your language code (e.g., `pt` for Portuguese, `ja` for Japanese).
+### Step 2: Scaffold the site (Phase 1)
 
-### Step 3: Site Scaffolding
-
-This step sets up the site infrastructure for your language. **Use the `/tranguide.create` skill** in Copilot or Claude Chat — it handles all of this automatically:
+Use the `@tranguide.create` agent in GitHub Copilot Chat:
 
 ```
-/tranguide.create de German
+@tranguide.create de German
 ```
 
-**What the skill does (Phase 1 — Site Scaffolding):**
+If you don't have Copilot Chat, do it manually — see [Manual scaffolding](#manual-scaffolding) below.
 
-- ✅ Adds language configuration to `hugo.yaml`
-- ✅ Disables it in `hugo.production.yaml` (until the translation is ready)
-- ✅ Creates `site/i18n/{LANG}.yaml` with all UI strings translated
-- ✅ Creates all structural wrapper content files (`_index`, history, translations pages) fully translated
-- ✅ Creates versioned guide files with translated front matter and **empty body** ready for you to fill in
-- ✅ Validates the complete setup and reports results
+### Step 3: Translate the guide bodies (Phase 2)
 
-> If you don't have access to GitHub Copilot or Claude Chat, see the [Manual Workflow](#manual-workflow) for how to set up the site scaffolding by hand.
+Open the scaffolded files and translate the body content:
 
-### Step 4: Translate the Guide Bodies
+- `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md`
+- `site/content/the-kanban-guide/2025.5/index.{LANG}.md`
 
-This is **Phase 2 — the manual work that only you can do**. The agent has created the guide files but left the body empty. Now translate the actual guide content:
+**Preserve while translating:**
+- Markdown formatting (`##`, `**bold**`, `[links](url)`)
+- Hugo shortcodes
+- HTML comments and IDs
+- Reference numbers exactly as-is (e.g. `(40)`, `(58)`)
 
-1. **Open the scaffolded guide files:**
-   - `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md` (~900 lines)
-   - `site/content/the-kanban-guide/2025.5/index.{LANG}.md` (~400 lines)
+See [Reserved Words](#reserved-words) for terms that require special handling.
 
-2. **The front matter is already translated** by the agent. Translate only the body content below the `---` closing the front matter.
-
-3. **Preserve while translating:**
-   - Markdown formatting (`##`, `**bold**`, `[links](url)`)
-   - Hugo shortcodes
-   - HTML comments and IDs
-   - Reference numbers exactly as-is (e.g. `(40)`, `(58)`)
-
-### Step 5: Test Your Translation
-
-1. **Install Hugo** (see [Development Guide](development.md))
-2. **Start the development server** (from project root):
+### Step 4: Test locally
 
 ```bash
+# From project root
 hugo serve --source site --config hugo.yaml,hugo.local.yaml
 ```
 
-3. **View your translation:**
-   - Navigate to `http://localhost:1313/{LANG}/open-guide-to-kanban/`
-   - Check all pages and UI elements
-   - Verify language switching works correctly
+Navigate to `http://localhost:1313/{LANG}/open-guide-to-kanban/` and verify all pages and UI elements.
 
-### Step 6: Submit for Review
-
-1. **Commit your changes:**
+### Step 5: Submit a Pull Request
 
 ```bash
 git add .
-git commit -m "Add {LANG} translation"
+git commit -m "Add {Language Name} translation"
 git push origin translation/add-{LANG}-language
 ```
 
-2. **Create Pull Request:**
-
-   - Go to your fork on GitHub
-   - Click "New Pull Request"
-   - Use title: "Add {Language Name} translation"
-   - Include translation details in description
-
-3. **Review Process:**
-   - Creators and community will review
-   - Native speakers may suggest improvements
-   - Collaborate on refinements
-   - Merge when approved
+Open a PR with title `Add {Language Name} translation`. Reference the prior site discussion in the description. The community and guide creators will review and collaborate on refinements before merge.
 
 ---
 
-## 📝 Manual Workflow
+## Manual Workflow
 
-> 💡 **Tip:** The manual workflow covers **site scaffolding by hand** for contributors without access to GitHub Copilot Chat. **Guide body translation is always manual regardless of which path you take** — see [Phase 2: Guide Body Translation](#phase-2-guide-body-translation-always-manual) above.
+For translators who do not use GitHub directly. Guide body translation is still required regardless of path.
 
-### Step 1: Get Translation Templates
+### Step 1: Download the source files
 
-1. **Download files to translate:**
+- [Open Guide to Kanban (English)](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/open-guide-to-kanban/2025.7/index.md)
+- [The Kanban Guide (English)](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/the-kanban-guide/2025.5/index.md)
+- [UI Strings Template](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/i18n/en.yaml)
 
-   - [Open Guide to Kanban (English)](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/open-guide-to-kanban/2025.7/index.md)
-   - [The Kanban Guide (English)](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/the-kanban-guide/2025.5/index.md)
-   - [UI Translations Template](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/i18n/en.yaml)
+Save them locally as `index.{LANG}.md` and `{LANG}.yaml`.
 
-2. **Save locally** with your language code:
-   - `index.{LANG}.md` for each guide (e.g., `index.pt.md`)
-   - `{LANG}.yaml` (e.g., `pt.yaml`)
+### Step 2: Translate
 
-### Step 2: Site Scaffolding (manual)
+Translate the guide body content and all `translation:` values in the i18n YAML (keep `id:` values unchanged).
 
-1. **Add language to `site/hugo.yaml`** in the `languages:` section:
+### Step 3: Submit via GitHub Issue
+
+1. Go to [Issues](https://github.com/KanbanGuides/KanbanGuides/issues) → New Issue
+2. Title: `Translation Submission: {Language Name}`
+3. Attach your translated files and list any collaborators to credit
+4. Maintainers will create the PR and coordinate community review
+
+---
+
+## Manual Scaffolding
+
+If you need to set up the site infrastructure without the `@tranguide.create` agent:
+
+**1. Add language to `site/hugo.yaml`:**
 
 ```yaml
 languages:
-  # ... existing languages
   {LANG}:
     languageName: Your Language Name
-    weight: 2 # Adjust as needed
+    weight: 2
     title: Your Translated Site Title
-    params:
-      description: "Your translated description"
-      keywords: "Your translated keywords"
 ```
 
-2. **Create the UI strings file:**
+**2. Create the UI strings file:**
 
 ```bash
 cp site/i18n/en.yaml site/i18n/{LANG}.yaml
+# Translate each translation: value; keep all id: values unchanged
 ```
 
-   Translate each `translation:` value in the new file. Keep all `id:` values unchanged.
-
-3. **Create section index files** (copy English and translate front matter + body):
+**3. Create section index files** (copy English, translate front matter and body):
 
 ```bash
 cp site/content/_index.md site/content/_index.{LANG}.md
@@ -221,7 +147,7 @@ cp site/content/open-guide-to-kanban/_index.md site/content/open-guide-to-kanban
 cp site/content/the-kanban-guide/_index.md site/content/the-kanban-guide/_index.{LANG}.md
 ```
 
-4. **Create empty guide version files** (front matter only — body translation is a separate step):
+**4. Create versioned guide files** (copy English, translate front matter, clear body):
 
 ```bash
 cp site/content/open-guide-to-kanban/2025.7/index.md \
@@ -230,148 +156,68 @@ cp site/content/the-kanban-guide/2025.5/index.md \
    site/content/the-kanban-guide/2025.5/index.{LANG}.md
 ```
 
-   Translate the front matter fields (`title`, `description`, `keywords`) and clear the body — you will translate it in the next step.
+---
 
-### Step 3: Translate the Guide Bodies
+## Reserved Words
 
-This is the same as the GitHub workflow [Step 4: Translate the Guide Bodies](#step-4-translate-the-guide-bodies) — translate the full body content of each guide file.
+Some terms require special handling. See the full list in the [Translations Code of Conduct §5](./translations-code-of-conduct.md).
 
-### Step 3: Collaborate (Optional)
+The key rule: if you translate a reserved word, the American English term must appear in parentheses after its first occurrence. Subsequently, you may use the translated term. You may also keep the English term throughout if that is the better option.
 
-- Share files with other translators via email or messaging
-- Use Google Docs or similar for collaborative editing
-- Coordinate with existing translation communities
+Example (French): *Le concept de flux(Flow) est au cœur de la compréhension de Kanban.*
 
-### Step 4: Submit Translation
-
-1. **Create GitHub Issue:**
-
-   - Go to [Issues page](https://github.com/KanbanGuides/KanbanGuides/issues)
-   - Click "New Issue"
-   - Title: "Translation Submission: {Language Name}"
-
-2. **Include in issue:**
-
-   - Language name and code
-   - Attach your translated files
-   - List any collaborators to credit
-   - Note any questions or concerns
-
-3. **We'll handle the rest:**
-   - Create proper Git commits
-   - Set up Pull Request
-   - Coordinate community review
-   - Handle technical integration
+Reference sections and cited titles must **not** be translated.
 
 ---
 
-## 🌍 Translation Guidelines
+## Language Codes
 
-### Language Codes
+Use [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag) tags. Current languages:
 
-Use [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag) language tags. The project uses these formats:
+| Code | Language |
+|---|---|
+| `en` | English (default) |
+| `ja` | Japanese |
+| `es-419` | Spanish (Latin America) |
+| `es-ES` | Spanish (Spain) |
+| `fa` | Farsi/Persian (RTL) |
+| `pl` | Polish |
 
-**Current languages:**
-
-- `en` - English (default)
-- `ja` - Japanese
-- `es-419` - Spanish (Latin America)
-- `es-ES` - Spanish (Spain)
-- `fa` - Farsi/Persian (RTL)
-- `pl` - Polish
-
-**Adding new languages:**
-
-- Use two-letter codes for most languages: `pt`, `de`, `fr`, `ko`
-- Use regional subtags when needed: `pt-BR` for Brazilian Portuguese
-- Three-letter codes for languages without two-letter codes: `min` (Minionese example)
-
-### Content Guidelines
-
-1. **Preserve Structure:**
-
-   - Keep all headings, links, and formatting
-   - Maintain reference numbers exactly: (40), (58)
-   - Don't translate technical terms unnecessarily
-
-2. **Cultural Adaptation:**
-
-   - Adapt examples to local context when appropriate
-   - Maintain the professional, educational tone
-   - Consider regional business practices
-
-3. **Consistency:**
-   - Use consistent terminology throughout
-   - Create a glossary for key Kanban terms
-   - Follow existing translation patterns if available
-
-### Quality Standards
-
-- **Accuracy:** Faithful to original meaning
-- **Clarity:** Clear and understandable for target audience
-- **Completeness:** All content translated
-- **Formatting:** Markdown and YAML syntax preserved
+Use two-letter codes for most new languages (`pt`, `de`, `fr`, `ko`). Use regional subtags where regional differences matter (`pt-BR`).
 
 ---
 
-## 🔗 Technical Resources
+## Translator Attribution
 
-### PowerShell Installation
+Translators are credited in `site/data/contributions/{guide-name}.yml`:
 
-For using the automated translation setup script:
+```yaml
+- name: María García
+  language: es-419
+  githubUsername: mariagarcia
+  contributions:
+    - "2025.7"
+  role: translator
+  weight: 100
+```
 
-- **Windows:** [Install PowerShell 7+](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows)
-- **macOS:** [Install PowerShell on macOS](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos)
-- **Linux:** [Install PowerShell on Linux](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-linux)
-
-### Hugo Documentation
-
-- [Hugo i18n Documentation](https://gohugo.io/content-management/multilingual/)
-- [Hugo Content Management](https://gohugo.io/content-management/)
-- [Markdown Guide](https://www.markdownguide.org/)
-
-### YAML Resources
-
-- [YAML Syntax Guide](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
-- [YAML Validator](https://yamlchecker.com/)
-
-### Project Resources
-
-- [Development Setup](development.md)
-- [Contributing Guidelines](contributing.md)
-- [Content Management](content-management.md)
+You may also include a `Translator Acknowledgement` section in the translated document — see [Translations Code of Conduct §4](./translations-code-of-conduct.md) for required fields.
 
 ---
 
-## 🤝 Getting Help
+## Auditing Existing Translations
 
-### Before You Start
+Use the `@tranguide.reconcile` agent to check for gaps:
 
-- Review the existing Klingon translation (`tlh`) as an example implementation
-- Check if your language is already in progress
-- Join our community discussions
+```
+@tranguide.reconcile de          # audit German
+@tranguide.reconcile all         # audit all languages
+@tranguide.reconcile de fix      # audit and repair German
+```
 
-### During Translation
+Or use `@tranguide.status` for a dashboard view:
 
-- **GitHub Users:** Comment on your Pull Request
-- **Community Contributors:** Comment on your submission issue
-- **General Questions:** Create a [new issue](https://github.com/KanbanGuides/KanbanGuides/issues)
-
-### Translation Communities
-
-- Connect with other translators in your language
-- Share resources and terminology decisions
-- Coordinate on quality review
-
----
-
-## 🎉 Recognition
-
-All translation contributors will be:
-
-- Credited in the translated version
-- Listed in project contributors
-- Recognized in release notes
-- Invited to join the translation team
-
-Thank you for helping make Kanban knowledge accessible worldwide! 🌍
+```
+@tranguide.status                # all languages
+@tranguide.status de             # one language
+```
