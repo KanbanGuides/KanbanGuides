@@ -11,12 +11,9 @@ author:
   - John Coleman
   - Daniel Vacanti
 type: guide
-mainfont: "Times New Roman"
-# mainfont: "Noto Serif JP"
-sansfont: "Arial"
-# sansfont: "Noto Sans JP"
-monofont: "Courier New"
-# monofont: "Noto Sans JP"
+mainfont: "Noto Serif JP"
+sansfont: "Noto Sans JP"
+monofont: "Noto Sans JP"
 sitemap:
   priority: 0.6
 guide_whatis: |
