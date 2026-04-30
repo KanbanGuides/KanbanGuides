@@ -20,6 +20,13 @@ languages:
     params:
       description: Learn how to apply Kanban to optimise flow and value delivery. Home of the Open Guide to Kanban and The Kanban Guide
       keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
+  fr:
+    languageName: French
+    weight: 2
+    title: Guides Kanban
+    params:
+      description: Apprenez à appliquer Kanban pour optimiser le flux et la livraison de valeur. Accueil du Guide Ouvert à Kanban et du Guide Kanban
+      keywords: Kanban, Guide Ouvert à Kanban, guide kanban, méthode kanban, travail du savoir, optimisation du flux, limites WIP, livraison de valeur, agile, lean, amélioration continue, attente de niveau de service, flux cumulatif, débit, métriques, ancienneté des éléments de travail, efficacité du flux, visualisation, travail en cours, amélioration des processus, tableau kanban, définition du flux de travail, livraison axée sur les résultats
   es-419:
     languageName: Spanish (Latin America)
     weight: 3
