@@ -19,7 +19,7 @@ guide_whatis:
 
   Ce guide utilise des conventions pour certains termes. Elles ne sont pas destinées à remplacer d'autres définitions existantes, mais à clarifier comment elles doivent être appliquées ici.
 aliases:
-  - /le-guide-kanban/derniere-version
+  - /fr/le-guide-kanban/derniere-version
 ---
 
 ## Préface

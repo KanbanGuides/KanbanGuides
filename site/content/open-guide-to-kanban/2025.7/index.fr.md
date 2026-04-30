@@ -37,7 +37,7 @@ monofont: "Courier New"
 sitemap:
   priority: 1.0
 aliases:
-  - /open-guide-to-kanban/latest/
+  - /fr/open-guide-to-kanban/latest/
 ---
 
 
