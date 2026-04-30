@@ -98,6 +98,35 @@ function Install-VazirmatnFont {
     $url    = "https://github.com/rastikerdar/vazirmatn/releases/download/v33.003/vazirmatn-v33.003.zip"
     $tmpZip = Join-Path $env:TEMP "vazirmatn.zip"
     $tmpDir = Join-Path $env:TEMP "vazirmatn-extract"
+    Install-FontFromZip -Url $url -TmpZip $tmpZip -TmpDir $tmpDir -SubDir "vazirmatn" -DisplayName "Vazirmatn"
+}
+
+# Downloads and installs Noto Sans/Serif JP (open-source Japanese font) so XeLaTeX can use it.
+function Install-NotoJpFont {
+    # Use individual JP OTF packages which register the correct "Noto Sans JP" / "Noto Serif JP" family names
+    $sansUrl   = "https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/16_NotoSansJP.zip"
+    $serifUrl  = "https://github.com/notofonts/noto-cjk/releases/download/Serif2.003/12_NotoSerifJP.zip"
+    $ok = $true
+    foreach ($entry in @(
+        [pscustomobject]@{ Url = $sansUrl;  TmpZip = "$env:TEMP\notosansjp.zip";  TmpDir = "$env:TEMP\notosansjp-extract";  Name = "Noto Sans JP" }
+        [pscustomobject]@{ Url = $serifUrl; TmpZip = "$env:TEMP\notoserifjp.zip"; TmpDir = "$env:TEMP\notoserifjp-extract"; Name = "Noto Serif JP" }
+    )) {
+        if (-not (Install-FontFromZip -Url $entry.Url -TmpZip $entry.TmpZip -TmpDir $entry.TmpDir -SubDir "noto-jp" -DisplayName $entry.Name)) {
+            $ok = $false
+        }
+    }
+    return $ok
+}
+
+# Shared helper: downloads a zip, extracts all .ttf/.otf/.ttc files, installs into MiKTeX fonts dir
+function Install-FontFromZip {
+    param(
+        [string]$Url,
+        [string]$TmpZip,
+        [string]$TmpDir,
+        [string]$SubDir,
+        [string]$DisplayName
+    )
 
     # Prefer MiKTeX's own opentype directory (always scanned by fc-cache)
     $miktexBase = $null
@@ -108,63 +137,78 @@ function Install-VazirmatnFont {
         if (Test-Path "$candidate\fonts\opentype") { $miktexBase = $candidate; break }
     }
     $destDir = if ($miktexBase) {
-        "$miktexBase\fonts\opentype\public\vazirmatn"
+        "$miktexBase\fonts\opentype\public\$SubDir"
     } else {
         "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
     }
     if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
 
-    Write-Host "  Downloading Vazirmatn (open-source Persian font)..." -ForegroundColor Yellow
+    Write-Host "  Downloading $DisplayName..." -ForegroundColor Yellow
     try {
-        Invoke-WebRequest -Uri $url -OutFile $tmpZip -UseBasicParsing
+        Invoke-WebRequest -Uri $Url -OutFile $TmpZip -UseBasicParsing
     }
     catch {
         Write-Host "  ❌ Download failed: $($_.Exception.Message)" -ForegroundColor Red
         return $false
     }
 
-    Expand-Archive -Path $tmpZip -DestinationPath $tmpDir -Force
+    Expand-Archive -Path $TmpZip -DestinationPath $TmpDir -Force
 
     $installed = 0
-    Get-ChildItem $tmpDir -Recurse -Filter "*.ttf" | ForEach-Object {
+    Get-ChildItem $TmpDir -Recurse | Where-Object { $_.Extension -in ".ttf",".otf",".ttc" } | ForEach-Object {
         Copy-Item $_.FullName (Join-Path $destDir $_.Name) -Force
         $installed++
     }
 
-    # Refresh fontconfig cache so XeLaTeX picks up the new fonts
     if (Get-Command fc-cache -ErrorAction SilentlyContinue) { & fc-cache -f 2>$null }
-
-    Remove-Item $tmpZip, $tmpDir -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item $TmpZip, $TmpDir -Recurse -Force -ErrorAction SilentlyContinue
 
     if ($installed -gt 0) {
-        Write-Host "  ✅ Vazirmatn installed ($installed file(s) → $destDir)" -ForegroundColor Green
+        Write-Host "  ✅ $DisplayName installed ($installed file(s) → $destDir)" -ForegroundColor Green
         return $true
     }
-    Write-Host "  ❌ No font files found in Vazirmatn archive" -ForegroundColor Red
+    Write-Host "  ❌ No font files found in $DisplayName archive" -ForegroundColor Red
     return $false
 }
+
+# Font requirements: maps an unavailable font to its open-source fallback and install function.
+# Add entries here whenever a new language requires a font not shipped with Windows.
+$fontRequirements = @(
+    [pscustomobject]@{ Required = "HMXRoya";       Fallback = "Vazirmatn";      Installer = { Install-VazirmatnFont } }
+    [pscustomobject]@{ Required = "Noto Serif JP";  Fallback = "Noto Serif JP";  Installer = { Install-NotoJpFont } }
+    [pscustomobject]@{ Required = "Noto Sans JP";   Fallback = "Noto Sans JP";   Installer = { Install-NotoJpFont } }
+)
 
 # Build a font-substitution map for any required fonts that are not installed.
 # When a font listed here is referenced in a file's front matter, pandoc will be
 # passed -V overrides to use the substitute instead.
 $script:FontSubstitutions = @{}
+$installedFallbacks = @{}  # avoid re-downloading the same fallback twice
 
-foreach ($requiredFont in @("HMXRoya")) {
-    if (-not (Test-FontAvailable $requiredFont)) {
-        Write-Host "⚠️  Font not installed: $requiredFont" -ForegroundColor Yellow
-        $fallback = "Vazirmatn"
-        if (-not (Test-FontAvailable $fallback)) {
-            if (Install-VazirmatnFont) {
-                Write-Host "  ℹ️  Using Vazirmatn as fallback for $requiredFont" -ForegroundColor Yellow
-                $script:FontSubstitutions[$requiredFont] = $fallback
-            }
-            else {
-                Write-Host "  ❌ Could not install fallback font — $requiredFont PDFs may fail" -ForegroundColor Red
-            }
+foreach ($req in $fontRequirements) {
+    if (Test-FontAvailable $req.Required) { continue }
+
+    Write-Host "⚠️  Font not installed: $($req.Required)" -ForegroundColor Yellow
+
+    if (Test-FontAvailable $req.Fallback) {
+        Write-Host "  ℹ️  Using $($req.Fallback) (already installed) as fallback for $($req.Required)" -ForegroundColor Yellow
+        $script:FontSubstitutions[$req.Required] = $req.Fallback
+    }
+    elseif ($installedFallbacks.ContainsKey($req.Fallback)) {
+        # Already attempted install for this fallback in this run
+        if ($installedFallbacks[$req.Fallback]) {
+            $script:FontSubstitutions[$req.Required] = $req.Fallback
+        }
+    }
+    else {
+        $ok = & $req.Installer
+        $installedFallbacks[$req.Fallback] = $ok
+        if ($ok) {
+            Write-Host "  ℹ️  Using $($req.Fallback) as fallback for $($req.Required)" -ForegroundColor Yellow
+            $script:FontSubstitutions[$req.Required] = $req.Fallback
         }
         else {
-            Write-Host "  ℹ️  Using Vazirmatn (already installed) as fallback for $requiredFont" -ForegroundColor Yellow
-            $script:FontSubstitutions[$requiredFont] = $fallback
+            Write-Host "  ❌ Could not install fallback font — $($req.Required) PDFs may fail" -ForegroundColor Red
         }
     }
 }
