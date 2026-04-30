@@ -47,6 +47,31 @@ catch {
     throw "Pandoc required but not found"
 }
 
+# Ensure xelatex is on PATH — MiKTeX user installs are not always added automatically
+if (-not (Get-Command xelatex -ErrorAction SilentlyContinue)) {
+    $miktexCandidates = @(
+        "$env:LOCALAPPDATA\Programs\MiKTeX\miktex\bin\x64"
+        "$env:LOCALAPPDATA\Programs\MiKTeX\miktex\bin"
+        "C:\Program Files\MiKTeX\miktex\bin\x64"
+        "C:\Program Files\MiKTeX\miktex\bin"
+    )
+    $found = $false
+    foreach ($candidate in $miktexCandidates) {
+        if (Test-Path (Join-Path $candidate "xelatex.exe")) {
+            $env:PATH += ";$candidate"
+            Write-Host "✅ XeLaTeX found (added to PATH: $candidate)" -ForegroundColor Green
+            $found = $true
+            break
+        }
+    }
+    if (-not $found) {
+        throw "xelatex not found. Install MiKTeX or TeX Live and ensure it is on the PATH."
+    }
+}
+else {
+    Write-Host "✅ XeLaTeX found" -ForegroundColor Green
+}
+
 # Returns $true if the markdown file has body content after the front matter block
 function Test-HasContent {
     param([string]$FilePath)
