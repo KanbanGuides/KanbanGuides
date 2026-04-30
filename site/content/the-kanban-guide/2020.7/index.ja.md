@@ -8,9 +8,9 @@ author:
   - John Coleman
   - Daniel Vacanti
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
+mainfont: "Noto Serif JP"
+sansfont: "Noto Sans JP"
+monofont: "Noto Sans JP"
 sitemap:
   priority: 0.6
 aliases:

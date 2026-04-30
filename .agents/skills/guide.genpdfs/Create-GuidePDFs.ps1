@@ -72,6 +72,103 @@ else {
     Write-Host "✅ XeLaTeX found" -ForegroundColor Green
 }
 
+# Returns $true if a font name is visible to XeLaTeX (checks fc-list, then Windows font dirs)
+function Test-FontAvailable {
+    param([string]$FontName)
+
+    # fc-list is shipped with MiKTeX/TeX Live and is the authoritative source for XeLaTeX fonts
+    if (Get-Command fc-list -ErrorAction SilentlyContinue) {
+        $found = & fc-list 2>$null | Select-String -SimpleMatch $FontName -Quiet
+        if ($found) { return $true }
+    }
+
+    # Fallback: scan Windows font directories by filename
+    $fontDirs = @("C:\Windows\Fonts", "$env:LOCALAPPDATA\Microsoft\Windows\Fonts")
+    foreach ($dir in $fontDirs) {
+        if (Get-ChildItem $dir -ErrorAction SilentlyContinue | Where-Object { $_.BaseName -match [regex]::Escape($FontName) }) {
+            return $true
+        }
+    }
+    return $false
+}
+
+# Downloads and installs Vazirmatn (open-source Persian/Arabic font) so XeLaTeX can use it.
+# Fonts are copied into MiKTeX's own opentype directory so fontconfig picks them up.
+function Install-VazirmatnFont {
+    $url    = "https://github.com/rastikerdar/vazirmatn/releases/download/v33.003/vazirmatn-v33.003.zip"
+    $tmpZip = Join-Path $env:TEMP "vazirmatn.zip"
+    $tmpDir = Join-Path $env:TEMP "vazirmatn-extract"
+
+    # Prefer MiKTeX's own opentype directory (always scanned by fc-cache)
+    $miktexBase = $null
+    foreach ($candidate in @(
+        "$env:LOCALAPPDATA\Programs\MiKTeX",
+        "C:\Program Files\MiKTeX"
+    )) {
+        if (Test-Path "$candidate\fonts\opentype") { $miktexBase = $candidate; break }
+    }
+    $destDir = if ($miktexBase) {
+        "$miktexBase\fonts\opentype\public\vazirmatn"
+    } else {
+        "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
+    }
+    if (-not (Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force | Out-Null }
+
+    Write-Host "  Downloading Vazirmatn (open-source Persian font)..." -ForegroundColor Yellow
+    try {
+        Invoke-WebRequest -Uri $url -OutFile $tmpZip -UseBasicParsing
+    }
+    catch {
+        Write-Host "  ❌ Download failed: $($_.Exception.Message)" -ForegroundColor Red
+        return $false
+    }
+
+    Expand-Archive -Path $tmpZip -DestinationPath $tmpDir -Force
+
+    $installed = 0
+    Get-ChildItem $tmpDir -Recurse -Filter "*.ttf" | ForEach-Object {
+        Copy-Item $_.FullName (Join-Path $destDir $_.Name) -Force
+        $installed++
+    }
+
+    # Refresh fontconfig cache so XeLaTeX picks up the new fonts
+    if (Get-Command fc-cache -ErrorAction SilentlyContinue) { & fc-cache -f 2>$null }
+
+    Remove-Item $tmpZip, $tmpDir -Recurse -Force -ErrorAction SilentlyContinue
+
+    if ($installed -gt 0) {
+        Write-Host "  ✅ Vazirmatn installed ($installed file(s) → $destDir)" -ForegroundColor Green
+        return $true
+    }
+    Write-Host "  ❌ No font files found in Vazirmatn archive" -ForegroundColor Red
+    return $false
+}
+
+# Build a font-substitution map for any required fonts that are not installed.
+# When a font listed here is referenced in a file's front matter, pandoc will be
+# passed -V overrides to use the substitute instead.
+$script:FontSubstitutions = @{}
+
+foreach ($requiredFont in @("HMXRoya")) {
+    if (-not (Test-FontAvailable $requiredFont)) {
+        Write-Host "⚠️  Font not installed: $requiredFont" -ForegroundColor Yellow
+        $fallback = "Vazirmatn"
+        if (-not (Test-FontAvailable $fallback)) {
+            if (Install-VazirmatnFont) {
+                Write-Host "  ℹ️  Using Vazirmatn as fallback for $requiredFont" -ForegroundColor Yellow
+                $script:FontSubstitutions[$requiredFont] = $fallback
+            }
+            else {
+                Write-Host "  ❌ Could not install fallback font — $requiredFont PDFs may fail" -ForegroundColor Red
+            }
+        }
+        else {
+            Write-Host "  ℹ️  Using Vazirmatn (already installed) as fallback for $requiredFont" -ForegroundColor Yellow
+            $script:FontSubstitutions[$requiredFont] = $fallback
+        }
+    }
+}
+
 # Returns $true if the markdown file has body content after the front matter block
 function Test-HasContent {
     param([string]$FilePath)
@@ -108,7 +205,8 @@ function Invoke-GuideVersionPDFs {
         [string]$VersionDir,        # full path to version directory
         [string]$Language,
         [switch]$Force,
-        [bool]$VersionInFilename    # whether to embed version in PDF filename
+        [bool]$VersionInFilename,   # whether to embed version in PDF filename
+        [hashtable]$FontSubstitutions = @{}
     )
 
     $pdfOutputDir = Join-Path $VersionDir "pdf"
@@ -172,11 +270,29 @@ function Invoke-GuideVersionPDFs {
 
         Write-Host "  📄 Generating PDF for $langCode ($pdfName)..." -ForegroundColor Blue
 
+        # If any fonts referenced in front matter are unavailable, build -V overrides
+        $fontOverrideArgs = @()
+        $rawContent = Get-Content $inputPath -Raw
+        foreach ($fontKey in @("mainfont", "sansfont", "monofont")) {
+            if ($rawContent -match "(?m)^${fontKey}:\s*(.+)$") {
+                $fontValue = $matches[1].Trim().Trim('"').Trim("'")
+                if ($FontSubstitutions.ContainsKey($fontValue)) {
+                    $fontOverrideArgs += "-V", "${fontKey}=$($FontSubstitutions[$fontValue])"
+                }
+            }
+        }
+
         # Build pandoc command — lang passed via --metadata since Hugo v0.144.0 removed lang: from front matter
+        # --pdf-engine-opt=-interaction=nonstopmode prevents xelatex from blocking on missing-package prompts
+        # keywords are cleared because Pandoc 3.x passes them via hyperxmp (\xmpquote) which requires
+        # a working hyperxmp installation; clearing avoids the dependency entirely.
         $pandocArgs = @(
             $inputPath
             "--pdf-engine=xelatex"
+            "--pdf-engine-opt=-interaction=nonstopmode"
             "--metadata", "lang=$langCode"
+            "--metadata", "keywords="
+        ) + $fontOverrideArgs + @(
             "-o", $outputPath
         )
 
@@ -230,13 +346,14 @@ foreach ($cfg in $guideConfigs) {
     Write-Host "`n📖 $($cfg.DirName) — version $($latestDir.Name)" -ForegroundColor Cyan
 
     Invoke-GuideVersionPDFs `
-        -GuideName        $cfg.DirName `
-        -PdfBaseName      $cfg.PdfBaseName `
-        -Version          $latestDir.Name `
-        -VersionDir       $latestDir.FullName `
-        -Language         $Language `
+        -GuideName         $cfg.DirName `
+        -PdfBaseName       $cfg.PdfBaseName `
+        -Version           $latestDir.Name `
+        -VersionDir        $latestDir.FullName `
+        -Language          $Language `
         -Force:$Force `
-        -VersionInFilename $cfg.VersionInFilename
+        -VersionInFilename $cfg.VersionInFilename `
+        -FontSubstitutions $script:FontSubstitutions
 }
 
 Write-Host "`n🎉 PDF generation complete!" -ForegroundColor Green
