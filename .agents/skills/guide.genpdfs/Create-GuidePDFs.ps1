@@ -1,33 +1,40 @@
 #!/usr/bin/env pwsh
 <#
 .SYNOPSIS
-Simple PDF generator for Open Guide to Kanban
+PDF generator for KanbanGuides content
 
 .DESCRIPTION
-Generates PDFs from markdown files using front matter and a simple cover page.
+Generates PDFs from markdown files in versioned guide directories using Pandoc with XeLaTeX.
+Supports both "open-guide-to-kanban" and "the-kanban-guide". Automatically discovers the
+latest version directory (format YYYY.N) under each guide and writes PDFs to its pdf/ subfolder.
 
 .PARAMETER Force
-Overwrite existing PDF files
+Overwrite existing PDF files even if source is unchanged
 
 .PARAMETER Language
-Generate PDF for specific language only
+Generate PDF for a specific language code only (e.g. fa, ja, es-419). Use "en" for English.
+
+.PARAMETER Guide
+Which guide to process. One of: open-guide-to-kanban, the-kanban-guide, all (default: all)
 
 .EXAMPLE
 .\Create-GuidePDFs.ps1
 .\Create-GuidePDFs.ps1 -Force
 .\Create-GuidePDFs.ps1 -Language fa
+.\Create-GuidePDFs.ps1 -Guide open-guide-to-kanban -Language ja
 #>
 
 param(
     [switch]$Force,
-    [string]$Language
+    [string]$Language,
+    [ValidateSet("open-guide-to-kanban", "the-kanban-guide", "all")]
+    [string]$Guide = "all"
 )
 
-# Basic setup — script lives at .agents/skills/create-guide-pdfs/, so project root is 3 levels up
+# Script lives at .agents/skills/guide.genpdfs/ — project root is 3 levels up
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $projectRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $scriptDir))
-$guideDir = Join-Path $projectRoot "site/content/guide"
-$pdfOutputDir = Join-Path $guideDir "pdf"
+$contentDir = Join-Path $projectRoot "site/content"
 
 Write-Host "📚 Generating PDFs..." -ForegroundColor Green
 
@@ -40,96 +47,171 @@ catch {
     throw "Pandoc required but not found"
 }
 
-# Ensure output directory exists
-if (-not (Test-Path $pdfOutputDir)) {
-    New-Item -ItemType Directory -Path $pdfOutputDir -Force | Out-Null
-}
-
-# Simple front matter parser
-function Get-FrontMatter {
+# Returns $true if the markdown file has body content after the front matter block
+function Test-HasContent {
     param([string]$FilePath)
-    
-    $content = Get-Content -Path $FilePath -Raw
-    if ($content -match '(?s)^---\s*\n(.*?)\n---') {
-        $yaml = $matches[1]
-        $result = @{}
-        
-        foreach ($line in ($yaml -split "`n")) {
-            if ($line -match '^([^:]+):\s*(.*)$') {
-                $key = $matches[1].Trim()
-                $value = $matches[2].Trim().Trim('"').Trim("'")
-                $result[$key] = $value
-            }
-        }
-        return $result
+
+    $raw = Get-Content -Path $FilePath -Raw
+    # Strip the opening front matter block (--- ... ---)
+    if ($raw -match '(?s)^---\s*\r?\n.*?\r?\n---\s*\r?\n(.*)$') {
+        $body = $matches[1].Trim()
+        return ($body.Length -gt 0)
     }
-    return @{}
+    # No front matter — treat entire file as content
+    return ($raw.Trim().Length -gt 0)
 }
 
-# Find markdown files to process
-if ($Language) {
-    $files = @("index.$Language.md")
-}
-else {
-    $files = Get-ChildItem -Path $guideDir -Name "index.*.md" | Where-Object { $_ -ne "index.en.md" }
+# Returns the latest versioned subdirectory (format YYYY.N) inside a guide directory
+function Get-LatestVersionDir {
+    param([string]$GuideDir)
+
+    Get-ChildItem -Path $GuideDir -Directory |
+        Where-Object { $_.Name -match '^\d{4}\.\d+$' } |
+        Sort-Object {
+            $parts = $_.Name -split '\.'
+            [int]$parts[0] * 1000 + [int]$parts[1]
+        } -Descending |
+        Select-Object -First 1
 }
 
-if (-not $files) {
-    Write-Host "No files found to process" -ForegroundColor Yellow
-    exit 0
-}
+# Processes all matching markdown files in a single versioned guide directory
+function Invoke-GuideVersionPDFs {
+    param(
+        [string]$GuideName,
+        [string]$PdfBaseName,       # e.g. "open-guide-to-kanban" or "kanban-guide"
+        [string]$Version,           # e.g. "2025.7"
+        [string]$VersionDir,        # full path to version directory
+        [string]$Language,
+        [switch]$Force,
+        [bool]$VersionInFilename    # whether to embed version in PDF filename
+    )
 
-Write-Host "Found $($files.Count) file(s): $($files -join ', ')" -ForegroundColor Yellow
+    $pdfOutputDir = Join-Path $VersionDir "pdf"
+    if (-not (Test-Path $pdfOutputDir)) {
+        New-Item -ItemType Directory -Path $pdfOutputDir -Force | Out-Null
+    }
 
-# Process each file
-foreach ($file in $files) {
-    $inputPath = Join-Path $guideDir $file
-    
-    # Extract language code
-    if ($file -match 'index\.([^.]+)\.md') {
-        $langCode = $matches[1]
+    # Collect files to process
+    if ($Language) {
+        $langCode = $Language
+        $mdFile   = if ($langCode -eq "en") { "index.md" } else { "index.$langCode.md" }
+        $files    = @(Get-ChildItem -Path $VersionDir -Name $mdFile -ErrorAction SilentlyContinue)
     }
     else {
-        Write-Host "Skipping $file - can't extract language code" -ForegroundColor Yellow
-        continue
+        # index.md = English; index.{lang}.md = all other languages
+        $files = Get-ChildItem -Path $VersionDir -Name "index*.md" |
+            Where-Object { $_ -eq "index.md" -or $_ -match '^index\.[^.]+\.md$' }
     }
-    
-    $outputPath = Join-Path $pdfOutputDir "open-guide-to-kanban.$langCode.pdf"
-    
-    # Check if we need to regenerate
-    if ((Test-Path $outputPath) -and -not $Force) {
-        $sourceTime = (Get-Item $inputPath).LastWriteTime
-        $pdfTime = (Get-Item $outputPath).LastWriteTime
-        if ($sourceTime -le $pdfTime) {
-            Write-Host "✅ $langCode - PDF up to date" -ForegroundColor Green
-            continue
-        }
-    }
-    
-    Write-Host "📄 Generating PDF for $langCode..." -ForegroundColor Blue
 
-    $pdfEngine = "xelatex"
-    
-    # Build pandoc command - pass lang via --metadata since Hugo v0.144.0 removed lang: from front matter
-    $pandocArgs = @(
-        $inputPath
-        "--pdf-engine=$pdfEngine"
-        "--metadata", "lang=$langCode"
-        "-o", $outputPath
-    )
-    
-    try {
-        & pandoc @pandocArgs
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "✅ Generated: $langCode" -ForegroundColor Green
+    if (-not $files) {
+        Write-Host "  No files found to process in $VersionDir" -ForegroundColor Yellow
+        return
+    }
+
+    Write-Host "  Found $($files.Count) file(s): $($files -join ', ')" -ForegroundColor Yellow
+
+    foreach ($file in $files) {
+        $inputPath = Join-Path $VersionDir $file
+
+        # Determine language code: index.md → en, index.fa.md → fa
+        if ($file -eq "index.md") {
+            $langCode = "en"
+        }
+        elseif ($file -match '^index\.(.+)\.md$') {
+            $langCode = $matches[1]
         }
         else {
-            Write-Host "❌ Failed: $langCode (exit code $LASTEXITCODE)" -ForegroundColor Red
+            Write-Host "  Skipping $file — cannot determine language code" -ForegroundColor Yellow
+            continue
         }
-    }
-    catch {
-        Write-Host "❌ Error generating $langCode`: $($_.Exception.Message)" -ForegroundColor Red
+
+        # Skip scaffolded files that have no body content (front matter only)
+        if (-not (Test-HasContent -FilePath $inputPath)) {
+            Write-Host "  ⏭️  $langCode — skipped (no body content, scaffolding only)" -ForegroundColor DarkGray
+            continue
+        }
+
+        # Build output PDF filename
+        $pdfName   = if ($VersionInFilename) { "$PdfBaseName.v$Version.$langCode.pdf" } else { "$PdfBaseName.$langCode.pdf" }
+        $outputPath = Join-Path $pdfOutputDir $pdfName
+
+        # Skip if up to date
+        if ((Test-Path $outputPath) -and -not $Force) {
+            $sourceTime = (Get-Item $inputPath).LastWriteTime
+            $pdfTime    = (Get-Item $outputPath).LastWriteTime
+            if ($sourceTime -le $pdfTime) {
+                Write-Host "  ✅ $langCode — PDF up to date" -ForegroundColor Green
+                continue
+            }
+        }
+
+        Write-Host "  📄 Generating PDF for $langCode ($pdfName)..." -ForegroundColor Blue
+
+        # Build pandoc command — lang passed via --metadata since Hugo v0.144.0 removed lang: from front matter
+        $pandocArgs = @(
+            $inputPath
+            "--pdf-engine=xelatex"
+            "--metadata", "lang=$langCode"
+            "-o", $outputPath
+        )
+
+        try {
+            & pandoc @pandocArgs
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "  ✅ Generated: $pdfName" -ForegroundColor Green
+            }
+            else {
+                Write-Host "  ❌ Failed: $langCode (exit code $LASTEXITCODE)" -ForegroundColor Red
+            }
+        }
+        catch {
+            Write-Host "  ❌ Error generating $langCode`: $($_.Exception.Message)" -ForegroundColor Red
+        }
     }
 }
 
-Write-Host "🎉 PDF generation complete!" -ForegroundColor Green
+# Guide configuration: guide directory name → pdf base name and filename convention
+$guideConfigs = @(
+    [pscustomobject]@{
+        DirName         = "open-guide-to-kanban"
+        PdfBaseName     = "open-guide-to-kanban"
+        VersionInFilename = $false
+    }
+    [pscustomobject]@{
+        DirName         = "the-kanban-guide"
+        PdfBaseName     = "kanban-guide"
+        VersionInFilename = $true
+    }
+)
+
+# Filter to requested guide(s)
+if ($Guide -ne "all") {
+    $guideConfigs = $guideConfigs | Where-Object { $_.DirName -eq $Guide }
+}
+
+foreach ($cfg in $guideConfigs) {
+    $guideDir = Join-Path $contentDir $cfg.DirName
+    if (-not (Test-Path $guideDir)) {
+        Write-Host "⚠️  Guide directory not found, skipping: $guideDir" -ForegroundColor Yellow
+        continue
+    }
+
+    $latestDir = Get-LatestVersionDir -GuideDir $guideDir
+    if (-not $latestDir) {
+        Write-Host "⚠️  No versioned directory found in: $guideDir" -ForegroundColor Yellow
+        continue
+    }
+
+    Write-Host "`n📖 $($cfg.DirName) — version $($latestDir.Name)" -ForegroundColor Cyan
+
+    Invoke-GuideVersionPDFs `
+        -GuideName        $cfg.DirName `
+        -PdfBaseName      $cfg.PdfBaseName `
+        -Version          $latestDir.Name `
+        -VersionDir       $latestDir.FullName `
+        -Language         $Language `
+        -Force:$Force `
+        -VersionInFilename $cfg.VersionInFilename
+}
+
+Write-Host "`n🎉 PDF generation complete!" -ForegroundColor Green
