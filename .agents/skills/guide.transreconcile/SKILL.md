@@ -28,7 +28,7 @@ For each language `{lang}`, the complete expected file set is:
 | Check | Location |
 |-------|----------|
 | Language entry in `site/hugo.yaml` | Under `languages.{lang}` |
-| Language entry in `site/hugo.production.yaml` | Under `languages.{lang}` with `disabled:` key |
+| Language entry in `site/hugo.production.yaml` | Under `languages.{lang}` — entry must exist; the value of `disabled:` is **not** required to be `true` (it may legitimately be `false` or absent if the language is already in production) |
 | i18n file | `site/i18n/{lang}.yaml` |
 
 ### Content files — Structural
@@ -87,6 +87,14 @@ For each existing translation content file, compare its front matter keys agains
 ### 4d. Guide body audit (versioned files only)
 For versioned guide files (`index.{lang}.md` inside version-numbered folders), check that the body (content after the closing `---`) is empty or contains only whitespace. If the body has content, flag it as a potential accidental copy of the English guide text.
 
+### 4e. Aliases audit
+For every translation content file that exists, inspect its `aliases:` front matter block (if present). Every alias path MUST begin with `/{lang}/`. Flag any alias that starts with `/` but does NOT start with `/{lang}/` as a **bad alias** — these will shadow production English routes and cause routing errors.
+
+Example of a bad alias: `/the-kanban-guide/latest` in `index.ja.md` — should be `/ja/the-kanban-guide/latest`.
+
+### 4f. Language ordering audit
+Read all non-English language entries in `site/hugo.yaml`. Look up the approximate global speaker count (native + L2) for each language via a web search or knowledge lookup. Verify that the entries are ordered descending by speaker count and that `weight` values are sequential starting from 1 (after `en`). Flag any language that is out of order or has a non-sequential weight.
+
 ## Step 5 — Report
 
 Produce a structured report:
@@ -116,6 +124,8 @@ Produce a structured report:
 - {N} i18n keys missing
 - {N} files with `lang` still set to `en`
 - {N} versioned guide files with unexpected body content
+- {N} aliases missing `/{lang}/` prefix
+- Languages out of speaker-count order in `hugo.yaml`: {list or "None"}
 ```
 
 Use ✅ for complete, ❌ for missing, ⚠️ for present but with issues.
@@ -123,6 +133,12 @@ Use ✅ for complete, ❌ for missing, ⚠️ for present but with issues.
 ## Step 6 — Fix Mode
 
 If mode is `fix`, after reporting, create or repair each identified issue:
+
+**For missing `hugo.production.yaml` entry**: Add the language entry under `languages:` in `site/hugo.production.yaml`. Because reconcile mode is used for languages that may already be in some stage of deployment, add it **without** forcing `disabled: true` — use `disabled: false` as the default so the language remains accessible:
+```yaml
+  {lang}:
+    disabled: false
+```
 
 **For missing files**: Follow the same creation rules as the `guide.transcreate` skill:
 - Structural files: translate front matter and body from English source
@@ -138,6 +154,10 @@ If mode is `fix`, after reporting, create or repair each identified issue:
 **For `lang:` present in any file**: Remove the `lang:` field entirely — Hugo v0.144.0+ removed it. Hugo determines language from the file suffix. Do not replace it with another value.
 
 **For missing front matter keys**: Add the key with the English value as placeholder followed by a `# TODO: translate` comment.
+
+**For bad aliases (missing `/{lang}/` prefix)**: Replace each offending alias by prepending `/{lang}` to it. For example `/the-kanban-guide/latest` → `/{lang}/the-kanban-guide/latest`.
+
+**For language ordering issues**: Look up the global speaker counts for all non-English languages in `hugo.yaml`, re-sort the language entries descending by speaker count, and reassign `weight` values sequentially (1, 2, 3 … after `en`).
 
 **NEVER**:
 - Add body content to versioned guide files
