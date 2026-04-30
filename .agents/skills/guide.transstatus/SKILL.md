@@ -45,6 +45,10 @@ For each language `{lang}`, check whether each expected scaffolding file exists:
 - `site/content/open-guide-to-kanban/{v}/index.{lang}.md`
 - `site/content/the-kanban-guide/{v}/index.{lang}.md`
 
+**Aliases check** — for every translation file that exists, scan its `aliases:` front matter block (if any). Flag any alias that starts with `/` but does NOT start with `/{lang}/` as a bad alias. These shadow production English routes.
+
+**Language ordering check** — look up the approximate global speaker count (native + L2) for each non-English language in `hugo.yaml` via a web search or knowledge lookup. Verify the entries are ordered descending by speaker count and that `weight` values are sequential. Flag any that are out of order.
+
 ## Step 4 — Check Guide Body Status
 
 For each versioned guide file that **exists**, read it and check whether the body (all content after the closing `---` of the front matter) contains meaningful text (more than whitespace/blank lines).
@@ -64,21 +68,23 @@ Output a summary table followed by a detail section and action plan.
 ```
 ## Translation Status Dashboard
 
-| Language | Code | Live? | Scaffolding | Guide Bodies |
-|----------|------|-------|-------------|--------------|
-| Japanese | ja | ✅ | ✅ Complete | ✅ All translated |
-| Spanish (Latin America) | es-419 | ❌ | ⚠️ 2 missing | ⬜ OGK 2025.7 empty, ✅ TKG 2025.5 |
-| Minionese | min | ❌ | ✅ Complete | ⬜ All empty |
+| Language | Code | Live? | Scaffolding | Aliases | Order | Guide Bodies |
+|----------|------|-------|-------------|---------|-------|---------------|
+| Japanese | ja | ✅ | ✅ Complete | ✅ OK | ✅ OK | ✅ All translated |
+| Spanish (Latin America) | es-419 | ❌ | ⚠️ 2 missing | ⚠️ 1 bad alias | ⚠️ Out of order | ⬜ OGK 2025.7 empty, ✅ TKG 2025.5 |
+| Minionese | min | ❌ | ✅ Complete | ✅ OK | ✅ OK | ⬜ All empty |
 ```
 
 **Column definitions:**
 - **Live?** — enabled in production (`disabled: false` or no entry in `hugo.production.yaml`)
 - **Scaffolding** — all config + structural files present
+- **Aliases** — all `aliases:` entries in translation files are prefixed with `/{lang}/`
+- **Order** — language is in the correct position in `hugo.yaml` sorted by global speaker count (descending), with sequential `weight`
 - **Guide Bodies** — whether versioned guide bodies are translated or empty
 
 ### Detail section
 
-For any language with issues (missing scaffolding files or empty bodies), list exactly what is missing or empty.
+For any language with issues (missing scaffolding files, bad aliases, ordering problems, or empty bodies), list exactly what is missing, wrong, or empty. Bad aliases should list the file and the offending alias value. Ordering issues should show the current order vs the expected order.
 
 ### Action plan
 
