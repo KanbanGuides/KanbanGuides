@@ -130,8 +130,11 @@ _Ideally, Work should enter the Kanban system guided by policies rather than bei
 - _The Kanban system members should self-organize around the Work and Definition of Workflow._
 - _Kanban system members should ‘start’ Work when they are ready to work on it, bringing in new Work based on how it is being prioritized._
 - _Kanban system members––and others outside the Kanban system––should explicitly prevent Work from being pushed to Kanban system members._
-- _Beware of re-prioritization of ‘Started but Not Finished Work’ (SNFW) or_ _Work In Progress/Process (WIP), as it causes those Items to age (sit idle)_ _and leads to longer or less predictable Elapsed Times from ‘Started’ to ‘Finished.’_
-- _Rightsizing, an optional but recommended practice, refers to assessing whether Work Items fit the Service Level Expectation, or are too big for the Service Level Expectation and therefore require splitting into smaller but still potentially valuable Work Items._
+- _Beware of re-prioritization of ‘Started but Not Finished Work’ (SNFW) or_  
+  _Work In Progress/Process (WIP), as it causes those Items to age (sit idle)_  
+  _and leads to longer or less predictable Elapsed Times from ‘Started’ to ‘Finished.’_
+
+_Rightsizing, an optional but recommended practice, refers to assessing whether Work Items fit the Service Level Expectation, or are too big for the Service Level Expectation and therefore require splitting into smaller but still potentially valuable Work Items._
 
 _Rightsizing, in a Knowledge Work context, is based on the assumption that Work Items need to be at or under a maximum size (according to the Kanban system members) but do not necessarily need to be the same size. If a Work Item is so large that it can’t be completed within a reasonable time (e.g., it would break the Service Level Expectation), even after starting it, Kanban system members should consider splitting it into smaller Items that each have the potential to deliver Value. Equally, Work Items can be merged._
 
@@ -155,7 +158,7 @@ _Kanban favors evolutionary change, but it does not prohibit larger, structural 
 > The Definition of Workflow should include a policy for defining Blockers (in context) and signaling them.
 
 - **_Cumulative Queueing or Buffer Time (CQBT):_** _The cumulative time a ‘finished’ single Work Item (or a selection of ‘finished’ Items) spends in Queueing or Buffer states from ‘started’ to ‘finished.’ \[measure for a single Work Item, metric for multiple Work Items\]_
-- **_Elapsed Time from ‘Started’ to ‘Finished’ (ETSF):_** The (typically _rounded-up) number of elapsed time units (often calendar days) from_ when a single _Work Item_ ‘started’ _to_ when a _Work Item_ ‘finished.’ _Only ‘finished’ Items get ETSFs. \[measure\]
+- **_Elapsed Time from ‘Started’ to ‘Finished’ (ETSF):_** The (typically _rounded-up) number of elapsed time units (often calendar days) from_ when a single _Work Item_ ‘started’ _to_ when a _Work Item_ ‘finished.’ _Only ‘finished’ Items get ETSFs. \[measure\]_
 - **Flow Distribution:** The Visualization and analysis of Work Item types ‘finished’ or ‘completed’ over time, enabling active management to ensure a healthy balance of effort. \[metric\]
 
 > [!FOOTNOTE]
