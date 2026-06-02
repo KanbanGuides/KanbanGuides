@@ -8,4 +8,6 @@
 tex2pdf.*/*
 
 
+# ignore macOs .DS_Store tags
+.DS_Store
 media-*/**
