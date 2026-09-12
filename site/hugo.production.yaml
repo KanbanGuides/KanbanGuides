@@ -6,7 +6,7 @@ minify:
   minifyOutput: true
 languages:
   min:
-    disabled: false
+    disabled: true
   fa:
     disabled: false
   pl:
