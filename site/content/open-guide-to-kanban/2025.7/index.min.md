@@ -103,8 +103,8 @@ _To tell yu how to run da worky-flow best and to help da fix-fix, at da teeny-mi
      - _Work in Progresso_/_Process_ (WIP).
    - [ ] A say-so for how da WIP get bossed from 'started' to 'finished.'
    - [ ] _A bundle of_ out-loud policies about how _Worky Bits_ can _Zoom_ through each state from 'started' to 'finished' _with no boo-boos_. _For example, Kanban system peeps might got a policy dat is out-loud about fixing any known boo-boo in a Bit before moving it to da next state, so dat no known boo-boo get passed to da next process._
-   - [ ] A _Promisa of Tim_ (SLE): A guessy of how long a _Worky Bit_ should take to _Zoom_ from 'started' to 'finished.' _Noticey dat dere is no pinky-promise dat what happened before will happen again._
-   - [ ] A _Looky_ of da _Promisa of Tim_ on da Kanban boardy.
+   - [ ] A _Time Expecty_ (SLE): A guessy of how long a _Worky Bit_ should take to _Zoom_ from 'started' to 'finished.' _Noticey dat dere is no pinky-promise dat what happened before will happen again._
+   - [ ] A _Looky_ of da _Time Expecty_ on da Kanban boardy.
 
 Da order yu do dese bits in is no importanty, long as dey ALL get _done_. Kanban system peeps often need extra _Definitiony of Worky-Flow_ bits, like what dey value, what principles dey hold, and what dey promisey each other, depending on da _situationy of da_ Kanban system _peeps_. _Dere is stuff in da appendix of dis booky and elsewhere to help pick da right options_.
 
@@ -112,7 +112,7 @@ Kanban system peeps also often need more dan one _Definitiony of Worky-Flow_. Do
 
 _Letting da Zoom-Zoom happen is da act of growing a smooth and balanced system dat make Banana. Da Definitiony of Worky-Flow should make sure da system is balanced so da Zoom-Zoom of Banana is good. Kanban system peeps do dis by getting betta at checking dat Banana really got delivered, and by throwing away Work dat giv no Banana._
 
-Da _Looky_ of one _or more_ _Definitionies of Worky-Flow_ is _called_ a Kanban boardy. Dere is no special rules for how a _Looky_ should looky. Thinky about all da bits of a _Definitiony of Worky-Flow_ (like _Worky Bits_, policies) plus any other local thingies dat might bonk how Banana _Zooms_.
+Da _Looky_ of one _or more_ _Definitionies of Worky-Flow_ is _called_ a Kanban boardy. Dere is no special rules for how a _Looky_ should looky. Thinky about all da bits of a _Definitiony of Worky-Flow_ (like _Worky Bits_, policies) plus any other local thingies dat might sway how Banana _Zooms_.
 
 _In a computery team, Kanban might Looky da feature-making from idea to put-it-out. In a shouty-selling team, it might follow a campaign from drawy-drawy to launchy._
 
@@ -123,7 +123,7 @@ Kanban system peeps is limited only by dere own silly imagination for how dey ma
 Bits in da worky-flow must-must get bossed actively. _Active bossing of Bits in a worky-flow can looky like lotsa things, includy, but no only, dese:_
 
 - _Boss_ '_Started but Not Finished Work' (SNFW) or Work In Progresso/Process (WIP)_.
-- _Make sure_ _Worky Bits_ no get oldy-oldy for no good reason, using da _Promisa of Tim_ as da looky-stick.
+- _Make sure_ _Worky Bits_ no get oldy-oldy for no good reason, using da _Time Expecty_ as da looky-stick.
 - _Un-stucky da stucky things dat is blocking Work or blocking processes_.
 
 A common do-do is for Kanban system peeps to luk over da live _Bits_ _regular-regular_. Dis luk can happen all-da-time or on a regular beaty. Kanban system peeps must-must out-loud boss how many _Worky Bits_ is in a worky-flow from 'started' to 'finished,' straight-on or roundabouty. Dat bossing can be showed on a Kanban boardy any way _da Kanban system_ peeps thinky is good.
@@ -147,9 +147,9 @@ _Best-best, Work should go into da Kanban system guided by policies, no shoved o
   _Work In Progresso/Process (WIP), because it make dose Bits go oldy (sit doing nothing)_  
   _and lead to longer or wobblier Elapsed Times from 'Started' to 'Finished.'_
 
-_Rightsizing, an optional but recommended do-do, mean checking whether Worky Bits fit da Promisa of Tim, or is too big for da Promisa of Tim and so need choppy-chopping into smaller Worky Bits dat still got Banana in dem._
+_Rightsizing, an optional but recommended do-do, mean checking whether Worky Bits fit da Time Expecty, or is too big for da Time Expecty and so need choppy-chopping into smaller Worky Bits dat still got Banana in dem._
 
-_Rightsizing, in a Brainy Worky place, lean on da idea dat Worky Bits need to be at or under a biggest-size (whatever da Kanban system peeps say), but dey no must all be da same size. If a Worky Bit is so HUUUGE dat it can't get done in a sensible time (like, it would breaky da Promisa of Tim), even after starting it, Kanban system peeps should thinky about choppy-chopping it into smaller Bits dat each got da chance to giv Banana. Same-same da other way: Worky Bits can be squished togethery._
+_Rightsizing, in a Brainy Worky place, lean on da idea dat Worky Bits need to be at or under a biggest-size (whatever da Kanban system peeps say), but dey no must all be da same size. If a Worky Bit is so HUUUGE dat it can't get done in a sensible time (like, it would breaky da Time Expecty), even after starting it, Kanban system peeps should thinky about choppy-chopping it into smaller Bits dat each got da chance to giv Banana. Same-same da other way: Worky Bits can be squished togethery._
 
 _Bossing da room-to-work often need more dan just WIP control._ Bossing WIP help da _Zoom-Zoom_ and often make da togethery focus, promisey-keeping and work-togethery _of da Kanban system peeps_ much betta. Any okay-okay exceptions to bossing WIP should be _said out-loud_ as part of da _Definitiony of Worky-Flow_.
 
@@ -180,7 +180,7 @@ _Kanban like growy-growy change, but it no forbid bigger, structural change, gui
 - **_Flow Efficiency:_** Da ratio of da busy-working time to da whole time a Bit or a bunch of Bits spend in da worky-flow, includy waity times, between da 'started' and 'finished' points on a Definitiony of Worky-Flow. _It is showed as a percentage. It can trick yu, because time sitting in busy states may no be real busy time. ((ETSF-(CQBT+other non-value-adding time))/ETSF) 100\. \[number\] Example of other no-Banana-adding time: Blocked Elapsed Time for Finished Items_
 - **Number of Blockers:** Da count of stucky things, part-way or all-da-way, at one point in time (usually right-now datetime), stopping da Zoom-Zoom of Worky Bits from 'started' to 'finished.' \[measure-bit\]
 - **Process Cycle Efficiency:** Measure da Work-efficiency of a system or bits of it. Yu work it out by dividing da Banana-adding time by Time to Market and den timesing by 100 to get a percentage. Dis mean Kanban system peeps got to measure ALL da Banana-adding and ALL da no-Banana-adding time (includy, but no only, waity time). ((T2M-(CQBT+other non-value-adding time))/T2M) 100\. \[number\]
-- **_Promisa of Tim (Service Level Expectation):_** A guessy of how long a _Worky Bit_ should take to Zoom from 'started' to 'finished.' Da _Promisa of Tim_ itself got two bits: a chunk o' elapsed time and a how-sure number stuck to dat chunk (like, '85% of _Worky Bits_ will be 'finished' in eight days or less'). _It is built from a pick of Elapsed Time from 'Started' to 'Finished' out of all history, a slice of history, or, if dere is no data or no enough data, a clever guessy. \[number\]_
+- **_Time Expecty (Service Level Expectation):_** A guessy of how long a _Worky Bit_ should take to Zoom from 'started' to 'finished.' Da _Time Expecty_ itself got two bits: a chunk o' elapsed time and a how-sure number stuck to dat chunk (like, '85% of _Worky Bits_ will be 'finished' in eight days or less'). _It is built from a pick of Elapsed Time from 'Started' to 'Finished' out of all history, a slice of history, or, if dere is no data or no enough data, a clever guessy. \[number\]_
 - **'Started but Not Finished Work' (SNFW)** or **Work In Progresso/Process (WIP)** _or **Flow Load**_: _Da_ count of _Worky Bits_ 'started' but no 'finished'. _\[measure-bit\]_
 - **Throughputty:** Da count of _Worky Bits_ 'finished' per chunk o' time. Da measuring of throughputty is da exact county of _Worky Bits_, _no monies. \[number\]_
 - **Time to Market, also called Customer Lead Time:** Da (usually rounded-up) count of elapsed time chunks (often calendar days/weeks) from when a Stakey-holder's order for one Worky Bit come in, to when da Worky Bit got given to da Stakey-holder. It is one example of an ETSF. \[measure-bit for one Worky Bit, number for a product or service\]
@@ -193,21 +193,21 @@ Da _Zoom-Zoom_ numbers _and measure-bits_ go with da right 'started' and 'finish
 
 _Time to Market, and for each togethery 'started' and 'finished' pair:_
 
-- _A Promisa of Tim (must-have for at least one 'started' and 'finished' pair),_
+- _A Time Expecty (must-have for at least one 'started' and 'finished' pair),_
 - _Worky Bit Oldy-ness or Elapsed Time for 'Started' but Not 'Finished' Items (ETSNFI),_
 - _Elapsed Time from 'Started' to 'Finished' (ETSF), and_
 - _Throughputty._
 
-Long as Kanban system peeps use da _Zoom-Zoom_ numbers _and measure-bits_ like dis booky say, _and dey fit da place dey in,_ dey can cally dem any other names dey fancy. It is up to da Kanban system peeps to decide da best way to _use_ dese _Zoom-Zoom_ numbers _and measure-bits, like Looky-ing dem in charty-charts or checking da wibbly-wobbly. A leany-forward focus on outcomes, bonk, and Banana is a good idea._
+Long as Kanban system peeps use da _Zoom-Zoom_ numbers _and measure-bits_ like dis booky say, _and dey fit da place dey in,_ dey can cally dem any other names dey fancy. It is up to da Kanban system peeps to decide da best way to _use_ dese _Zoom-Zoom_ numbers _and measure-bits, like Looky-ing dem in charty-charts or checking da wibbly-wobbly. A leany-forward focus on outcomes, effecty, and Banana is a good idea._
 
-### _Outcomes, Bonk, and Banana_
+### _Outcomes, Effecty, and Banana_
 
-_Kanban system peeps should regular-regular hunt for evidence of outcomes/bonk, e.g.:_
+_Kanban system peeps should regular-regular hunt for evidence of outcomes/effecty, e.g.:_
 
 - _Customer outcomes could focus on giving measurable Banana to customers, e.g., less Failure Demand, customer long-time cost squishing, or customer jobs got done (18)._
-- _User outcomes could poke at da exact changes in user behaviour dat fix problems or make experiences betta, e.g., 'completing' Worky Bits betta at da teeniest costs, or easier-to-use stuff._
+- _User outcomes could look hard at da exact changes in user behaviour dat fix problems or make experiences betta, e.g., 'completing' Worky Bits betta at da teeniest costs, or easier-to-use stuff._
 - _Product Stakey-holder outcomes could gluey dose behaviour changes to product numbers, like trends in product customer take-up, sticky-ness and convergence, plus trends in feature take-up, decidey-peep and user numbers, and product Time to Market._
-- _Business Stakey-holder Bonk, e.g., rule-following, business long-time cost squishing, business results, trends in market share, customer happy-ness across all products, etc._
+- _Business Stakey-holder Effecty, e.g., rule-following, business long-time cost squishing, business results, trends in market share, customer happy-ness across all products, etc._
 - _Outcomes for Kanban system peeps, like betta can-do, thinking about for example psychological flow (15), how often dey release, tooly stuff, skills, technical debt, user experience (UX) debt, customer experience (CX) debt, human-centered-design debt, technical domain can-do, market domain can-do, business domain can-do, and a weather/culture for net fixing._
 
 Any of da above ways can be useful. Also thinky about dese:
@@ -217,7 +217,7 @@ Any of da above ways can be useful. Also thinky about dese:
 - **Banana Checked-For-Real:** A Worky Bit dat reach da 'finished' point and giv da Banana it meant to giv to da Stakey-holder (includy, but no only, customer or user), meeting da out-loud policies, e.g., quality or experience standards. Often got evidence and luk-sees with it.
 - **Banana No-Good:** A Worky Bit dat reach da 'finished' point, or get luk-ed at, but fail to giv da Banana it meant to, no meeting what da Definitiony of Worky-Flow expected, often needing re-work or a chuck-out, guided by evidence and luk-sees. Thinky about da place yu in.
 
-_By measuring dese kinds of outcomes, bonks, Banana numbers and Banana measure-bits, Kanban system peeps make sure dey is no just giving Work fast (outputs), but giving real Banana and real fixes (outcomes and bonks) to Stakey-holders, includy but no only customers and users._
+_By measuring dese kinds of outcomes, effecties, Banana numbers and Banana measure-bits, Kanban system peeps make sure dey is no just giving Work fast (outputs), but giving real Banana and real fixes (outcomes and effecties) to Stakey-holders, includy but no only customers and users._
 
 _Getting clear on Worky Bits should happen right-now-when-needed, to keep da wastey away._ No stare too hard at outputs and too teeny at outcomes. _Kanban system peeps should leany-forward, on-purpose and regular-regular luk over da numbers or measure-bits and keep making dem betta._
 
@@ -225,7 +225,7 @@ _Getting clear on Worky Bits should happen right-now-when-needed, to keep da was
 
 _Only da Kanban Do-Dos, da teeny-minimum Definitiony of Worky-Flow, and a pick of numbers or measure-bits is must-must; ev'rything else is up to yu._ _Thinky about da place yu in. Kanban system peeps should grow a kind-hearted Zoom-Zoom of Banana._
 
-_Feedback from results ('result feedback') mean da data dat come back after yu change something, whether it is county-numbers or wordy-words about outcomes, bonks, or even shifts in da market weather. Dis feedback can bonk da Stakey-holder Banana outcomes, plus da inputs, effort, stuff, or costs going forward. (Noticey: Peeps is NOT 'resources.')._
+_Feedback from results ('result feedback') mean da data dat come back after yu change something, whether it is county-numbers or wordy-words about outcomes, effecties, or even shifts in da market weather. Dis feedback can sway da Stakey-holder Banana outcomes, plus da inputs, effort, stuff, or costs going forward. (Noticey: Peeps is NOT 'resources.')._
 
 _In real life, Kanban is a journey of always-learning and always-bending. By starting with dese core do-dos and keeping da fix-fix going, Kanban system peeps can get a betta Zoom-Zoom of Banana dat last. Kanban system peeps should start simple-simple and grow dere Kanban system as dey learn._
 
@@ -241,7 +241,7 @@ _Da peeps thanked here no must agree with what is writted in dis doccy, and dat 
 - _Kanban Guide July 2020 or December 2020 version luky-overs: Jean-Paul Bayley, Jose Casal, Colleen Johnson, Todd Miller, Eric Naiburg, Steve Porter, Ryan Ripley, Dave West, Julia Wester, Yuval Yeret, and Deborah Zanke_
 - _Kanban Guide May 2025 version luky-overs:_ Magdalena Firlit, Tom Gilb, Colleen Johnson, Christian Neverdal, Prateek Singh, Steve Tendon, and Julia Wester
 - _Open Guide to Kanban luky-overs: Jim Benson, Andy Carmichael, Jose Casal, Magdalena Firlit, Michael Forni, Martin Hinshelwood, Christian Neverdal, Nader Talai, Steve Tendon, and Nigel Thurlow_
-- _Peeps who bonked da thinking: Russell L. Ackoff, Jim Benson, Andy Carmichael, Emily Coleman, John Cutler, W. Edwards Deming, Dominica DeGrandis, Tom Gilb, Joseph M. Juran, Siegfried Kaltenecker, Henrik Kniberg, Klaus Leopold, John Little, Troy Magennis, Taiichi Ohno, Donald G. Reinersten, Sam L. Savage, Walter Shewhart, Nader Talai, Steve Tendon, Nigel Thurlow, and Donald J. Wheeler._
+- _Peeps who shaped da thinking: Russell L. Ackoff, Jim Benson, Andy Carmichael, Emily Coleman, John Cutler, W. Edwards Deming, Dominica DeGrandis, Tom Gilb, Joseph M. Juran, Siegfried Kaltenecker, Henrik Kniberg, Klaus Leopold, John Little, Troy Magennis, Taiichi Ohno, Donald G. Reinersten, Sam L. Savage, Walter Shewhart, Nader Talai, Steve Tendon, Nigel Thurlow, and Donald J. Wheeler._
 
 ## Extra-Bits Bag (Appendix)
 
@@ -270,7 +270,7 @@ _Here is some optional no-Kanban tricks dat some but no all tribes hold up:_
 - **Real Options** (23)**:** Waity on promises until yu got enough info, treating decisions as valuable, going-off-soon options, to keep yu bendy and boss da Uh-oh.
 - **Uh-oh (Risk):** Do da uh-oh-iest Bit first. Uh-oh can include da chance dat da Banana can no be picked at all.
 - **Shortest Job First** (24-25)**:** Pick da Worky Bit with da teeniest felt effort, putting rightsized Worky Bits before other Worky Bits. Dis can make feedback loops shorter and outcomes quicker. But it can also make yu 'start' late on a bigger, uh-oh-ier Worky Bit.
-- **Slack** (19)**:** Slack is leaving some room-to-work unused so yu can cope with demand surges, no-planned work, or surprises popping up. In a Kanban for Brainy Worky Stuff place, it is an on-purpose set-aside or policy of spare room or time inside da Definitiony of Worky-Flow, to soak up wibbly-wobbly, handle surprise bonks, or let da fix-fix happen without squishing da Kanban system's Throughputty. Example: Kanban system peeps might keep a Slack by holding dere 'Started but Not Finished Work' (SNFW) or Work In Progresso/Process (WIP) to 80% of dere room-to-work, leaving time for urgent asks or tidying up processes without making da planned work late. Slack is a big idea in Lean.
+- **Slack** (19)**:** Slack is leaving some room-to-work unused so yu can cope with demand surges, no-planned work, or surprises popping up. In a Kanban for Brainy Worky Stuff place, it is an on-purpose set-aside or policy of spare room or time inside da Definitiony of Worky-Flow, to soak up wibbly-wobbly, handle surprise knocks, or let da fix-fix happen without squishing da Kanban system's Throughputty. Example: Kanban system peeps might keep a Slack by holding dere 'Started but Not Finished Work' (SNFW) or Work In Progresso/Process (WIP) to 80% of dere room-to-work, leaving time for urgent asks or tidying up processes without making da planned work late. Slack is a big idea in Lean.
 - **Banana divided by Effort:** Guessed Banana (usually a clever guessy) divided by Guessed Effort (usually a clever guessy). Real Effort and real Banana tend to be all over da place. Kanban system peeps should steppy careful before thinking about dis way. Optional: thinky about Uh-oh too.
 
 ### Termy-Term Rules in da Context of Brainy Worky Stuff
@@ -280,7 +280,7 @@ _Here is some optional no-Kanban tricks dat some but no all tribes hold up:_
 - **Out-loud policy:** An out-loud policy in a Kanban system is a clearly-said, can-see rule or guidey dat make da assumptions about da worky-flow — like when Worky Bits 'start' or move — see-through for Kanban system peeps. Dese policies should be Looky'd on da Kanban boardy and be easy to get at, so all Kanban system peeps understand and follow da same process. By making policies out-loud, Kanban system peeps squish da muddle, line up dere doing, and hold up da good Zoom-Zoom of Banana.
 - **'Finished' (or 'Completed'):** When da Elapsed Time from 'Started' to 'Finished' clocky stop for a 'started' and 'finished' pair in a Definitiony of Worky-Flow.
 - **Zoom-Zoom (Flow):** Da (best-case smooth) moving and giving of Worky Bits through da Definitiony of Worky-Flow. A balanced Kanban system keep da Throughputty going. In a perfect world, Work dat went into da system (Brainy Worky Stuff) would zoom like a river, never stopping, finding da easiest path until it reach da customer. No to be muddled with da Definitiony of Worky-Flow (DoW). In Kanban, Zoom-Zoom \> keeping-everybody-busy.
-- **_kanban:_** _A kanban​ (signboard in Japanese) is a Looky cue dat poke yu to pick, 'start,' or move a Worky Bit. Nothing should be made or moved without a kanban beep-beep._
+- **_kanban:_** _A kanban​ (signboard in Japanese) is a Looky cue dat nudge yu to pick, 'start,' or move a Worky Bit. Nothing should be made or moved without a kanban beep-beep._
 - **Kanban or Kanban system**: Da whole bundle of ideas in dis booky. _Kanban grow from da idea of a beep-beep system (a way to call for Work or stuff-on-da-shelf in a making-stuff system)._  
   _When dis booky say Kanban, assume a Kanban system._
 - **Kanban Boardy:** A Looky version of one or more Definitionies of Worky-Flow.
@@ -294,7 +294,7 @@ _Here is some optional no-Kanban tricks dat some but no all tribes hold up:_
 - **Queue:** A queue in Kanban is a waity area for Worky Bits, often with no strict limits, but it can act as a Buffer if Work In Progresso/Process (WIP) limits (16) or 'Started but Not Finished Work' (SNFW) limits is dere.
 - **Uh-oh (Risk):** Da chance dat a bad thingy could happen.
 - **Steady system:** Put simple-simple, a system dat can keep meeting da demand put on it. Dere is more exact descriptions (7,8,20). Brainy Worky Stuff tend to make a wider range of Worky Bit sizes dan factory work. Uneven sizes no must lead to wobblier elapsed times (because waity time is often da biggest thing, etc.) or Throughputty, but dey can (because of outside dependencies, etc.). Dis booky reckon dat ways built for factories no must be useless for Brainy Worky Stuff.
-- **Stakey-holder**: A thingy, one peep, or a gang o' peeps who is boss of, nosey about, or bonked by what go into da Kanban system, what happen inside, and what come out. Includy but no only customer, decidey-peep, or user.
+- **Stakey-holder**: A thingy, one peep, or a gang o' peeps who is boss of, nosey about, or changed by what go into da Kanban system, what happen inside, and what come out. Includy but no only customer, decidey-peep, or user.
 - **'Started':** When da elapsed time clockies 'start' for a 'started' and 'finished' pair in a Definitiony of Worky-Flow.
 - **'started' and 'finished' pair:** Each of da one-or-many 'started' points on a Definitiony of Worky-Flow should got a matching 'finished' point on da same Definitiony of Worky-Flow.
 - **Takt:** Da word Takt (English 'tact') come from da German word meaning rhythm, beaty, or cycle. Takt is about keeping time in music. Now-now, Takt is mostly used in factory places. Takt is a ground-floor measure-bit in da Toyota Product System and Lean Thinking, used to work out da room-to-work needed to meet demand in a steady system. Throughputty, unlike Takt — which set da hoped-for perfect beaty from da demand — measure da real output per chunk o' time. Takt also help get a balanced system dat meet demand steady, by letting Kanban system peeps work out da room-to-work needed at each stage of a process. Working out Takt is hard-hard in Brainy Worky Stuff, because yu got to understand demand in very wibbly-wobbly places. No always great for Brainy Worky Stuff.

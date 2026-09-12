@@ -56,7 +56,7 @@ Kanban look hard at **zoom-zoom** — da maybe-banana moving through a system. I
 - **No wastey**: Use da monies and minion-power da best way.
 - **No surprisey**: Can guessy da banana-giving close enough, even with da wobbly unknowns.
 
-Kanban poke da fix-fix along by making peeps ask betta questions earlier-earlier. It fit almost any worky-flow and almost any job-kind.
+Kanban push da fix-fix along by making peeps ask betta questions earlier-earlier. It fit almost any worky-flow and almost any job-kind.
 
 ## Kanban Brainy-Think
 
@@ -80,7 +80,7 @@ Da shared understandy of zoom-zoom is called da **Definitiony of Worky-Flow (DoW
 - Da states from started to finished (WIP)
 - How da WIP get bossed
 - Out-loud zoom-zoom policies
-- Promisa of Tim (SLE)
+- Time Expecty (SLE)
 
 Da **Kanban boardy** is da looky-version of da DoW. Dere is no bossy rules for how it look — see-through is da whole point.
 
@@ -101,7 +101,7 @@ WIP must-must be bossed out-loud, often with **WIP Limits** (numbers or tokens).
 
 Any exceptions must-must be writted out-loud in da DoW.
 
-#### Promisa of Tim (SLE)
+#### Time Expecty (SLE)
 
 SLE = chunk o' time + how-sure number (like, "85% of worky bits finish in 8 days").  
 Use oldy **cycly time** to work it out, and looky-show it on da boardy. Use a guessy if yu got no data yet.
