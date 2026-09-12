@@ -88,7 +88,7 @@
   translation: "Oopsie! No guidey here!"
 
 - id: reportTranslationError
-  translation: "Uh oh! Banana word broken!"
+  translation: "Banana word wonky? Tell us!"
 
 # Navigation translations
 - id: nav_read_online

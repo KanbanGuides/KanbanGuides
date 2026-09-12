@@ -47,7 +47,7 @@ Dis booky got termy-term rules for some words. Dey no wanna push out nobody else
 
 **Kanban or Kanban system**: All da ideas in dis booky, glued togethery — specially for brainy worky stuff.
 
-**Stakey-holder**: A thingy, one peep, or a gang o' peeps who is boss of, nosey about, or bonked by what go into da Kanban system, what happen inside, and what come out.
+**Stakey-holder**: A thingy, one peep, or a gang o' peeps who is boss of, nosey about, or changed by what go into da Kanban system, what happen inside, and what come out.
 
 **Banana (value)**: Banana you maybe get, or banana you already got, for a stakey-holder. Like: make da customer happy, make da end-user happy, make da company happy, make da big blue planet happy.
 
@@ -110,7 +110,7 @@ Kanban system peeps also often need more dan one DoW. Dose many DoWs could be fo
 
 Da looky-version of a DoW is a Kanban boardy. Making at least da small-small bits of a DoW see-through on a Kanban boardy is must-have for chewing da knowledge dat tell you how to run da worky-flow best, and for making da fix-fix happen.
 
-Dere is no special rules for how a looky should looky. Thinky about all da bits of a DoW (like da worky bits, da policies) plus any other local thingies dat might bonk how da banana zoom. Kanban system peeps is limited only by dere own silly imagination for how dey make da zoom-zoom see-through.
+Dere is no special rules for how a looky should looky. Thinky about all da bits of a DoW (like da worky bits, da policies) plus any other local thingies dat might sway how da banana zoom. Kanban system peeps is limited only by dere own silly imagination for how dey make da zoom-zoom see-through.
 
 ### Manage Da Work: Bossing Da Worky Bits, All Da Time
 

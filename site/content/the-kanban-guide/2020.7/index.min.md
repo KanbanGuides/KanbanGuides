@@ -92,7 +92,7 @@ Kanban holdy-hand with other giving-ways and make dem stronger.
 - Da worky-flow states (work in progress, or WIP)
 - How da WIP get bossed
 - Policies for how bits move through da worky-flow
-- **Promisa of Tim (SLE)** for how long from start to finish
+- **Time Expecty (SLE)** for how long from start to finish
 
 **Kanban Boardy**: A looky-version of da DoW.  
 Looky-making help chew da knowledge and push da fix-fix.
@@ -115,7 +115,7 @@ Dis can be loosey-goosey or regular. Daily meetings is up to yu.
 - Dis make a **pully system**: new work only get pulled when dere is room
 - Going over da WIP should be rare-rare and writted out-loud in da DoW
 
-#### Promisa of Tim (SLE)
+#### Time Expecty (SLE)
 
 - Guessy of how long a bit take to finish (like, "85% within 8 days")
 - Built from oldy **cycly time**, or a best guessy at da start
