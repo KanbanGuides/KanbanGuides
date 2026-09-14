@@ -95,6 +95,22 @@ Attribution is requested.
 
 See [LICENSE](./LICENSE) for complete terms.
 
+## Build and update this site
+
+Use PowerShell 7.4+, Hugo Extended, Go and GitHub CLI from the repository root:
+
+```powershell
+./build.ps1 -Target preview
+./build.ps1 -Target production
+./build.ps1 -Stage Serve
+./build.ps1 Update -ring preview -WhatIf
+./build.ps1 Update -ring preview
+```
+
+The installed release is recorded in `open-guide-platform.installation.json`; updates belong on a review branch. The shared pipeline deploys PR previews and validates production output without deploying production during adoption. Windows requires symbolic-link support and `git config --global core.symlinks true` before cloning.
+
+**Adoption is in progress:** Preview.2 exposed upstream defects. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md) before interpreting failed installed-release checks or accepting the preview. Shared skills are in `.agents/skills`; existing PDFs are preserved during migration.
+
 ## Getting Started
 
 1. **[Read the guide](https://kanbanguides.org)** - Production site

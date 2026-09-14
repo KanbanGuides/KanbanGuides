@@ -121,19 +121,6 @@
   translation: "Overview"
 
 # Guide page PDF download translations
-- id: guide_pdf_download_button
-  translation: "دانلود PDF"
-
-- id: guide_pdf_not_available
-  translation: "PDF در دسترس نیست"
-
-- id: guide_pdf_intro_text
-  translation: "می‌توانید این راهنما را به صورت PDF برای مطالعه‌ی آفلاین دانلود کنید."
-
-- id: guide_pdf_intro_link
-  translation: "دانلود PDF"
-
-# Preview Translations functionality
 - id: download_preview_translations
   translation: "پیش‌نمایش ترجمه‌ها"
 

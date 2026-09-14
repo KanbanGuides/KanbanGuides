@@ -122,19 +122,6 @@
   translation: "Big Piccy"
 
 # PDF download translations
-- id: guide_pdf_download_button
-  translation: "Get da PDF"
-
-- id: guide_pdf_not_available
-  translation: "No PDFy now..."
-
-- id: guide_pdf_intro_text
-  translation: "Also have PDFy! Put in pocket."
-
-- id: guide_pdf_intro_link
-  translation: "Downloady PDF"
-
-# Preview Translations functionality
 - id: download_preview_translations
   translation: "Banana Peeky-Talk"
 

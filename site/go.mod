@@ -2,4 +2,4 @@ module github.com/KanbanGuides/KanbanGuides/site
 
 go 1.24.5
 
-require github.com/nkdAgility/HugoGuides/module v0.8.4 // indirect
+require github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides v0.5.3-Preview.2

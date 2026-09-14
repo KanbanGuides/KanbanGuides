@@ -121,19 +121,6 @@
   translation: "Resumen"
 
 # Guide page PDF download translations
-- id: guide_pdf_download_button
-  translation: "Descargar PDF"
-
-- id: guide_pdf_not_available
-  translation: "PDF no disponible"
-
-- id: guide_pdf_intro_text
-  translation: "También puedes descargar esta guía como PDF para lectura sin conexión."
-
-- id: guide_pdf_intro_link
-  translation: "Descargar PDF"
-
-# Preview Translations functionality
 - id: download_preview_translations
   translation: "Vista Previa de Traducciones"
 

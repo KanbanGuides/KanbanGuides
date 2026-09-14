@@ -159,23 +159,6 @@
   translation: "概要"
 
 # Guide page PDF download translations
-- id: guide_pdf_download_button
-  # translation: "Download PDF"
-  translation: "PDFをダウンロード"
-
-- id: guide_pdf_not_available
-  # translation: "PDF not available"
-  translation: "PDFは利用できません"
-
-- id: guide_pdf_intro_text
-  # translation: "You can also download this guide as a PDF for offline reading."
-  translation: "このガイドは、オフラインで読むためにPDFとしてダウンロードすることもできます。"
-
-- id: guide_pdf_intro_link
-  # translation: "Download PDF"
-  translation: "PDFをダウンロード"
-
-# Preview Translations functionality
 - id: download_preview_translations
   # translation: "Preview Translations"
   translation: "翻訳版のプレビュー"
