@@ -10,14 +10,14 @@ param(
     [string]$OutputPath,[string]$BaseUrl,[string]$DeploymentUrl,[string]$DeploymentEnvironment
 )
 $ErrorActionPreference='Stop'
-$lock=Get-Content "$PSScriptRoot/open-guide-platform.installation.json" -Raw|ConvertFrom-Json
+$lock=Get-Content "$PSScriptRoot/.OpenGuidePlatform/installation.json" -Raw|ConvertFrom-Json
 if($Stage -eq 'Update'){
-    $platform=& "$PSScriptRoot/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $PSScriptRoot
+    $platform=& "$PSScriptRoot/.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $PSScriptRoot
     Import-Module "$platform/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/OpenGuidePlatform.PowerShell.GuideSiteAdoption.psm1" -Force
     Update-GuideSitePlatform -WorkspaceRoot $PSScriptRoot -PlatformSource $PlatformSource -PlatformPath $PlatformPath -PlatformRelease $PlatformRelease -Ring $Ring -WhatIf:$WhatIfPreference
     return
 }
-$platform=& "$PSScriptRoot/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $PSScriptRoot -PlatformSource $PlatformSource -PlatformPath $PlatformPath -PlatformRelease $PlatformRelease
+$platform=& "$PSScriptRoot/.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1" -WorkspaceRoot $PSScriptRoot -PlatformSource $PlatformSource -PlatformPath $PlatformPath -PlatformRelease $PlatformRelease
 Import-Module "$platform/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
 $arguments=@{}+$PSBoundParameters
 foreach($name in @('PlatformSource','PlatformPath','PlatformRelease','Ring')){$arguments.Remove($name)}

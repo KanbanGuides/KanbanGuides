@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "kind": "preview-installation",
   "releaseTag": "v0.5.3-Preview.2",
-  "policyPath": "guide-site.policy.json",
+  "policyPath": ".OpenGuidePlatform/guide-site.policy.json",
   "release": {
     "schemaVersion": 2,
     "product": "OpenGuidePlatform",

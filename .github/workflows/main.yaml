@@ -13,30 +13,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  preview:
-    name: Preview
+  guide-site:
+    name: Guide site
     uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v0.5.3-Preview.2
     with:
       source-ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      site-name: KanbanGuides
-      policy-path: guide-site.policy.json
-      target: preview
-      platform-release: v0.5.3-Preview.2
-      platform-commit: 40d3497391f3232ce5e66eb39dc1609cb60ef18c
-      site-url: ${{ github.event_name == 'pull_request' && format('https://red-pond-0d8225910-{0}.centralus.2.azurestaticapps.net/', github.event.pull_request.number) || 'https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/' }}
-      deployment-environment: ${{ github.event_name == 'pull_request' && format('{0}', github.event.pull_request.number) || 'preview' }}
+      policy-path: .OpenGuidePlatform/guide-site.policy.json
+      platform-ring: preview
       deploy: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     secrets:
       static-web-app-token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_POND_0D8225910 }}
-  production-validation:
-    name: Production validation
-    uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v0.5.3-Preview.2
-    with:
-      source-ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      site-name: KanbanGuides
-      policy-path: guide-site.policy.json
-      target: production
-      platform-release: v0.5.3-Preview.2
-      platform-commit: 40d3497391f3232ce5e66eb39dc1609cb60ef18c
-      site-url: https://kanbanguides.org/
-      deploy: false

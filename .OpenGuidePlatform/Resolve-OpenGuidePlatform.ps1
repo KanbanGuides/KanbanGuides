@@ -126,7 +126,7 @@ function Invoke-GitHub([string[]]$Arguments) {
 
 $previous=$null
 if($Restore){
-    $lockPath=Resolve-InstallPath 'open-guide-platform.installation.json'
+    $lockPath=Resolve-InstallPath '.OpenGuidePlatform/installation.json'
     if(-not (Test-Path $lockPath)){throw 'No installation found. Run the remote bootstrap to install the platform, or select an explicit platform source.'}
     $previous=Get-Content $lockPath -Raw|ConvertFrom-Json -AsHashtable
 }
