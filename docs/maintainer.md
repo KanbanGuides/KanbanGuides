@@ -23,7 +23,7 @@ pwsh --version
 
 ```powershell
 # From project root
-hugo serve --source site --config hugo.yaml,hugo.local.yaml
+./build.ps1 -Stage Serve
 ```
 
 Navigate to `http://localhost:1313`. The preview environment is at [red-pond-0d8225910-preview.centralus.2.azurestaticapps.net](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/).
@@ -167,7 +167,7 @@ Deployments are triggered automatically by GitHub Actions (Azure Static Web Apps
 ### Production build command
 
 ```powershell
-hugo --source site --config hugo.yaml,hugo.production.yaml --minify
+./build.ps1 -Target production
 ```
 
 ---
@@ -263,12 +263,11 @@ $bytes = [System.Text.Encoding]::UTF8.GetBytes($email.ToLower().Trim())
 
 Requires **Pandoc** and a **LaTeX distribution** (MiKTeX/TeX Live/MacTeX) in addition to PowerShell 7+.
 
-```powershell
-# From project root
-./scripts/Create-GuidePDFs.ps1
-```
+Use the distributed [PDF skill](../.agents/skills/guide.genpdfs/SKILL.md) and its version-locked Core module. The former local PDF, contributor, Gravatar and edition scripts have been retired; their operations are supplied by the corresponding shared skills.
 
-The script generates PDFs for all available languages using YAML front matter for configuration and `scripts/cover-page.tex` as the cover page template. Output includes working hyperlinks suitable for electronic distribution.
+Existing PDFs are declared `supplied` during adoption and must retain their bytes. Before generating a new or reviewed replacement PDF, explicitly declare that resource as `generated` in policy and inspect `Get-GuidePdfPlan`. Preserve the existing filenames, XeLaTeX engine, language metadata passed to Pandoc, and the fonts declared in each document. The former recipe cleared PDF keyword metadata and used non-interactive XeLaTeX; inspect the shared plan for equivalent arguments. Font substitutions require review; do not silently install substitutes. The existing optional cover template remains at `.agents/skills/guide.genpdfs/cover-page.tex`.
+
+PDF generation and visual acceptance of a replacement remain separate from build/adoption acceptance. No PDF regeneration is part of this migration.
 
 ---
 
@@ -286,7 +285,7 @@ choco upgrade hugo-extended   # Windows upgrade
 
 ```powershell
 # Run from project root (not from site/)
-hugo serve --source site --config hugo.yaml,hugo.local.yaml
+./build.ps1 -Stage Serve
 
 # Check for port conflicts
 netstat -an | Select-String ":1313"

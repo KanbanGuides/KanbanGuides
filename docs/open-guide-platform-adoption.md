@@ -10,7 +10,7 @@ Status: Preview.2 is installed on this draft adoption branch. Installed-release 
 - [x] Prepare guide-site.policy.json for the bespoke wrapper and both guides, allowing the inventory to grow without a fixed guide count.
 - [x] Install the selected preview release and reconcile managed-file conflicts in this PR.
 - [x] Adopt thin build.ps1 and shared workflow callers, including PR cleanup, while preserving consumer-owned integrations.
-- [ ] Adopt distributed skills and agent instructions; distinguish repository guidance from independently enforced controls.
+- [x] Adopt distributed skills and agent instructions; distinguish repository guidance from independently enforced controls.
 - [ ] Build and validate preview and production locally using build.ps1.
 - [ ] Verify the exact PR preview: wrapper, both guides, languages, navigation, aliases and PDFs, including Persian and Japanese. Investigate the previously reported Spanish PDF path.
 - [ ] Prove Minionese is excluded from production pages, indexes and downloads.
@@ -39,12 +39,12 @@ Hugo internal refactoring follows verified adoption across all three guide sites
 - Attribution URL: restore `/history/kanban-guide-2025/` as an alias to the May 2025 edition, without rewriting the attribution text.
 - Spanish PDFs: preserve their existing duplicated public path segments and source bytes. Correcting those URLs is deferred to an explicit compatibility decision; artifact validation verifies their current locations.
 - Preview keeps the existing `es-419` exclusion; production also keeps `min`, `pl`, `de` and `nl` exclusions. Legacy download aliases are frozen to existing declarations only.
-- PR hosting uses the shared cleanup contract's numeric environment (`110`), rather than the old `canary-110` name. The old environment may need retirement after adoption; no production deployment is enabled.
+- PR hosting uses the shared cleanup contract's numeric environment (the PR number), rather than the old `canary-<number>` name. The old environment may need retirement after adoption; no production deployment is enabled.
 - The site-customized workflow caller remains reviewable; a future platform update must reconcile its managed-file conflict rather than overwrite hosting choices.
 
 ## Remaining acceptance
 
 - Merge/release platform PR #38, then update this installation and repeat both builds using the installed release.
-- Reconcile the four retained legacy publishing scripts with the distributed operations and preserve the approved PDF recipe before removing them. No PDFs were regenerated during adoption.
+- Four legacy publishing scripts are retired in favor of distributed operations. The existing cover template and PDF recipe requirements are retained in maintainer documentation. No PDFs were regenerated; future generated replacements require explicit policy and visual acceptance.
 - Complete managed instruction update from the corrected release; Preview.2 still mentions the removed local bootstrap.
 - Verify the exact deployed PR, full styling, routes and downloads before requesting maintainer acceptance. No adoption merge or production promotion has occurred.
