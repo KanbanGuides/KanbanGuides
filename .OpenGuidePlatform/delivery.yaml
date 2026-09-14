@@ -1,0 +1,10 @@
+canary:
+  url: https://red-pond-0d8225910-{pr}.centralus.2.azurestaticapps.net/
+  environment: '{pr}'
+preview:
+  url: https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/
+  environment: preview
+production:
+  url: https://kanbanguides.org/
+  environment: ""
+

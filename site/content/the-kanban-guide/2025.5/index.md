@@ -19,6 +19,7 @@ guide_whatis: |
 
    This guide has conventions for some terms. They are not meant to replace any other existing definitions but to clarify how they are intended to be applied here.
 aliases:
+  - /history/kanban-guide-2025/
   - /the-kanban-guide/latest
 ---
 

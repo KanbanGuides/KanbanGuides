@@ -41,7 +41,7 @@ Making Kanban knowledge accessible globally is essential.
 ### 📖 Read Online
 
 - **Production**: [kanbanguides.org](https://kanbanguides.org)
-- **Preview**: [red-pond-0d8225910-preview.centralus.2.azurestaticapps.net](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/)
+- **Preview**: use the preview URL in the [delivery configuration](.OpenGuidePlatform/delivery.yaml)
 
 ### 📄 Download Options
 
@@ -95,10 +95,26 @@ Attribution is requested.
 
 See [LICENSE](./LICENSE) for complete terms.
 
+## Build and update this site
+
+Use PowerShell 7.4+, Hugo Extended, Go and GitHub CLI from the repository root:
+
+```powershell
+./build.ps1 -Target preview
+./build.ps1 -Target production
+./build.ps1 -Stage Serve -Target local
+./build.ps1 Update -ring preview -WhatIf
+./build.ps1 Update -ring preview
+```
+
+The installed release is recorded in `.OpenGuidePlatform/installation.json`; updates belong on a review branch. Prepare selects one site ring using GitVersion; CI builds, validates and deploys that ring. PRs select canary, and the current main-branch configuration selects preview. The separate production command above validates production locally without deploying it. Windows requires symbolic-link support and `git config --global core.symlinks true` before cloning.
+
+**Adoption is in progress:** Preview.6 is installed. Local canary and production validation and hosted PR checks have passed. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md) for the recorded comparison and remaining maintainer acceptance. Shared skills are in `.agents/skills`; existing PDFs are preserved during migration.
+
 ## Getting Started
 
 1. **[Read the guide](https://kanbanguides.org)** - Production site
-2. **[Test latest changes](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/)** - Preview site
+2. **Test latest changes** - Use the preview destination in [delivery.yaml](.OpenGuidePlatform/delivery.yaml), or the deployment link posted on the PR.
 3. **[Engage with the community](https://github.com/KanbanGuides/KanbanGuides/discussions)**
 4. **[Support translations](https://github.com/KanbanGuides/KanbanGuides/discussions)**
 5. **[Review contribution guidelines](./docs/contributing.md)**

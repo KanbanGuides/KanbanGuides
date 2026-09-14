@@ -120,20 +120,7 @@
 - id: nav_overview
   translation: "Aperçu"
 
-# Guide page PDF download translations
-- id: guide_pdf_download_button
-  translation: "Télécharger le PDF"
-
-- id: guide_pdf_not_available
-  translation: "PDF non disponible"
-
-- id: guide_pdf_intro_text
-  translation: "Vous pouvez également télécharger ce guide en PDF pour une lecture hors ligne."
-
-- id: guide_pdf_intro_link
-  translation: "Télécharger le PDF"
-
-# Preview Translations functionality
+# Preview translation availability
 - id: download_preview_translations
   translation: "Aperçu des traductions"
 

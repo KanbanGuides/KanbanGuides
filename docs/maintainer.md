@@ -10,7 +10,7 @@ Reference for maintainers and developers with repository access. For contributio
 
 - **Hugo Extended** v0.146.0+ — `choco install hugo-extended` (Windows) / `brew install hugo` (macOS)
 - **Git**
-- **PowerShell 7+** — required for PDF generation scripts
+- **PowerShell 7.4+** — required for PDF generation scripts
 
 ```powershell
 # Verify
@@ -23,10 +23,10 @@ pwsh --version
 
 ```powershell
 # From project root
-hugo serve --source site --config hugo.yaml,hugo.local.yaml
+./build.ps1 -Stage Serve -Target local
 ```
 
-Navigate to `http://localhost:1313`. The preview environment is at [red-pond-0d8225910-preview.centralus.2.azurestaticapps.net](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/).
+Navigate to `http://localhost:1313`. The preview destination is configured in [delivery.yaml](../.OpenGuidePlatform/delivery.yaml).
 
 ### Module dependencies
 
@@ -42,7 +42,7 @@ Hugo also downloads the module automatically on first serve/build.
 
 ## Architecture
 
-The site is a Hugo static site deployed to Azure Static Web Apps. All templates, partials, shortcodes, and render hooks are provided by the **HugoGuides Hugo module** (`github.com/nkdAgility/HugoGuides/module`) declared in `site/go.mod`. There is no local `layouts/` directory.
+The site is a Hugo static site deployed to Azure Static Web Apps. All templates, partials, shortcodes, and render hooks are provided by the **OpenGuidePlatform Hugo Guides module** (`github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides`) declared in `site/go.mod`. There is no local `layouts/` directory.
 
 ```
 KanbanGuides/
@@ -123,7 +123,7 @@ enableMissingTranslationPlaceholders: true
 
 module:
   imports:
-    - path: github.com/nkdAgility/HugoGuides/module
+    - path: github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides
 
 markup:
   goldmark:
@@ -156,18 +156,20 @@ Each environment has its own config handling:
 
 ### Environments
 
-| Environment | URL | Branch | Hugo config |
-|---|---|---|---|
-| Production | [kanbanguides.org](https://kanbanguides.org) | `main` | `hugo.production.yaml` |
-| Preview | [red-pond-0d8225910-preview...](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/) | `preview` | `hugo.preview.yaml` |
-| Canary | `red-pond-0d8225910-{PR#}.centralus.6...` | Per PR | `hugo.canary.yaml` |
+Deployment URLs and Azure environment names belong to this site and are defined in [delivery.yaml](../.OpenGuidePlatform/delivery.yaml). Shared OpenGuidePlatform tooling consumes that configuration; it does not own KanbanGuides hostnames or regions.
 
-Deployments are triggered automatically by GitHub Actions (Azure Static Web Apps CI/CD). Each PR gets a unique preview URL.
+| Site ring | Selection | Hugo config |
+|---|---|---|
+| Production | GitVersion has no prerelease label | `hugo.production.yaml` |
+| Preview | GitVersion preview label; currently `main` | `hugo.preview.yaml` |
+| Canary | PR context or another prerelease label | `hugo.canary.yaml` |
+
+The workflow builds and validates one selected ring. PR deployment links are posted on the PR. The local production build below validates production output without deploying it.
 
 ### Production build command
 
 ```powershell
-hugo --source site --config hugo.yaml,hugo.production.yaml --minify
+./build.ps1 -Target production
 ```
 
 ---
@@ -202,7 +204,7 @@ On `main`, every commit generates a preview version: `v1.1.0-preview.166`. Relea
 
 ## Creating a Release
 
-1. Check the [preview site](https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/) header for the current preview version (e.g. `v1.1.0-preview.166`)
+1. Open the preview URL from the [delivery configuration](../.OpenGuidePlatform/delivery.yaml) and check its header for the current preview version (e.g. `v1.1.0-preview.166`)
 2. Determine the release version:
    - Same minor = `v1.1.0` (patch changes)
    - Increment minor = `v1.2.0` (new content or translations)
@@ -261,14 +263,13 @@ $bytes = [System.Text.Encoding]::UTF8.GetBytes($email.ToLower().Trim())
 
 ## PDF Generation
 
-Requires **Pandoc** and a **LaTeX distribution** (MiKTeX/TeX Live/MacTeX) in addition to PowerShell 7+.
+Requires **Pandoc** and a **LaTeX distribution** (MiKTeX/TeX Live/MacTeX) in addition to PowerShell 7.4+.
 
-```powershell
-# From project root
-./scripts/Create-GuidePDFs.ps1
-```
+Use the distributed [PDF skill](../.agents/skills/guide.genpdfs/SKILL.md) and its version-locked Core module. The former local PDF, contributor, Gravatar and edition scripts have been retired; their operations are supplied by the corresponding shared skills.
 
-The script generates PDFs for all available languages using YAML front matter for configuration and `scripts/cover-page.tex` as the cover page template. Output includes working hyperlinks suitable for electronic distribution.
+Existing PDFs are declared `supplied` during adoption and must retain their bytes. Before generating a new or reviewed replacement PDF, explicitly declare that resource as `generated` in policy and inspect `Get-GuidePdfPlan`. Preserve the existing filenames, XeLaTeX engine, language metadata passed to Pandoc, and the fonts declared in each document. The former recipe cleared PDF keyword metadata and used non-interactive XeLaTeX; inspect the shared plan for equivalent arguments. Font substitutions require review; do not silently install substitutes. The existing optional cover template remains at `.agents/skills/guide.genpdfs/cover-page.tex`.
+
+PDF generation and visual acceptance of a replacement remain separate from build/adoption acceptance. No PDF regeneration is part of this migration.
 
 ---
 
@@ -286,7 +287,7 @@ choco upgrade hugo-extended   # Windows upgrade
 
 ```powershell
 # Run from project root (not from site/)
-hugo serve --source site --config hugo.yaml,hugo.local.yaml
+./build.ps1 -Stage Serve -Target local
 
 # Check for port conflicts
 netstat -an | Select-String ":1313"
