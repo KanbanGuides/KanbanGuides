@@ -1,17 +1,17 @@
 # OpenGuidePlatform adoption
 
-Status: Preview.2 is installed on this draft adoption branch. Installed-release acceptance is blocked by platform defects fixed in [OpenGuidePlatform PR #38](https://github.com/nkdAgility/OpenGuidePlatform/pull/38). Both targets pass against that local candidate; a corrected release and exact PR-preview verification are still required.
+Status: Preview.5 is installed on the adoption branch. Installed-release canary and production builds pass. Exact deployed PR preview verification and maintainer acceptance remain outstanding.
 
 ## Execution checklist
 
 - [x] Create the adoption branch from current KanbanGuides main.
 - [x] Confirm the platform release, both package assets, manifest and matching native Hugo module tag are available and verified.
 - [x] Record the exact selected release and the existing site's dependency and publication baseline.
-- [x] Prepare guide-site.policy.json for the bespoke wrapper and both guides, allowing the inventory to grow without a fixed guide count.
+- [x] Infer wrapper, guide, edition, language and route requirements from Hugo sources; remove the maintained policy file.
 - [x] Install the selected preview release and reconcile managed-file conflicts in this PR.
 - [x] Adopt thin build.ps1 and shared workflow callers, including PR cleanup, while preserving consumer-owned integrations.
 - [x] Adopt distributed skills and agent instructions; distinguish repository guidance from independently enforced controls.
-- [ ] Build and validate preview and production locally using build.ps1.
+- [x] Build and validate the PR canary and production locally using the installed build.ps1.
 - [ ] Verify the exact PR preview: wrapper, both guides, languages, navigation, aliases and PDFs, including Persian and Japanese. Investigate the previously reported Spanish PDF path.
 - [ ] Prove Minionese is excluded from production pages, indexes and downloads.
 - [ ] Obtain maintainer acceptance of the preview before merging adoption.
@@ -24,11 +24,11 @@ Hugo internal refactoring follows verified adoption across all three guide sites
 
 ## Evidence
 
-- Installed release: `v0.5.3-Preview.2`, platform commit `40d3497391f3232ce5e66eb39dc1609cb60ef18c`; both package SHA-256 values match the published manifest and the native Hugo tag points to that commit.
+- Installed release: `v0.5.3-Preview.5`; the verified manifest and native Hugo module identity are recorded in `.OpenGuidePlatform/installation.json`.
 - Prior native dependency: `github.com/nkdAgility/HugoGuides/module v0.8.4`. Site baseline: `b59056a594d70b860595befd46b2f8c36a88d506`; pre-adoption preview/production outputs retained locally under `.processing/adoption/baseline-*`.
 - Candidate platform: `e5b7810`, PR #38. Preview passed with 306 files; production passed with 229 files. Six preview anchors cover both guides in Japanese, Persian and Minionese; four remain eligible in production. These are functional browser checks with external resources blocked, not CSS-complete visual approval.
 - Minionese enablement returns blocker `PERMANENT_LANGUAGE_ENABLED`; production contains no Minionese pages or PDFs. All existing source PDFs remain byte-identical.
-- Installed Preview.2 checks remain red until the upstream fixes are released. No candidate code is copied into its cache or release pin.
+- Installed Preview.5: canary Prepare/Build/Validate passed with 340 files; production passed with 229 files. Evidence is retained under `.processing/adoption-preview5-*`.
 
 ## Reconciled findings and decisions
 
@@ -44,7 +44,9 @@ Hugo internal refactoring follows verified adoption across all three guide sites
 
 ## Remaining acceptance
 
-- Merge/release platform PR #38, then update this installation and repeat both builds using the installed release.
+- Verify the hosted adoption run and its deployed PR preview using the released platform.
 - Four legacy publishing scripts are retired in favor of distributed operations. The existing cover template and PDF recipe requirements are retained in maintainer documentation. No PDFs were regenerated; future generated replacements require explicit policy and visual acceptance.
-- Complete managed instruction update from the corrected release; Preview.2 still mentions the removed local bootstrap.
+- Managed instructions, resolver and thin launcher are updated. Support configuration lives under `.OpenGuidePlatform`; no authored policy inventory remains.
 - Verify the exact deployed PR, full styling, routes and downloads before requesting maintainer acceptance. No adoption merge or production promotion has occurred.
+
+- Spanish Latin America latest link: retain the stable latest URL and declare its alias at the end of the May 2025 edition front matter; do not hard-code the edition in wrapper links.

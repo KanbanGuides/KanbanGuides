@@ -1,6 +1,7 @@
 #Requires -Version 7.4
 [CmdletBinding()]
 param(
+    [ValidateSet('preview','production')][string]$PlatformRing='production',
     [Parameter(Mandatory)][string]$WorkspaceRoot,
     [ValidateSet('Auto','Local','Preview','Production','Path')][string]$PlatformSource='Auto',
     [string]$PlatformPath,[string]$PlatformRelease,[string]$DefaultPlatformRoot,
@@ -21,17 +22,19 @@ function Restore-WorkflowPlatform {
 #Requires -Version 7.4
 [CmdletBinding(DefaultParameterSetName='Release')]
 param(
+    [ValidateSet('preview','production')][string]$PlatformRing='production',
     [Parameter(ParameterSetName='Workflow')][switch]$FromWorkflow,
     [Parameter(ParameterSetName='Release')][ValidatePattern('^(?:v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?)?$')][string]$ReleaseTag,
     [Parameter(Mandatory,ParameterSetName='Candidate')][uri]$PackageUrl,
     [Parameter(Mandatory,ParameterSetName='Candidate')][ValidatePattern('^[a-fA-F0-9]{64}$')][string]$PackageSha256,
     [Parameter(Mandatory,ParameterSetName='Candidate')][ValidatePattern('^[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$')][string]$ExpectedVersion,
-    [Parameter(Mandatory)][ValidatePattern('^[a-f0-9]{40}$')][string]$ExpectedCommit,
+    [ValidatePattern('^[a-f0-9]{40}$')][string]$ExpectedCommit,
     [Parameter(Mandatory)][string]$OutputPath
 )
 $ErrorActionPreference='Stop'
 if($FromWorkflow){
-    $restore=@{ExpectedCommit=$ExpectedCommit;OutputPath=$OutputPath}
+    $restore=@{OutputPath=$OutputPath;PlatformRing=$(if($env:PLATFORM_RING){$env:PLATFORM_RING}else{$PlatformRing})}
+    if($ExpectedCommit){$restore.ExpectedCommit=$ExpectedCommit}
     if($env:PLATFORM_PACKAGE_URL){
         if($env:PLATFORM_RELEASE){throw 'Select a candidate URL or release tag, not both.'}
         $restore.PackageUrl=$env:PLATFORM_PACKAGE_URL
@@ -67,13 +70,21 @@ if($PSCmdlet.ParameterSetName -eq 'Candidate'){
         $items=& gh api 'repos/nkdAgility/OpenGuidePlatform/releases?per_page=100' --paginate --slurp
         if($LASTEXITCODE -ne 0){throw 'Cannot discover the platform release.'}
         $pages=$items|ConvertFrom-Json
-        $matches=@($pages|ForEach-Object { $_ }|Where-Object { -not $_.draft -and $_.target_commitish -ceq $ExpectedCommit })
-        if($matches.Count -ne 1){throw 'Expected one published release for the platform commit; specify ReleaseTag when ambiguous. No source-build fallback is permitted.'}
+        $ring=$PlatformRing
+        if($ring -notin @('preview','production')){throw 'Platform ring must be preview or production.'}
+        $channel=if($ring -eq 'production'){'stable'}else{'preview'}
+        $matches=@($pages|ForEach-Object { foreach($item in $_){$item} }|Where-Object {
+            -not $_.draft -and ([bool]$_.prerelease -eq ($channel -eq 'preview')) -and
+            @($_.assets|Where-Object name -eq 'OpenGuidePlatform-GuideSite.zip').Count -eq 1 -and
+            (-not $ExpectedCommit -or $_.target_commitish -ceq $ExpectedCommit)
+        }|Sort-Object published_at -Descending)
+        if(-not $matches.Count){throw "No installable $channel platform release is available."}
         $ReleaseTag=$matches[0].tag_name
     }
     $raw=& gh release view $ReleaseTag --repo nkdAgility/OpenGuidePlatform --json tagName,targetCommitish,isDraft 2>$null
     if($LASTEXITCODE -ne 0){throw "Release $ReleaseTag is unavailable; no source-build fallback is permitted."}
     $release=$raw|ConvertFrom-Json
+    if(-not $ExpectedCommit){$ExpectedCommit=$release.targetCommitish}
     if($release.isDraft -or $release.tagName -cne $ReleaseTag -or $release.targetCommitish -cne $ExpectedCommit){throw 'Release source/tag does not match the pinned platform.'}
     & gh release download $ReleaseTag --repo nkdAgility/OpenGuidePlatform --pattern OpenGuidePlatform-GuideSite.zip --pattern release-manifest.json --dir $download
     if($LASTEXITCODE -ne 0){throw 'Release asset download failed.'}
@@ -81,6 +92,8 @@ if($PSCmdlet.ParameterSetName -eq 'Candidate'){
     $ExpectedVersion=$ReleaseTag.Substring(1)
 }
 $manifest=Get-Content "$assets/release-manifest.json" -Raw|ConvertFrom-Json
+if(-not $ExpectedCommit){$ExpectedCommit=$manifest.sourceCommit}
+if($ExpectedCommit -cnotmatch '^[a-f0-9]{40}$'){throw 'Release source identity is invalid.'}
 if($manifest.schemaVersion -ne 2 -or $manifest.packages.GuideSite.version -cne $manifest.version -or $manifest.product -cne 'OpenGuidePlatform' -or $manifest.version -cne $ExpectedVersion -or $manifest.sourceCommit -cne $ExpectedCommit -or $manifest.packages.GuideSite.archive -cne 'OpenGuidePlatform-GuideSite.zip'){throw 'Release manifest does not match the requested platform.'}
 if((Get-FileHash "$assets/OpenGuidePlatform-GuideSite.zip").Hash.ToLowerInvariant() -cne $manifest.packages.GuideSite.sha256){throw 'Release package digest mismatch.'}
 # Check archive paths before extracting or importing any candidate code.
@@ -96,6 +109,9 @@ Import-Module "$output/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGu
 Write-Host "Restored OpenGuidePlatform $ExpectedVersion ($($PSCmdlet.ParameterSetName)); SHA256 $($manifest.packages.GuideSite.sha256)."
 if($env:GITHUB_STEP_SUMMARY){[IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY,"## Platform restored`n`nSource: $($PSCmdlet.ParameterSetName)`n`nVersion: $ExpectedVersion`n`nCommit: $ExpectedCommit`n`nPackage SHA256: $($manifest.packages.GuideSite.sha256)`n")}
 
+if($env:GITHUB_OUTPUT){
+    [IO.File]::AppendAllText($env:GITHUB_OUTPUT,"source-commit=$ExpectedCommit`nrelease-tag=$ReleaseTag`n")
+}
 return $output
 }
 function Restore-GuideSiteRelease {
@@ -174,8 +190,9 @@ return $package
 
 }
 
-if($FromWorkflow -or $PackageUrl -or $ExpectedCommit){
-    $arguments=@{ExpectedCommit=$ExpectedCommit;OutputPath=$OutputPath}
+if($FromWorkflow -or $PackageUrl -or $ExpectedCommit -or $OutputPath){
+    $arguments=@{PlatformRing=$PlatformRing;OutputPath=$OutputPath}
+    if($ExpectedCommit){$arguments.ExpectedCommit=$ExpectedCommit}
     if($FromWorkflow){$arguments.FromWorkflow=$true}
     elseif($PackageUrl){$arguments.PackageUrl=$PackageUrl;$arguments.PackageSha256=$PackageSha256;$arguments.ExpectedVersion=$ExpectedVersion}
     else{$arguments.ReleaseTag=$PlatformRelease}

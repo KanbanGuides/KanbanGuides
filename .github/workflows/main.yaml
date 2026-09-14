@@ -15,10 +15,10 @@ concurrency:
 jobs:
   guide-site:
     name: Guide site
-    uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v0.5.3-Preview.2
+    uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v0.5.3-Preview.5
     with:
       source-ref: ${{ github.event.pull_request.head.sha || github.sha }}
-      policy-path: .OpenGuidePlatform/guide-site.policy.json
+      source-path: site
       platform-ring: preview
       deploy: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     secrets:
