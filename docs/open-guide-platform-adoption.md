@@ -1,6 +1,6 @@
 # OpenGuidePlatform adoption
 
-Status: Preview.6 is installed on the adoption branch. Installed-release canary and production builds pass. Exact deployed PR preview verification and maintainer acceptance remain outstanding.
+Status: Preview.6 is installed on the adoption branch. Installed-release canary and production builds pass. Hosted Preview.6 checks through Verify passed. The live comparison is recorded below; maintainer acceptance remains outstanding.
 
 ## Execution checklist
 
@@ -26,8 +26,8 @@ Hugo internal refactoring follows verified adoption across all three guide sites
 
 - Installed release: `v0.5.3-Preview.6`; the verified manifest and native Hugo module identity are recorded in `.OpenGuidePlatform/installation.json`.
 - Prior native dependency: `github.com/nkdAgility/HugoGuides/module v0.8.4`. Site baseline: `b59056a594d70b860595befd46b2f8c36a88d506`; pre-adoption preview/production outputs retained locally under `.processing/adoption/baseline-*`.
-- Candidate platform: `e5b7810`, PR #38. Preview passed with 306 files; production passed with 230 files. Six preview anchors cover both guides in Japanese, Persian and Minionese; four remain eligible in production. These are functional browser checks with external resources blocked, not CSS-complete visual approval.
-- Minionese enablement returns blocker `PERMANENT_LANGUAGE_ENABLED`; production contains no Minionese pages or PDFs. All existing source PDFs remain byte-identical.
+- Candidate platform: `e5b7810`, PR #38. Preview passed with 306 files; production passed with 229 files. Six preview anchors cover both guides in Japanese, Persian and Minionese; four remain eligible in production. These are functional browser checks with external resources blocked, not CSS-complete visual approval.
+- Minionese enablement returns blocker `PERMANENT_LANGUAGE_ENABLED`; the locally built production artifact contains no Minionese pages or PDFs. All existing source PDFs remain byte-identical.
 - Installed Preview.6: canary Prepare/Build/Validate passed with 341 files; production passed with 230 files. Evidence is retained under `.processing/adoption-preview6-*`.
 
 ## Reconciled findings and decisions
@@ -53,3 +53,9 @@ Hugo internal refactoring follows verified adoption across all three guide sites
 
 - Preview.6 alias enforcement found the missing canonical French latest alias; it was added after existing metadata while preserving the localized French alias.
 - Hosted Preview.5 passed every stage through Verify. A browser check with external CSS allowed returned HTTP 200 for the home page, both Japanese guides, both Persian guides, Minionese and the Spanish Latin America latest redirect. Persian rendered RTL with CSS. Screenshots and request evidence are under .processing/preview5-styled-review; this is not maintainer visual acceptance.
+
+## Current deployed comparison
+
+At commit c5d244b, all hosted stages through Verify passed. The live comparison covered 13 routes per site at desktop size with CSS enabled and 22 matching PDF downloads, all byte-identical. English, Japanese and Persian guide text matched apart from canary/version controls. Preview repairs the French and Spanish Latin America latest aliases. Homepage contributor names and additional canary language entries are visible differences. The existing Japanese title/button overlap is present on both sites. This sampled comparison is not exhaustive mobile or every-route acceptance.
+
+Live production still serves Minionese from v1.2.18: removal commit cb991c4 was deployed to preview as 1.2.19-preview.2, not production. Confirm removal after a separately authorized production release. Local comparison artifacts are under .processing/live-site-comparison.

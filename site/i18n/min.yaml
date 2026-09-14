@@ -121,7 +121,7 @@
 - id: nav_overview
   translation: "Big Piccy"
 
-# PDF download translations
+# Preview translation availability
 - id: download_preview_translations
   translation: "Banana Peeky-Talk"
 

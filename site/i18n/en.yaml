@@ -120,7 +120,7 @@
 - id: nav_overview
   translation: "Overview"
 
-# Guide page PDF download translations
+# Preview translation availability
 - id: download_preview_translations
   translation: "Preview Translations"
 

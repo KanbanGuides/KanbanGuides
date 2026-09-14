@@ -121,7 +121,7 @@
 - id: nav_overview
   translation: "Resumen"
 
-# Guide page PDF download translations
+# Preview translation availability
 - id: download_preview_translations
   translation: "Vista Previa de Traducciones"
 
