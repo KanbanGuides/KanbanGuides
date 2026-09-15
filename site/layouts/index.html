@@ -5,7 +5,8 @@
 <a class="kg-skip" href="#kg-content">{{ $copy.ui.skip }}</a>
 <div class="kg-header kg-shell">
   <a class="kg-brand" href="{{ .RelPermalink }}" aria-label="{{ $copy.ui.home }}">{{ partial "ux/mark.html" . }}<span>KANBAN GUIDES</span></a>
-  <nav aria-label="{{ $copy.ui.navigation }}" class="kg-nav">
+  <button type="button" class="kg-menu-toggle" aria-label="{{ $copy.ui.navigation }}" aria-controls="kg-navigation" aria-expanded="false" hidden><span class="kg-menu-open" aria-hidden="true">☰</span><span class="kg-menu-close" aria-hidden="true">×</span></button>
+  <nav id="kg-navigation" aria-label="{{ $copy.ui.navigation }}" class="kg-nav">
     <a href="#guides">{{ $copy.ui.guides }}</a><a href="#compare">{{ $copy.ui.compare }}</a><button type="button" data-dialog="kg-about">{{ $copy.ui.about }}</button>
     <button type="button" class="kg-search-button" data-dialog="kg-search" aria-label="{{ $copy.ui.search }}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg></button>
     <details class="kg-languages"><summary>{{ $copy.ui.language_name }}</summary><ul>{{ range .AllTranslations }}<li><a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" {{ if eq .Language.Lang $.Language.Lang }}aria-current="page"{{ end }}>{{ (partial "ux/copy.html" .).ui.language_name }}</a></li>{{ end }}</ul></details>

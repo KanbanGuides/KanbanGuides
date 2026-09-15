@@ -582,16 +582,20 @@ body:has(.kg-home)>header>.container {
   }
   .kg-header {
     padding:17px 0 9px;
-    display:block
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:0 12px
   }
   .kg-brand {
-    font-size:20px
+    gap:10px;
+    font-size:16px
   }
   .kg-mark i {
     width:15px;
     height:32px
   }
   .kg-nav {
+    grid-column:1/-1;
     flex-direction:column;
     align-items:stretch;
     gap:4px;
@@ -723,4 +727,27 @@ body:has(.kg-home)>header>.container {
 }
 .kg-home:dir(rtl) :is(h1,h2,h3,.kg-eyebrow) {
   letter-spacing:normal;
+}
+
+/* The menu remains available without JavaScript; enhancement controls visibility. */
+.kg-menu-toggle[hidden],.kg-nav[hidden] {
+  display:none!important;
+}
+.kg-menu-toggle {
+  width:44px;
+  height:44px;
+  padding:0;
+  border:1px solid #d3dbe5;
+  border-radius:5px;
+  background:#fff;
+  color:inherit;
+  font:inherit;
+  font-size:26px;
+  cursor:pointer;
+}
+.kg-menu-close,.kg-menu-toggle[aria-expanded="true"] .kg-menu-open {
+  display:none;
+}
+.kg-menu-toggle[aria-expanded="true"] .kg-menu-close {
+  display:inline;
 }

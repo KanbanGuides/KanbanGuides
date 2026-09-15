@@ -18,6 +18,7 @@ class Page(HTMLParser):
     def __init__(self, path):
         super().__init__()
         self.links = []
+        self.elements = []
         self.ids = set()
         self.dialogs = set()
         self.openers = []
@@ -29,6 +30,7 @@ class Page(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        self.elements.append((tag, attrs))
         if tag == 'html':
             self.html = attrs
         if attrs.get('id'):
@@ -155,6 +157,19 @@ class HomepageAcceptance(unittest.TestCase):
                 html = path.read_text(encoding='utf-8')
                 self.assertNotIn('ux-home.css', html)
                 self.assertNotIn('kg-search-index', html)
+
+    def test_menu_control_is_localized_and_navigation_survives_without_javascript(self):
+        for lang, (route, page) in self.homes.items():
+            with self.subTest(language=lang):
+                toggle = next(a for tag, a in page.elements
+                              if tag == 'button' and 'kg-menu-toggle' in a.get('class', '').split())
+                navigation = next(a for tag, a in page.elements
+                                  if tag == 'nav' and a.get('id') == toggle['aria-controls'])
+                copy = json.loads((COPY / f'{lang}.json').read_text(encoding='utf-8'))
+                self.assertEqual(toggle['aria-label'], copy['ui']['navigation'])
+                self.assertEqual(toggle['aria-expanded'], 'false')
+                self.assertIn('hidden', toggle)
+                self.assertNotIn('hidden', navigation)
 
     def test_translation_resources_have_complete_keys(self):
         baseline = json.loads((COPY / 'en.json').read_text(encoding='utf-8'))

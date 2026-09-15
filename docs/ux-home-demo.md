@@ -57,3 +57,13 @@ host. Use a local BaseUrl when building a complete local navigation preview.
 Existing build warnings include old module/deprecation notices, contributor
 helper diagnostics, and duplicate legacy download aliases. They predate this
 homepage override and are not corrected by this experiment.
+
+## Mobile navigation acceptance
+
+At widths up to 650px, the enhanced header starts with a closed hamburger menu.
+Check opening by click and keyboard, closing with the toggle and Escape, selecting
+an anchor or language, and opening a dialog. Hidden links must leave the tab order.
+The expanded language list must stay within the page width, including RTL locales.
+Check resizing in both directions with the menu and a dialog open: desktop links
+remain visible and dialog close restores focus to a visible control. Without
+JavaScript the navigation remains available.
