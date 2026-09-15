@@ -1,6 +1,6 @@
 ---
-title: The Kanban Guide (July 2020)
-description: The Kanban Guide is the official, minimal reference for Kanban. Clear, stable, and focused, it defines the core practices and principles for managing flow and improving delivery across industries.
+title: カンバンガイド（2020年7月版）
+description: この文書は、カンバンの最小限のガイダンスを提供することによって、コミュニティの統一的なリファレンスとなることを目的としています。文脈に応じて、さまざまなアプローチがカンバンを補完し、価値提供と組織の課題の全範囲に対応できるようになります。
 date: 2020-07-01T09:00:00Z
 keywords:
   - Kanban
