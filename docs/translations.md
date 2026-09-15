@@ -127,7 +127,7 @@ If you need to set up the site infrastructure without the `/guide.transcreate` s
 ```yaml
 languages:
   {LANG}:
-    languageName: Your Language Name
+    label: Your Language Name
     weight: 2
     title: Your Translated Site Title
 ```

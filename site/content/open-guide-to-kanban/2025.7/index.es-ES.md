@@ -32,6 +32,9 @@ forked_from: the-kanban-guide/2025.5
 mainfont: "Times New Roman"
 sansfont: "Arial"
 monofont: "Courier New"
+resources:
+  - src: '**open-guide-to-kanban.es-ES.pdf'
+    name: 'pdf/open-guide-to-kanban.es-ES.pdf'
 sitemap:
   priority: 1.0
 aliases:
