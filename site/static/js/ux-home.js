@@ -11,11 +11,13 @@
   const results = document.getElementById('kg-results');
   const status = document.getElementById('kg-search-status');
   const index = JSON.parse(document.getElementById('kg-search-index').textContent);
+  const messages = JSON.parse(document.getElementById('kg-search-messages').textContent);
+  const locale = document.documentElement.lang;
   function search() {
-    const terms = query.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
-    const matches = terms.length ? index.filter(item => terms.every(term => (item.title + ' ' + item.text).toLocaleLowerCase().includes(term))) : [];
+    const terms = query.value.toLocaleLowerCase(locale).trim().split(/\s+/).filter(Boolean);
+    const matches = terms.length ? index.filter(item => terms.every(term => (item.title + ' ' + item.text).toLocaleLowerCase(locale).includes(term))) : [];
     results.replaceChildren();
-    status.textContent = terms.length ? (matches.length ? `${matches.length} result${matches.length === 1 ? '' : 's'}.` : 'No results. Try another term, such as flow or workflow.') : 'Search the current English editions of both guides.';
+    status.textContent = terms.length ? (matches.length ? messages.results.replace('{count}', new Intl.NumberFormat(locale).format(matches.length)) : messages.empty) : messages.initial;
     for (const item of matches) {
       const row = document.createElement('li');
       const link = document.createElement('a');

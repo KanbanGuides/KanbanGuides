@@ -1,0 +1,53 @@
+{
+  "ui": {
+    "skip": "Saltar al contenido",
+    "home": "Inicio de Kanban Guides",
+    "navigation": "Navegación principal",
+    "guides": "Las guías",
+    "compare": "Comparar",
+    "about": "Acerca de",
+    "search": "Buscar en las guías",
+    "close": "Cerrar",
+    "footer": "Pie de página",
+    "by": "Por",
+    "edition": "edición",
+    "languages": "Idiomas",
+    "history": "Historial de ediciones",
+    "read": "Leer la guía",
+    "download": "Descargar PDF",
+    "which": "¿Qué guía debería leer?",
+    "compare_guides": "Comparar las guías",
+    "about_title": "Acerca de Kanban Guides",
+    "search_label": "Busca una práctica, métrica o definición",
+    "search_placeholder": "Prueba trabajo en curso",
+    "search_initial": "Busca en las ediciones actuales de las guías en este idioma.",
+    "search_results": "Resultados: {count}",
+    "search_empty": "No hay resultados. Prueba otro término, como flujo.",
+    "relationship": "La Guía Abierta de Kanban es una adaptación de la Guía Kanban de mayo de 2025. Cada publicación tiene su propio historial de ediciones.",
+    "about_intro": "Kanban Guides es el hogar de la Guía Kanban y la Guía Abierta de Kanban, con ediciones en línea, traducciones y PDF.",
+    "about_detail": "La Guía Kanban ofrece una referencia mínima. La Guía Abierta de Kanban es una adaptación ampliada para el trabajo del conocimiento. Sus autorías e historiales de ediciones son distintos.",
+    "language_name": "Español (España)"
+  },
+  "hero": {
+    "eyebrow": "Lectura gratuita. Exploración abierta.",
+    "title": "Dos guías.",
+    "subtitle": "Una comprensión más clara de Kanban.",
+    "description": "Lee la Guía Kanban y la Guía Abierta de Kanban. Explora sus prácticas, comprende sus diferencias y encuentra la edición en tu idioma."
+  },
+  "guides": {
+    "the-kanban-guide": {
+      "label": "La referencia mínima",
+      "description": "La definición esencial, las prácticas y las métricas de flujo. Una referencia concisa para comprender Kanban.",
+      "comparison_title": "Empieza por lo esencial",
+      "comparison": "Elige la Guía Kanban como referencia mínima compartida.",
+      "accent": "red"
+    },
+    "open-guide-to-kanban": {
+      "label": "La adaptación ampliada",
+      "description": "Una adaptación ampliada para el trabajo del conocimiento, con más contexto, convenciones y orientación.",
+      "comparison_title": "Explora un contexto más amplio",
+      "comparison": "Elige la Guía Abierta de Kanban para obtener orientación ampliada.",
+      "accent": "blue"
+    }
+  }
+}

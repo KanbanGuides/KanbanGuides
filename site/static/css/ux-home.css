@@ -425,7 +425,7 @@ body:has(.kg-home)>header>.container {
 .kg-skip {
   position:fixed;
   top:-100px;
-  left:20px;
+  inset-inline-start:20px;
   z-index:20;
   background:#fff;
   color:#102342;
@@ -459,7 +459,8 @@ body:has(.kg-home)>header>.container {
 .kg-dialog h2 {
   font-size:28px;
   font-weight:750;
-  margin:0 40px 24px 0
+  margin:0 0 24px;
+  margin-inline-end:40px
 }
 
 .kg-dialog h3 {
@@ -472,7 +473,7 @@ body:has(.kg-home)>header>.container {
 }
 
 .kg-close {
-  float:right;
+  float:inline-end;
   font-size:28px;
   border:0;
   background:#f1f4f6;
@@ -484,7 +485,7 @@ body:has(.kg-home)>header>.container {
 
 .kg-compare-details {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
   gap:28px;
   margin-bottom:25px
 }
@@ -683,4 +684,23 @@ body:has(.kg-home)>header>.container {
   .kg-book {
     display:none;
   }
+}
+
+/* Let translated labels wrap and preserve the reading direction. */
+.kg-header,.kg-nav,.kg-actions,.kg-guide-links,.kg-footer nav {
+  flex-wrap:wrap;
+}
+.kg-button {
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+.kg-home,.kg-dialog {
+  overflow-wrap:anywhere;
+}
+.kg-dialog:dir(rtl),.kg-home:dir(rtl) {
+  text-align:start;
+  letter-spacing:normal;
+}
+.kg-home:dir(rtl) :is(h1,h2,h3,.kg-eyebrow) {
+  letter-spacing:normal;
 }

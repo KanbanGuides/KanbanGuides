@@ -1,0 +1,72 @@
+{{ define "menu" }}
+{{ $copy := partial "ux/copy.html" . }}
+<link rel="stylesheet" href="{{ "css/ux-home.css" | relURL }}">
+<script src="{{ "js/ux-home.js" | relURL }}" defer></script>
+<a class="kg-skip" href="#kg-content">{{ $copy.ui.skip }}</a>
+<div class="kg-header kg-shell">
+  <a class="kg-brand" href="{{ .RelPermalink }}" aria-label="{{ $copy.ui.home }}">{{ partial "ux/mark.html" . }}<span>KANBAN GUIDES</span></a>
+  <nav aria-label="{{ $copy.ui.navigation }}" class="kg-nav">
+    <a href="#guides">{{ $copy.ui.guides }}</a><a href="#compare">{{ $copy.ui.compare }}</a><button type="button" data-dialog="kg-about">{{ $copy.ui.about }}</button>
+    <button type="button" class="kg-search-button" data-dialog="kg-search" aria-label="{{ $copy.ui.search }}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg></button>
+    <details class="kg-languages"><summary>{{ $copy.ui.language_name }}</summary><ul>{{ range .AllTranslations }}<li><a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" {{ if eq .Language.Lang $.Language.Lang }}aria-current="page"{{ end }}>{{ (partial "ux/copy.html" .).ui.language_name }}</a></li>{{ end }}</ul></details>
+  </nav>
+</div>
+{{ end }}
+
+{{ define "main" }}
+{{ $copy := partial "ux/copy.html" . }}
+{{ $guides := where .Site.Sections "Type" "guide" }}
+{{ $search := slice }}
+<div class="kg-home kg-shell" id="kg-content" tabindex="-1">
+  <section class="kg-hero" aria-labelledby="kg-title">
+    <p class="kg-eyebrow">{{ $copy.hero.eyebrow }}</p>
+    <h1 id="kg-title">{{ $copy.hero.title }}<br>{{ $copy.hero.subtitle }}</h1>
+    <p class="kg-intro">{{ $copy.hero.description }}</p>
+  </section>
+  <section id="guides" class="kg-guides" aria-label="{{ $copy.ui.guides }}">
+  {{ range $guides.ByWeight }}
+    {{ $guide := . }}
+    {{ $info := index $copy.guides .Section }}
+    {{ $title := $info.title | default .Params.short_title | default .Title }}
+    {{ $version := partial "functions/get-latest-version.html" . }}
+    {{ $latest := .GetPage $version }}
+    {{ $pdf := false }}
+    {{ with $latest }}
+      {{ range .Resources.Match "pdf/*.pdf" }}{{ if strings.HasSuffix (lower .Name) (printf ".%s.pdf" (lower $guide.Language.Lang)) }}{{ $pdf = . }}{{ end }}{{ end }}
+      {{ $search = $search | append (dict "title" $title "guide" $title "url" $guide.RelPermalink "text" .Plain) }}
+      {{ range findRESubmatch `(?s)<h[2-4][^>]*id="([^"]+)"[^>]*>(.*?)</h[2-4]>` .Content }}
+        {{ $search = $search | append (dict "title" (index . 2 | plainify | htmlUnescape) "guide" $title "url" (printf "%s#%s" $guide.RelPermalink (index . 1)) "text" (index . 2 | plainify)) }}
+      {{ end }}
+    {{ end }}
+    <article class="kg-guide kg-{{ $info.accent | default "blue" }}" aria-labelledby="title-{{ .Section }}">
+      <div class="kg-guide-copy">
+        <p class="kg-eyebrow">{{ $info.label | default $copy.ui.guides }}</p>
+        <h2 id="title-{{ .Section }}">{{ $title }}</h2>
+        {{ with $latest }}<p class="kg-edition"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "January 2006" }}</time> {{ $copy.ui.edition }}</p>{{ end }}
+        <p class="kg-description">{{ $info.description | default .Description }}</p>
+        {{ with $latest }}{{ with .Params.author }}<p class="kg-authors">{{ $copy.ui.by }} {{ delimit . (printf " %s " (i18n "and")) }}</p>{{ end }}{{ end }}
+      </div>
+      <div class="kg-book" aria-hidden="true"><strong>{{ $title }}</strong>{{ partial "ux/mark.html" . }}<span class="kg-book-lines"></span></div>
+      <div class="kg-actions"><a class="kg-button kg-primary" href="{{ .RelPermalink }}" data-action="read" data-guide="{{ .Section }}" aria-label="{{ $copy.ui.read }} — {{ $title }}">{{ $copy.ui.read }} <span aria-hidden="true">→</span></a>{{ with $pdf }}<a class="kg-button kg-secondary" download href="{{ .RelPermalink }}" data-action="pdf" data-guide="{{ $guide.Section }}" aria-label="{{ $copy.ui.download }} — {{ $title }}"><span aria-hidden="true">↓</span> {{ $copy.ui.download }}</a>{{ end }}</div>
+      <div class="kg-guide-links"><a href="{{ with .GetPage "translations" }}{{ .RelPermalink }}{{ end }}" data-action="languages" data-guide="{{ .Section }}" aria-label="{{ $copy.ui.languages }} — {{ $title }}">{{ $copy.ui.languages }}</a><a href="{{ with .GetPage "history" }}{{ .RelPermalink }}{{ end }}" data-action="history" data-guide="{{ .Section }}" aria-label="{{ $copy.ui.history }} — {{ $title }}">{{ $copy.ui.history }}</a></div>
+    </article>
+  {{ end }}
+  </section>
+  <section id="compare" class="kg-comparison" aria-labelledby="compare-title">
+    <h2 id="compare-title">{{ $copy.ui.which }}</h2>
+    {{ range $guides.ByWeight }}{{ $info := index $copy.guides .Section }}<div class="kg-comparison-item kg-{{ $info.accent | default "blue" }}"><h3>{{ $info.comparison_title | default ($info.title | default .Params.short_title | default .Title) }}</h3><p>{{ $info.comparison | default (.Params.which_to_use_summary | plainify) }}</p></div>{{ end }}
+    <button type="button" class="kg-text-button" data-dialog="kg-compare">{{ $copy.ui.compare_guides }} <span aria-hidden="true">→</span></button>
+  </section>
+</div>
+<dialog class="kg-dialog" id="kg-compare" aria-labelledby="kg-compare-title"><form method="dialog"><button class="kg-close" aria-label="{{ $copy.ui.close }}">×</button></form><h2 id="kg-compare-title">{{ $copy.ui.compare_guides }}</h2><div class="kg-compare-details">{{ range $guides.ByWeight }}{{ $info := index $copy.guides .Section }}<section><h3>{{ $info.title | default .Params.short_title | default .Title }}</h3><dl>{{ range .Params.guide_comparison }}<dt>{{ .title | title }}</dt><dd>{{ .content | markdownify }}</dd>{{ end }}</dl><a href="{{ .RelPermalink }}">{{ $copy.ui.read }} →</a></section>{{ end }}</div><p>{{ $copy.ui.relationship }}</p></dialog>
+<dialog class="kg-dialog" id="kg-about" aria-labelledby="kg-about-title"><form method="dialog"><button class="kg-close" aria-label="{{ $copy.ui.close }}">×</button></form><h2 id="kg-about-title">{{ $copy.ui.about_title }}</h2><p>{{ $copy.ui.about_intro }}</p><p>{{ $copy.ui.about_detail }}</p><p>{{ i18n "open_source_description" . }}</p><a href="{{ strings.TrimSuffix "/" .Site.Params.githubUrl }}/discussions">{{ i18n "join_discussion_button" }} →</a></dialog>
+<dialog class="kg-dialog" id="kg-contributors" aria-labelledby="kg-contributors-title"><form method="dialog"><button class="kg-close" aria-label="{{ $copy.ui.close }}">×</button></form><h2 id="kg-contributors-title">{{ i18n "contributors_label" }}</h2><p>{{ i18n "contributors_description" . }}</p>{{ range $guides.ByWeight }}{{ $info := index $copy.guides .Section }}<h3>{{ $info.title | default .Params.short_title | default .Title }}</h3><ul class="kg-contributor-list">{{ range partial "functions/get-contributors.html" . }}<li>{{ .name }}{{ with .role }} <small>({{ if eq . "creator" }}{{ i18n "nav_creators" }}{{ else }}{{ i18n "contributors_label" }}{{ end }})</small>{{ end }}</li>{{ end }}</ul>{{ end }}</dialog>
+<dialog class="kg-dialog" id="kg-search" aria-labelledby="kg-search-title"><form method="dialog"><button class="kg-close" aria-label="{{ $copy.ui.close }}">×</button></form><h2 id="kg-search-title">{{ $copy.ui.search }}</h2><label for="kg-query">{{ $copy.ui.search_label }}</label><input type="search" id="kg-query" placeholder="{{ $copy.ui.search_placeholder }}" autocomplete="off"><p id="kg-search-status" role="status"></p><ul id="kg-results" class="kg-results"></ul></dialog>
+<script type="application/json" id="kg-search-messages">{{ dict "initial" $copy.ui.search_initial "results" $copy.ui.search_results "empty" $copy.ui.search_empty | jsonify | safeJS }}</script>
+<script type="application/json" id="kg-search-index">{{ $search | jsonify | safeJS }}</script>
+{{ end }}
+
+{{ define "footer" }}
+{{ $copy := partial "ux/copy.html" . }}
+<footer class="kg-footer"><div class="kg-shell"><a href="{{ .RelPermalink }}">Kanban Guides</a><nav aria-label="{{ $copy.ui.footer }}"><button type="button" data-dialog="kg-about">{{ $copy.ui.about }}</button><button type="button" data-dialog="kg-contributors">{{ i18n "contributors_label" }}</button><a href="{{ .Site.Params.githubUrl }}">GitHub</a></nav></div></footer>
+{{ end }}

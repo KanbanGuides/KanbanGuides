@@ -1,0 +1,4 @@
+{{/* Keep one shared layout; missing UI resources must fail the build. */}}
+{{ $copy := index (index .Site.Data "ux-home") (lower .Language.Lang) }}
+{{ if not $copy }}{{ errorf "Homepage UI translation missing for %s" .Language.Lang }}{{ end }}
+{{ return $copy }}
