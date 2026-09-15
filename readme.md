@@ -41,7 +41,7 @@ Making Kanban knowledge accessible globally is essential.
 ### 📖 Read Online
 
 - **Production**: [kanbanguides.org](https://kanbanguides.org)
-- **Preview**: use the preview URL in the [delivery configuration](.OpenGuidePlatform/delivery.yaml)
+- **Preview**: use the preview URL under `delivery` in [settings.yaml](.OpenGuidePlatform/settings.yaml)
 
 ### 📄 Download Options
 
@@ -103,18 +103,20 @@ Use PowerShell 7.4+, Hugo Extended, Go and GitHub CLI from the repository root:
 ./build.ps1 -Target preview
 ./build.ps1 -Target production
 ./build.ps1 -Stage Serve -Target local
-./build.ps1 Update -ring preview -WhatIf
-./build.ps1 Update -ring preview
+./build.ps1 Update -WhatIf
+./build.ps1 Update
 ```
 
 The installed release is recorded in `.OpenGuidePlatform/installation.json`; updates belong on a review branch. Prepare selects one site ring using GitVersion; CI builds, validates and deploys that ring. PRs select canary, and the current main-branch configuration selects preview. The separate production command above validates production locally without deploying it. Windows requires symbolic-link support and `git config --global core.symlinks true` before cloning.
 
-**Adoption is in progress:** v0.5.4-Preview.2 is installed. Local canary and production validation have passed; hosted PR checks for this update are pending. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md) for the recorded comparison and remaining maintainer acceptance. Shared skills are in `.agents/skills`; existing PDFs are preserved during migration.
+The platform selection is `v1` in `.OpenGuidePlatform/settings.yaml`: builds select the latest production OGP release within major version 1, without crossing into version 2. `Update` refreshes the installed adapters and recorded release using that selection. Site deployment rings remain independent of the platform ring. Edit user settings in `settings.yaml`; do not edit the generated installation record.
+
+**Upgrade verification is in progress:** v1.0.0 is installed. Local canary validation with the PR base URL and production validation passed. A malformed copy-link URL in the generated output remains under investigation; hosted acceptance and merge are pending. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md) for earlier evidence. Shared skills are in `.agents/skills`; existing PDFs are preserved during migration.
 
 ## Getting Started
 
 1. **[Read the guide](https://kanbanguides.org)** - Production site
-2. **Test latest changes** - Use the preview destination in [delivery.yaml](.OpenGuidePlatform/delivery.yaml), or the deployment link posted on the PR.
+2. **Test latest changes** - Use the preview destination under `delivery` in [settings.yaml](.OpenGuidePlatform/settings.yaml), or the deployment link posted on the PR.
 3. **[Engage with the community](https://github.com/KanbanGuides/KanbanGuides/discussions)**
 4. **[Support translations](https://github.com/KanbanGuides/KanbanGuides/discussions)**
 5. **[Review contribution guidelines](./docs/contributing.md)**

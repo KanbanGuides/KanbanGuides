@@ -4,19 +4,19 @@
 version: 'v0.0.2'
 workflows:
     '.github/workflows/copilot-setup-steps.yml':
-        - 'actions/checkout@v4'
+        - 'actions/checkout@v7'
         - 'peaceiris/actions-hugo@v3'
     '.github/workflows/stale-issues.yml':
-        - 'actions/stale@v9'
+        - 'actions/stale@v11'
 dependencies:
-    'actions/checkout@v4':
-        ref: 'v4'
-        commit: 'sha1-11d5960a326750d5838078e36cf38b85af677262'
+    'actions/checkout@v7':
+        ref: 'v7'
+        commit: 'sha1-3d3c42e5aac5ba805825da76410c181273ba90b1'
         owner_id: 44036562
         repo_id: 197814629
-    'actions/stale@v9':
-        ref: 'v9'
-        commit: 'sha1-5bef64f19d7facfb25b37b414482c7164d639639'
+    'actions/stale@v11':
+        ref: 'v11'
+        commit: 'sha1-4391f3da665fdf50b6810c1a66712fb9ba21aa93'
         owner_id: 44036562
         repo_id: 200437066
     'peaceiris/actions-hugo@v3':

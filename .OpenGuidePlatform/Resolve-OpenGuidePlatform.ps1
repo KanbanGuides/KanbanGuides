@@ -6,8 +6,61 @@ param(
     [ValidateSet('Auto','Local','Preview','Production','Path')][string]$PlatformSource='Auto',
     [string]$PlatformPath,[string]$PlatformRelease,[string]$DefaultPlatformRoot,
     [ValidateSet('GuideSite','Platform')][string]$Product='GuideSite',
-    [switch]$FromWorkflow,[uri]$PackageUrl,[string]$PackageSha256,[string]$ExpectedVersion,[string]$ExpectedCommit,[string]$OutputPath
+    [switch]$ReadSettings,[switch]$UseInstalled,[switch]$FromWorkflow,[uri]$PackageUrl,[string]$PackageSha256,[string]$ExpectedVersion,[string]$ExpectedCommit,[string]$OutputPath
 )
+function Get-PlatformSettings([string]$Root) {
+    $settingsPath=Join-Path $Root '.OpenGuidePlatform/settings.yaml'
+    if(-not (Test-Path -LiteralPath $settingsPath)){return $null}
+    if((Get-Item -LiteralPath $settingsPath).Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Linked platform settings are not supported.'}
+    if(-not (Get-Module -ListAvailable powershell-yaml)){
+        Install-Module powershell-yaml -MinimumVersion 0.4.12 -Scope CurrentUser -Force -Repository PSGallery -ErrorAction Stop
+    }
+    Import-Module powershell-yaml -MinimumVersion 0.4.12 -ErrorAction Stop
+    $settings=Get-Content -LiteralPath $settingsPath -Raw|ConvertFrom-Yaml
+    if($settings -isnot [Collections.IDictionary] -or $settings.platform -isnot [Collections.IDictionary] -or
+        $settings.site -isnot [Collections.IDictionary] -or $settings.delivery -isnot [Collections.IDictionary]){
+        throw 'settings.yaml requires platform, site and delivery mappings.'
+    }
+    if([string]$settings.platform.version -cnotmatch '^v(0|[1-9][0-9]*)(?:\.(0|[1-9][0-9]*)(?:\.(0|[1-9][0-9]*)(?:-[A-Za-z0-9.-]+)?)?)?$'){
+        throw 'platform.version must be v1, v1.2 or an exact release such as v1.2.3 or v1.2.3-Preview.1.'
+    }
+    if($settings.platform.ring -cnotin @('preview','production')){throw 'platform.ring must be preview or production.'}
+    if($settings.platform.version -match '^v[0-9]+\.[0-9]+\.[0-9]+(?:-|$)'){
+        $expectedRing=if($settings.platform.version.Contains('-')){'preview'}else{'production'}
+        if($settings.platform.ring -cne $expectedRing){throw "The exact OGP version belongs to the $expectedRing ring. Correct platform.ring in settings.yaml or use Update to select another release."}
+    }
+    $source=[string]$settings.site.source
+    if([string]::IsNullOrWhiteSpace($source) -or [IO.Path]::IsPathRooted($source) -or $source -match '(^|[/\\])\.\.([/\\]|$)|[:\\]'){
+        throw 'site.source must be a relative directory inside the site repository.'
+    }
+    return $settings
+}
+function Assert-PlatformSettingsWorkflow($Settings,$Installation) {
+    $reference=[string]$Settings.platform.version
+    if($reference -match '^v[0-9]+(?:\.[0-9]+)?$' -and $Settings.platform.ring -eq 'preview'){$reference+='-preview'}
+    $installedReference=if($Installation -is [Collections.IDictionary]){if($Installation.ContainsKey('workflowReference')){$Installation.workflowReference}else{$Installation.releaseTag}}else{if($Installation.PSObject.Properties['workflowReference']){$Installation.workflowReference}else{$Installation.releaseTag}}
+    if($reference -cne $installedReference){throw 'The settings selection requires a different shared workflow reference. Run ./build.ps1 Update to coordinate the workflow and native dependency, then commit the changes.'}
+}
+function Select-PlatformRelease([string]$Selection,[string]$Ring) {
+    if($Selection -and $Selection -cnotmatch '^v[0-9]+(?:\.[0-9]+){0,2}(?:-[A-Za-z0-9.-]+)?$'){throw 'Invalid platform version selection.'}
+    if($Selection -match '^v[0-9]+\.[0-9]+\.[0-9]+(?:-|$)'){return $Selection}
+    $raw=& gh api 'repos/nkdAgility/OpenGuidePlatform/releases?per_page=100' --paginate --slurp
+    if($LASTEXITCODE -ne 0){throw 'Cannot resolve the configured OGP version. Restore release access or select an exact available release; no stale fallback was used.'}
+    $releases=@($raw|ConvertFrom-Json|ForEach-Object {foreach($item in $_){$item}})
+    $prefix=if($Selection){$Selection+'.'}else{'v'}
+    $eligible=@(foreach($release in $releases){
+        if($release.draft -or [bool]$release.prerelease -ne ($Ring -eq 'preview') -or
+            -not $release.tag_name.StartsWith($prefix,[StringComparison]::Ordinal) -or
+            @($release.assets|Where-Object name -eq 'OpenGuidePlatform-GuideSite.zip').Count -ne 1){continue}
+        $version=$null
+        if(-not [System.Management.Automation.SemanticVersion]::TryParse($release.tag_name.Substring(1),[ref]$version)){continue}
+        [pscustomobject]@{Tag=$release.tag_name;Version=$version}
+    })
+    $selected=$eligible|Sort-Object Version -Descending|Select-Object -First 1
+    if(-not $selected){throw "No installable $Ring OGP release matches '$Selection'. The version boundary was not crossed."}
+    return $selected.Tag
+}
+if($ReadSettings){return Get-PlatformSettings $WorkspaceRoot}
 function Expand-VerifiedPlatformArchive([string]$Path,[string]$Destination) {
     $archive=[IO.Compression.ZipFile]::OpenRead($Path)
     try {
@@ -24,7 +77,7 @@ function Restore-WorkflowPlatform {
 param(
     [ValidateSet('preview','production')][string]$PlatformRing='production',
     [Parameter(ParameterSetName='Workflow')][switch]$FromWorkflow,
-    [Parameter(ParameterSetName='Release')][ValidatePattern('^(?:v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?)?$')][string]$ReleaseTag,
+    [Parameter(ParameterSetName='Release')][ValidatePattern('^(?:v[0-9]+(?:\.[0-9]+){0,2}(?:-[A-Za-z0-9.-]+)?)?$')][string]$ReleaseTag,
     [Parameter(Mandatory,ParameterSetName='Candidate')][uri]$PackageUrl,
     [Parameter(Mandatory,ParameterSetName='Candidate')][ValidatePattern('^[a-fA-F0-9]{64}$')][string]$PackageSha256,
     [Parameter(Mandatory,ParameterSetName='Candidate')][ValidatePattern('^[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$')][string]$ExpectedVersion,
@@ -32,9 +85,11 @@ param(
     [Parameter(Mandatory)][string]$OutputPath
 )
 $ErrorActionPreference='Stop'
+$resolvedCommit=$ExpectedCommit
+$installedDigest=$null
 if($FromWorkflow){
     $restore=@{OutputPath=$OutputPath;PlatformRing=$(if($env:PLATFORM_RING){$env:PLATFORM_RING}else{$PlatformRing})}
-    if($ExpectedCommit){$restore.ExpectedCommit=$ExpectedCommit}
+    if($resolvedCommit){$restore.ExpectedCommit=$resolvedCommit}
     if($env:PLATFORM_PACKAGE_URL){
         if($env:PLATFORM_RELEASE){throw 'Select a candidate URL or release tag, not both.'}
         $restore.PackageUrl=$env:PLATFORM_PACKAGE_URL
@@ -48,7 +103,7 @@ if($FromWorkflow){
     return
 }
 if($OutputPath -notmatch '^\.processing/[A-Za-z0-9/_-]+$' -or $OutputPath.Split('/') -contains '..'){throw 'Install into a fresh .processing directory.'}
-$output=[IO.Path]::GetFullPath((Join-Path $PWD $OutputPath))
+$output=[IO.Path]::GetFullPath((Join-Path $WorkspaceRoot $OutputPath))
 $cursor=$output
 while($cursor){if((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)){throw 'Linked installation paths are not supported.'};$cursor=[IO.Path]::GetDirectoryName($cursor)}
 if(Test-Path -LiteralPath $output){throw 'Installation output already exists.'}
@@ -67,41 +122,54 @@ if($PSCmdlet.ParameterSetName -eq 'Candidate'){
     Expand-VerifiedPlatformArchive $bundle $assets
 }else{
     if(-not $ReleaseTag){
-        $items=& gh api 'repos/nkdAgility/OpenGuidePlatform/releases?per_page=100' --paginate --slurp
-        if($LASTEXITCODE -ne 0){throw 'Cannot discover the platform release.'}
-        $pages=$items|ConvertFrom-Json
-        $ring=$PlatformRing
-        if($ring -notin @('preview','production')){throw 'Platform ring must be preview or production.'}
-        $channel=if($ring -eq 'production'){'stable'}else{'preview'}
-        $matches=@($pages|ForEach-Object { foreach($item in $_){$item} }|Where-Object {
-            -not $_.draft -and ([bool]$_.prerelease -eq ($channel -eq 'preview')) -and
-            @($_.assets|Where-Object name -eq 'OpenGuidePlatform-GuideSite.zip').Count -eq 1 -and
-            (-not $ExpectedCommit -or $_.target_commitish -ceq $ExpectedCommit)
-        }|Sort-Object published_at -Descending)
-        if(-not $matches.Count){throw "No installable $channel platform release is available."}
-        $ReleaseTag=$matches[0].tag_name
+        $installationPath=Join-Path $WorkspaceRoot '.OpenGuidePlatform/installation.json'
+        if(-not (Test-Path -LiteralPath $installationPath)){
+            throw 'No OGP installation pin was found. Run the platform installer, commit .OpenGuidePlatform/installation.json and its coordinated Hugo dependency, then rerun the build.'
+        }
+        try {$installation=Get-Content -LiteralPath $installationPath -Raw|ConvertFrom-Json -ErrorAction Stop}
+        catch {throw 'The OGP installation pin is invalid. Run a reviewed platform install/update; do not edit the installation record manually.'}
+        $ReleaseTag=[string]$installation.releaseTag
+        $installedCommit=[string]$installation.release.sourceCommit
+        $installedDigest=[string]$installation.release.packages.GuideSite.sha256
+        if($installation.schemaVersion -ne 1 -or $ReleaseTag -cne ('v'+$installation.release.version) -or $ReleaseTag -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$' -or $installedCommit -cnotmatch '^[a-f0-9]{40}$' -or $installedDigest -cnotmatch '^[a-f0-9]{64}$'){
+            throw 'The OGP installation pin is invalid. Run a reviewed platform install/update; do not edit the installation record manually.'
+        }
+        if($resolvedCommit -and $resolvedCommit -cne $installedCommit){throw 'Prepared platform source differs from the installation pin.'}
+        $resolvedCommit=$installedCommit
+        $settings=Get-PlatformSettings $WorkspaceRoot
+        if($settings){
+            Assert-PlatformSettingsWorkflow $settings $installation
+            $selectedTag=Select-PlatformRelease $settings.platform.version $settings.platform.ring
+            if($selectedTag -cne $ReleaseTag){$resolvedCommit='';$installedDigest=$null}
+            $ReleaseTag=$selectedTag
+            Write-Host "OGP selection: $($settings.platform.version); resolved: $ReleaseTag; ring: $($settings.platform.ring)."
+        }
+        Write-Host "Using resolved OGP release $ReleaseTag for this build."
     }
+    if($ReleaseTag -match '^v[0-9]+(?:\.[0-9]+)?$'){$ReleaseTag=Select-PlatformRelease $ReleaseTag $PlatformRing}
     $raw=& gh release view $ReleaseTag --repo nkdAgility/OpenGuidePlatform --json tagName,targetCommitish,isDraft 2>$null
     if($LASTEXITCODE -ne 0){throw "Release $ReleaseTag is unavailable; no source-build fallback is permitted."}
     $release=$raw|ConvertFrom-Json
-    if(-not $ExpectedCommit){$ExpectedCommit=$release.targetCommitish}
-    if($release.isDraft -or $release.tagName -cne $ReleaseTag -or $release.targetCommitish -cne $ExpectedCommit){throw 'Release source/tag does not match the pinned platform.'}
+    if(-not $resolvedCommit){$resolvedCommit=$release.targetCommitish}
+    if($release.isDraft -or $release.tagName -cne $ReleaseTag -or $release.targetCommitish -cne $resolvedCommit){throw 'Release source/tag does not match the pinned platform.'}
     & gh release download $ReleaseTag --repo nkdAgility/OpenGuidePlatform --pattern OpenGuidePlatform-GuideSite.zip --pattern release-manifest.json --dir $download
     if($LASTEXITCODE -ne 0){throw 'Release asset download failed.'}
     $assets=$download
     $ExpectedVersion=$ReleaseTag.Substring(1)
 }
 $manifest=Get-Content "$assets/release-manifest.json" -Raw|ConvertFrom-Json
-if(-not $ExpectedCommit){$ExpectedCommit=$manifest.sourceCommit}
-if($ExpectedCommit -cnotmatch '^[a-f0-9]{40}$'){throw 'Release source identity is invalid.'}
-if($manifest.schemaVersion -ne 2 -or $manifest.packages.GuideSite.version -cne $manifest.version -or $manifest.product -cne 'OpenGuidePlatform' -or $manifest.version -cne $ExpectedVersion -or $manifest.sourceCommit -cne $ExpectedCommit -or $manifest.packages.GuideSite.archive -cne 'OpenGuidePlatform-GuideSite.zip'){throw 'Release manifest does not match the requested platform.'}
+if($installedDigest -and $manifest.packages.GuideSite.sha256 -cne $installedDigest){throw 'Installed platform package digest mismatch. The release assets differ from the installed pin; restore the original assets or perform a reviewed update.'}
+if(-not $resolvedCommit){$resolvedCommit=$manifest.sourceCommit}
+if($resolvedCommit -cnotmatch '^[a-f0-9]{40}$'){throw 'Release source identity is invalid.'}
+if($manifest.schemaVersion -ne 2 -or $manifest.packages.GuideSite.version -cne $manifest.version -or $manifest.product -cne 'OpenGuidePlatform' -or $manifest.version -cne $ExpectedVersion -or $manifest.sourceCommit -cne $resolvedCommit -or $manifest.packages.GuideSite.archive -cne 'OpenGuidePlatform-GuideSite.zip'){throw 'Release manifest does not match the requested platform.'}
 if((Get-FileHash "$assets/OpenGuidePlatform-GuideSite.zip").Hash.ToLowerInvariant() -cne $manifest.packages.GuideSite.sha256){throw 'Release package digest mismatch.'}
 # Check archive paths before extracting or importing any candidate code.
 Expand-VerifiedPlatformArchive "$assets/OpenGuidePlatform-GuideSite.zip" $output
 # Check source identity before running the checksum-verified package validator.
 $metadata=Get-Content "$output/platform.json" -Raw|ConvertFrom-Json
-if($metadata.product -cne 'OpenGuidePlatform' -or $metadata.sourceCommit -cne $ExpectedCommit -or $metadata.version -cne $manifest.version){throw 'Installed platform identity mismatch.'}
+if($metadata.product -cne 'OpenGuidePlatform' -or $metadata.sourceCommit -cne $resolvedCommit -or $metadata.version -cne $manifest.version){throw 'Installed platform identity mismatch.'}
 $metadata=& "$output/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Confirm-PlatformPackage.ps1" -PackageRoot $output -Manifest $manifest
+[IO.File]::WriteAllText("$output/release-manifest.json",($manifest|ConvertTo-Json -Depth 30))
 $resolution=[ordered]@{schemaVersion=1;mode=if($PSCmdlet.ParameterSetName -eq 'Candidate'){'candidate'}else{'release'};version=$manifest.version;sourceCommit=$manifest.sourceCommit}
 [IO.File]::WriteAllText("$output/platform-resolution.json",($resolution|ConvertTo-Json))
 Import-Module "$output/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
@@ -109,7 +177,7 @@ Import-Module "$output/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGu
 Write-Host "Restored OpenGuidePlatform $ExpectedVersion ($($PSCmdlet.ParameterSetName)); SHA256 $($manifest.packages.GuideSite.sha256)."
 
 if($env:GITHUB_OUTPUT){
-    [IO.File]::AppendAllText($env:GITHUB_OUTPUT,"source-commit=$ExpectedCommit`nrelease-tag=$ReleaseTag`n")
+    [IO.File]::AppendAllText($env:GITHUB_OUTPUT,"source-commit=$resolvedCommit`nrelease-tag=$ReleaseTag`n")
 }
 return $output
 }
@@ -145,16 +213,22 @@ if($Restore){
     if(-not (Test-Path $lockPath)){throw 'No installation found. Run the remote bootstrap to install the platform, or select an explicit platform source.'}
     $previous=Get-Content $lockPath -Raw|ConvertFrom-Json -AsHashtable
 }
+if($Restore -and -not $UseInstalled){
+    $settings=Get-PlatformSettings $WorkspaceRoot
+    if($settings){
+        Assert-PlatformSettingsWorkflow $settings $previous
+        $selectedTag=Select-PlatformRelease $settings.platform.version $settings.platform.ring
+        if($selectedTag -cne $previous.releaseTag){
+            $ReleaseTag=$selectedTag;$Channel=if($settings.platform.ring -eq 'production'){'stable'}else{'preview'};$Restore=$false
+        }
+        Write-Host "OGP selection: $($settings.platform.version); resolved: $selectedTag; ring: $($settings.platform.ring)."
+    }
+}
 if($Restore){
     $ReleaseTag=$previous.releaseTag
     $manifest=$previous.release
 }else{
-    if(-not $ReleaseTag){
-        $releases=Invoke-GitHub @('api',"repos/$repository/releases?per_page=100",'--paginate','--slurp') | ConvertFrom-Json | ForEach-Object { foreach($item in $_){$item} }
-        $eligible=@($releases|Where-Object { -not $_.draft -and ([bool]$_.prerelease -eq ($Channel -eq 'preview')) -and @($_.assets|Where-Object name -eq 'OpenGuidePlatform-GuideSite.zip').Count -eq 1 }|Sort-Object published_at -Descending)
-        if(-not $eligible.Count){throw "No installable $Channel release is available."}
-        $ReleaseTag=$eligible[0].tag_name
-    }
+    $ReleaseTag=Select-PlatformRelease $ReleaseTag $(if($Channel -eq 'stable'){'production'}else{'preview'})
     $release=Invoke-GitHub @('release','view',$ReleaseTag,'--repo',$repository,'--json','tagName,targetCommitish,isDraft,isPrerelease')|ConvertFrom-Json
     if($release.isDraft -or ([bool]$release.isPrerelease -ne ($Channel -eq 'preview')) -or $release.tagName -cne $ReleaseTag){throw "Select a published $Channel release."}
 }
@@ -185,6 +259,7 @@ $metadata=& "$package/system/OpenGuidePlatform.PowerShell.GuideSiteAdoption/Conf
 $resolution=[ordered]@{schemaVersion=1;mode='release';version=$manifest.version;sourceCommit=$manifest.sourceCommit}
 [IO.File]::WriteAllText("$package/platform-resolution.json",($resolution|ConvertTo-Json))
 [IO.File]::WriteAllText("$package/release-manifest.json",($manifest|ConvertTo-Json -Depth 30))
+if(-not $Restore -or $PlatformRelease){[IO.File]::WriteAllText("$package/platform-selection.json",(@{version=$(if($PlatformRelease){$PlatformRelease}else{$ReleaseTag});ring=$(if($Channel -eq 'stable'){'production'}else{'preview'})}|ConvertTo-Json))}
 return $package
 
 }
