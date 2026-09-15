@@ -26,7 +26,7 @@ pwsh --version
 ./build.ps1 -Stage Serve -Target local
 ```
 
-Navigate to `http://localhost:1313`. The preview destination is configured in [delivery.yaml](../.OpenGuidePlatform/delivery.yaml).
+Navigate to `http://localhost:1313`. The preview destination is configured in [settings.yaml](../.OpenGuidePlatform/settings.yaml).
 
 ### Module dependencies
 
@@ -156,7 +156,7 @@ Each environment has its own config handling:
 
 ### Environments
 
-Deployment URLs and Azure environment names belong to this site and are defined in [delivery.yaml](../.OpenGuidePlatform/delivery.yaml). Shared OpenGuidePlatform tooling consumes that configuration; it does not own KanbanGuides hostnames or regions.
+Deployment URLs and Azure environment names belong to this site and are defined in [settings.yaml](../.OpenGuidePlatform/settings.yaml). Shared OpenGuidePlatform tooling consumes that configuration; it does not own KanbanGuides hostnames or regions.
 
 | Site ring | Selection | Hugo config |
 |---|---|---|
@@ -204,7 +204,7 @@ On `main`, every commit generates a preview version: `v1.1.0-preview.166`. Relea
 
 ## Creating a Release
 
-1. Open the preview URL from the [delivery configuration](../.OpenGuidePlatform/delivery.yaml) and check its header for the current preview version (e.g. `v1.1.0-preview.166`)
+1. Open the preview URL from the [settings.yaml delivery configuration](../.OpenGuidePlatform/settings.yaml) and check its header for the current preview version (e.g. `v1.1.0-preview.166`)
 2. Determine the release version:
    - Same minor = `v1.1.0` (patch changes)
    - Increment minor = `v1.2.0` (new content or translations)

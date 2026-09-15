@@ -60,7 +60,7 @@ At commit c5d244b, all hosted stages through Verify passed. The live comparison 
 
 Live production still serves Minionese from v1.2.18: removal commit cb991c4 was deployed to preview as 1.2.19-preview.2, not production. Confirm removal after a separately authorized production release. Local comparison artifacts are under .processing/live-site-comparison.
 
-## PR 112 validation repair (2026-09-15)
+## Historical PR 112 validation repair (2026-09-15)
 
 The release workflow and native Hugo dependency now select v0.5.4-Preview.2 together. This addresses the Prepare failure caused by resolving a newer platform with the older native module. The requested stable v0.5.4 package was downloaded, but its official updater rejects stable adoption; that upgrade remains blocked.
 
