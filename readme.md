@@ -109,7 +109,7 @@ Use PowerShell 7.4+, Hugo Extended, Go and GitHub CLI from the repository root:
 
 The installed release is recorded in `.OpenGuidePlatform/installation.json`; updates belong on a review branch. Prepare selects one site ring using GitVersion; CI builds, validates and deploys that ring. PRs select canary, and the current main-branch configuration selects preview. The separate production command above validates production locally without deploying it. Windows requires symbolic-link support and `git config --global core.symlinks true` before cloning.
 
-**Adoption is in progress:** Preview.6 is installed. Local canary and production validation and hosted PR checks have passed. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md) for the recorded comparison and remaining maintainer acceptance. Shared skills are in `.agents/skills`; existing PDFs are preserved during migration.
+**Adoption is in progress:** v0.5.4-Preview.2 is installed. Local canary and production validation have passed; hosted PR checks for this update are pending. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md) for the recorded comparison and remaining maintainer acceptance. Shared skills are in `.agents/skills`; existing PDFs are preserved during migration.
 
 ## Getting Started
 

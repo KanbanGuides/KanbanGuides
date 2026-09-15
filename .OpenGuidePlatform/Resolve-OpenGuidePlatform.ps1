@@ -107,7 +107,6 @@ $resolution=[ordered]@{schemaVersion=1;mode=if($PSCmdlet.ParameterSetName -eq 'C
 Import-Module "$output/system/OpenGuidePlatform.PowerShell.Core/OpenGuidePlatform.PowerShell.Core.psd1" -Force
 Import-Module "$output/system/OpenGuidePlatform.PowerShell.GuideSiteBuild/OpenGuidePlatform.PowerShell.GuideSiteBuild.psm1" -Force
 Write-Host "Restored OpenGuidePlatform $ExpectedVersion ($($PSCmdlet.ParameterSetName)); SHA256 $($manifest.packages.GuideSite.sha256)."
-if($env:GITHUB_STEP_SUMMARY){[IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY,"## Platform restored`n`nSource: $($PSCmdlet.ParameterSetName)`n`nVersion: $ExpectedVersion`n`nCommit: $ExpectedCommit`n`nPackage SHA256: $($manifest.packages.GuideSite.sha256)`n")}
 
 if($env:GITHUB_OUTPUT){
     [IO.File]::AppendAllText($env:GITHUB_OUTPUT,"source-commit=$ExpectedCommit`nrelease-tag=$ReleaseTag`n")

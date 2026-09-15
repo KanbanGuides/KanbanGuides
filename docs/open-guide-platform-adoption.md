@@ -59,3 +59,20 @@ Hugo internal refactoring follows verified adoption across all three guide sites
 At commit c5d244b, all hosted stages through Verify passed. The live comparison covered 13 routes per site at desktop size with CSS enabled and 22 matching PDF downloads, all byte-identical. English, Japanese and Persian guide text matched apart from canary/version controls. Preview repairs the French and Spanish Latin America latest aliases. Homepage contributor names and additional canary language entries are visible differences. The existing Japanese title/button overlap is present on both sites. This sampled comparison is not exhaustive mobile or every-route acceptance.
 
 Live production still serves Minionese from v1.2.18: removal commit cb991c4 was deployed to preview as 1.2.19-preview.2, not production. Confirm removal after a separately authorized production release. Local comparison artifacts are under .processing/live-site-comparison.
+
+## PR 112 validation repair (2026-09-15)
+
+The release workflow and native Hugo dependency now select v0.5.4-Preview.2 together. This addresses the Prepare failure caused by resolving a newer platform with the older native module. The requested stable v0.5.4 package was downloaded, but its official updater rejects stable adoption; that upgrade remains blocked.
+
+The Spanish Open Guide page explicitly names its supplied PDF resource so Hugo's `pdf/*` lookup includes it. This preserves the PDF bytes and existing URL (including its duplicated bundle segment), and restores the page download link and translation index entry.
+
+Verified with the root entry point:
+
+```powershell
+./build.ps1 -Target canary -PullRequestNumber 112 -BaseUrl https://red-pond-0d8225910-112.centralus.2.azurestaticapps.net/ -OutputPath .processing/pr112-pdf-fixed-canary
+./build.ps1 -Target production -OutputPath .processing/pr112-pdf-fixed-production
+```
+
+Both full builds and artifact validation passed. The Spanish download index and page link resolve to a PDF with the source SHA256; production has no Minionese directory. Existing contributor-template DEBUG messages and unsupported `isset` page-property warnings remain; no ERROR lines were emitted. These local checks do not establish hosted deployment success.
+
+`gh actions-lock --no-narrow` generated the lockfile; `gh actions-lock --verify` passed. This tool version covers setup and stale workflows, but does not include the reusable main/close workflow calls in its lockfile. The bespoke main workflow's existing mismatch with its managed-file hash remains; future automatic updates may require reconciling that ownership.
