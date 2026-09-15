@@ -1,0 +1,53 @@
+{
+  "ui": {
+    "skip": "Bello! Content-o",
+    "home": "Banana Kanban Guides home",
+    "navigation": "Banana navigation",
+    "guides": "Banana guides",
+    "compare": "Compare-o",
+    "about": "About-o",
+    "search": "Search banana guides",
+    "close": "Poopaye",
+    "footer": "Banana footer",
+    "by": "By-o",
+    "edition": "edition-o",
+    "languages": "Lingua",
+    "history": "Edition history-o",
+    "read": "Read banana guide",
+    "download": "Download PDF-o",
+    "which": "Which banana guide?",
+    "compare_guides": "Compare banana guides",
+    "about_title": "About Banana Kanban Guides",
+    "search_label": "Find practice-o, metric-o, definition-o",
+    "search_placeholder": "Try banana flow",
+    "search_initial": "Search current banana editions-o.",
+    "search_results": "Results-o: {count}",
+    "search_empty": "No banana results. Try flow-o.",
+    "relationship": "Open Guide to Kanban adaptation-o of May 2025 Kanban Guide. Each guide own edition history-o.",
+    "about_intro": "Banana Kanban Guides home of The Kanban Guide and Open Guide to Kanban. Online editions-o, translations-o, PDF-o!",
+    "about_detail": "The Kanban Guide minimal reference-o. Open Guide to Kanban expanded adaptation-o for knowledge work. Authors and edition histories distinct-o.",
+    "language_name": "Minionese"
+  },
+  "hero": {
+    "eyebrow": "Free banana read! Open banana explore!",
+    "title": "Two banana guides.",
+    "subtitle": "Kanban understanding-o!",
+    "description": "Read The Kanban Guide and Open Guide to Kanban. Explore practice-o, differences-o, find lingua edition-o!"
+  },
+  "guides": {
+    "the-kanban-guide": {
+      "label": "Minimal banana reference",
+      "description": "Essential definition-o, practice-o, flow metrics-o. Concise banana reference for Kanban.",
+      "comparison_title": "Start essentials-o",
+      "comparison": "Choose The Kanban Guide for minimal shared banana reference.",
+      "accent": "red"
+    },
+    "open-guide-to-kanban": {
+      "label": "Expanded banana adaptation",
+      "description": "Expanded adaptation-o for knowledge work, extra context-o, conventions-o, guidance-o.",
+      "comparison_title": "Explore wider context-o",
+      "comparison": "Choose Open Guide to Kanban for expanded banana guidance.",
+      "accent": "blue"
+    }
+  }
+}

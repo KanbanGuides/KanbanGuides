@@ -1,0 +1,54 @@
+{
+  "ui": {
+    "skip": "Aller au contenu",
+    "home": "Accueil de Kanban Guides",
+    "navigation": "Navigation principale",
+    "guides": "Les guides",
+    "compare": "Comparer",
+    "about": "À propos",
+    "search": "Rechercher dans les guides",
+    "close": "Fermer",
+    "footer": "Pied de page",
+    "by": "Par",
+    "edition": "édition",
+    "languages": "Langues",
+    "history": "Historique des éditions",
+    "read": "Lire le guide",
+    "download": "Télécharger le PDF",
+    "which": "Quel guide choisir ?",
+    "compare_guides": "Comparer les guides",
+    "about_title": "À propos de Kanban Guides",
+    "search_label": "Rechercher une pratique, une métrique ou une définition",
+    "search_placeholder": "Essayez travail en cours",
+    "search_initial": "Recherchez dans les éditions actuelles des guides dans cette langue.",
+    "search_results": "Résultats : {count}",
+    "search_empty": "Aucun résultat. Essayez un autre terme, comme flux.",
+    "relationship": "Le Guide Ouvert de Kanban est une adaptation du Guide Kanban de mai 2025. Chaque publication possède son propre historique des éditions.",
+    "about_intro": "Kanban Guides accueille le Guide Kanban et le Guide Ouvert de Kanban, avec des éditions en ligne, des traductions et des PDF.",
+    "about_detail": "Le Guide Kanban fournit une référence minimale. Le Guide Ouvert de Kanban est une adaptation élargie pour le travail de la connaissance. Leurs auteurs et leurs historiques des éditions restent distincts.",
+    "language_name": "Français"
+  },
+  "hero": {
+    "eyebrow": "Lecture gratuite. Exploration libre.",
+    "title": "Deux guides.",
+    "subtitle": "Pour mieux comprendre Kanban.",
+    "description": "Lisez le Guide Kanban et le Guide Ouvert de Kanban. Découvrez leurs pratiques, comprenez leurs différences et trouvez une édition dans votre langue."
+  },
+  "guides": {
+    "the-kanban-guide": {
+      "label": "La référence minimale",
+      "description": "La définition essentielle, les pratiques et les métriques de flux. Une référence concise pour comprendre Kanban.",
+      "comparison_title": "Commencez par l’essentiel",
+      "comparison": "Choisissez le Guide Kanban pour une référence commune minimale.",
+      "accent": "red",
+      "title": "Le Guide Kanban"
+    },
+    "open-guide-to-kanban": {
+      "label": "L’adaptation élargie",
+      "description": "Une adaptation élargie pour le travail de la connaissance, avec davantage de contexte, de conventions et de conseils.",
+      "comparison_title": "Explorez un contexte plus large",
+      "comparison": "Choisissez le Guide Ouvert de Kanban pour des conseils plus détaillés.",
+      "accent": "blue"
+    }
+  }
+}
