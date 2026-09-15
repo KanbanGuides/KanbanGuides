@@ -1,0 +1,686 @@
+/* Homepage-only experiment. Guide readers retain the platform theme. */
+body:has(.kg-home) {
+  background:#fdfcf9;
+  color:#0a1934;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif
+}
+
+body:has(.kg-home)>header {
+  background:#fff!important;
+  color:#0a1934!important;
+  padding:0!important;
+  border-bottom:1px solid #d9dfe5
+}
+
+body:has(.kg-home)>header>.container {
+  max-width:none;
+  padding:0!important;
+  display:block!important
+}
+
+.kg-shell {
+  width:min(1320px,calc(100% - 64px));
+  margin-inline:auto
+}
+
+.kg-home *, .kg-header *, .kg-footer *, .kg-dialog * {
+  box-sizing:border-box
+}
+
+.kg-header {
+  min-height:88px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px
+}
+
+.kg-header a,.kg-footer a {
+  text-decoration:none;
+  color:inherit
+}
+
+.kg-brand {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-.7px;
+  white-space:nowrap
+}
+
+.kg-mark {
+  display:inline-flex;
+  gap:4px;
+  flex:none
+}
+
+.kg-mark i {
+  display:block;
+  width:19px;
+  height:40px;
+  background:#1675ac;
+  border-top:5px solid #3494c6;
+  position:relative
+}
+
+.kg-mark i:before,.kg-mark i:after {
+  content:"";
+  position:absolute;
+  inset:5px 3px auto;
+  height:5px;
+  background:#f1c568
+}
+
+.kg-mark i:after {
+  top:14px
+}
+
+.kg-mark i:last-child:after {
+  display:none
+}
+
+.kg-nav {
+  display:flex;
+  align-items:center;
+  gap:26px;
+  font-size:15px;
+  font-weight:500
+}
+
+.kg-nav button,.kg-footer button,.kg-text-button {
+  font:inherit;
+  background:none;
+  border:0;
+  color:inherit;
+  padding:8px 0;
+  cursor:pointer
+}
+
+.kg-nav a,.kg-nav button {
+  min-height:44px;
+  display:inline-flex;
+  align-items:center
+}
+
+.kg-nav a:hover,.kg-nav button:hover,.kg-footer a:hover,.kg-footer button:hover {
+  text-decoration:underline;
+  text-underline-offset:5px
+}
+
+.kg-search-button {
+  border-inline-start:1px solid #d3dbe5!important;
+  padding-inline-start:25px!important
+}
+
+.kg-search-button svg {
+  width:23px;
+  height:23px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2
+}
+
+.kg-languages {
+  position:relative
+}
+
+.kg-languages summary {
+  padding:12px 4px;
+  cursor:pointer
+}
+
+.kg-languages ul {
+  position:absolute;
+  inset-inline-end:0;
+  top:100%;
+  z-index:3;
+  background:#fff;
+  border:1px solid #d3dbe5;
+  border-radius:6px;
+  box-shadow:0 8px 25px #152b4920;
+  list-style:none;
+  margin:0;
+  padding:8px;
+  min-width:190px
+}
+
+.kg-languages a {
+  display:block;
+  padding:8px
+}
+
+.kg-hero {
+  padding:42px 0 30px
+}
+
+.kg-eyebrow {
+  font-size:12px;
+  text-transform:uppercase;
+  font-weight:750;
+  letter-spacing:1.1px;
+  margin:0 0 18px;
+  color:#63728a
+}
+
+.kg-hero h1 {
+  font-size:clamp(32px,3.7vw,52px);
+  line-height:1.13;
+  letter-spacing:-1.8px;
+  font-weight:780;
+  margin:0 0 20px;
+  max-width:1200px
+}
+
+.kg-intro {
+  font-size:19px;
+  line-height:1.6;
+  max-width:1030px;
+  margin:0
+}
+
+.kg-guides {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));
+  gap:20px;
+  scroll-margin-top:20px
+}
+
+.kg-guide {
+  --accent:#0870bb;
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 135px;
+  grid-template-rows:1fr auto auto;
+  column-gap:24px;
+  background:#fff;
+  border:1px solid #dfe5e9;
+  border-top:7px solid var(--accent);
+  border-radius:7px;
+  padding:30px;
+  overflow:hidden
+}
+
+.kg-red {
+  --accent:#b52937
+}
+
+.kg-blue {
+  --accent:#0870bb
+}
+
+.kg-guide .kg-eyebrow {
+  color:var(--accent);
+  font-size:11px;
+  margin:0 0 17px
+}
+
+.kg-guide h2 {
+  font-size:clamp(24px,2.2vw,32px);
+  line-height:1.2;
+  font-weight:760;
+  letter-spacing:-1px;
+  margin:0 0 12px
+}
+
+.kg-edition {
+  font-size:16px;
+  color:#405674;
+  margin:0 0 22px
+}
+
+.kg-description,.kg-authors {
+  font-size:15px;
+  color:#354d6d;
+  line-height:1.6;
+  margin:0 0 18px
+}
+
+.kg-authors {
+  margin-bottom:25px
+}
+
+.kg-book {
+  border:1px solid #d7dce0;
+  border-inline-start:8px solid var(--accent);
+  background:linear-gradient(120deg,#fff,#f0f4f5);
+  box-shadow:2px 4px 5px #152b4910;
+  padding:24px 15px;
+  align-self:start;
+  min-height:200px;
+  margin-top:7px
+}
+
+.kg-book strong {
+  display:block;
+  font-size:14px;
+  line-height:1.2;
+  margin-bottom:17px
+}
+
+.kg-book .kg-mark {
+  gap:3px
+}
+
+.kg-book .kg-mark i {
+  width:23px;
+  height:42px
+}
+
+.kg-book-lines {
+  display:block;
+  margin-top:18px;
+  height:26px;
+  width:75%;
+  background:repeating-linear-gradient(to bottom,#c8cdcf 0 4px,transparent 4px 9px)
+}
+
+.kg-actions {
+  grid-column:1/-1;
+  display:flex;
+  gap:14px
+}
+
+.kg-button {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:15px;
+  flex:1;
+  min-height:52px;
+  border:1px solid var(--accent);
+  border-radius:5px;
+  font-size:15px;
+  font-weight:650;
+  text-decoration:none;
+  padding:10px 12px
+}
+
+.kg-primary {
+  background:var(--accent);
+  color:#fff
+}
+
+.kg-primary:hover {
+  color:#fff;
+  filter:brightness(.9)
+}
+
+.kg-secondary {
+  color:#0757a0;
+  background:#fff;
+  border-color:#1672be
+}
+
+.kg-secondary:hover {
+  background:#edf5fb;
+  color:#073b70
+}
+
+.kg-button span {
+  font-size:22px;
+  line-height:1
+}
+
+.kg-guide-links {
+  grid-column:1/-1;
+  display:flex;
+  gap:20px;
+  margin-top:15px;
+  font-size:14px
+}
+
+.kg-guide-links a {
+  color:#075cad;
+  min-height:36px;
+  display:flex;
+  align-items:center;
+  text-decoration:none
+}
+
+.kg-guide-links a:hover {
+  text-decoration:underline
+}
+
+.kg-guide-links a+a {
+  border-inline-start:1px solid #c5ccd6;
+  padding-inline-start:20px
+}
+
+.kg-comparison {
+  display:flex;
+  align-items:center;
+  gap:25px;
+  background:#f7f5ef;
+  border:1px solid #e5e1d8;
+  border-radius:6px;
+  margin:20px 0 44px;
+  padding:27px;
+  scroll-margin-top:20px
+}
+
+.kg-comparison h2 {
+  font-size:24px;
+  font-weight:750;
+  letter-spacing:-.8px;
+  margin:0;
+  flex:1.3
+}
+
+.kg-comparison-item {
+  flex:1;
+  border-inline-start:1px solid #d5d7d7;
+  padding-inline-start:24px
+}
+
+.kg-comparison h3 {
+  font-size:17px;
+  color:var(--accent);
+  font-weight:700;
+  margin:0 0 8px
+}
+
+.kg-comparison p {
+  font-size:14px;
+  line-height:1.6;
+  color:#354d6d;
+  margin:0
+}
+
+.kg-text-button {
+  color:#075cad;
+  white-space:nowrap;
+  font-size:14px
+}
+
+.kg-text-button:hover {
+  text-decoration:underline
+}
+
+.kg-footer {
+  background:#fff;
+  border-top:1px solid #d9dfe5;
+  padding:23px 0
+}
+
+.kg-footer>.kg-shell,.kg-footer nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:26px
+}
+
+.kg-footer a,.kg-footer button {
+  font-size:14px;
+  min-height:44px;
+  display:inline-flex;
+  align-items:center
+}
+
+.kg-footer>.kg-shell>a {
+  font-weight:650
+}
+
+.kg-skip {
+  position:fixed;
+  top:-100px;
+  left:20px;
+  z-index:20;
+  background:#fff;
+  color:#102342;
+  padding:12px
+}
+
+.kg-skip:focus {
+  top:10px
+}
+
+:is(.kg-home,.kg-header,.kg-footer,.kg-dialog) :focus-visible {
+  outline:3px solid #bd7800;
+  outline-offset:4px
+}
+
+.kg-dialog {
+  color:#0a1934;
+  background:#fff;
+  width:min(800px,calc(100% - 32px));
+  max-height:85vh;
+  border:1px solid #c7d1dc;
+  border-radius:10px;
+  padding:35px;
+  box-shadow:0 16px 70px #10234230
+}
+
+.kg-dialog::backdrop {
+  background:#0a193480
+}
+
+.kg-dialog h2 {
+  font-size:28px;
+  font-weight:750;
+  margin:0 40px 24px 0
+}
+
+.kg-dialog h3 {
+  font-size:20px
+}
+
+.kg-dialog p,.kg-dialog dd {
+  font-size:16px;
+  line-height:1.6
+}
+
+.kg-close {
+  float:right;
+  font-size:28px;
+  border:0;
+  background:#f1f4f6;
+  border-radius:5px;
+  width:44px;
+  height:44px;
+  cursor:pointer
+}
+
+.kg-compare-details {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:28px;
+  margin-bottom:25px
+}
+
+.kg-dialog dt {
+  font-size:13px;
+  text-transform:uppercase;
+  color:#60708a;
+  margin-top:15px
+}
+
+.kg-dialog dd {
+  margin:5px 0 0
+}
+
+.kg-contributor-list {
+  columns:2;
+  padding-inline-start:22px;
+  margin-bottom:28px
+}
+
+.kg-contributor-list li {
+  break-inside:avoid;
+  margin-bottom:8px
+}
+
+.kg-dialog input {
+  width:100%;
+  padding:12px;
+  border:1px solid #8393a7;
+  border-radius:5px;
+  margin:10px 0;
+  font-size:18px
+}
+
+.kg-results {
+  list-style:none;
+  padding:0
+}
+
+.kg-results li {
+  border-top:1px solid #e0e5eb;
+  padding:14px 0
+}
+
+.kg-results a {
+  font-weight:650;
+  text-decoration:none
+}
+
+.kg-results small {
+  display:block;
+  color:#536782;
+  margin-top:5px
+}
+
+@media(max-width:1050px) {
+  .kg-shell {
+    width:calc(100% - 40px)
+  }
+  .kg-guide {
+    padding:23px;
+    grid-template-columns:minmax(0,1fr) 105px;
+    column-gap:16px
+  }
+  .kg-book {
+    padding:20px 10px;
+    min-height:180px
+  }
+  .kg-book .kg-mark i {
+    width:18px
+  }
+  .kg-comparison {
+    flex-wrap:wrap
+  }
+  .kg-comparison h2 {
+    flex-basis:100%
+  }
+  .kg-comparison-item {
+    border:0;
+    padding:0
+  }
+  .kg-nav {
+    gap:16px
+  }
+  .kg-brand {
+    font-size:20px
+  }
+}
+
+@media(max-width:650px) {
+  .kg-shell {
+    width:calc(100% - 32px)
+  }
+  .kg-header {
+    padding:17px 0 9px;
+    display:block
+  }
+  .kg-brand {
+    font-size:20px
+  }
+  .kg-mark i {
+    width:15px;
+    height:32px
+  }
+  .kg-nav {
+    justify-content:space-between;
+    gap:12px;
+    margin-top:12px;
+    font-size:14px
+  }
+  .kg-search-button {
+    padding-inline-start:12px!important
+  }
+  .kg-hero {
+    padding:28px 0
+  }
+  .kg-hero h1 {
+    letter-spacing:-1px
+  }
+  .kg-intro {
+    font-size:17px;
+    line-height:1.6
+  }
+  .kg-guide {
+    padding:22px 20px;
+    column-gap:14px;
+    grid-template-columns:minmax(0,1fr) 92px
+  }
+  .kg-guide h2 {
+    font-size:27px
+  }
+  .kg-book {
+    padding:20px 8px;
+    min-height:170px
+  }
+  .kg-book strong {
+    font-size:12px
+  }
+  .kg-book .kg-mark i {
+    width:18px
+  }
+  .kg-book-lines {
+    width:100%
+  }
+  .kg-guide .kg-eyebrow {
+    font-size:10px;
+    line-height:1.5
+  }
+  .kg-actions {
+    gap:10px
+  }
+  .kg-button {
+    font-size:14px;
+    gap:8px;
+    padding:10px 8px
+  }
+  .kg-comparison {
+    padding:23px;
+    gap:22px;
+    margin-bottom:30px
+  }
+  .kg-comparison-item {
+    flex-basis:100%
+  }
+  .kg-text-button {
+    min-height:44px
+  }
+  .kg-footer>.kg-shell {
+    align-items:flex-start;
+    gap:8px;
+    flex-direction:column
+  }
+  .kg-footer nav {
+    gap:22px
+  }
+  .kg-dialog {
+    padding:22px
+  }
+  .kg-contributor-list {
+    columns:1
+  }
+}
+
+@media(prefers-reduced-motion:no-preference) {
+  html:has(.kg-home) {
+    scroll-behavior:smooth
+  }
+}
+
+/* Decorative covers yield to reading space on phones. */
+@media (max-width:650px) {
+  .kg-guide {
+    grid-template-columns:minmax(0,1fr);
+  }
+  .kg-book {
+    display:none;
+  }
+}

@@ -1,0 +1,18 @@
+hero:
+  eyebrow: Free to read. Open to explore.
+  title: Two guides.
+  subtitle: A clearer understanding of Kanban.
+  description: Read The Kanban Guide and the Open Guide to Kanban. Explore the practices, understand their differences, and find the edition in your language.
+guides:
+  the-kanban-guide:
+    label: The minimal reference
+    description: The essential definition, practices, and flow metrics. A concise reference for understanding Kanban.
+    comparison_title: Start with the essentials
+    comparison: Choose The Kanban Guide for a minimal shared reference.
+    accent: red
+  open-guide-to-kanban:
+    label: The expanded adaptation
+    description: An expanded adaptation for knowledge work, with additional context, conventions, and guidance.
+    comparison_title: Explore the wider context
+    comparison: Choose the Open Guide to Kanban for expanded guidance.
+    accent: blue
