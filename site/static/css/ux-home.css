@@ -592,13 +592,33 @@ body:has(.kg-home)>header>.container {
     height:32px
   }
   .kg-nav {
-    justify-content:space-between;
-    gap:12px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:4px;
     margin-top:12px;
     font-size:14px
   }
+  .kg-nav>a,.kg-nav>button {
+    width:100%;
+    text-align:start;
+    justify-content:flex-start
+  }
   .kg-search-button {
-    padding-inline-start:12px!important
+    border-inline-start:0!important;
+    padding-inline-start:0!important
+  }
+  .kg-languages {
+    width:100%;
+    min-width:0
+  }
+  .kg-languages ul {
+    position:static;
+    width:100%;
+    min-width:0;
+    box-shadow:none
+  }
+  .kg-languages a {
+    overflow-wrap:anywhere
   }
   .kg-hero {
     padding:28px 0
