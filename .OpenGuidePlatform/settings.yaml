@@ -1,0 +1,15 @@
+platform:
+  version: v1
+  ring: production
+site:
+  source: site
+delivery:
+  production:
+    environment: ""
+    url: https://kanbanguides.org/
+  canary:
+    environment: '{pr}'
+    url: https://red-pond-0d8225910-{pr}.centralus.2.azurestaticapps.net/
+  preview:
+    environment: preview
+    url: https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/
