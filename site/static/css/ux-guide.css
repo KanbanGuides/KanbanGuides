@@ -1,7 +1,7 @@
 /* Site presentation only. OGP still owns guide markup, content, navigation and behaviour. */
 body:has(.guide-nav-menu) {
-  --kg-article-width:72ch;
-  --kg-reader-width:76rem;
+  --kg-article-width:862px;
+  --kg-reader-width:1200px;
   --kg-accent:#b52937;
   background:#fdfcf9;
   color:#0a1934;
@@ -76,7 +76,7 @@ body:has(.guide-nav-menu) .content-wrapper {
 body:has(.guide-nav-menu) .content-details {
   width:100%;
   max-width:var(--kg-article-width);
-  margin-inline:auto;
+  margin-inline:0;
   font-size:18px;
   line-height:1.7;
   overflow-wrap:anywhere;
@@ -182,8 +182,8 @@ body:has(.guide-nav-menu) > footer {
 @media (min-width:768px) {
   body:has(.guide-nav-menu) > main > section:has(.content-details) > .row {
     display:grid;
-    grid-template-columns:clamp(12rem,18vw,15rem) minmax(0,1fr);
-    gap:clamp(20px,3vw,40px);
+    grid-template-columns:clamp(192px,25.833333%,310px) minmax(0,1fr);
+    gap:28px;
     margin:0;
   }
   body:has(.guide-nav-menu) > main > section:has(.content-details) > .row > :is(aside,main) {

@@ -77,7 +77,7 @@ The homepage continues to use its own stylesheet.
 
 The reader uses a sticky contents rail from 768px and the platform's existing
 collapsible contents below that width. Navigation links are styled as underlined
-tabs. Article width is capped at 72ch; the whole reader is capped at 76rem.
+tabs. Article width is capped at the previous 862px; the whole reader is capped at its previous 1200px. A fixed 28px gap separates the rail and text, with no extra article centering.
 Change `--kg-article-width` and `--kg-reader-width` in the stylesheet to tune these.
 No new behaviour or guide-template fork is introduced. This integration depends
 on OGP's current class names and needs rechecking when the platform is upgraded.
