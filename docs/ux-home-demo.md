@@ -1,0 +1,102 @@
+# Disposable homepage UX demo
+
+This UX experiment implements the approved homepage as a shared, site-owned
+`site/layouts/index.html` override for every enabled language. Guide readers keep
+OGP markup and behaviour, with site-owned presentation CSS described below.
+The UX changes do not edit publication bodies or supplied PDFs. Earlier inherited
+changes added Spanish PDF metadata and corrected Japanese edition metadata;
+those changes are now on main through PR #112 and are not part of this UX diff.
+Remove the homepage override, its `ux` partials, data, CSS and JavaScript to remove
+the homepage experiment.
+
+The cards discover guide sections and their current editions in the active language.
+Authors and supplied PDF links come from edition content. Languages and history
+remain guide-specific. Production language exclusions are unchanged.
+`site/data/ux-home/<language>.json` contains localized homepage presentation copy
+and controls; existing site i18n resources supply community and contributor text.
+New copy is draft localization and has not had native-speaker review. Adding a
+language requires a matching UI resource; a missing resource fails the build rather
+than silently serving an English homepage. These resources are presentation strings,
+not a page or translation inventory. The optional per-guide `title` overrides a
+presentation label: French uses it to correct the existing wrapper metadata that
+otherwise labels both publications as the Open Guide. Guide source content is preserved.
+
+Search uses current guide text and headings in the active language and runs locally
+in the browser. Search messages and accessible labels are localized. Comparison,
+About and contributor controls open native keyboard-accessible dialogs. Navigation
+and actions wrap for longer labels, and Persian retains right-to-left layout.
+The book covers are decorative CSS illustrations, not replacement PDF covers.
+
+## Build and verify
+
+Use a fresh output path for every build; the platform preserves previous evidence.
+
+```powershell
+./build.ps1 -Target preview -OutputPath .processing/ux-preview-<unique>
+./build.ps1 -Target production -OutputPath .processing/ux-production-<unique>
+python tests/test_ux_home.py .processing/ux-preview-<unique>/site
+python tests/test_ux_home.py .processing/ux-production-<unique>/site --production
+```
+
+Python checks use the standard library. Check desktop and mobile presentation,
+keyboard focus, dialog open/close, search and its no-results state in a browser,
+including longer translated labels, Japanese and right-to-left Persian. Tests
+discover enabled homepages from the generated language menu and check shared layout,
+localized controls, guide-specific links, PDFs, search anchors and reader integration.
+The production target validates a local artifact; it does not publish the site.
+
+The installed platform's local Serve target currently fails during Prepare with
+`PREPARE_INPUT_UNAVAILABLE` (null-valued expression). To inspect a successfully
+built preview artifact without changing platform adapters:
+
+```powershell
+python -m http.server 1319 --bind 127.0.0.1 --directory .processing/ux-preview-<unique>/site
+```
+
+Open http://127.0.0.1:1319/. This is static artifact inspection, without hot reload.
+The existing readers may retain absolute navigation URLs for the configured build
+host. Use a local BaseUrl when building a complete local navigation preview.
+
+Existing build warnings include old module/deprecation notices, contributor
+helper diagnostics, and duplicate legacy download aliases. They predate this
+homepage override and are not corrected by this experiment.
+
+## Mobile navigation acceptance
+
+At widths up to 650px, the enhanced header starts with a closed hamburger menu.
+Check opening by click and keyboard, closing with the toggle and Escape, selecting
+an anchor or language, and opening a dialog. Hidden links must leave the tab order.
+The expanded language list must stay within the page width, including RTL locales.
+Check resizing in both directions with the menu and a dialog open: desktop links
+remain visible and dialog close restores focus to a visible control. Without
+JavaScript the navigation remains available.
+
+## Guide reader presentation
+
+Guide pages load `site/static/css/ux-guide.css` through the site-owned
+`components/main-menu.html` partial. This small wrapper retains OGP navigation;
+OGP still owns the reader markup, content, PDFs, version controls and translations.
+The homepage continues to use its own stylesheet.
+
+The reader uses a sticky contents rail from 768px and the platform's existing
+collapsible contents below that width. Navigation links are styled as underlined
+tabs. Article width is capped at the previous 862px; the whole reader is capped at its previous 1200px. A fixed 28px gap separates the rail and text, with no extra article centering.
+Change `--kg-article-width` and `--kg-reader-width` in the stylesheet to tune these.
+No new behaviour or guide-template fork is introduced. This integration depends
+on OGP's current class names and needs rechecking when the platform is upgraded.
+
+Verify both guides and translated/historical editions, at 320px, 768px and wide
+desktop widths. Check TOC collapse, sticky scrolling, language menus, PDF/version
+controls and preservation of emphasis in the Open Kanban Guide. To remove this
+reader experiment, remove the stylesheet and the site main-menu partial.
+
+Content-preservation regression checks compare built readers with an accepted
+pre-styling artifact (including PDF hashes):
+
+```powershell
+python tests/test_ux_guide.py .processing/ux-reader-preview-final/site .processing/ux-collapse-preview-final/site
+python tests/test_ux_guide.py .processing/ux-reader-production-final/site .processing/ux-collapse-production-final/site
+```
+
+These checks cover publication markup and controls; responsive geometry and
+interaction still require the browser checks above.

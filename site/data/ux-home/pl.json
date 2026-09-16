@@ -1,0 +1,53 @@
+{
+  "ui": {
+    "skip": "Przejdź do treści",
+    "home": "Strona główna Kanban Guides",
+    "navigation": "Nawigacja główna",
+    "guides": "Przewodniki",
+    "compare": "Porównaj",
+    "about": "O stronie",
+    "search": "Szukaj w przewodnikach",
+    "close": "Zamknij",
+    "footer": "Stopka",
+    "by": "Autorzy:",
+    "edition": "wydanie",
+    "languages": "Języki",
+    "history": "Historia wydań",
+    "read": "Czytaj przewodnik",
+    "download": "Pobierz PDF",
+    "which": "Który przewodnik wybrać?",
+    "compare_guides": "Porównaj przewodniki",
+    "about_title": "O Kanban Guides",
+    "search_label": "Znajdź praktykę, metrykę lub definicję",
+    "search_placeholder": "Spróbuj praca w toku",
+    "search_initial": "Przeszukaj aktualne wydania przewodników w tym języku.",
+    "search_results": "Wyniki: {count}",
+    "search_empty": "Brak wyników. Spróbuj innego słowa, na przykład przepływ.",
+    "relationship": "Open Guide to Kanban jest adaptacją The Kanban Guide z maja 2025 roku. Każda publikacja ma własną historię wydań.",
+    "about_intro": "Kanban Guides to miejsce publikacji The Kanban Guide i Open Guide to Kanban, z wydaniami online, tłumaczeniami i plikami PDF.",
+    "about_detail": "The Kanban Guide stanowi minimalny punkt odniesienia. Open Guide to Kanban to rozszerzona adaptacja dla pracy opartej na wiedzy. Autorstwo i historie wydań pozostają odrębne.",
+    "language_name": "Polski"
+  },
+  "hero": {
+    "eyebrow": "Czytaj bezpłatnie. Odkrywaj swobodnie.",
+    "title": "Dwa przewodniki.",
+    "subtitle": "Lepsze zrozumienie Kanbanu.",
+    "description": "Przeczytaj The Kanban Guide i Open Guide to Kanban. Poznaj praktyki, zrozum różnice i znajdź wydanie w swoim języku."
+  },
+  "guides": {
+    "the-kanban-guide": {
+      "label": "Minimalny punkt odniesienia",
+      "description": "Podstawowa definicja, praktyki i metryki przepływu. Zwięzły punkt odniesienia pomagający zrozumieć Kanban.",
+      "comparison_title": "Zacznij od podstaw",
+      "comparison": "Wybierz The Kanban Guide jako minimalny wspólny punkt odniesienia.",
+      "accent": "red"
+    },
+    "open-guide-to-kanban": {
+      "label": "Rozszerzona adaptacja",
+      "description": "Rozszerzona adaptacja dla pracy opartej na wiedzy, z dodatkowym kontekstem, konwencjami i wskazówkami.",
+      "comparison_title": "Poznaj szerszy kontekst",
+      "comparison": "Wybierz Open Guide to Kanban, aby uzyskać szersze wskazówki.",
+      "accent": "blue"
+    }
+  }
+}

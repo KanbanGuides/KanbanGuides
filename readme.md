@@ -97,7 +97,7 @@ See [LICENSE](./LICENSE) for complete terms.
 
 ## Build and update this site
 
-Use PowerShell 7.4+, Hugo Extended, Go and GitHub CLI from the repository root:
+Use PowerShell 7.4+, Hugo Extended 0.158.0+, Go and GitHub CLI from the repository root:
 
 ```powershell
 ./build.ps1 -Target preview

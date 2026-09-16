@@ -1,0 +1,53 @@
+{
+  "ui": {
+    "skip": "本文へ移動",
+    "home": "Kanban Guides ホーム",
+    "navigation": "メインナビゲーション",
+    "guides": "ガイド",
+    "compare": "比較",
+    "about": "このサイトについて",
+    "search": "ガイドを検索",
+    "close": "閉じる",
+    "footer": "フッター",
+    "by": "著者：",
+    "edition": "版",
+    "languages": "言語",
+    "history": "版の履歴",
+    "read": "ガイドを読む",
+    "download": "PDFをダウンロード",
+    "which": "どのガイドを読めばよいですか？",
+    "compare_guides": "ガイドを比較",
+    "about_title": "Kanban Guidesについて",
+    "search_label": "プラクティス、計測指標、定義を検索",
+    "search_placeholder": "例：進行中の作業",
+    "search_initial": "この言語のガイドの現行版を検索します。",
+    "search_results": "検索結果：{count}件",
+    "search_empty": "結果がありません。フローなど、別の語句を試してください。",
+    "relationship": "オープン版カンバンガイドは、2025年5月版カンバンガイドを基にした改変版です。それぞれに独自の版の履歴があります。",
+    "about_intro": "Kanban Guidesは、カンバンガイドとオープン版カンバンガイドのホームです。オンライン版、翻訳、PDFを提供しています。",
+    "about_detail": "カンバンガイドは最小限の参照資料です。オープン版カンバンガイドは、ナレッジワーク向けに内容を拡充した改変版です。それぞれの著者と版の履歴は区別されています。",
+    "language_name": "日本語"
+  },
+  "hero": {
+    "eyebrow": "無料で読める。自由に学べる。",
+    "title": "2つのガイド。",
+    "subtitle": "カンバンを、もっと明確に理解する。",
+    "description": "カンバンガイドとオープン版カンバンガイドを読んでみましょう。プラクティスを学び、違いを理解し、自分の言語の版を見つけましょう。"
+  },
+  "guides": {
+    "the-kanban-guide": {
+      "label": "最小限の参照資料",
+      "description": "基本となる定義、プラクティス、フローの計測指標。カンバンを理解するための簡潔な参照資料です。",
+      "comparison_title": "基本から始める",
+      "comparison": "最小限の共通の参照資料として、カンバンガイドを選びましょう。",
+      "accent": "red"
+    },
+    "open-guide-to-kanban": {
+      "label": "内容を拡充した改変版",
+      "description": "ナレッジワーク向けに、背景、表記上の規約、指針を追加した改変版です。",
+      "comparison_title": "より広い背景を学ぶ",
+      "comparison": "より詳しい指針を得るには、オープン版カンバンガイドを選びましょう。",
+      "accent": "blue"
+    }
+  }
+}

@@ -8,7 +8,7 @@ Reference for maintainers and developers with repository access. For contributio
 
 ### Prerequisites
 
-- **Hugo Extended** v0.146.0+ — `choco install hugo-extended` (Windows) / `brew install hugo` (macOS)
+- **Hugo Extended** v0.158.0+ — `choco install hugo-extended` (Windows) / `brew install hugo` (macOS)
 - **Git**
 - **PowerShell 7.4+** — required for PDF generation scripts
 
@@ -278,7 +278,7 @@ PDF generation and visual acceptance of a replacement remain separate from build
 ### Hugo not found or wrong version
 
 ```powershell
-hugo version        # must include "extended" and be v0.146.0+
+hugo version        # must include "extended" and be v0.158.0+
 hugo env            # check extended: true
 choco upgrade hugo-extended   # Windows upgrade
 ```
