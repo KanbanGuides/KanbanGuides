@@ -141,6 +141,9 @@ outputFormats:
     isPlainText: true
 
 module:
+  hugoVersion:
+    min: "0.158.0"
+    extended: true
   imports:
     - path: github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides
 

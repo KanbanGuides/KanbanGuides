@@ -1,6 +1,6 @@
 # OpenGuidePlatform adoption
 
-Status: selection `v1` resolves to installed `v1.0.0`, recorded in `.OpenGuidePlatform/installation.json`. Local canary (with PR base URL) and production validation passed. Hosted stages through Verify passed at `ed7b29d`. Martin authorized merging with the disclosed copy-link defect tracked for an upstream OGP fix; checks for subsequent review corrections remain pending. Earlier preview evidence below is historical.
+Status: `.OpenGuidePlatform/installation.json` records the v1.0.0 adapter installation. The floating `v1` selection resolved build runtime v1.0.1 for the review-correction preview and production artifacts (see their `platform-context.json`); these are distinct identities. Local canary (with PR base URL) and production validation passed. Hosted stages through Verify passed at `ed7b29d`. Martin authorized merging with the disclosed copy-link defect tracked for an upstream OGP fix; hosted stages through Verify also passed for the merged-main UX revision `26ea108`. Local review-correction preview and production builds passed; hosted checks for the next correction commit are pending. Earlier preview evidence below is historical.
 
 ## Execution checklist
 
@@ -12,9 +12,9 @@ Status: selection `v1` resolves to installed `v1.0.0`, recorded in `.OpenGuidePl
 - [x] Adopt thin build.ps1 and shared workflow callers, including PR cleanup, while preserving consumer-owned integrations.
 - [x] Adopt distributed skills and agent instructions; distinguish repository guidance from independently enforced controls.
 - [x] Build and validate the PR canary and production locally using the installed build.ps1.
-- [ ] Verify the exact PR preview: wrapper, both guides, languages, navigation, aliases and PDFs, including Persian and Japanese. Investigate the previously reported Spanish PDF path.
-- [ ] Prove Minionese is excluded from production pages, indexes and downloads.
-- [ ] Obtain maintainer acceptance of the preview before merging adoption.
+- [ ] Repeat the complete manual preview matrix after future platform upgrades. Earlier UX browser evidence covers both guides, Persian/Japanese and responsive navigation; hosted Verify passed at `26ea108`. Current artifact acceptance checks cover localized guide/PDF links and search anchors. The duplicated legacy Spanish PDF paths remain intentionally preserved as recorded below; this is not an unresolved missing-download finding.
+- [x] Prove Minionese is excluded from production pages, indexes and downloads: production validation and homepage acceptance passed for `.processing/reviews-production`; no Minionese route or PDF is present.
+- [x] Obtain maintainer acceptance: adoption was accepted in PR #112; Martin approved the UX preview and requested merge on 2026-09-16.
 
 ## Boundaries
 
@@ -42,7 +42,9 @@ Hugo internal refactoring follows verified adoption across all three guide sites
 - PR hosting uses the shared cleanup contract's numeric environment (the PR number), rather than the old `canary-<number>` name. The old environment may need retirement after adoption; no production deployment is enabled.
 - The site-customized workflow caller remains reviewable; a future platform update must reconcile its managed-file conflict rather than overwrite hosting choices.
 
-## Remaining acceptance
+## Historical acceptance checklist (before PR #112 merged)
+
+The statements below describe that earlier checkpoint, not the current merge status. Current evidence and maintainer acceptance are recorded at the top of this document.
 
 - Verify the hosted adoption run and its deployed PR preview using the released platform.
 - Four legacy publishing scripts are retired in favor of distributed operations. The existing cover template and PDF recipe requirements are retained in maintainer documentation. No PDFs were regenerated; future generated replacements require explicit policy and visual acceptance.

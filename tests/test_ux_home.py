@@ -4,6 +4,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 import sys
 import unittest
+from tempfile import TemporaryDirectory
 from urllib.parse import unquote, urljoin, urlsplit
 
 ARTIFACT = Path(sys.argv.pop(1)).resolve()
@@ -11,6 +12,12 @@ PRODUCTION = '--production' in sys.argv
 if PRODUCTION:
     sys.argv.remove('--production')
 COPY = Path(__file__).resolve().parents[1] / 'site/data/ux-home'
+
+
+def language_pdfs(directory, lang):
+    """Hugo preserves supplied filename casing and sometimes nested PDF paths."""
+    return [path for path in directory.rglob("*")
+            if path.is_file() and path.name.lower().endswith(f".{lang.lower()}.pdf")]
 
 
 class Page(HTMLParser):
@@ -120,7 +127,7 @@ class HomepageAcceptance(unittest.TestCase):
                         link = next(a for a in page.links if a.get('data-action') == action and a.get('data-guide') == slug)
                         self.assertEqual(urlsplit(link['href']).path, f'{route}{slug}{suffix}')
                     pdfs = [a for a in page.links if a.get('data-action') == 'pdf' and a.get('data-guide') == slug]
-                    available = list((ARTIFACT / route.lstrip('/') / slug).glob(f'*/pdf/*.{lang}.pdf'))
+                    available = language_pdfs(ARTIFACT / route.lstrip('/') / slug, lang)
                     if available:
                         self.assertTrue(pdfs, (lang, slug))
                     for pdf in pdfs:
@@ -170,6 +177,17 @@ class HomepageAcceptance(unittest.TestCase):
                 self.assertEqual(toggle['aria-expanded'], 'false')
                 self.assertIn('hidden', toggle)
                 self.assertNotIn('hidden', navigation)
+
+    def test_pdf_discovery_preserves_mixed_case_and_nested_paths(self):
+        with TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            supplied = root / '2025.7' / 'pdf' / 'nested' / 'guide.es-ES.pdf'
+            supplied.parent.mkdir(parents=True)
+            supplied.write_bytes(b'%PDF-1.7')
+            (supplied.parent / 'guide.en.pdf').write_bytes(b'%PDF-1.7')
+            self.assertEqual(language_pdfs(root, 'es-es'), [supplied])
+            self.assertEqual(language_pdfs(root, 'ES-ES'), [supplied])
+            self.assertEqual(language_pdfs(root, 'fr'), [])
 
     def test_translation_resources_have_complete_keys(self):
         baseline = json.loads((COPY / 'en.json').read_text(encoding='utf-8'))

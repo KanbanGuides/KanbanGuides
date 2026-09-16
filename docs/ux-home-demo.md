@@ -1,10 +1,13 @@
 # Disposable homepage UX demo
 
-This branch implements the approved homepage concept as a shared, site-owned
-`site/layouts/index.html` override for every enabled language. Guide readers retain
-the installed OpenGuidePlatform layouts. No platform module or guide publication
-is edited. Remove the override, its `ux` partials, data, CSS and JavaScript to
-remove the experiment.
+This UX experiment implements the approved homepage as a shared, site-owned
+`site/layouts/index.html` override for every enabled language. Guide readers keep
+OGP markup and behaviour, with site-owned presentation CSS described below.
+The UX changes do not edit publication bodies or supplied PDFs. Earlier inherited
+changes added Spanish PDF metadata and corrected Japanese edition metadata;
+those changes are now on main through PR #112 and are not part of this UX diff.
+Remove the homepage override, its `ux` partials, data, CSS and JavaScript to remove
+the homepage experiment.
 
 The cards discover guide sections and their current editions in the active language.
 Authors and supplied PDF links come from edition content. Languages and history
