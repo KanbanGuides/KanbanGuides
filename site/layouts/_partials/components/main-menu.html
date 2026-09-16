@@ -1,0 +1,12 @@
+{{/* Site-owned wrapper: retain OGP navigation, add only the guide presentation layer. */}}
+{{ with .Site.GetPage (printf "/%s" .Section) }}
+  {{ if eq .Type "guide" }}<link rel="stylesheet" href="{{ "css/ux-guide.css" | relURL }}">{{ end }}
+{{ end }}
+<a href="{{ (.Site.GetPage "/").Permalink }}" class="d-flex align-items-center text-white text-decoration-none" title="{{ .Site.Title }}">
+  <img src="{{ .Site.Params.menu_logo }}" alt="{{ .Site.Title }}" class="d-inline-block align-text-top me-2" style="max-height: 40px;" />
+</a>
+<ul class="nav nav-pills">
+  <!-- Generic Dropdown Menu -->
+
+  {{ partial "components/language-switcher.html" . }}
+</ul>

@@ -39,7 +39,7 @@ Python checks use the standard library. Check desktop and mobile presentation,
 keyboard focus, dialog open/close, search and its no-results state in a browser,
 including longer translated labels, Japanese and right-to-left Persian. Tests
 discover enabled homepages from the generated language menu and check shared layout,
-localized controls, guide-specific links, PDFs, search anchors and unchanged readers.
+localized controls, guide-specific links, PDFs, search anchors and reader integration.
 The production target validates a local artifact; it does not publish the site.
 
 The installed platform's local Serve target currently fails during Prepare with
@@ -67,3 +67,33 @@ The expanded language list must stay within the page width, including RTL locale
 Check resizing in both directions with the menu and a dialog open: desktop links
 remain visible and dialog close restores focus to a visible control. Without
 JavaScript the navigation remains available.
+
+## Guide reader presentation
+
+Guide pages load `site/static/css/ux-guide.css` through the site-owned
+`components/main-menu.html` partial. This small wrapper retains OGP navigation;
+OGP still owns the reader markup, content, PDFs, version controls and translations.
+The homepage continues to use its own stylesheet.
+
+The reader uses a sticky contents rail from 768px and the platform's existing
+collapsible contents below that width. Navigation links are styled as underlined
+tabs. Article width is capped at 72ch; the whole reader is capped at 76rem.
+Change `--kg-article-width` and `--kg-reader-width` in the stylesheet to tune these.
+No new behaviour or guide-template fork is introduced. This integration depends
+on OGP's current class names and needs rechecking when the platform is upgraded.
+
+Verify both guides and translated/historical editions, at 320px, 768px and wide
+desktop widths. Check TOC collapse, sticky scrolling, language menus, PDF/version
+controls and preservation of emphasis in the Open Kanban Guide. To remove this
+reader experiment, remove the stylesheet and the site main-menu partial.
+
+Content-preservation regression checks compare built readers with an accepted
+pre-styling artifact (including PDF hashes):
+
+```powershell
+python tests/test_ux_guide.py .processing/ux-reader-preview-final/site .processing/ux-collapse-preview-final/site
+python tests/test_ux_guide.py .processing/ux-reader-production-final/site .processing/ux-collapse-production-final/site
+```
+
+These checks cover publication markup and controls; responsive geometry and
+interaction still require the browser checks above.
