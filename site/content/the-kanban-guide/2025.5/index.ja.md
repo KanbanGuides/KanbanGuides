@@ -82,7 +82,7 @@ This publication is offered for license under the Attribution ShareAlike license
 - ワークフローを改善する
 
 <!-- In their implementation, these Kanban practices are collectively called a Kanban system. Those who participate in the value delivery of a Kanban system are called Kanban system members. -->
-これらのカンバンのプラクティスを実装したものを、総称してカンバンシステムと呼ぶ。カンバンシステムの価値提供に参加する人たちを、「カンバンシステムメンバー（Kanban system members）」と呼ぶ。
+これらのカンバンのプラクティスを実装したものを総称してカンバンシステムと呼ぶ。カンバンシステムの価値提供に参加する人たちのことを「カンバンシステムメンバー（Kanban system members）」と呼ぶ。
 
 <!-- ## Why Use Kanban? -->
 ## カンバンを使う理由
@@ -91,7 +91,7 @@ This publication is offered for license under the Attribution ShareAlike license
 カンバンの定義の中心にあるのはフローの概念である。フローとは、潜在的な価値がシステムを通じて移動することを指す。ほとんどのワークフローが価値を最適化するために存在するように、カンバンの戦略はフローを最適化することで価値を最適化する。価値の最適化とは、効果性、効率性、予測可能性の適切なバランスを追求することを意味する。
 
 <!-- - An effective workflow delivers what stakeholders want when they want it. -->
-- 効果的なワークフローは、ステークホルダーが望むものを、望むタイミングで提供する
+- 効果的なワークフローは、ステークホルダーが望むものを望むタイミングで提供する
 <!-- - An efficient workflow allocates available economic resources as optimally as possible to deliver value. -->
 - 効率的なワークフローは、利用可能な経済資源をできるだけ最適に配分し、価値を提供する
 <!-- - A predictable workflow means being able to accurately forecast value delivery within an acceptable degree of uncertainty. -->
