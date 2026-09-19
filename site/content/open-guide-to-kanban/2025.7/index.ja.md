@@ -105,7 +105,7 @@ translators:
 - *フロー*を改善する
 
 <!-- In their implementation, these Kanban practices are collectively called a Kanban system. Those who participate in the Value delivery of a Kanban system are called Kanban system members. -->
-これらのカンバンのプラクティスを実装したものを、総称してカンバンシステムと呼ぶ。カンバンシステムの価値提供に参加する人たちを、カンバンシステムメンバーと呼ぶ。
+これらのカンバンのプラクティスを実装したものを総称してカンバンシステムと呼ぶ。カンバンシステムの価値提供に参加する人たちのことをカンバンシステムメンバーと呼ぶ。
 
 <!-- ## Why Use Kanban? -->
 ## カンバンを使う理由
@@ -203,7 +203,7 @@ translators:
 - *ブロックされている作業やプロセスを引き起こしている障害物を解消する*
 
 <!-- A common practice is for Kanban system members to review the active _Items_ _on a regular basis_. This review can occur continuously or at regular intervals. Kanban system members must explicitly control the number of _Work Items_ in a workflow from ‘started’ to ‘finished,’ directly or indirectly. That control can be represented on a Kanban board in any way that _Kanban system_ members deem appropriate. -->
-カンバンシステムメンバーは、進行中の*項目*を*一定の頻度で*レビューするのが一般的である。このレビューは、継続的または定期的に行う。カンバンシステムメンバーは、「開始」から「終了」までの*作業項目*の数を、明示的に、直接的または間接的に制御しなければならない。この制御は、*カンバンシステム*メンバーが適切と判断する任意の方法でカンバンボード上に表現できる。
+カンバンシステムメンバーは、進行中の*項目*を*一定の頻度で*レビューするのが一般的である。このレビューは、継続的または定期的に行う。カンバンシステムメンバーは、「開始」から「終了」までの*作業項目*の数を明示的に、直接的または間接的に制御しなければならない。この制御は、*カンバンシステム*メンバーが適切と判断する任意の方法でカンバンボード上に表現できる。
 
 <!-- _The use of WIP limits (16) in Kanban for Knowledge Work typically indicates that demand can exceed the team’s capacity, so WIP limits (16) are used to regulate and balance the Flow of Work Items and prevent overload._ -->
 *ナレッジワークにおけるカンバンでWIP制限(16)が用いられているのは、需要がチームのキャパシティを上回る可能性があることを示している場合が多い。そのため、WIP制限(16)は、作業項目のフローを調整し、バランスを保ち、過負荷を防ぐために用いられる*。
@@ -228,7 +228,7 @@ translators:
 <!-- - _Kanban system members should ‘start’ Work when they are ready to work on it, bringing in new Work based on how it is being prioritized._ -->
 - *カンバンシステムメンバーは、作業の準備ができたときに「開始」すべきであり、優先順位に基づいて新たな作業に取り組むべきである*
 <!-- - _Kanban system members––and others outside the Kanban system––should explicitly prevent Work from being pushed to Kanban system members._ -->
-- *カンバンシステムメンバーおよびその外部にいる関係者は、作業がカンバンシステムメンバーにプッシュされることを、明示的に防がねばならない*
+- *カンバンシステムメンバーおよびその外部にいる関係者は、作業がカンバンシステムメンバーにプッシュされるのを明示的に防がねばならない*
 <!-- - _Beware of re-prioritization of ‘Started but Not Finished Work’ (SNFW) or_  
   _Work In Progress/Process (WIP), as it causes those Items to age (sit idle)_  
   _and leads to longer or less predictable Elapsed Times from ‘Started’ to ‘Finished.’_ -->
@@ -457,7 +457,7 @@ translators:
 - **スラック（Slack）**(19): スラックとは、需要の急増、予期しない作業、あるいは想定外の事態の発生に対応するために、システム内にあえて未稼働のキャパシティを残しておくことである。知識活動におけるカンバンの文脈では、スラックとは、ばらつきを吸収したり、突発的な中断に対処したり、継続的な改善を実現したりするために、カンバンシステムのスループットを損なうことなく、ワークフローの定義内で意図的にキャパシティや時間に余裕をもたせる方針やその配分を指す。例えば、カンバンシステムメンバーが「開始しているが終了していない作業（SNFW）」や「進行中の作業（WIP）」をキャパシティの80%に制限することでスラックを確保し、計画した作業を遅延させることなく、緊急対応やプロセス改善に時間を割けるようにすることがある。スラックは、リーンにおける重要な概念である。
 <!-- - **Value divided by Effort:** Estimated Value (usually an educated guess) divided by Estimated Effort (usually an educated guess). Actual Effort and Value tend to be random. Kanban system members should tread carefully before considering this approach. Optionally, consider Risk. -->
 <!-- 現時点でこの訳を当てておく -->
-- **価値 ÷ 作業量（Value divided by Effort）**: 見積もった価値（通常は経験に基づく推測）を、見積もった作業量（これも通常は経験に基づく推測）で割ったもの。実際の作業量と価値は往々にしてランダムである。このアプローチを検討する際には、カンバンシステムメンバーは慎重になるべきである。必要に応じて、リスクも考慮すること。
+- **価値 ÷ 作業量（Value divided by Effort）**: 見積もった価値（通常は経験に基づく推測）を見積もった作業量（これも通常は経験に基づく推測）で割ったもの。実際の作業量と価値は往々にしてランダムである。このアプローチを検討する際には、カンバンシステムメンバーは慎重になるべきである。必要に応じて、リスクも考慮すること。
 
 <!-- ### Conventions Used in the Context of Knowledge Workd -->
 ### ナレッジワークにおける用語
