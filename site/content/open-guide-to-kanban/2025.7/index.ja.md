@@ -228,7 +228,8 @@ translators:
 <!-- - _Kanban system members should ‘start’ Work when they are ready to work on it, bringing in new Work based on how it is being prioritized._ -->
 - *カンバンシステムメンバーは、作業の準備ができたときに「開始」すべきであり、優先順位に基づいて新たな作業に取り組むべきである*
 <!-- - _Kanban system members––and others outside the Kanban system––should explicitly prevent Work from being pushed to Kanban system members._ -->
-- *カンバンシステムメンバーおよびその外部にいる関係者は、作業がカンバンシステムメンバーにプッシュされることを、明示的に防がねばならない*
+- *カンバンシステムメンバーおよびカンバンシステムの外部にいる関係者は、作業がカンバンシステムメンバーにプッシュされるのを明示的に防がねばならない*
+
 <!-- - _Beware of re-prioritization of ‘Started but Not Finished Work’ (SNFW) or_  
   _Work In Progress/Process (WIP), as it causes those Items to age (sit idle)_  
   _and leads to longer or less predictable Elapsed Times from ‘Started’ to ‘Finished.’_ -->
