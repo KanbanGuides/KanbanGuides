@@ -1,0 +1,35 @@
+% Kanban Guides cover: uppercase title stacked above an accent
+% bar at the middle of the page; details below. Colour comes from style.tex.
+\begin{titlepage}
+  \thispagestyle{empty}
+  $if(dir)$\raggedleft\rmfamily$else$\raggedright\sffamily$endif$
+  \vspace*{-0.02\textheight}
+  \parbox[b][0.47\textheight][b]{0.6\textwidth}{$if(dir)$\raggedleft$else$\raggedright$endif$\fontsize{64}{72}\selectfont\MakeUppercase{$if(short_title)$$short_title$$else$$title$$endif$}\par}\par
+  \vspace{1.4cm}
+  \textcolor{guideaccent}{\rule{0.36\textwidth}{0.9cm}}\par
+  \vspace{1.4cm}
+  {\large $labels.edition$ $edition$$if(date)$ · $date$$endif$\par}
+  $if(tagline)$
+  \vspace{0.3cm}
+  {\itshape $tagline$\par}
+  $elseif(based_on)$
+  \vspace{0.3cm}
+  {\itshape $labels.based_on$ $based_on$\par}
+  $endif$
+  $if(authors)$
+  \vspace{1cm}
+  {\bfseries $labels.authors$\par}
+  $for(authors)$$authors.name$$sep$ · $endfor$\par
+  $endif$
+  $if(translators)$
+  \vspace{0.6cm}
+  {\bfseries $labels.translators$\par}
+  $for(translators)$$translators.name$$sep$ · $endfor$\par
+  $endif$
+  $if(contributors)$
+  \vspace{0.6cm}
+  {\bfseries $labels.contributors$\par}
+  {\small $for(contributors)$$contributors.name$$sep$, $endfor$\par}
+  $endif$
+  \vfill
+\end{titlepage}

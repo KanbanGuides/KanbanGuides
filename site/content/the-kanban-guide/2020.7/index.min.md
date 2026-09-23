@@ -1,5 +1,6 @@
 ---
 title: "Da Kanban Booky (Joo-ly 2020)"
+short_title: "Da Kanban Booky"
 description: >
   Dis booky try be da one-banany-rulebook! Just da teeny Kanban rule-bits for makin’ da worky flow flow.  
   You can mix da Kanban with other thingies if your team go beep-boop in weird ways. 🍌
@@ -8,14 +9,7 @@ date: 2020-07-01T09:00:00Z
 keywords:
   - Kanban
 
-author:
-  - John Banana Coleman
-  - Danny Banana Vacanti
-
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 
 sitemap:
   priority: 0.6
@@ -23,10 +17,6 @@ sitemap:
 aliases:
   - /the-kanban-guide/2020.07/
 
-translators:
-  - name: "John Coleman"
-    role: translator
-    weight: 1
 ---
 
 # Da Kanban Booky

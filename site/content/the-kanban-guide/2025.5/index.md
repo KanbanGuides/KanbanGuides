@@ -1,17 +1,12 @@
 ---
 title: The Kanban Guide (May 2025)
+short_title: The Kanban Guide
 description: The Kanban Guide is the official, minimal reference for Kanban. Clear, stable, and focused, it defines the core practices and principles for managing flow and improving delivery across industries.
 date: 2025-05-01T09:00:00Z
 version: 2025.5
 keywords:
   - Kanban
-author:
-  - John Coleman
-  - Daniel Vacanti
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 sitemap:
   priority: 0.6
 guide_whatis: |

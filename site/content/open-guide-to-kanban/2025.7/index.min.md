@@ -29,15 +29,9 @@ keywords:
   - what’s da workflow?
   - get result, not noise
 
-author:
-  - Johnny Banana Coleman
-
 date: 2025-07-02T09:00:00Z
 type: guide
 forked_from: the-kanban-guide/2025.5
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 
 sitemap:
   priority: 1.0
@@ -45,10 +39,6 @@ sitemap:
 aliases:
   - /open-guide-to-kanban/latest/
 
-translators:
-  - name: "John Coleman"
-    role: translator
-    weight: 1
 ---
 
 Dis work, Da Open Banana Booky of Kanban, is an adaptation of da [Kanban Guide (May 2025 version)](https://kanbanguides.org/history/kanban-guide-2025/), which is licensed under da Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0). Da original booky is © 2019-2025 Orderly Disruption Limited, Daniel S. Vacanti, Inc. Changes were made to da original. Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). _Bits in slanty-letters is © 2025_ Orderly Disruption Limited, licensed under CC BY-SA 4.0. All da other stuff is from © 2019-2025 Orderly Disruption Limited, Daniel S. Vacanti, Inc., also licensed under CC BY-SA 4.0.

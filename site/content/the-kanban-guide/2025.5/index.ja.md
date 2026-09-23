@@ -1,19 +1,14 @@
 ---
 # title: The Kanban Guide (May 2025)
 title: カンバンガイド (2025年5月)
+short_title: カンバンガイド
 # description: The Kanban Guide is the official, minimal reference for Kanban. Clear, stable, and focused, it defines the core practices and principles for managing flow and improving delivery across industries.
 description: カンバンガイドは、カンバンに関する公式かつ最小限のリファレンスです。明確で安定しており、焦点が定まった本ガイドは、業界を問わずフローの管理とデリバリーの改善のための中核となるプラクティスと原則を定義しています。
 date: 2025-05-01T09:00:00Z
 version: 2025.5
 keywords:
   - Kanban, カンバン
-author:
-  - John Coleman
-  - Daniel Vacanti
 type: guide
-mainfont: "Noto Serif JP"
-sansfont: "Noto Sans JP"
-monofont: "Noto Sans JP"
 sitemap:
   priority: 0.6
 guide_whatis: |
@@ -24,13 +19,6 @@ guide_whatis: |
    本ガイドでは、いくつかの用語について特定の使い方を定めている。これらは既存の定義を置き換えることを意図したものではなく、本ガイドにおける用法を明確にするためのものである。
 aliases:
   - /the-kanban-guide/latest
-translators:
-- name: Tomoharu Nagasawa
-  githubUsername: tomoharunagasawa
-  url: https://www.linkedin.com/in/tnagasawa/
-  role: translator
-  founder: true
-  weight: 1
 ---
 
 <!-- ## Preface -->

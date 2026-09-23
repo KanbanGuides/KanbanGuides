@@ -1,6 +1,3 @@
-platform:
-  version: v1
-  ring: production
 site:
   source: site
 delivery:
@@ -13,3 +10,6 @@ delivery:
   preview:
     environment: preview
     url: https://red-pond-0d8225910-preview.centralus.2.azurestaticapps.net/
+platform:
+  version: v1
+  ring: preview

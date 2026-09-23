@@ -1,0 +1,69 @@
+# Spanish (Spain) translation team for The Kanban Guide. Roles: translator, reviewer.
+# From the "Información de la traducción" section of index.es-ES.md.
+- name: Aitor Fernández-Ceballos
+  url: https://www.linkedin.com/in/aitorfcj/
+  role: translator
+  contributions:
+    - "2025.5"
+  weight: 1
+
+# Original 2020.12 translators; their translation is retained for paragraphs unchanged since that version.
+- name: Jose Antonio Molina
+  url: https://www.linkedin.com/in/molina2018/
+  role: translator
+  contributions:
+    - "2020.12"
+    - "2025.5"
+  weight: 2
+
+- name: Youssef Oufaska
+  url: https://www.linkedin.com/in/youfaska/
+  role: translator
+  contributions:
+    - "2020.12"
+    - "2025.5"
+  weight: 3
+
+# Reviewer of the original 2020.12 translation.
+- name: Jose Casal
+  url: https://www.linkedin.com/in/jcasal/
+  role: reviewer
+  contributions:
+    - "2020.12"
+    - "2025.5"
+  weight: 9
+
+- name: David Zalazar
+  url: https://www.linkedin.com/in/david-zalazar-6ba55610b/
+  role: reviewer
+  contributions:
+    - "2025.5"
+  weight: 4
+
+- name: Imanol Calo
+  url: https://www.linkedin.com/in/imanol-calo-granillo-icg/
+  role: reviewer
+  contributions:
+    - "2025.5"
+  weight: 5
+
+- name: Iván Garrido
+  url: https://www.linkedin.com/in/ivangarridog/
+  role: reviewer
+  contributions:
+    - "2025.5"
+  weight: 6
+
+- name: Jorge Messina
+  url: https://www.linkedin.com/in/jormessina/
+  role: reviewer
+  contributions:
+    - "2025.5"
+  weight: 7
+
+- name: Luis Chueca
+  url: https://www.linkedin.com/in/luischueca/
+  role: reviewer
+  contributions:
+    - "2025.5"
+  weight: 8

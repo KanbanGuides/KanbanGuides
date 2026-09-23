@@ -1,0 +1,8 @@
+# Japanese PDFs. CJKmainfont enables Japanese line breaking.
+mainfont: Noto Serif JP
+sansfont: Noto Sans JP
+monofont: Noto Sans JP
+CJKmainfont: Noto Serif JP
+fontSources:
+  Noto Serif JP: https://github.com/notofonts/noto-cjk/releases/tag/Serif2.003 (12_NotoSerifJP.zip, SIL Open Font License)
+  Noto Sans JP: https://github.com/notofonts/noto-cjk/releases/tag/Sans2.004 (16_NotoSansJP.zip, SIL Open Font License)

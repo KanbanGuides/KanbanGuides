@@ -1,0 +1,6 @@
+# Minionese (test language, never published to production). Roles: translator, reviewer.
+- name: John Coleman
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 1

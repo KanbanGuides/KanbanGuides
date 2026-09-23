@@ -1,5 +1,6 @@
 ---
 title: "Da Kanban Booky (Deceembah 2020)"
+short_title: "Da Kanban Booky"
 description: >
   Dis doccy try to be da big banana for all Kanban lovers. Just da tiny rule bits to start da party.  
   You can mash it with other stuff too—more bananas, more fun, more flowy-wow!
@@ -8,22 +9,11 @@ date: 2020-12-01T09:00:00Z
 keywords:
   - Kanban
 
-author:
-  - John Banana Coleman
-  - Danny Banana Vacanti
-
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 
 sitemap:
   priority: 0.6
 
-translators:
-  - name: "John Coleman"
-    role: translator
-    weight: 1
 ---
 
 **Deceembah 2020**  

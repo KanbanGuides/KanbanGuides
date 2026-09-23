@@ -1,17 +1,12 @@
 ---
 title: La Guía Kanban (mayo de 2025)
+short_title: La Guía Kanban
 description: La Guía Kanban es la referencia mínima oficial de Kanban. Clara, estable y focalizada, define las prácticas y principios básicos para gestionar el flujo y mejorar la entrega en todos los sectores.
 date: 2025-10-30T15:30:00Z
 version: 2025.5
 keywords:
   - Kanban
-author:
-  - John Coleman
-  - Daniel Vacanti
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 sitemap:
   priority: 0.6
 guide_whatis: |

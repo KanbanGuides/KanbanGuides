@@ -54,26 +54,14 @@ keywords:
   - outcome-oriented delivery
   - アウトカム指向の提供
   - 成果指向の提供
-author:
-  - John Coleman
 date: 2025-07-02T09:00:00Z
 type: guide
 forked_from: the-kanban-guide/2025.5
-mainfont: "Noto Serif JP"
-sansfont: "Noto Sans JP"
-monofont: "Noto Sans JP"
 sitemap:
   priority: 1.0
 aliases:
   - /open-guide-to-kanban/latest/
 translationDraft: false
-translators:
-- name: Tomoharu Nagasawa
-  githubUsername: tomoharunagasawa
-  url: https://www.linkedin.com/in/tnagasawa/
-  role: translator
-  founder: true
-  weight: 1
 ---
 
 <!-- This work, Open Guide to Kanban, is an adaptation of the [Kanban Guide (May 2025 version)](https://kanbanguides.org/ja/history/the-kanban-guide-2025/), which is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0). The original guide is © 2019-2025 Orderly Disruption Limited, Daniel S. Vacanti, Inc. Changes were made to the original. Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). _Portions highlighted in italic are © 2025_ Orderly Disruption Limited, licensed under CC BY-SA 4.0. All other content is from © 2019-2025 Orderly Disruption Limited, Daniel S. Vacanti, Inc., also licensed under CC BY-SA 4.0. -->

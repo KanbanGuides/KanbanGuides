@@ -98,5 +98,10 @@ python tests/test_ux_guide.py .processing/ux-reader-preview-final/site .processi
 python tests/test_ux_guide.py .processing/ux-reader-production-final/site .processing/ux-collapse-production-final/site
 ```
 
+PDFs deliberately regenerated and reviewed are listed with their baseline and
+replacement SHA-256 in `tests/reviewed-pdf-replacements.json`; the PDF check
+accepts only those replacements and requires every other PDF to be unchanged.
+Add an entry there when a reviewed PDF replacement is merged.
+
 These checks cover publication markup and controls; responsive geometry and
 interaction still require the browser checks above.

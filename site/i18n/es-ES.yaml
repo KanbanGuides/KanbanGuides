@@ -498,3 +498,25 @@
 
 - id: guide_version_latest
   translation: "Última"
+
+# PDF cover and callout labels
+- id: pdf_authors_label
+  translation: "Autores"
+- id: pdf_contributors_label
+  translation: "Contribuidores"
+- id: pdf_translators_label
+  translation: "Traductores"
+- id: pdf_edition_label
+  translation: "Edición"
+- id: pdf_based_on_label
+  translation: "Basado en"
+- id: pdf_callout_note
+  translation: "Nota"
+- id: pdf_callout_tip
+  translation: "Consejo"
+- id: pdf_callout_important
+  translation: "Importante"
+- id: pdf_callout_warning
+  translation: "Advertencia"
+- id: pdf_callout_caution
+  translation: "Precaución"

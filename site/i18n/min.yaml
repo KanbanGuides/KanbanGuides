@@ -496,3 +496,25 @@
   translation: "Select version"
 - id: guide_version_latest
   translation: "Latest"
+
+# PDF cover and callout labels
+- id: pdf_authors_label
+  translation: "Writey Minions"
+- id: pdf_contributors_label
+  translation: "Banana Helpers"
+- id: pdf_translators_label
+  translation: "talky-translaters"
+- id: pdf_edition_label
+  translation: "Booky Num Num"
+- id: pdf_based_on_label
+  translation: "Copy-copy from"
+- id: pdf_callout_note
+  translation: "Psst"
+- id: pdf_callout_tip
+  translation: "Banana Tip"
+- id: pdf_callout_important
+  translation: "Big Deal"
+- id: pdf_callout_warning
+  translation: "Uh-oh"
+- id: pdf_callout_caution
+  translation: "Bee-do Bee-do"

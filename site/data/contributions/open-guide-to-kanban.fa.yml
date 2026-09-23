@@ -1,0 +1,55 @@
+# Persian translation team for the Open Guide to Kanban. Roles: translator, reviewer.
+# Moved from index.fa.md front matter; weights keep the previously displayed order.
+- name: Pedram Keshavarzi
+  githubUsername: pedicurus
+  url: https://www.agile-gap.com/p/pedram-keshavarzi
+  role: translator
+  founder: true
+  contributions:
+    - "2025.7"
+  weight: 1
+
+- name: Orod Semsarzadeh
+  githubUsername: orodsem
+  url: https://www.linkedin.com/in/orod-semsarzadeh/
+  role: reviewer
+  founder: false
+  contributions:
+    - "2025.7"
+  weight: 2
+
+- name: Shahrzad Lotfi
+  githubUsername: shahrzadlotfi92
+  url: https://www.linkedin.com/in/shahrzad-lotfi-a6163ba2/
+  role: reviewer
+  founder: false
+  contributions:
+    - "2025.7"
+  weight: 3
+
+- name: Morteza Moalagh
+  githubUsername: Aragornsprint
+  url: https://www.linkedin.com/in/morteza-moalagh-abb5ba33/
+  role: reviewer
+  founder: false
+  contributions:
+    - "2025.7"
+  weight: 4
+
+- name: Mohammad Esmaeil Pedaran
+  githubUsername: mohped
+  url: https://www.linkedin.com/in/mohammad-esmaeil-pedaran/
+  role: reviewer
+  founder: false
+  contributions:
+    - "2025.7"
+  weight: 5
+
+- name: Ali Naderivarandi
+  githubUsername: Alinaderivarandi
+  url: https://www.linkedin.com/in/ali-naderivarandi-9a269a261/
+  role: reviewer
+  founder: false
+  contributions:
+    - "2025.7"
+  weight: 6

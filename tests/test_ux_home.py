@@ -1,7 +1,9 @@
 """Acceptance checks against built multilingual UX homepages (standard library only)."""
+from html import unescape
 import json
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 import sys
 import unittest
 from tempfile import TemporaryDirectory
@@ -12,6 +14,29 @@ PRODUCTION = '--production' in sys.argv
 if PRODUCTION:
     sys.argv.remove('--production')
 COPY = Path(__file__).resolve().parents[1] / 'site/data/ux-home'
+
+
+def yaml_records(text):
+    """Read the contribution files' YAML subset: a list of mappings whose values are
+    scalars, scalar lists or one-level scalar mappings."""
+    records, key = [], None
+    for line in text.splitlines():
+        if not line.strip() or line.lstrip().startswith('#'):
+            continue
+        indent = len(line) - len(line.lstrip())
+        item = line.strip()
+        if indent == 0 and item.startswith('- '):
+            records.append({})
+            item, indent = item[2:], 2
+        if indent == 2:
+            key, _, value = item.partition(':')
+            records[-1][key] = value.strip().strip('"\'') or None
+        elif item.startswith('- '):
+            records[-1][key] = (records[-1][key] or []) + [item[2:].strip().strip('"\'')]
+        else:
+            name, _, value = item.partition(':')
+            records[-1][key] = (records[-1][key] or {}) | {name.strip(): value.strip().strip('"\'')}
+    return records
 
 
 def language_pdfs(directory, lang):
@@ -177,6 +202,28 @@ class HomepageAcceptance(unittest.TestCase):
                 self.assertEqual(toggle['aria-expanded'], 'false')
                 self.assertIn('hidden', toggle)
                 self.assertNotIn('hidden', navigation)
+
+    def test_guide_cards_credit_localized_creators_of_the_latest_edition(self):
+        contributions = Path(__file__).resolve().parents[1] / 'site/data/contributions'
+        for lang, (route, page) in self.homes.items():
+            html = (ARTIFACT / route.lstrip('/') / 'index.html').read_text(encoding='utf-8')
+            copy = json.loads((COPY / f'{lang}.json').read_text(encoding='utf-8'))
+            for slug in [a['data-guide'] for a in page.links if a.get('data-action') == 'read']:
+                with self.subTest(language=lang, guide=slug):
+                    people = yaml_records((contributions / f'{slug}.yml').read_text(encoding='utf-8'))
+                    latest = max((c for p in people for c in p['contributions']), key=lambda v: tuple(map(int, v.split('.'))))
+                    creators = sorted((p for p in people if p.get('role') == 'creator' and latest in p['contributions']), key=lambda p: int(p['weight']))
+                    self.assertTrue(creators, slug)
+                    names = [p.get('localizedNames', {}).get(lang, p['name']) for p in creators]
+                    card = re.search(rf'aria-labelledby="?title-{slug}"?.*?</article>', html, re.S)
+                    self.assertIsNotNone(card)
+                    byline = re.search(r'class="?kg-authors"?>(.*?)</p>', card[0], re.S)
+                    self.assertIsNotNone(byline, 'missing creator byline')
+                    text = unescape(byline[1])
+                    self.assertTrue(text.startswith(copy['ui']['by']), text)
+                    positions = [text.find(name) for name in names]
+                    self.assertNotIn(-1, positions, text)
+                    self.assertEqual(positions, sorted(positions), text)
 
     def test_pdf_discovery_preserves_mixed_case_and_nested_paths(self):
         with TemporaryDirectory() as temporary:

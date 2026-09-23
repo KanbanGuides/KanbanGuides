@@ -4,6 +4,7 @@ Usage: python tests/test_ux_guide.py NEW_SITE BASELINE_SITE
 """
 from pathlib import Path
 import hashlib
+import json
 import re
 import sys
 import unittest
@@ -38,14 +39,40 @@ class GuidePresentation(unittest.TestCase):
         print(f'Compared {count} complete reader articles, including controls and emphasis')
 
     def test_supplied_pdfs_are_unchanged(self):
-        count = 0
+        # Reviewed regenerations are listed per source PDF. A published PDF path
+        # ends with its source path below site/content (language prefixes vary).
+        # A listed PDF must have exactly the reviewed baseline and replacement
+        # hashes; every other PDF must match the baseline byte for byte.
+        reviewed = json.loads((Path(__file__).parent / 'reviewed-pdf-replacements.json').read_text(encoding='utf-8'))
+        entries = {}
+        for entry in reviewed['replacements']:
+            key = entry['source'].removeprefix('site/content/').lower()
+            self.assertNotIn(key, entries, f'duplicate reviewed replacement for {key}')
+            entries[key] = entry
+        matched = set()
+        count = replaced = 0
         for old in BASELINE.rglob('*.pdf'):
             count += 1
+            relative = old.relative_to(BASELINE).as_posix().lower()
             new = SITE / old.relative_to(BASELINE)
-            self.assertEqual(hashlib.sha256(old.read_bytes()).digest(),
-                             hashlib.sha256(new.read_bytes()).digest(), str(new))
+            baseline = hashlib.sha256(old.read_bytes()).hexdigest()
+            keys = [key for key in entries if relative == key or relative.endswith('/' + key)]
+            if keys:
+                entry = entries[keys[0]]
+                matched.add(keys[0])
+                self.assertEqual(entry['baseline'], baseline, f'{relative}: baseline differs from the reviewed entry')
+                expected = entry['replacement']
+                replaced += 1
+            else:
+                expected = baseline
+            self.assertEqual(expected, hashlib.sha256(new.read_bytes()).hexdigest(), str(new))
         self.assertGreater(count, 0)
-        print(f'Compared {count} PDF hashes')
+        # The policy only reviews replacements, so a newly published PDF is unreviewed.
+        published = {path.relative_to(SITE).as_posix() for path in SITE.rglob('*.pdf')}
+        accepted = {path.relative_to(BASELINE).as_posix() for path in BASELINE.rglob('*.pdf')}
+        self.assertEqual(set(), published - accepted, 'PDFs published without a baseline')
+        self.assertEqual(set(entries), matched, 'reviewed replacements with no matching published PDF')
+        print(f'Compared {count} PDF hashes ({replaced} reviewed replacements)')
 
     def test_homepage_does_not_load_reader_style(self):
         self.assertNotIn('/css/ux-guide.css', (SITE / 'index.html').read_text(encoding='utf-8'))

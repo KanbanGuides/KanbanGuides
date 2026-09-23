@@ -18,7 +18,7 @@ concurrency:
 jobs:
   guide-site:
     name: Guide site
-    uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v1
+    uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-build.yaml@v1-preview
     with:
       source-ref: ${{ github.event.pull_request.head.sha || github.sha }}
       source-path: site

@@ -26,14 +26,9 @@ keywords:
   - définition du flux de travail
   - livraison axée sur les résultats
 
-author:
-  - John Coleman
 date: 2025-07-02T09:00:00Z
 type: guide
 forked_from: the-kanban-guide/2025.5
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 sitemap:
   priority: 1.0
 aliases:

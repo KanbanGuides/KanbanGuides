@@ -1,5 +1,6 @@
 ---
 title: "Da Kanban Booky (May 2025)"
+short_title: "Da Kanban Booky"
 description: >
   Dis banana doc is da one-guidey-to-rule-em-all! Just da tiniest bits you need to Kanban good. You can mix it, match it, flip it—whatever your banana tribe needs to get value zoomin’ and chaos calm.
 
@@ -8,14 +9,7 @@ version: 2025.5
 keywords:
   - Kanban
 
-author:
-  - John Banana Coleman
-  - Danny Banana Vacanti
-
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 
 sitemap:
   priority: 0.6
@@ -29,10 +23,6 @@ guide_whatis: |
 aliases:
   - /the-kanban-guide/latest
 
-translators:
-  - name: "John Coleman"
-    role: translator
-    weight: 1
 ---
 
 ## Before-Blabla
