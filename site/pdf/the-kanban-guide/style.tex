@@ -1,0 +1,18 @@
+% OpenGuidePlatform default styling (LaTeX preamble, Pandoc template).
+\usepackage{xcolor}
+\usepackage{graphicx}
+\definecolor{ogplink}{HTML}{1F5FA8}
+\AtBeginDocument{\hypersetup{colorlinks=true,linkcolor=ogplink,urlcolor=ogplink,citecolor=ogplink}}
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+$if(watermark)$
+\usepackage{draftwatermark}
+\SetWatermarkText{$watermark$}
+\SetWatermarkScale{0.6}
+\SetWatermarkColor[gray]{0.9}
+$endif$
+% Kanban Guides: guide accent for the cover bar and top-level headings.
+\definecolor{guideaccent}{HTML}{B52937}
+\usepackage{sectsty}
+\sectionfont{\color{guideaccent}}
+\subsectionfont{\color{guideaccent}}
