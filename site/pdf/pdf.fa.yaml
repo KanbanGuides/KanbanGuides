@@ -1,0 +1,4 @@
+# Persian PDFs. Right-to-left layout comes from the fa language direction in hugo.yaml.
+mainfont: HMXRoya
+sansfont: HMXRoya
+monofont: HMXRoya

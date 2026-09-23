@@ -1,0 +1,43 @@
+# Spanish (Spain) translation team for the Open Guide to Kanban. Roles: translator, reviewer.
+# From the "Información de la traducción" section of index.es-ES.md.
+- name: Aitor Fernández-Ceballos
+  url: https://www.linkedin.com/in/aitorfcj/
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 1
+
+- name: David Zalazar
+  url: https://www.linkedin.com/in/david-zalazar-6ba55610b/
+  role: reviewer
+  contributions:
+    - "2025.7"
+  weight: 2
+
+- name: Imanol Calo
+  url: https://www.linkedin.com/in/imanol-calo-granillo-icg/
+  role: reviewer
+  contributions:
+    - "2025.7"
+  weight: 3
+
+- name: Iván Garrido
+  url: https://www.linkedin.com/in/ivangarridog/
+  role: reviewer
+  contributions:
+    - "2025.7"
+  weight: 4
+
+- name: Jorge Messina
+  url: https://www.linkedin.com/in/jormessina/
+  role: reviewer
+  contributions:
+    - "2025.7"
+  weight: 5
+
+- name: Luis Chueca
+  url: https://www.linkedin.com/in/luischueca/
+  role: reviewer
+  contributions:
+    - "2025.7"
+  weight: 6

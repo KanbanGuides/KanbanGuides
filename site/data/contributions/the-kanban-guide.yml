@@ -25,6 +25,9 @@
     - "2020.12"
     - "2025.5"
   weight: 1
+  localizedNames:
+    fa: جان کولمن
+    min: John Banana Coleman
 
 - name: Daniel Vacanti
   url: https://www.linkedin.com/in/danielvacanti/
@@ -35,7 +38,10 @@
     - "2020.7"
     - "2020.12"
     - "2025.5"
-  weight: 1
+  weight: 2
+  localizedNames:
+    fa: دانیال وَکانتی
+    min: Danny Banana Vacanti
 
 - name: Julia Wester
   githubUsername: julia-wester

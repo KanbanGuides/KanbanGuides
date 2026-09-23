@@ -1,0 +1,16 @@
+# Polish translation team for the Open Guide to Kanban. Roles: translator, reviewer.
+# From the "Nota od tłumaczy" section of index.pl.md.
+- name: Magdalena Firlit
+  githubUsername: Magdalena-Firlit
+  url: https://magdalenafirlit.com/
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 1
+
+- name: Mike Januszewski
+  url: https://januszew.ski
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 2

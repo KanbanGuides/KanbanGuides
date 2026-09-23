@@ -6,13 +6,7 @@ description: Le Guide Kanban est la référence officielle et minimale pour Kanb
 date: 2020-07-01T09:00:00Z
 keywords:
   - Kanban
-author:
-  - John Coleman
-  - Daniel Vacanti
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 sitemap:
   priority: 0.6
 aliases:

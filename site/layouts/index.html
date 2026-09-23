@@ -45,7 +45,7 @@
         <h2 id="title-{{ .Section }}">{{ $title }}</h2>
         {{ with $latest }}<p class="kg-edition"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "January 2006" }}</time> {{ $copy.ui.edition }}</p>{{ end }}
         <p class="kg-description">{{ $info.description | default .Description }}</p>
-        {{ with $latest }}{{ with .Params.author }}<p class="kg-authors">{{ $copy.ui.by }} {{ delimit . (printf " %s " (i18n "and")) }}</p>{{ end }}{{ end }}
+        {{ with $latest }}{{ $authors := slice }}{{ range sort (where (partial "functions/get-contributors.html" .) "role" "creator") "weight" }}{{ $authors = $authors | append .name }}{{ end }}{{ with $authors }}<p class="kg-authors">{{ $copy.ui.by }} {{ delimit . (printf " %s " (i18n "and")) }}</p>{{ end }}{{ end }}
       </div>
       <div class="kg-book" aria-hidden="true"><strong>{{ $title }}</strong>{{ partial "ux/mark.html" . }}<span class="kg-book-lines"></span></div>
       <div class="kg-actions"><a class="kg-button kg-primary" href="{{ .RelPermalink }}" data-action="read" data-guide="{{ .Section }}" aria-label="{{ $copy.ui.read }} — {{ $title }}">{{ $copy.ui.read }} <span aria-hidden="true">→</span></a>{{ with $pdf }}<a class="kg-button kg-secondary" download href="{{ .RelPermalink }}" data-action="pdf" data-guide="{{ $guide.Section }}" aria-label="{{ $copy.ui.download }} — {{ $title }}"><span aria-hidden="true">↓</span> {{ $copy.ui.download }}</a>{{ end }}</div>

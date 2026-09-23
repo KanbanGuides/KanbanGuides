@@ -4,13 +4,7 @@ description: La Guía Kanban es la referencia mínima oficial de Kanban. Clara, 
 date: 2020-12-01T09:00:00Z
 keywords:
   - Kanban
-author:
-  - John Coleman
-  - Daniel Vacanti
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 sitemap:
   priority: 0.6
 ---

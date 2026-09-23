@@ -1,0 +1,37 @@
+# French translation team for the Open Guide to Kanban. Roles: translator, reviewer.
+# From the "Les traducteurs de la version française" line of index.fr.md.
+- name: Dominique Causse
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 1
+
+- name: Jean-Hugues Congia
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 2
+
+- name: Stéphane Maze
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 3
+
+- name: Thomas Moreau
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 4
+
+- name: Laurent Thomas
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 5
+
+- name: Pierre Laurent
+  role: translator
+  contributions:
+    - "2025.7"
+  weight: 6

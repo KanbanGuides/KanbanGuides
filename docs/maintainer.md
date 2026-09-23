@@ -231,8 +231,10 @@ Creators, contributors, reviewers, and translators are managed in YAML data file
 
 ```
 site/data/contributions/
-├── open-guide-to-kanban.yml
-└── the-kanban-guide.yml
+├── open-guide-to-kanban.yml          ← creators (authors), contributors, reviewers
+├── open-guide-to-kanban.<lang>.yml   ← one translation team per language
+├── the-kanban-guide.yml
+└── the-kanban-guide.<lang>.yml
 ```
 
 Entry structure:
@@ -243,12 +245,14 @@ Entry structure:
   url: https://www.linkedin.com/in/johnanthonycoleman/
   contributions:
     - "2025.7"
-  role: creator       # creator | contributor | reviewer | translator
-  founder: true
-  weight: 1
+  role: creator       # guide file: creator | contributor | reviewer | involved
+  founder: true       # language file: translator | reviewer
+  weight: 1           # lower weights are listed first
+  localizedNames:     # optional: the name shown in one language
+    fa: جان کولمن
 ```
 
-Translator entries also include `language: es-419`.
+Authors are the records with `role: creator`; the home page, guide pages and PDF covers all read them from here. Do not add `author` or `translators` to guide front matter — Prepare blocks both.
 
 **Profile image priority:** `image` URL → `gravatarHash` → `githubUsername` (GitHub avatar) → default.
 
@@ -267,7 +271,9 @@ Requires **Pandoc** and a **LaTeX distribution** (MiKTeX/TeX Live/MacTeX) in add
 
 Use the distributed [PDF skill](../.agents/skills/guide.genpdfs/SKILL.md) and its version-locked Core module. The former local PDF, contributor, Gravatar and edition scripts have been retired; their operations are supplied by the corresponding shared skills.
 
-Existing PDFs are declared `supplied` during adoption and must retain their bytes. Before generating a new or reviewed replacement PDF, explicitly declare that resource as `generated` in policy and inspect `Get-GuidePdfPlan`. Preserve the existing filenames, XeLaTeX engine, language metadata passed to Pandoc, and the fonts declared in each document. The former recipe cleared PDF keyword metadata and used non-interactive XeLaTeX; inspect the shared plan for equivalent arguments. Font substitutions require review; do not silently install substitutes. The existing optional cover template remains at `.agents/skills/guide.genpdfs/cover-page.tex`.
+PDF settings, templates and filters live in [`site/pdf/`](../site/pdf/README.md), layered by site, guide, edition and language on top of the platform defaults. Fonts are in `site/pdf/pdf.yaml`, `pdf.fa.yaml` and `pdf.ja.yaml`; right-to-left layout comes from the `fa` language direction in `site/hugo.yaml`. Do not put fonts or `dir` in guide front matter.
+
+Existing PDFs are supplied and must retain their bytes. Before generating a new or reviewed replacement PDF, list it under `downloads` with `handling: generated` in `site/pdf/<guide>/<edition>/pdf.yaml` and inspect `Get-GuidePdfPlan`. Preserve the existing filenames. Font substitutions require review; do not silently install substitutes.
 
 PDF generation and visual acceptance of a replacement remain separate from build/adoption acceptance. No PDF regeneration is part of this migration.
 

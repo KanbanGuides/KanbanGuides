@@ -1,0 +1,9 @@
+# Japanese translation team for The Kanban Guide. Roles: translator, reviewer.
+- name: Tomoharu Nagasawa
+  githubUsername: tomoharunagasawa
+  url: https://www.linkedin.com/in/tnagasawa/
+  role: translator
+  founder: true
+  contributions:
+    - "2025.5"
+  weight: 1

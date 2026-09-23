@@ -1,0 +1,5 @@
+# Kanban Guides PDF settings (all languages unless a pdf.<lang>.yaml overrides).
+# Moved from guide front matter; see README.md for the layering.
+mainfont: Times New Roman
+sansfont: Arial
+monofont: Courier New

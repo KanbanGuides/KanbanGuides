@@ -4,13 +4,7 @@ description: This document aims to be a unifying reference for the community by 
 date: 2020-07-01T09:00:00Z
 keywords:
   - Kanban
-author:
-  - John Coleman
-  - Daniel Vacanti
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 sitemap:
   priority: 0.6
 ---

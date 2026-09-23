@@ -8,22 +8,11 @@ date: 2020-12-01T09:00:00Z
 keywords:
   - Kanban
 
-author:
-  - John Banana Coleman
-  - Danny Banana Vacanti
-
 type: guide
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 
 sitemap:
   priority: 0.6
 
-translators:
-  - name: "John Coleman"
-    role: translator
-    weight: 1
 ---
 
 **Deceembah 2020**  

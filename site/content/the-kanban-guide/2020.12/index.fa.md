@@ -4,15 +4,7 @@ description: «راهنمای کانبان (The Kanban Guide)» مرجع رسم�
 date: 2020-12-01T09:00:00Z
 keywords:
   - کانبان
-author:
-  - جان کولمن
-  - دانیال وَکانتی
 type: guide
-dir: rtl
-mainfont: HMXRoya
-sansfont: HMXRoya
-monofont: HMXRoya
-pdf-engine: xelatex
 sitemap:
   priority: 0.6
 ---

@@ -4,13 +4,7 @@ description: この文書は、カンバンの最小限のガイダンスを提�
 date: 2020-07-01T09:00:00Z
 keywords:
   - Kanban
-author:
-  - John Coleman
-  - Daniel Vacanti
 type: guide
-mainfont: "Noto Serif JP"
-sansfont: "Noto Sans JP"
-monofont: "Noto Sans JP"
 sitemap:
   priority: 0.6
 aliases:

@@ -6,13 +6,7 @@ description: カンバンガイドは、カンバンに関する公式かつ最�
 date: 2020-12-01T09:00:00Z
 keywords:
   - Kanban, カンバン
-author:
-  - John Coleman
-  - Daniel Vacanti
 type: guide
-mainfont: "Noto Serif JP"
-sansfont: "Noto Sans JP"
-monofont: "Noto Sans JP"
 sitemap:
   priority: 0.6
 ---

@@ -24,14 +24,9 @@ keywords:
   - tablero kanban
   - definición de flujo de trabajo
   - entrega orientada a resultados  
-author:
-  - John Coleman
 date: 2025-10-30T15:30:00Z
 type: guide
 forked_from: the-kanban-guide/2025.5
-mainfont: "Times New Roman"
-sansfont: "Arial"
-monofont: "Courier New"
 resources:
   - src: '**open-guide-to-kanban.es-ES.pdf'
     name: 'pdf/open-guide-to-kanban.es-ES.pdf'
