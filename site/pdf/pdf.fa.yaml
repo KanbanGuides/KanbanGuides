@@ -1,5 +1,6 @@
 # Persian PDFs. Right-to-left layout comes from the fa language direction in hugo.yaml.
-# Vazirmatn (SIL Open Font License): https://github.com/rastikerdar/vazirmatn
 mainfont: Vazirmatn
 sansfont: Vazirmatn
 monofont: Vazirmatn
+fontSources:
+  Vazirmatn: https://github.com/rastikerdar/vazirmatn/releases (SIL Open Font License)

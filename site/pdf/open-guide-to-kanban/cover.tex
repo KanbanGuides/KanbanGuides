@@ -1,12 +1,12 @@
-% Kanban Guides cover: uppercase sans title stacked above an accent
+% Kanban Guides cover: uppercase title stacked above an accent
 % bar at the middle of the page; details below. Colour comes from style.tex.
 \begin{titlepage}
   \thispagestyle{empty}
-  \raggedright\sffamily
+  $if(dir)$\raggedleft\rmfamily$else$\raggedright\sffamily$endif$
   \vspace*{-0.02\textheight}
-  \parbox[b][0.47\textheight][b]{0.6\textwidth}{\raggedright\fontsize{64}{72}\selectfont\MakeUppercase{$if(short_title)$$short_title$$else$$title$$endif$}\par}\par
+  \parbox[b][0.47\textheight][b]{0.6\textwidth}{$if(dir)$\raggedleft$else$\raggedright$endif$\fontsize{64}{72}\selectfont\MakeUppercase{$if(short_title)$$short_title$$else$$title$$endif$}\par}\par
   \vspace{1.4cm}
-  {\color{guideaccent}\rule{0.36\textwidth}{0.9cm}}\par
+  \textcolor{guideaccent}{\rule{0.36\textwidth}{0.9cm}}\par
   \vspace{1.4cm}
   {\large $labels.edition$ $edition$$if(date)$ · $date$$endif$\par}
   $if(tagline)$

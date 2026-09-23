@@ -3,3 +3,7 @@
 mainfont: Times New Roman
 sansfont: Arial
 monofont: Courier New
+fontSources:
+  Times New Roman: Microsoft core fonts; included with Windows and Microsoft Office
+  Arial: Microsoft core fonts; included with Windows and Microsoft Office
+  Courier New: Microsoft core fonts; included with Windows and Microsoft Office
