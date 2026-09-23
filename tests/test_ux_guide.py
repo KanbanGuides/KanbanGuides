@@ -39,19 +39,35 @@ class GuidePresentation(unittest.TestCase):
         print(f'Compared {count} complete reader articles, including controls and emphasis')
 
     def test_supplied_pdfs_are_unchanged(self):
-        # Reviewed regenerations are listed by baseline and replacement hash;
-        # every other PDF must match the baseline byte for byte.
+        # Reviewed regenerations are listed per source PDF. A published PDF path
+        # ends with its source path below site/content (language prefixes vary).
+        # A listed PDF must have exactly the reviewed baseline and replacement
+        # hashes; every other PDF must match the baseline byte for byte.
         reviewed = json.loads((Path(__file__).parent / 'reviewed-pdf-replacements.json').read_text(encoding='utf-8'))
-        replacements = {entry['baseline']: entry['replacement'] for entry in reviewed['replacements']}
+        entries = {}
+        for entry in reviewed['replacements']:
+            key = entry['source'].removeprefix('site/content/').lower()
+            self.assertNotIn(key, entries, f'duplicate reviewed replacement for {key}')
+            entries[key] = entry
+        matched = set()
         count = replaced = 0
         for old in BASELINE.rglob('*.pdf'):
             count += 1
+            relative = old.relative_to(BASELINE).as_posix().lower()
             new = SITE / old.relative_to(BASELINE)
             baseline = hashlib.sha256(old.read_bytes()).hexdigest()
-            expected = replacements.get(baseline, baseline)
-            replaced += expected != baseline
+            keys = [key for key in entries if relative == key or relative.endswith('/' + key)]
+            if keys:
+                entry = entries[keys[0]]
+                matched.add(keys[0])
+                self.assertEqual(entry['baseline'], baseline, f'{relative}: baseline differs from the reviewed entry')
+                expected = entry['replacement']
+                replaced += 1
+            else:
+                expected = baseline
             self.assertEqual(expected, hashlib.sha256(new.read_bytes()).hexdigest(), str(new))
         self.assertGreater(count, 0)
+        self.assertEqual(set(entries), matched, 'reviewed replacements with no matching published PDF')
         print(f'Compared {count} PDF hashes ({replaced} reviewed replacements)')
 
     def test_homepage_does_not_load_reader_style(self):
