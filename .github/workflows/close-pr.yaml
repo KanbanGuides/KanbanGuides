@@ -9,6 +9,6 @@ permissions:
   pull-requests: write
 jobs:
   close:
-    uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-close-pr.yaml@v1
+    uses: nkdAgility/OpenGuidePlatform/.github/workflows/guide-site-close-pr.yaml@v1-preview
     secrets:
       static-web-app-token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_POND_0D8225910 }}
