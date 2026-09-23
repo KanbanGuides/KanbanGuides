@@ -660,3 +660,25 @@
 - id: guide_version_latest
   # translation: "Latest"
   translation: "最新"
+
+# PDF cover and callout labels
+- id: pdf_authors_label
+  translation: "著者"
+- id: pdf_contributors_label
+  translation: "貢献者"
+- id: pdf_translators_label
+  translation: "翻訳者"
+- id: pdf_edition_label
+  translation: "版"
+- id: pdf_based_on_label
+  translation: "原典"
+- id: pdf_callout_note
+  translation: "注記"
+- id: pdf_callout_tip
+  translation: "ヒント"
+- id: pdf_callout_important
+  translation: "重要"
+- id: pdf_callout_warning
+  translation: "警告"
+- id: pdf_callout_caution
+  translation: "注意"

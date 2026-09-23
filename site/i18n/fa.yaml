@@ -495,3 +495,25 @@
   translation: "انتخاب ورژن"
 - id: guide_version_latest
   translation: "جدیدترین"
+
+# PDF cover and callout labels
+- id: pdf_authors_label
+  translation: "نویسندگان"
+- id: pdf_contributors_label
+  translation: "همکاران"
+- id: pdf_translators_label
+  translation: "مترجمان"
+- id: pdf_edition_label
+  translation: "ویرایش"
+- id: pdf_based_on_label
+  translation: "بر اساس"
+- id: pdf_callout_note
+  translation: "یادداشت"
+- id: pdf_callout_tip
+  translation: "نکته"
+- id: pdf_callout_important
+  translation: "مهم"
+- id: pdf_callout_warning
+  translation: "هشدار"
+- id: pdf_callout_caution
+  translation: "احتیاط"
