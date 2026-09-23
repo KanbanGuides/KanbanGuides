@@ -273,9 +273,9 @@ Use the distributed [PDF skill](../.agents/skills/guide.genpdfs/SKILL.md) and it
 
 PDF settings, templates and filters live in [`site/pdf/`](../site/pdf/README.md), layered by site, guide, edition and language on top of the platform defaults. Fonts are in `site/pdf/pdf.yaml`, `pdf.fa.yaml` and `pdf.ja.yaml`; right-to-left layout comes from the `fa` language direction in `site/hugo.yaml`. Do not put fonts or `dir` in guide front matter.
 
-Existing PDFs are supplied and must retain their bytes. Before generating a new or reviewed replacement PDF, list it under `downloads` with `handling: generated` in `site/pdf/<guide>/<edition>/pdf.yaml` and inspect `Get-GuidePdfPlan`. Preserve the existing filenames. Font substitutions require review; do not silently install substitutes.
+This migration replaced the current-edition PDFs (Open Guide to Kanban 2025.7 and The Kanban Guide 2025.5, every language with guide text, plus the Letter-size `en-us` copy) with reviewed PDFs generated from the site content using these templates. All other PDFs keep their existing bytes: the 2020.7 and 2020.12 editions (whose web text is abridged, so the published PDFs stay authoritative) and translations that exist only as PDFs.
 
-PDF generation and visual acceptance of a replacement remain separate from build/adoption acceptance. No PDF regeneration is part of this migration.
+Until the platform generates PDFs during the build, every committed PDF is treated as supplied and must retain its bytes. Replacing one is a reviewed change: generate it with the platform's PDF workflow, inspect `Get-GuidePdfPlan`, check the pages visually and keep the existing filename. Font substitutions require review; do not silently install substitutes.
 
 ---
 

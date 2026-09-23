@@ -7,11 +7,12 @@
     - "2025.5"
   weight: 1
 
-# Their 2020.12 translation is retained for paragraphs unchanged since that version.
+# Original 2020.12 translators; their translation is retained for paragraphs unchanged since that version.
 - name: Jose Antonio Molina
   url: https://www.linkedin.com/in/molina2018/
   role: translator
   contributions:
+    - "2020.12"
     - "2025.5"
   weight: 2
 
@@ -19,6 +20,7 @@
   url: https://www.linkedin.com/in/youfaska/
   role: translator
   contributions:
+    - "2020.12"
     - "2025.5"
   weight: 3
 
