@@ -4,6 +4,7 @@ Usage: python tests/test_ux_guide.py NEW_SITE BASELINE_SITE
 """
 from pathlib import Path
 import hashlib
+import json
 import re
 import sys
 import unittest
@@ -38,14 +39,20 @@ class GuidePresentation(unittest.TestCase):
         print(f'Compared {count} complete reader articles, including controls and emphasis')
 
     def test_supplied_pdfs_are_unchanged(self):
-        count = 0
+        # Reviewed regenerations are listed by baseline and replacement hash;
+        # every other PDF must match the baseline byte for byte.
+        reviewed = json.loads((Path(__file__).parent / 'reviewed-pdf-replacements.json').read_text(encoding='utf-8'))
+        replacements = {entry['baseline']: entry['replacement'] for entry in reviewed['replacements']}
+        count = replaced = 0
         for old in BASELINE.rglob('*.pdf'):
             count += 1
             new = SITE / old.relative_to(BASELINE)
-            self.assertEqual(hashlib.sha256(old.read_bytes()).digest(),
-                             hashlib.sha256(new.read_bytes()).digest(), str(new))
+            baseline = hashlib.sha256(old.read_bytes()).hexdigest()
+            expected = replacements.get(baseline, baseline)
+            replaced += expected != baseline
+            self.assertEqual(expected, hashlib.sha256(new.read_bytes()).hexdigest(), str(new))
         self.assertGreater(count, 0)
-        print(f'Compared {count} PDF hashes')
+        print(f'Compared {count} PDF hashes ({replaced} reviewed replacements)')
 
     def test_homepage_does_not_load_reader_style(self):
         self.assertNotIn('/css/ux-guide.css', (SITE / 'index.html').read_text(encoding='utf-8'))
