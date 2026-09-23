@@ -24,6 +24,15 @@
     - "2025.5"
   weight: 3
 
+# Reviewer of the original 2020.12 translation.
+- name: Jose Casal
+  url: https://www.linkedin.com/in/jcasal/
+  role: reviewer
+  contributions:
+    - "2020.12"
+    - "2025.5"
+  weight: 9
+
 - name: David Zalazar
   url: https://www.linkedin.com/in/david-zalazar-6ba55610b/
   role: reviewer
