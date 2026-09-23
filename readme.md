@@ -111,7 +111,7 @@ The installed release is recorded in `.OpenGuidePlatform/installation.json`; upd
 
 The platform selection is `v1` in `.OpenGuidePlatform/settings.yaml`: builds select the latest production OGP release within major version 1, without crossing into version 2. `Update` refreshes the installed adapters and recorded release using that selection. Site deployment rings remain independent of the platform ring. Edit user settings in `settings.yaml`; do not edit the generated installation record.
 
-**Upgrade verification is in progress:** v1.0.0 is installed. Local canary validation with the PR base URL and production validation passed. A malformed copy-link URL in the generated output remains under investigation; hosted acceptance and merge are pending. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md) for earlier evidence. Shared skills are in `.agents/skills`; existing PDFs are preserved during migration.
+**Upgrade verification is in progress:** v1.1.1-Preview.5 is installed, replacing v1.0.0; hosted acceptance of this upgrade is pending. The malformed copy-link URL found under v1.0.0 was tracked for an upstream OGP fix. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md) for earlier evidence. Shared skills are in `.agents/skills`; existing PDFs are preserved during migration.
 
 ## Getting Started
 
