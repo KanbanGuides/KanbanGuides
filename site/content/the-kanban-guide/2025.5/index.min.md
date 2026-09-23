@@ -1,5 +1,6 @@
 ---
 title: "Da Kanban Booky (May 2025)"
+short_title: "Da Kanban Booky"
 description: >
   Dis banana doc is da one-guidey-to-rule-em-all! Just da tiniest bits you need to Kanban good. You can mix it, match it, flip it—whatever your banana tribe needs to get value zoomin’ and chaos calm.
 

@@ -1,5 +1,6 @@
 ---
 title: The Kanban Guide (December 2020)
+short_title: The Kanban Guide
 description: The Kanban Guide is the official, minimal reference for Kanban. Clear, stable, and focused, it defines the core practices and principles for managing flow and improving delivery across industries.
 date: 2020-12-01T09:00:00Z
 keywords:

@@ -1,5 +1,6 @@
 ---
 title: The Kanban Guide (Maj 2025)
+short_title: The Kanban Guide
 description: Kanban Guide jest oficjalnym, minimalnym punktem odniesienia dla Kanban. Jasny, stabilny i skoncentrowany, definiuje podstawowe praktyki i zasady zarządzania przepływem i doskonalenia dostarczania w różnych branżach.
 date: 2025-05-01T09:00:00Z
 version: 2025.5

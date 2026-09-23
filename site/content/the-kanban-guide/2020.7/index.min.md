@@ -1,5 +1,6 @@
 ---
 title: "Da Kanban Booky (Joo-ly 2020)"
+short_title: "Da Kanban Booky"
 description: >
   Dis booky try be da one-banany-rulebook! Just da teeny Kanban rule-bits for makin’ da worky flow flow.  
   You can mix da Kanban with other thingies if your team go beep-boop in weird ways. 🍌
