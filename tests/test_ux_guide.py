@@ -67,6 +67,10 @@ class GuidePresentation(unittest.TestCase):
                 expected = baseline
             self.assertEqual(expected, hashlib.sha256(new.read_bytes()).hexdigest(), str(new))
         self.assertGreater(count, 0)
+        # The policy only reviews replacements, so a newly published PDF is unreviewed.
+        published = {path.relative_to(SITE).as_posix() for path in SITE.rglob('*.pdf')}
+        accepted = {path.relative_to(BASELINE).as_posix() for path in BASELINE.rglob('*.pdf')}
+        self.assertEqual(set(), published - accepted, 'PDFs published without a baseline')
         self.assertEqual(set(entries), matched, 'reviewed replacements with no matching published PDF')
         print(f'Compared {count} PDF hashes ({replaced} reviewed replacements)')
 
