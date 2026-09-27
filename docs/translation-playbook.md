@@ -29,7 +29,7 @@ Start with the [Translation Guide](./translations.md) and agree the applicable e
 | Maintainers | Approve workflow execution, review technical changes and help resolve system or design issues. |
 | Translation guardian | Agree scope and editorial decisions, coordinate policy requirements and approve publication. |
 
-One person may fulfil more than one role, subject to the applicable review requirements. Volunteers can use an assistant such as Claude Code, Copilot or Codex, or have a technical contributor operate the documented Core workflow without an agent. An assistant does not replace human language review.
+One person may fulfil more than one role, subject to the applicable review requirements. Volunteers can use an assistant such as Claude Code, Copilot or Codex, or follow [I don't have an agent](./translations.md#i-dont-have-an-agent) with PowerShell and an editor. One technical contributor can operate that workflow for the team. An assistant does not replace human language review.
 
 ## 1. Agree the scope and language decisions
 
@@ -51,7 +51,7 @@ The technical contributor forks the repository, clones that fork and creates a b
 
 Use [guide.transstatus](../.agents/skills/guide.transstatus/SKILL.md) to inspect the selected language, guide and edition. Record what already exists, the intended source and the remaining work. Do not infer that every historical edition needs a translation.
 
-A short request to an assistant can be:
+Without an assistant, follow the [human-operated discovery and selection steps](./translations.md#i-dont-have-an-agent). The `guide.*` skill names are not PowerShell commands. If you do use an assistant, a short request can be:
 
 > Use guide.transstatus to report the current state of our selected language, guide and edition, without changing files. Explain the remaining work in plain English.
 
@@ -59,7 +59,7 @@ If tools or access are missing, record the blocker and ask for help. Do not subs
 
 ## 3. Scaffold and translate the selected experience
 
-Use [guide.transcreate](../.agents/skills/guide.transcreate/SKILL.md) for the selected translation, or request only an empty scaffold if that is the agreed first step. The new language must remain disabled in production. Capture the source used before drafting through the installed workflow; a later upstream commit does not establish what the team translated.
+Use [guide.transcreate](../.agents/skills/guide.transcreate/SKILL.md) for the selected translation, or request only an empty scaffold if that is the agreed first step. Without an agent, use the [same creation, candidate and reviewed-application procedure](./translations.md#i-dont-have-an-agent) directly. The new language must remain disabled in production. Capture the source used before drafting through the installed workflow; a later upstream commit does not establish what the team translated.
 
 > Use guide.transcreate for our selected language, guide and edition, following the installed skill. Keep the language disabled in production and use our agreed glossary. Prepare a translation for human review.
 

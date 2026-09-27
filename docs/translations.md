@@ -18,6 +18,28 @@ Use the installed [shared skills and Core usage](../.agents/skills/USAGE.md). Th
 
 Specify the language, guide and edition you intend to work on. Translation availability is per edition: selecting one does not require translating other guides or historical editions. Use discovery to find the current inventory and agree an appropriate language tag with the guardian; do not infer scope from an existing language.
 
+## I don't have an agent
+
+You can complete this workflow with PowerShell and your preferred text editor. You do not need an AI assistant, subscription or AI account. The `guide.*` names above identify instructions for assistants; they are not commands to type into PowerShell. People use the same installed Core commands, candidate checks and reviewed hashes directly.
+
+1. **Prepare your fork.** Follow [local setup](./maintainer.md#local-development-setup), clone your fork and create a translation branch. Agree the language, guide and edition with the guardian. GitHub access is still needed for the fork/PR and, when restoring an uncached platform package, the release access described in local setup.
+2. **Open the version-matched instructions.** From the repository root in PowerShell 7.4 or later, resolve the installed package and read its human-operated procedures:
+
+   ```powershell
+   $platform = ./.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1 -WorkspaceRoot $PWD -UseInstalled
+   $coreDocs = Join-Path $platform 'system/OpenGuidePlatform.PowerShell.Core'
+   Get-Content -LiteralPath "$coreDocs/README.md"
+   Get-Content -LiteralPath "$coreDocs/TranslationReadiness/README.md"
+   ```
+
+   You can also open those two files in your editor. Their location is resolved locally; do not use a guessed cache path or a globally installed module. Keep the installed instructions open as you work rather than copying an older procedure from another translation.
+3. **Discover and select.** In the Core README, follow **“Load the installed commands and discover content”** to import Core, run Prepare into a fresh output directory and load its discovered inventory. Then follow **“Load and select”** in the TranslationReadiness README for your exact guide, edition and language. Read the Prepare assessment; a failed assessment is not a readiness pass.
+4. **Prepare and review the translation.** Follow **“Create a new translation”** only for a new target, keeping the language disabled in production and refreshing discovery afterwards. For existing work, use **“Reconcile against source changes”** with an explicitly agreed comparison revision. Follow **“Write, check and apply a candidate”** to draft in your editor, run the candidate checks, review the source and target, preview the write with `-WhatIf`, and apply through `Set-GuideTranslation` with the captured hashes. If a hash is stale, reconcile the changed text; do not simply replace the hash. A check result is not language approval.
+5. **Complete the surrounding experience.** Follow **“Finish wrapper, downloads and verification”** and the [file responsibility map](#where-the-translated-experience-lives). The installed [shared usage](../.agents/skills/USAGE.md#reviewed-wrapper-translation-edits) explains reviewed wrapper changes. Read **“Guide credits”**, the contributor-update guidance, **“PDF configuration”** and **“Retain generated-PDF evidence”** in the Core README as needed. The [credits guidance](../.agents/skills/guide.contributions/SKILL.md) and [PDF guidance](../.agents/skills/guide.genpdfs/SKILL.md) also describe the supported operations; read them as instructions, not terminal commands. Adding a new person to an existing credits file needs maintainer coordination under the current operation limits. Preserve supplied/protected PDFs.
+6. **Validate and submit.** Run the installed procedure's full preview and production builds using the same resolved package. Inspect the rendered website and any generated PDFs, including script shaping and layout; confirm production exclusion. Follow [local validation](#local-validation-and-review-environments) and the [playbook's PR handoff](./translation-playbook.md#5-open-the-pr-and-review-in-canary), including unresolved issues and actual check results. The canary, preview language review and separate production approval stages are the same with or without an agent.
+
+One technical volunteer can operate these steps while other translators work in the playbook's review tables. If a command or prerequisite is unfamiliar, ask that contributor or a maintainer for help; an assistant is optional, and direct edits that bypass the reviewed application procedure are not an alternative workflow.
+
 ## Where the translated experience lives
 
 This is a map of responsibilities, not a manual scaffolding recipe. The installed workflow determines the exact files and supported operations for your selection.
