@@ -1,6 +1,8 @@
 # OpenGuidePlatform adoption
 
-Status: `.OpenGuidePlatform/installation.json` records the v1.1.1-Preview.5 adapter installation, which replaces v1.0.0; hosted stages through Verify passed for this upgrade at `8140a54` (PR #116). The remaining evidence in this paragraph applies to the earlier v1.0.0 installation. The floating `v1` selection resolved build runtime v1.0.1 for the review-correction preview and production artifacts (see their `platform-context.json`); these are distinct identities. Local canary (with PR base URL) and production validation passed. Hosted stages through Verify passed at `ed7b29d`. Martin authorized merging with the disclosed copy-link defect tracked for an upstream OGP fix; hosted stages through Verify also passed for the merged-main UX revision `26ea108`. Local review-correction preview and production builds passed; hosted checks for the next correction commit are pending. Earlier preview evidence below is historical.
+Status (2026-09-27): `.OpenGuidePlatform/installation.json` records stable OGP `v1.1.2`, from source `7c3f0af967191104478df2198be42558fbf6aaff`. User settings retain the `v1` version family and now select the `production` platform ring. Both workflow callers select `@v1`, and the native Hugo dependency is `v1.1.2`. The platform ring is independent of the site's deployment ring.
+
+Local preview and production builds passed with zero ERROR lines and artifact validation passed (310 and 233 files respectively). Both recorded the same OGP version and source identity in `platform-context.json`. All 35 supplied PDF hashes and the production language-exclusion configuration are unchanged. [Hosted stages through Verify](https://github.com/KanbanGuides/KanbanGuides/actions/runs/36334270611) passed at consumer revision `4edbd5bc0bb92dad763b4f323d725217d461c863`. These are adoption-candidate checks, not proof of a production site deployment or exhaustive visual review.
 
 ## Execution checklist
 
@@ -8,7 +10,7 @@ Status: `.OpenGuidePlatform/installation.json` records the v1.1.1-Preview.5 adap
 - [x] Confirm the platform release, both package assets, manifest and matching native Hugo module tag are available and verified.
 - [x] Record the exact selected release and the existing site's dependency and publication baseline.
 - [x] Infer wrapper, guide, edition, language and route requirements from Hugo sources; remove the maintained policy file.
-- [x] Install the selected preview release and reconcile managed-file conflicts in this PR.
+- [x] Install stable OGP `v1.1.2` through the coordinated Update workflow, preserving the `v1` family and selecting the production platform ring.
 - [x] Adopt thin build.ps1 and shared workflow callers, including PR cleanup, while preserving consumer-owned integrations.
 - [x] Adopt distributed skills and agent instructions; distinguish repository guidance from independently enforced controls.
 - [x] Build and validate the PR canary and production locally using the installed build.ps1.
@@ -24,7 +26,11 @@ Hugo internal refactoring follows verified adoption across all three guide sites
 
 ## Historical adoption evidence
 
-- Historical installed release: `v0.5.3-Preview.6`; the verified manifest and native Hugo module identity are recorded in `.OpenGuidePlatform/installation.json`.
+These records describe earlier checkpoints; the installation record and current status above describe the latest adoption candidate.
+
+- The `v1.1.1-Preview.5` installation replaced `v1.0.0`; hosted stages through Verify passed at `8140a54` (PR #116).
+- Earlier `v1.0.0` adoption: the floating `v1` selection resolved build runtime `v1.0.1` for the review-correction preview and production artifacts. Local canary and production validation passed; hosted stages through Verify passed at `ed7b29d` and the merged-main UX revision `26ea108`. Martin authorized merging with the disclosed malformed copy-link defect tracked for an upstream OGP fix.
+- Historical installed release: `v0.5.3-Preview.6`; its manifest and native Hugo module identity were recorded in the installation record at that checkpoint.
 - Prior native dependency: `github.com/nkdAgility/HugoGuides/module v0.8.4`. Site baseline: `b59056a594d70b860595befd46b2f8c36a88d506`; pre-adoption preview/production outputs retained locally under `.processing/adoption/baseline-*`.
 - Candidate platform: `e5b7810`, PR #38. Preview passed with 306 files; production passed with 229 files. Six preview anchors cover both guides in Japanese, Persian and Minionese; four remain eligible in production. These are functional browser checks with external resources blocked, not CSS-complete visual approval.
 - Minionese enablement returns blocker `PERMANENT_LANGUAGE_ENABLED`; the locally built production artifact contains no Minionese pages or PDFs. All existing source PDFs remain byte-identical.
@@ -60,7 +66,7 @@ The statements below describe that earlier checkpoint, not the current merge sta
 
 At commit c5d244b, all hosted stages through Verify passed. The live comparison covered 13 routes per site at desktop size with CSS enabled and 22 matching PDF downloads, all byte-identical. English, Japanese and Persian guide text matched apart from canary/version controls. Preview repairs the French and Spanish Latin America latest aliases. Homepage contributor names and additional canary language entries are visible differences. The existing Japanese title/button overlap is present on both sites. This sampled comparison is not exhaustive mobile or every-route acceptance.
 
-Live production still serves Minionese from v1.2.18: removal commit cb991c4 was deployed to preview as 1.2.19-preview.2, not production. Confirm removal after a separately authorized production release. Local comparison artifacts are under .processing/live-site-comparison.
+At that historical comparison checkpoint, live production served Minionese from v1.2.18: removal commit cb991c4 had been deployed to preview as 1.2.19-preview.2, not production. The recorded follow-up was to confirm removal after a separately authorized production release. Local comparison artifacts are under .processing/live-site-comparison; this is not a current live-production observation.
 
 ## Historical PR 112 validation repair (2026-09-15)
 

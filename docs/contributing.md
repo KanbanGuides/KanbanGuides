@@ -15,7 +15,7 @@ Suggest improvements, corrections, or additions to the guide content.
 3. **Fork the repository** and make your changes on a branch:
 
    ```powershell
-   git clone https://github.com/KanbanGuides/KanbanGuides.git
+   git clone https://github.com/YOUR-GITHUB-USERNAME/KanbanGuides.git
    Set-Location KanbanGuides
    git checkout -b feedback/your-short-description
    ```
@@ -49,12 +49,10 @@ Suggest improvements, corrections, or additions to the guide content.
 
 Add a new language translation or improve an existing one.
 
-1. **Read the [Translations Code of Conduct](./translations-code-of-conduct.md)** — agreement is required before starting any translation work
-2. **Open a discussion** at [kanbanguides.org](https://kanbanguides.org) or Slack to notify the translation guardian that you intend to translate
-3. **Follow the [Translation Guide](./translations.md)** for the full technical workflow, including:
-   - Using the `/guide.transcreate` skill to scaffold all site infrastructure
-   - Translating the guide bodies (the manual, human-only work)
-4. **Submit a Pull Request** linking back to the discussion and referencing the CoC
+1. **Open a discussion** at [kanbanguides.org](https://kanbanguides.org) or Slack to agree the site language and scope with the translation guardian, then select guide editions for body translation separately.
+2. **Read the [Translations Code of Conduct](./translations-code-of-conduct.md)** for the Open Guide to Kanban and its associated materials; confirm the applicable policy with the guardian for your selected guide.
+3. **Follow the [Translation Guide](./translations.md)** for the installed technical workflows and the [Kanban translation companion](./translation-playbook.md) for site policy and access to the installed reusable OGP playbook. AI assistance is permitted under the Open Guide policy, with human review and correction required.
+4. **Work in a fork and validate locally**, then submit a PR linking the discussion and recording results and unresolved issues. Maintainers arrange and verify the approved PR canary for technical and design review before merge to preview for language validation; see the [current fork-canary integration limitation](./translations.md#local-validation-and-review-environments). Production promotion requires separate approval.
 
 > One translation per language is preferred. Regional variants (e.g., `es-ES` vs `es-419`) are accepted where genuinely needed.
 
