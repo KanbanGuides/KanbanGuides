@@ -8,15 +8,22 @@ Reference for maintainers and developers with repository access. For contributio
 
 ### Prerequisites
 
-- **Hugo Extended** v0.158.0+ — `choco install hugo-extended` (Windows) / `brew install hugo` (macOS)
+- **Hugo Extended 0.158.0+** — `choco install hugo-extended` (Windows) / `brew install hugo` (macOS)
 - **Git**
-- **PowerShell 7.4+** — required for PDF generation scripts
+- **PowerShell 7.4+** — required for every root build entry-point command, including the development server
+- **Go 1.24.5+** — required for Hugo module resolution
+- **GitHub CLI (`gh`)**, authenticated with access to the platform release — required when the resolver restores release assets that are not cached
+
+The installed release requirements in [installation.json](../.OpenGuidePlatform/installation.json) are the source of truth for platform minimum versions. This site may require newer tools: its documented Hugo Extended minimum remains 0.158.0, above the current platform minimum of 0.146.0. The current platform also requires PowerShell 7.4+ and Go 1.24.5+. Use a PowerShell session (`pwsh` on macOS/Linux) for the commands below. Release restoration also needs network access; see the [resolver](../.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1).
 
 ```powershell
 # Verify
 hugo version   # must show "extended"
 git --version
 pwsh --version
+go version
+gh --version
+gh auth status
 ```
 
 ### Run the development server
@@ -275,7 +282,7 @@ PDF settings, templates and filters live in [`site/pdf/`](../site/pdf/README.md)
 
 This migration replaced the current-edition PDFs (Open Guide to Kanban 2025.7 and The Kanban Guide 2025.5 in en, es-ES, fr, pl, fa, ja and min, plus the Letter-size `en-us` copy; `es-419` has no guide text of its own and has no PDF) with reviewed PDFs generated from the site content using these templates. All other PDFs keep their existing bytes: the 2020.7 and 2020.12 editions (whose web text is abridged, so the published PDFs stay authoritative) and translations that exist only as PDFs.
 
-Until the platform generates PDFs during the build, every committed PDF is treated as supplied and must retain its bytes. Replacing one is a reviewed change: generate it with the platform's PDF workflow, inspect `Get-GuidePdfPlan`, check the pages visually and keep the existing filename. Font substitutions require review; do not silently install substitutes.
+Only downloads explicitly declared `handling: generated` in the edition's PDF configuration are eligible for generation. All other PDFs remain supplied/protected and retain their bytes. Follow the installed PDF workflow: inspect the plan, check fonts and tools, generate the selected output, visually review actual pages and record the required receipt. Prepare validates generated-PDF receipts; ordinary builds do not generate PDFs automatically. Replacements require the reviewed existing PDF hash and must preserve the published filename. Font substitutions require review; do not silently install substitutes.
 
 ---
 

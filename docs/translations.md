@@ -47,4 +47,6 @@ Follow the [maintainer guide](./maintainer.md#local-development-setup) for local
 
 Run full preview and production builds through `./build.ps1` as directed by the installed workflow, and inspect the rendered experience locally. A development server alone is not acceptance evidence. A local production build validates output; it does not publish it. Keep a new language excluded from production throughout translation review.
 
-Contribute through a fork and PR. A maintainer-approved workflow deploys the PR's canary environment. Resolve technical and design issues there before merging to preview for native-speaker language validation. Production promotion is a separate approved step. The [playbook](./translation-playbook.md) explains each handoff and the evidence to include.
+Contribute through a fork and PR. The intended review journey includes a maintainer-approved PR canary: resolve technical and design issues there before merging to preview for native-speaker language validation. Production promotion is a separate approved step. The [playbook](./translation-playbook.md) explains each handoff and the evidence to include.
+
+**Current implementation:** the [workflow caller](../.github/workflows/main.yaml) disables automatic deployment for fork PRs. Workflow approval alone does not override that setting. Maintainers must arrange and verify the approved PR canary before technical review; completing the fork-canary workflow integration is outstanding. Contributors should report this blocker in the PR rather than bypass deployment controls.

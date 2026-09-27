@@ -75,7 +75,7 @@ Work in manageable sections against the glossary. AI drafts are permitted where 
 
 Keep each table tied to the source and candidate being reviewed. Apply corrections through the installed workflow and review the resulting diff. If the source changes, reconcile it explicitly rather than treating an old candidate as newly reviewed.
 
-Use [guide.contributions](../.agents/skills/guide.contributions/SKILL.md) to record consented names, roles and edition contributions. Structured credits do not replace required body acknowledgements or change history. Under the Open Guide policy, the change history belongs on the last page; do not copy a conflicting placement from another translation.
+Use [guide.contributions](../.agents/skills/guide.contributions/SKILL.md) to create a new translation-team file or update a selected existing person's record with consented details. The installed operations cannot append a new person to an existing file: ask a maintainer to coordinate that change, including later reviewer additions, rather than bypassing the operation's checks. Structured credits do not replace required body acknowledgements or change history. Under the Open Guide policy, the change history belongs on the last page; do not copy a conflicting placement from another translation.
 
 ## 4. Validate locally
 
@@ -101,7 +101,7 @@ Push the branch to your fork and open a PR against the original repository, link
 - Outstanding language questions and technical or design issues.
 - Confirmation that production remains disabled and consented credits are recorded.
 
-An early draft PR is useful when help is needed. A maintainer approves the workflow run to deploy the PR's canary environment; working from a fork does not require a separate internal branch.
+An early draft PR is useful when help is needed. The intended next step is a maintainer-approved PR canary. Maintainers arrange and verify deployment; see the [current fork-canary integration limitation](./translations.md#local-validation-and-review-environments). Keep working in your fork and record a missing review environment as a blocker for maintainers.
 
 Review canary together. Resolve fonts, PDF shaping, cover layout, spacing and other system or design problems in the PR before the technical handoff to preview. Shared platform defects belong with maintainers, who coordinate any upstream work and validate the resulting experience. Update the same PR and recheck affected pages as fixes arrive.
 
