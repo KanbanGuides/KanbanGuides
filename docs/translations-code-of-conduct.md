@@ -4,7 +4,7 @@ Translators of the Open Guide to Kanban and its associated materials do our comm
 
 Official translators must agree to this code of conduct before translating any written materials associated with the Open Guide to Kanban.
 
-For the contribution process and supported tooling, start with the [Translation Guide](./translations.md) and [translation playbook](./translation-playbook.md). Those documents explain implementation and review steps; this document sets the editorial policy for the Open Guide to Kanban and its associated materials.
+For the contribution process and supported tooling, start with the [Translation Guide](./translations.md) and [Kanban translation companion](./translation-playbook.md). They point to the installed reusable OGP procedure and add site review arrangements; this document sets the editorial policy for the Open Guide to Kanban and its associated materials.
 
 Suggestions to improve this code of conduct can be submitted using the “submit ideas” button on the home page at [https://kanbanguides.org](https://kanbanguides.org) or via the KanbanGuides slack channel button underneath that button.
 

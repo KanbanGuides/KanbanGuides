@@ -49,9 +49,9 @@ Suggest improvements, corrections, or additions to the guide content.
 
 Add a new language translation or improve an existing one.
 
-1. **Open a discussion** at [kanbanguides.org](https://kanbanguides.org) or Slack to agree the selected guide, edition and language with the translation guardian.
+1. **Open a discussion** at [kanbanguides.org](https://kanbanguides.org) or Slack to agree the site language and scope with the translation guardian, then select guide editions for body translation separately.
 2. **Read the [Translations Code of Conduct](./translations-code-of-conduct.md)** for the Open Guide to Kanban and its associated materials; confirm the applicable policy with the guardian for your selected guide.
-3. **Follow the [Translation Guide](./translations.md)** for the installed technical workflows and the [translation playbook](./translation-playbook.md) for the volunteer journey. AI assistance is permitted under the Open Guide policy, with human review and correction required.
+3. **Follow the [Translation Guide](./translations.md)** for the installed technical workflows and the [Kanban translation companion](./translation-playbook.md) for site policy and access to the installed reusable OGP playbook. AI assistance is permitted under the Open Guide policy, with human review and correction required.
 4. **Work in a fork and validate locally**, then submit a PR linking the discussion and recording results and unresolved issues. Maintainers arrange and verify the approved PR canary for technical and design review before merge to preview for language validation; see the [current fork-canary integration limitation](./translations.md#local-validation-and-review-environments). Production promotion requires separate approval.
 
 > One translation per language is preferred. Regional variants (e.g., `es-ES` vs `es-419`) are accepted where genuinely needed.
