@@ -4,6 +4,8 @@ Translators of the Open Guide to Kanban and its associated materials do our comm
 
 Official translators must agree to this code of conduct before translating any written materials associated with the Open Guide to Kanban.
 
+For the contribution process and supported tooling, start with the [Translation Guide](./translations.md) and [translation playbook](./translation-playbook.md). Those documents explain implementation and review steps; this document sets the editorial policy for the Open Guide to Kanban and its associated materials.
+
 Suggestions to improve this code of conduct can be submitted using the “submit ideas” button on the home page at [https://kanbanguides.org](https://kanbanguides.org) or via the KanbanGuides slack channel button underneath that button.
 
 # 1\. Glossary
@@ -25,7 +27,7 @@ The administrator(s) of the official website(s) for accessing Open Guide to Kanb
 5. The translation should render no material changes to content (such as changes in meaning, emphasis, or inattention to nuance); this includes the acknowledgment section.
 6. A translation can be presented in side-by-side paragraph format (to enhance reader trust), fully translated, or both (in a single document). If both side-by-side and full translations are in the same document, the side-by-side translation must appear first.
 7. Copyright information and creative commons collection or license information in the original document must not be altered and, therefore, should not be translated.
-8. The translation must include a _Translator Acknowledgement_ section and a _Change_ _Log,_ as specified in Section 6 of this Code of Conduct. The Translator Acknowledgement section must include details for the current translation version and should consist of previous translator groups, subject to their permission.
+8. The translation must include a _Translator Acknowledgement_ section and a _Change_ _Log,_ as specified in Sections 4 and 6 respectively of this Code of Conduct. The Translator Acknowledgement section must include details for the current translation version and should consist of previous translator groups, subject to their permission.
 9. The translation guardian reserves the right to remove acknowledgments or translations should they determine that the group of translators, or individuals therein, bring the Open Guide to Kanban into disrepute.
 10. During translation, reviewers should submit all feedback through constructive and respectful comments to help ensure that it is not ignored or diminished. Alternatively, reviewers can provide audio or video feedback.
 11. Translators, like everyone else, are welcome to suggest a change(s) to the Open Guide to Kanban by following the GitHub process on [https://kanbanguides.org](https://kanbanguides.org).
@@ -68,6 +70,8 @@ The administrator(s) of the official website(s) for accessing Open Guide to Kanb
 10. Respond to requests for needed changes (e.g., translation errors) in a reasonable amount of time as negotiated with the translation guardian.
 11. The translator may not exchange a translation related to the Open Guide to Kanban for monetary gain.
 12. The translation group name, social media handles, and email addresses must not bring the Open Guide to Kanban into disrepute, as decided by the translation guardian..
+
+Structured translation-team credits in `site/data/contributions/{guide}.{lang}.yml` supply website and PDF credits; they do not replace the Translator Acknowledgement section required above or the change history required by Section 6. Follow the [Translation Guide](./translations.md#where-the-translated-experience-lives) for their technical location, preserving the consent requirements in this policy.
 
 # 5\. Reserved Words
 

@@ -1,223 +1,50 @@
 # Translation Guide
 
-Help make the guides accessible worldwide by contributing a translation. Before starting, you must read and agree to the [Translations Code of Conduct](./translations-code-of-conduct.md).
+Help make the guides accessible worldwide. Start with the [translation playbook](./translation-playbook.md) for the volunteer journey, from agreeing terminology to publication. Contact the translation guardian through the site discussion or KanbanGuides Slack before starting.
 
-> Open a discussion at [kanbanguides.org](https://kanbanguides.org) or via the KanbanGuides Slack channel to notify the translation guardian **before** starting any translation work.
+The [Translations Code of Conduct](./translations-code-of-conduct.md) sets the editorial requirements for the Open Guide to Kanban and its associated materials. Read and agree to it where applicable; confirm the applicable policy with the guardian when selecting another guide. AI assistance is permitted by that policy, with human review and correction required. Automated checks do not establish translation quality or approve publication.
 
----
+## Technical source of truth
 
-## What Needs Translating
+Use the installed [shared skills and Core usage](../.agents/skills/USAGE.md). They provide the supported workflow for agents and people operating the commands themselves. The installed platform, rather than copied prompts or another language's files, defines how changes are discovered, checked and applied. Do not edit generated skills or installation records.
 
-Adding a new language involves two distinct phases:
-
-### Phase 1: Site Scaffolding (tooling-handled)
-
-The `/guide.transcreate` skill handles all of this automatically:
-
-| What | File(s) |
+| Task | Installed workflow |
 |---|---|
-| Language config | `site/hugo.yaml`, `site/hugo.production.yaml` |
-| UI strings | `site/i18n/{LANG}.yaml` (~40 strings) |
-| Homepage index | `site/content/_index.{LANG}.md` |
-| Guide section indexes | `site/content/open-guide-to-kanban/_index.{LANG}.md`, `site/content/the-kanban-guide/_index.{LANG}.md` |
-| Versioned guide files | Created with translated front matter and **empty body** |
+| Inspect readiness without changing files | [guide.transstatus](../.agents/skills/guide.transstatus/SKILL.md) |
+| Create a translation or request an empty scaffold | [guide.transcreate](../.agents/skills/guide.transcreate/SKILL.md) |
+| Audit or update an existing translation against an agreed source revision | [guide.transreconcile](../.agents/skills/guide.transreconcile/SKILL.md) |
+| Record consented translator and reviewer credits | [guide.contributions](../.agents/skills/guide.contributions/SKILL.md) |
+| Plan and generate eligible PDFs, then review rendering | [guide.genpdfs](../.agents/skills/guide.genpdfs/SKILL.md) |
 
-### Phase 2: Guide Body Translation (always manual)
+Specify the language, guide and edition you intend to work on. Translation availability is per edition: selecting one does not require translating other guides or historical editions. Use discovery to find the current inventory and agree an appropriate language tag with the guardian; do not infer scope from an existing language.
 
-The agent never translates guide body text — that is your work:
+## Where the translated experience lives
 
-| File | Size |
+This is a map of responsibilities, not a manual scaffolding recipe. The installed workflow determines the exact files and supported operations for your selection.
+
+| Area | Location and responsibility |
 |---|---|
-| `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md` | ~900 lines |
-| `site/content/the-kanban-guide/2025.5/index.{LANG}.md` | ~400 lines |
+| Language configuration | `site/hugo.yaml` and `site/hugo.production.yaml`; a new language remains disabled in production until separately approved. |
+| Interface catalogue | `site/i18n/{lang}.yaml`; reader-facing messages, preserving identifiers and interpolation placeholders. |
+| Bespoke homepage | `site/data/ux-home/{lang}.json`; reader-facing copy, preserving keys, machine values and placeholders. This site-owned JSON is separate from the platform's wrapper Markdown/YAML operations. |
+| Website pages | Language-specific homepage and selected guide landing, history and translations pages under `site/content/`; preserve layout, routing and structural metadata. |
+| Guide text | `site/content/{guide}/{edition}/index.{lang}.md`; use the installed translation workflow for candidates and reviewed source/target checks. |
+| Guide credits | `site/data/contributions/{guide}.yml`; the guide's creators and contributors. Do not add translation-team members to the original author list. |
+| Translation credits | `site/data/contributions/{guide}.{lang}.yml`; translators and reviewers, with consent and the editions their contributions cover. |
+| PDF presentation | [`site/pdf/`](../site/pdf/README.md); fonts, templates and settings, handled with the PDF workflow and maintainer review. Preserve supplied/protected PDFs. |
 
-The front matter is already translated by the agent. Translate only the body content below the closing `---`.
+Do not put `lang`, `author`, `translators`, fonts or `dir` in guide front matter. Preserve links, shortcodes, explicit anchors and deliberate multilingual behaviour. Ask the technical contributor or maintainer about changes outside a supported operation's scope rather than bypassing its checks.
 
----
+Structured translation credits supply the website and PDF credits. They do not replace the in-document Translator Acknowledgement and last-page change history required by the Code of Conduct. See its sections 4 and 6 for those requirements and section 7 for consent and personal data.
 
-## GitHub Workflow
+## Local validation and review environments
 
-For translators familiar with Git and [Pull Requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests).
-
-### Step 1: Fork and branch
-
-```powershell
-git clone https://github.com/YOUR-USERNAME/KanbanGuides.git
-Set-Location KanbanGuides
-git checkout -b translation/add-{LANG}-language
-```
-
-### Step 2: Scaffold the site (Phase 1)
-
-Use the `/guide.transcreate` skill in GitHub Copilot Chat:
-
-```
-/guide.transcreate de German
-```
-
-If you don't have Copilot Chat, do it manually — see [Manual scaffolding](#manual-scaffolding) below.
-
-### Step 3: Translate the guide bodies (Phase 2)
-
-Open the scaffolded files and translate the body content:
-
-- `site/content/open-guide-to-kanban/2025.7/index.{LANG}.md`
-- `site/content/the-kanban-guide/2025.5/index.{LANG}.md`
-
-**Preserve while translating:**
-- Markdown formatting (`##`, `**bold**`, `[links](url)`)
-- Hugo shortcodes
-- HTML comments and IDs
-- Reference numbers exactly as-is (e.g. `(40)`, `(58)`)
-
-See [Reserved Words](#reserved-words) for terms that require special handling.
-
-### Step 4: Test locally
+Follow the [maintainer guide](./maintainer.md#local-development-setup) for local setup and [installed Core usage](../.agents/skills/USAGE.md) for the version-matched platform and translation checks. Run documented PowerShell commands from a PowerShell session (`pwsh` on macOS/Linux), at the repository root. The development server is:
 
 ```powershell
-# From project root
-hugo serve --source site --config hugo.yaml,hugo.local.yaml
+./build.ps1 -Stage Serve -Target local
 ```
 
-Navigate to `http://localhost:1313/{LANG}/open-guide-to-kanban/` and verify all pages and UI elements.
+Run full preview and production builds through `./build.ps1` as directed by the installed workflow, and inspect the rendered experience locally. A development server alone is not acceptance evidence. A local production build validates output; it does not publish it. Keep a new language excluded from production throughout translation review.
 
-### Step 5: Submit a Pull Request
-
-```powershell
-git add .
-git commit -m "Add {Language Name} translation"
-git push origin translation/add-{LANG}-language
-```
-
-Open a PR with title `Add {Language Name} translation`. Reference the prior site discussion in the description. The community and guide creators will review and collaborate on refinements before merge.
-
----
-
-## Manual Workflow
-
-For translators who do not use GitHub directly. Guide body translation is still required regardless of path.
-
-### Step 1: Download the source files
-
-- [Open Guide to Kanban (English)](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/open-guide-to-kanban/2025.7/index.md)
-- [The Kanban Guide (English)](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/content/the-kanban-guide/2025.5/index.md)
-- [UI Strings Template](https://raw.githubusercontent.com/KanbanGuides/KanbanGuides/main/site/i18n/en.yaml)
-
-Save them locally as `index.{LANG}.md` and `{LANG}.yaml`.
-
-### Step 2: Translate
-
-Translate the guide body content and all `translation:` values in the i18n YAML (keep `id:` values unchanged).
-
-### Step 3: Submit via GitHub Issue
-
-1. Go to [Issues](https://github.com/KanbanGuides/KanbanGuides/issues) → New Issue
-2. Title: `Translation Submission: {Language Name}`
-3. Attach your translated files and list any collaborators to credit
-4. Maintainers will create the PR and coordinate community review
-
----
-
-## Manual Scaffolding
-
-If you need to set up the site infrastructure without the `/guide.transcreate` skill:
-
-**1. Add language to `site/hugo.yaml`:**
-
-```yaml
-languages:
-  {LANG}:
-    label: Your Language Name
-    weight: 2
-    title: Your Translated Site Title
-```
-
-**2. Create the UI strings file:**
-
-```powershell
-Copy-Item site/i18n/en.yaml site/i18n/{LANG}.yaml
-# Translate each translation: value; keep all id: values unchanged
-```
-
-**3. Create section index files** (copy English, translate front matter and body):
-
-```powershell
-Copy-Item site/content/_index.md site/content/_index.{LANG}.md
-Copy-Item site/content/open-guide-to-kanban/_index.md site/content/open-guide-to-kanban/_index.{LANG}.md
-Copy-Item site/content/the-kanban-guide/_index.md site/content/the-kanban-guide/_index.{LANG}.md
-```
-
-**4. Create versioned guide files** (copy English, translate front matter, clear body):
-
-```powershell
-Copy-Item site/content/open-guide-to-kanban/2025.7/index.md `
-          site/content/open-guide-to-kanban/2025.7/index.{LANG}.md
-Copy-Item site/content/the-kanban-guide/2025.5/index.md `
-          site/content/the-kanban-guide/2025.5/index.{LANG}.md
-```
-
----
-
-## Reserved Words
-
-Some terms require special handling. See the full list in the [Translations Code of Conduct §5](./translations-code-of-conduct.md).
-
-The key rule: if you translate a reserved word, the American English term must appear in parentheses after its first occurrence. Subsequently, you may use the translated term. You may also keep the English term throughout if that is the better option.
-
-Example (French): *Le concept de flux(Flow) est au cœur de la compréhension de Kanban.*
-
-Reference sections and cited titles must **not** be translated.
-
----
-
-## Language Codes
-
-Use [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag) tags. Current languages:
-
-| Code | Language |
-|---|---|
-| `en` | English (default) |
-| `ja` | Japanese |
-| `es-419` | Spanish (Latin America) |
-| `es-ES` | Spanish (Spain) |
-| `fa` | Farsi/Persian (RTL) |
-| `pl` | Polish |
-
-Use two-letter codes for most new languages (`pt`, `de`, `fr`, `ko`). Use regional subtags where regional differences matter (`pt-BR`).
-
----
-
-## Translator Attribution
-
-Translators are credited in `site/data/contributions/{guide-name}.yml`:
-
-```yaml
-- name: María García
-  language: es-419
-  githubUsername: mariagarcia
-  contributions:
-    - "2025.7"
-  role: translator
-  weight: 100
-```
-
-You may also include a `Translator Acknowledgement` section in the translated document — see [Translations Code of Conduct §4](./translations-code-of-conduct.md) for required fields.
-
----
-
-## Auditing Existing Translations
-
-Use the `/guide.transreconcile` skill to check for gaps:
-
-```
-/guide.transreconcile de          # audit German
-/guide.transreconcile all         # audit all languages
-/guide.transreconcile de fix      # audit and repair German
-```
-
-Or use `/guide.transstatus` for a dashboard view:
-
-```
-/guide.transstatus                # all languages
-/guide.transstatus de             # one language
-```
+Contribute through a fork and PR. A maintainer-approved workflow deploys the PR's canary environment. Resolve technical and design issues there before merging to preview for native-speaker language validation. Production promotion is a separate approved step. The [playbook](./translation-playbook.md) explains each handoff and the evidence to include.
