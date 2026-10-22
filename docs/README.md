@@ -8,6 +8,8 @@ This is a community-maintained open source project. The guides are collaborative
 
 ## How to Contribute
 
+The [shared contributor guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md) supplies reusable procedures and diagrams. Local pages below record Kanban policy, contacts and site configuration.
+
 There are two contribution paths:
 
 ### Feedback & Content Changes
@@ -24,7 +26,7 @@ Add or improve a language translation:
 
 1. Read the [Translations Code of Conduct](./translations-code-of-conduct.md) — agreement is required before starting
 2. Open a discussion at [kanbanguides.org](https://kanbanguides.org) or via the Slack channel to notify the translation guardian
-3. Follow the [Translation Guide](./translations.md) to scaffold and complete the translation
+3. Follow the [Translation Guide](./translations.md) for the shared walkthrough and Kanban-specific policy
 4. Submit a Pull Request for community review
 
 > **All PRs must be preceded by a site discussion.** Direct PRs without prior discussion may be closed.

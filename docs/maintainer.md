@@ -6,46 +6,9 @@ Reference for maintainers and developers with repository access. For contributio
 
 ## Local Development Setup
 
-### Prerequisites
+Use OGP's [shared setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [validation/development-server instructions](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/validation.md). This site requires Hugo Extended 0.158.0 or later, in addition to the installed release requirements. Site destinations are configured in [settings.yaml](../.OpenGuidePlatform/settings.yaml).
 
-- **Hugo Extended 0.158.0+** — `choco install hugo-extended` (Windows) / `brew install hugo` (macOS)
-- **Git**
-- **PowerShell 7.4+** — required for every root build entry-point command, including the development server
-- **Go 1.24.5+** — required for Hugo module resolution
-- **GitHub CLI (`gh`)**, authenticated with access to the platform release — required when the resolver restores release assets that are not cached
-
-The installed release requirements in [installation.json](../.OpenGuidePlatform/installation.json) are the source of truth for platform minimum versions. This site may require newer tools: its documented Hugo Extended minimum remains 0.158.0, above the current platform minimum of 0.146.0. The current platform also requires PowerShell 7.4+ and Go 1.24.5+. Use a PowerShell session (`pwsh` on macOS/Linux) for the commands below. Release restoration also needs network access; see the [resolver](../.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1).
-
-```powershell
-# Verify
-hugo version   # must show "extended"
-git --version
-pwsh --version
-go version
-gh --version
-gh auth status
-```
-
-### Run the development server
-
-```powershell
-# From project root
-./build.ps1 -Stage Serve -Target local
-```
-
-Navigate to `http://localhost:1313`. The preview destination is configured in [settings.yaml](../.OpenGuidePlatform/settings.yaml).
-
-### Module dependencies
-
-```powershell
-Set-Location site
-hugo mod download
-Set-Location ..
-```
-
-Hugo also downloads the module automatically on first serve/build.
-
----
+Translation review and the current fork deployment limitation are recorded in [site translation guidance](./translations.md#local-validation-and-review-environments).
 
 ## Architecture
 
@@ -87,19 +50,9 @@ site/content/
     └── translations/
 ```
 
-### Active languages
+### Language configuration
 
-Controlled by `disabled: true/false` in `site/hugo.production.yaml`:
-
-| Code | Language |
-|---|---|
-| `en` | English (default) |
-| `ja` | Japanese |
-| `es-419` | Spanish (Latin America) |
-| `es-ES` | Spanish (Spain) |
-| `fa` | Farsi/Persian (RTL) |
-| `pl` | Polish |
-| `min` | Minionese (reference implementation) |
+Language declarations live in `site/hugo.yaml`; production eligibility is controlled by `site/hugo.production.yaml`. Use the installed Prepare/status reports for current readiness rather than a copied language inventory. Minionese is a reference language and remains excluded from production.
 
 ### History visualization
 
@@ -305,8 +258,6 @@ choco upgrade hugo-extended   # Windows upgrade
 # Check for port conflicts
 netstat -an | Select-String ":1313"
 
-# Clear cache
-hugo --gc
 ```
 
 ### Content not appearing
