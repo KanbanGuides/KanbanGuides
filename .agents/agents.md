@@ -27,3 +27,5 @@ These instructions guide Codex, Claude and GitHub Copilot; they do not enforce p
 Independent managed agent controls remain an explicit adoption blocker.
 
 For team preparation, PR/canary review and preview language validation, read system/OpenGuidePlatform.Agents.Integration/translation-playbook.md in the resolved installed package. Keep consumer-specific editorial and delivery arrangements in the consumer repository; report reusable platform gaps upstream.
+
+For human-facing setup, translation/content tasks, review and troubleshooting with SVG diagrams, open system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md in the resolved installed package. Guide-site entry pages should link to the matching OGP source revision and retain local editorial/delivery policy rather than copy shared procedures.

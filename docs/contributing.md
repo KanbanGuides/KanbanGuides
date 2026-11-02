@@ -12,20 +12,8 @@ Suggest improvements, corrections, or additions to the guide content.
 
 1. **Open a discussion** at [kanbanguides.org](https://kanbanguides.org) using the "Submit Ideas" button, or join the KanbanGuides Slack channel
 2. **Collaborate** with the community and guide creators — reach consensus on the proposed change
-3. **Fork the repository** and make your changes on a branch:
-
-   ```powershell
-   git clone https://github.com/YOUR-GITHUB-USERNAME/KanbanGuides.git
-   Set-Location KanbanGuides
-   git checkout -b feedback/your-short-description
-   ```
-
-4. **Edit the guide content** — the guides live in versioned subdirectories:
-
-   ```
-   site/content/open-guide-to-kanban/2025.7/index.md
-   site/content/the-kanban-guide/2025.5/index.md
-   ```
+3. Follow OGP's [setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [content-change procedure](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/content.md).
+4. Select the agreed guide and edition through discovery. Kanban content lives under `site/content/open-guide-to-kanban/` and `site/content/the-kanban-guide/`.
 
 5. **Submit a Pull Request**, referencing the site discussion in the PR description
 
@@ -51,7 +39,7 @@ Add a new language translation or improve an existing one.
 
 1. **Open a discussion** at [kanbanguides.org](https://kanbanguides.org) or Slack to agree the site language and scope with the translation guardian, then select guide editions for body translation separately.
 2. **Read the [Translations Code of Conduct](./translations-code-of-conduct.md)** for the Open Guide to Kanban and its associated materials; confirm the applicable policy with the guardian for your selected guide.
-3. **Follow the [Translation Guide](./translations.md)** for the installed technical workflows and the [Kanban translation companion](./translation-playbook.md) for site policy and access to the installed reusable OGP playbook. AI assistance is permitted under the Open Guide policy, with human review and correction required.
+3. **Follow the [Translation Guide](./translations.md)** for the shared plain-English walkthrough and [Kanban editorial and review policy](./translation-playbook.md). AI assistance is permitted under the Open Guide policy, with human review and correction required.
 4. **Work in a fork and validate locally**, then submit a PR linking the discussion and recording results and unresolved issues. Maintainers arrange and verify the approved PR canary for technical and design review before merge to preview for language validation; see the [current fork-canary integration limitation](./translations.md#local-validation-and-review-environments). Production promotion requires separate approval.
 
 > One translation per language is preferred. Regional variants (e.g., `es-ES` vs `es-419`) are accepted where genuinely needed.

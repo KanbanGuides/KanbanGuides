@@ -49,6 +49,8 @@ Making Kanban knowledge accessible globally is essential.
 
 ## How to Contribute
 
+Start with the [shared OGP contributor guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md) for plain-English explanations, diagrams and task instructions. For Kanban-specific translation decisions, read [site translation guidance](./docs/translations.md).
+
 ### Content Contributors
 
 - Open Guide to Kanban: `site/content/open-guide-to-kanban/`
@@ -71,7 +73,7 @@ Contributions include:
 **Guidance:**
 
 - [Documentation Overview](./docs/README.md)
-- [Getting Started Guide](./docs/getting-started.md)
+- [Shared setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md)
 - [Contributing Guidelines](./docs/contributing.md)
 
 ## About the Authors

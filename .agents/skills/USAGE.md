@@ -60,3 +60,5 @@ For the team journey, review handoffs and context-rich skill requests, follow `s
 ```powershell
 Get-Content "$platform/system/OpenGuidePlatform.Agents.Integration/translation-playbook.md"
 ```
+
+In the resolved installed package, open `system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md` for human-facing setup, task explanations and SVG diagrams. The same pages are browsable in OGP at the package source commit. Keep site-specific policy in the consumer repository.
