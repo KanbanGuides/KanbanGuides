@@ -1,5 +1,7 @@
 # Kanban Guides Documentation
 
+**Want to translate a guide? [Start here](translations.md#start-here)** for the team contact, agent setup, shared instructions and submission handoff. No tool installation is needed to ask for help.
+
 This repository hosts the canonical copies of two guides: **The Kanban Guide** and the **Open Guide to Kanban**, published at [kanbanguides.org](https://kanbanguides.org).
 
 ## About This Project

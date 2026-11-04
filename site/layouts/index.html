@@ -23,6 +23,7 @@
     <p class="kg-eyebrow">{{ $copy.hero.eyebrow }}</p>
     <h1 id="kg-title">{{ $copy.hero.title }}<br>{{ $copy.hero.subtitle }}</h1>
     <p class="kg-intro">{{ $copy.hero.description }}</p>
+    <p><a href="{{ strings.TrimSuffix "/" .Site.Params.githubUrl }}/blob/main/docs/translations.md#start-here" lang="en">Help translate (English)</a></p>
   </section>
   <section id="guides" class="kg-guides" aria-label="{{ $copy.ui.guides }}">
   {{ range $guides.ByWeight }}
