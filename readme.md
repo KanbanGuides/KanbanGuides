@@ -1,5 +1,7 @@
 # Kanban Guides
 
+**Want to translate a guide? [Start here](docs/translations.md#start-here)** for the team contact, agent setup, shared instructions and submission handoff. No tool installation is needed to ask for help.
+
 The Kanban Guides is a free, community-driven reference for applying Kanban in knowledge work. It defines the core practices, and metrics, necessary to improve flow, optimise value delivery, and enhance team sustainability. This guide supports scalable Kanban implementations across diverse industries and complements other agile, lean, and flow-based approaches.
 
 ## What is This?
@@ -111,9 +113,9 @@ Use PowerShell 7.4+, Hugo Extended 0.158.0+, Go and GitHub CLI from the reposito
 
 The installed release is recorded in `.OpenGuidePlatform/installation.json`; updates belong on a review branch. Prepare selects one site ring using GitVersion; CI builds, validates and deploys that ring. PRs select canary, and the current main-branch configuration selects preview. The separate production command above validates production locally without deploying it. Windows requires symbolic-link support and `git config --global core.symlinks true` before cloning.
 
-The platform selection is `v1` in `.OpenGuidePlatform/settings.yaml`: with ring `production`, builds select the latest stable OGP release within major version 1, without crossing into version 2. `Update` refreshes the installed adapters and recorded release using that selection. Site deployment rings remain independent of the platform ring. Edit user settings in `settings.yaml`; do not edit the generated installation record.
+The current platform selection is `v1.1.5` with ring `production` in `.OpenGuidePlatform/settings.yaml`. This review branch records OGP `v1.1.5` in `.OpenGuidePlatform/installation.json`; use the shared instructions matching that release. `Update` refreshes the installed adapters and recorded release using that selection. Site deployment rings remain independent of the platform ring. Edit user settings in `settings.yaml`; do not edit the generated installation record.
 
-**Current installation:** stable OGP `v1.1.2`, from source `7c3f0af967191104478df2198be42558fbf6aaff`. Local preview and production builds passed, and [hosted stages through Verify](https://github.com/KanbanGuides/KanbanGuides/actions/runs/36334270611) passed at consumer revision `4edbd5b`. This verifies the adoption candidate; it does not establish a production site deployment. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md). Shared skills are in `.agents/skills`; all 35 supplied PDFs remain unchanged.
+**Historical adoption verification:** stable OGP `v1.1.2`, from source `7c3f0af967191104478df2198be42558fbf6aaff`. Local preview and production builds passed, and [hosted stages through Verify](https://github.com/KanbanGuides/KanbanGuides/actions/runs/36334270611) passed at consumer revision `4edbd5b`. This verifies the adoption candidate; it does not establish a production site deployment. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md). Shared skills are in `.agents/skills`; all 35 supplied PDFs remain unchanged.
 
 ## Getting Started
 

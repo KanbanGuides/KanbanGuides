@@ -1,5 +1,7 @@
 # Contributing Guide
 
+**Want to translate a guide? [Start here](translations.md#start-here)** for the team contact, agent setup, shared instructions and submission handoff. No tool installation is needed to ask for help.
+
 This repository hosts the canonical copies of **The Kanban Guide** and the **Open Guide to Kanban**. Contributions are welcome and are managed through a discussion-first, collaborative process.
 
 > **All pull requests must be preceded by a site discussion.** PRs submitted without prior community discussion may be closed. This ensures all changes reflect genuine community consensus.
