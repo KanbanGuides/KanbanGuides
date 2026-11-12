@@ -6,7 +6,7 @@ Reference for maintainers and developers with repository access. For contributio
 
 ## Local Development Setup
 
-Use OGP's [shared setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [validation/development-server instructions](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/validation.md). This site requires Hugo Extended 0.158.0 or later, in addition to the installed release requirements. Site destinations are configured in [settings.yaml](../.OpenGuidePlatform/settings.yaml).
+Use OGP's [shared setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.6/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [validation/development-server instructions](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.6/system/OpenGuidePlatform.Agents.Integration/contributor-guide/validation.md). This site requires Hugo Extended 0.158.0 or later, in addition to the installed release requirements. Site destinations are configured in [settings.yaml](../.OpenGuidePlatform/settings.yaml).
 
 Translation review and the current fork deployment limitation are recorded in [site translation guidance](./translations.md#local-validation-and-review-environments).
 

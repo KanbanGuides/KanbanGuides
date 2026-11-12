@@ -1,5 +1,7 @@
 # Using the shared publishing commands
 
+This is a technical reference for installed agent skills and maintainers. People following the no-agent route should start with [manual setup](../contributor-guide/setup.md#i-do-not-have-an-agent-and-want-to-do-this-manually) and its task pages. The contributor module handles the loading/discovery code below internally; its installation notes state whether publication is available. Agents must still invoke the site's installed named skills for their tasks, not substitute a generic workflow.
+
 Installation and Update distribute these skills and the matching Core module. Follow the "Correct an existing guide" workflow in the resolved package's `system/OpenGuidePlatform.PowerShell.Core/README.md` for module loading, discovery, exact selection, editing and verification. The same commands work without an agent. Do not import an arbitrary globally installed Core version or invent inventory from test fixtures.
 
 In an adopted site, resolve `$platform` through `./.OpenGuidePlatform/Resolve-OpenGuidePlatform.ps1 -WorkspaceRoot $PWD -UseInstalled`, then import Core from that package. Run Prepare with a fresh output directory and `-PlatformSource Path -PlatformPath $platform` to use that same version. Load `<output>/discovered-site.json` with Import-GuidePolicy. Keep WorkspaceRoot set to the consumer repository root. Explicit policy inputs remain supported for callers that use them; ordinary contributors use discovery.
