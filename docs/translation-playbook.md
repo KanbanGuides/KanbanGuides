@@ -1,6 +1,6 @@
 # Kanban translation policy and review
 
-The shared [OGP contributor guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.6/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md) explains how to do the work. This page records KanbanGuides decisions and approval requirements. Start with the [site translation entry point](./translations.md).
+The shared [OGP contributor guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md) explains how to do the work. This page records KanbanGuides decisions and approval requirements. Start with the [site translation entry point](./translations.md).
 
 ## Agree Kanban editorial decisions
 

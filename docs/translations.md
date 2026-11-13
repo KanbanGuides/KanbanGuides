@@ -18,7 +18,7 @@ You can translate words without knowing how to change website files. Start with 
 
 ## Shared translation instructions
 
-Start with OGP's [first translation walkthrough](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.6/system/OpenGuidePlatform.Agents.Integration/contributor-guide/first-translation.md). It explains the people, tasks and review handoffs with diagrams. You can help review wording without installing tools: use [reviewing wording](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.6/system/OpenGuidePlatform.Agents.Integration/contributor-guide/review-wording.md). Technical volunteers use the same guide's [setup](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.6/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [task index](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.6/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md).
+Start with OGP's [first translation walkthrough](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/first-translation.md). It explains the people, tasks and review handoffs with diagrams. You can help review wording without installing tools: use [reviewing wording](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/review-wording.md). Technical volunteers use the same guide's [setup](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [task index](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md).
 
 These links match this site's OGP release. Shared procedures and diagrams live in OGP and ship with its package. This repository keeps Kanban policy and site details.
 
@@ -38,7 +38,7 @@ Guide and translation-team credits live separately in `site/data/contributions/`
 
 ## Local validation and review environments
 
-Use OGP's [validation and submission guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.6/system/OpenGuidePlatform.Agents.Integration/contributor-guide/validation.md) for commands and evidence. KanbanGuides requires Hugo Extended 0.158.0 or later, in addition to the installed package's requirements. Local production validation does not publish the site.
+Use OGP's [validation and submission guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/validation.md) for commands and evidence. KanbanGuides requires Hugo Extended 0.158.0 or later, in addition to the installed package's requirements. Local production validation does not publish the site.
 
 Site delivery destinations are in [settings.yaml](../.OpenGuidePlatform/settings.yaml). The [workflow caller](../.github/workflows/main.yaml) disables automatic deployment for fork PRs. Workflow approval does not override that setting. Maintainers must arrange and verify the approved PR canary for technical/design review before preview language review; report unavailable review environments in the PR. Production promotion requires separate guardian approval.
 

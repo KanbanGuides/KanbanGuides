@@ -11,5 +11,5 @@ delivery:
 site:
   source: site
 platform:
-  version: v1.1.6
   ring: production
+  version: v1.1.7
