@@ -14,7 +14,7 @@ Suggest improvements, corrections, or additions to the guide content.
 
 1. **Open a discussion** at [kanbanguides.org](https://kanbanguides.org) using the "Submit Ideas" button, or join the KanbanGuides Slack channel
 2. **Collaborate** with the community and guide creators — reach consensus on the proposed change
-3. Follow OGP's [setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [content-change procedure](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/content.md).
+3. Follow OGP's [setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.8/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [content-change procedure](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.8/system/OpenGuidePlatform.Agents.Integration/contributor-guide/content.md).
 4. Select the agreed guide and edition through discovery. Kanban content lives under `site/content/open-guide-to-kanban/` and `site/content/the-kanban-guide/`.
 
 5. **Submit a Pull Request**, referencing the site discussion in the PR description
