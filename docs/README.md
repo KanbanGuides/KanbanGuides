@@ -10,7 +10,7 @@ This is a community-maintained open source project. The guides are collaborative
 
 ## How to Contribute
 
-The [shared contributor guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.5/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md) supplies reusable procedures and diagrams. Local pages below record Kanban policy, contacts and site configuration.
+The [shared contributor guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.7/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md) supplies reusable procedures and diagrams. Local pages below record Kanban policy, contacts and site configuration.
 
 There are two contribution paths:
 
