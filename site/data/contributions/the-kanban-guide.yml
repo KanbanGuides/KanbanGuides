@@ -19,7 +19,7 @@
   githubUsername: ViralGoodAgile
   url: https://www.linkedin.com/in/johnanthonycoleman/
   role: creator
-  founder: true
+  flags: [founder]
   contributions:
     - "2020.7"
     - "2020.12"
@@ -33,7 +33,7 @@
   url: https://www.linkedin.com/in/danielvacanti/
   githubUsername: danielvacanti
   role: creator
-  founder: true
+  flags: [founder]
   contributions:
     - "2020.7"
     - "2020.12"
@@ -50,7 +50,7 @@
     - "2020.12"
     - "2025.5"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Colleen Johnson
@@ -59,7 +59,7 @@
     - "2020.12"
     - "2025.5"
   weight: 2
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Prateek Singh
@@ -67,7 +67,7 @@
     - "2020.12"
     - "2025.5"
   weight: 2
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Christian Neverdal
@@ -76,7 +76,7 @@
     - "2020.12"
     - "2025.5"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Magdalena Firlit
@@ -85,7 +85,7 @@
     - "2020.12"
     - "2025.5"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Tom Gilb
@@ -94,7 +94,7 @@
     - "2020.12"
     - "2025.5"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Steve Tendon
@@ -102,7 +102,7 @@
     - "2020.12"
     - "2025.5"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Yuval Yeret
@@ -111,7 +111,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Steve Porter
@@ -120,7 +120,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Emily Coleman
@@ -128,7 +128,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Ryan Ripley
@@ -137,7 +137,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Todd Miller
@@ -146,7 +146,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Jose Casal
@@ -155,7 +155,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Jean-Paul Bayley
@@ -163,7 +163,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Dave West
@@ -172,7 +172,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Eric Naiburg
@@ -181,7 +181,7 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
 
 - name: Deborah Zanke
@@ -189,5 +189,5 @@
     - "2020.7"
     - "2020.12"
   weight: 100
-  founder: true
+  flags: [founder]
   role: contributor
