@@ -80,6 +80,10 @@ languages:
       status: reference
 
 params:
+  contributorFilters:
+    homepageGuideAuthors:
+      roles: [creator]
+    homepageGuideContributors: {}
   description: Authoritative and Open Resources for Flow-Based Work
   keywords: Kanban, Open Guide to Kanban, kanban guide, kanban method, knowledge work, flow optimisation, WIP limits, value delivery, agile, lean, continuous improvement, service level expectation, cumulative flow, throughput, metrics, work item age, flow efficiency, visualisation, work in progress, process improvement, kanban board, definition of workflow, outcome-oriented delivery
   og_image: /images/kanban-guides-logo-light-1280x640.png
@@ -146,7 +150,7 @@ module:
     min: "0.158.0"
     extended: true
   imports:
-    - path: github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides
+    - path: github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides/v2
 
 markup:
   goldmark:

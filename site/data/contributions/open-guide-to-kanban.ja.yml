@@ -3,7 +3,7 @@
   githubUsername: tomoharunagasawa
   url: https://www.linkedin.com/in/tnagasawa/
   role: translator
-  founder: true
+  flags: [founder]
   contributions:
     - "2025.7"
   weight: 1

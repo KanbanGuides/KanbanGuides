@@ -8,7 +8,7 @@
   contributions:
     - "2025.7"
   role: creator
-  founder: true
+  flags: [founder]
   weight: 1
   localizedNames:
     fa: جان کولمن
@@ -22,7 +22,7 @@
     - "2025.7"
   role: contributor
   weight: 100
-  founder: true
+  flags: [founder]
 
 - name: Andy Carmichael
   url: https://www.linkedin.com/in/andycarmichael/
@@ -31,7 +31,7 @@
     - "2025.7"
   role: reviewer
   weight: 100
-  founder: true
+  flags: [founder]
 
 - name: Jim Benson
   githubUsername: ourfounder
@@ -40,7 +40,7 @@
     - "2025.7"
   role: contributor
   weight: 100
-  founder: true
+  flags: [founder]
 
 - name: Magdalena Firlit
   url: https://magdalenafirlit.com/
@@ -49,7 +49,7 @@
     - "2025.7"
   role: contributor
   weight: 2
-  founder: true
+  flags: [founder]
 
 - name: Michael Forni
   url: https://www.linkedin.com/in/Michaelforni/
@@ -58,7 +58,7 @@
     - "2025.7"
   role: contributor
   weight: 100
-  founder: true
+  flags: [founder]
 
 - name: Christian Neverdal
   githubUsername: flyrev
@@ -67,7 +67,7 @@
   role: contributor
   url: https://www.linkedin.com/in/christian-neverdal/
   weight: 100
-  founder: true
+  flags: [founder]
 
 - name: Nader Talai
   contributions:
@@ -76,14 +76,14 @@
   githubUsername: nadertalai
   url: https://www.linkedin.com/in/nadertalai/
   weight: 100
-  founder: true
+  flags: [founder]
 
 - name: Steve Tendon
   contributions:
     - "2025.7"
   role: contributor
   weight: 100
-  founder: true
+  flags: [founder]
 
 - name: Nigel Thurlow
   url: https://www.linkedin.com/in/nigelthurlow/
@@ -92,7 +92,7 @@
     - "2025.7"
   role: contributor
   weight: 3
-  founder: true
+  flags: [founder]
 
 - name: Jose Casal
   url: https://www.linkedin.com/in/jcasal/
@@ -101,7 +101,7 @@
     - "2025.7"
   role: contributor
   weight: 4
-  founder: true
+  flags: [founder]
 
 - name: Rikard Skelander
   url: https://www.linkedin.com/in/rikardskelander/
@@ -109,4 +109,4 @@
   contributions:
     - "2025.7"
   role: involved
-  founder: true
+  flags: [founder]

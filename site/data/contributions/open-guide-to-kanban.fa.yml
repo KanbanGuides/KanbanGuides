@@ -4,7 +4,7 @@
   githubUsername: pedicurus
   url: https://www.agile-gap.com/p/pedram-keshavarzi
   role: translator
-  founder: true
+  flags: [founder]
   contributions:
     - "2025.7"
   weight: 1
@@ -13,7 +13,6 @@
   githubUsername: orodsem
   url: https://www.linkedin.com/in/orod-semsarzadeh/
   role: reviewer
-  founder: false
   contributions:
     - "2025.7"
   weight: 2
@@ -22,7 +21,6 @@
   githubUsername: shahrzadlotfi92
   url: https://www.linkedin.com/in/shahrzad-lotfi-a6163ba2/
   role: reviewer
-  founder: false
   contributions:
     - "2025.7"
   weight: 3
@@ -31,7 +29,6 @@
   githubUsername: Aragornsprint
   url: https://www.linkedin.com/in/morteza-moalagh-abb5ba33/
   role: reviewer
-  founder: false
   contributions:
     - "2025.7"
   weight: 4
@@ -40,7 +37,6 @@
   githubUsername: mohped
   url: https://www.linkedin.com/in/mohammad-esmaeil-pedaran/
   role: reviewer
-  founder: false
   contributions:
     - "2025.7"
   weight: 5
@@ -49,7 +45,6 @@
   githubUsername: Alinaderivarandi
   url: https://www.linkedin.com/in/ali-naderivarandi-9a269a261/
   role: reviewer
-  founder: false
   contributions:
     - "2025.7"
   weight: 6
