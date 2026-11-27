@@ -6,7 +6,7 @@ Reference for maintainers and developers with repository access. For contributio
 
 ## Local Development Setup
 
-Use OGP's [shared setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.8/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [validation/development-server instructions](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.8/system/OpenGuidePlatform.Agents.Integration/contributor-guide/validation.md). This site requires Hugo 0.158.0 or later (Extended before 0.170), in addition to the installed release requirements. Site destinations are configured in [settings.yaml](../.OpenGuidePlatform/settings.yaml).
+Use OGP's [shared setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v2.2.0-Preview.1/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md) and [validation/development-server instructions](https://github.com/nkdAgility/OpenGuidePlatform/blob/v2.2.0-Preview.1/system/OpenGuidePlatform.Agents.Integration/contributor-guide/validation.md). This site requires Hugo 0.158.0 or later (Extended before 0.170), in addition to the installed release requirements. Site destinations are configured in [settings.yaml](../.OpenGuidePlatform/settings.yaml).
 
 For builds and the local server, use the [repository build commands](../readme.md#build-and-update-this-site) from your local checkout. These commands require the YAML dependency listed there and run directly in PowerShell.
 
@@ -14,7 +14,7 @@ Translation review and the current fork deployment limitation are recorded in [s
 
 ## Architecture
 
-The site is a Hugo static site deployed to Azure Static Web Apps. All templates, partials, shortcodes, and render hooks are provided by the **OpenGuidePlatform Hugo Guides module** (`github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides`) declared in `site/go.mod`. There is no local `layouts/` directory.
+The site is a Hugo static site deployed to Azure Static Web Apps. All templates, partials, shortcodes, and render hooks are provided by the **OpenGuidePlatform Hugo Guides module** (`github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides/v2`) declared in `site/go.mod`. Site-owned overrides in `site/layouts/` preserve the bespoke homepage, navigation and UX partials.
 
 ```
 KanbanGuides/
@@ -85,7 +85,7 @@ enableMissingTranslationPlaceholders: true
 
 module:
   imports:
-    - path: github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides
+    - path: github.com/nkdAgility/OpenGuidePlatform/system/OpenGuidePlatform.Hugo.Guides/v2
 
 markup:
   goldmark:
@@ -192,11 +192,13 @@ On `main`, every commit generates a preview version: `v1.1.0-preview.166`. Relea
 Creators, contributors, reviewers, and translators are managed in YAML data files (not in content front matter):
 
 ```
-site/data/contributions/
-├── open-guide-to-kanban.yml          ← creators (authors), contributors, reviewers
-├── open-guide-to-kanban.<lang>.yml   ← one translation team per language
-├── the-kanban-guide.yml
-└── the-kanban-guide.<lang>.yml
+site/content/
+├── open-guide-to-kanban/data/
+│   ├── contributors.yml             ← creators (authors), contributors, reviewers
+│   └── translators.<lang>.yml       ← one translation team per language
+└── the-kanban-guide/data/
+    ├── contributors.yml
+    └── translators.<lang>.yml
 ```
 
 Entry structure:
@@ -255,7 +257,7 @@ choco upgrade hugo-extended   # Windows upgrade
 
 ```powershell
 # Run from project root (not from site/)
-./build.ps1 -Stage Serve -Target local
+./build.ps1 -Stage Serve -Target local -BaseUrl http://localhost:1313/
 
 # Check for port conflicts
 netstat -an | Select-String ":1313"
