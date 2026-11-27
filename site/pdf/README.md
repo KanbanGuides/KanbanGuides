@@ -13,4 +13,4 @@ Each folder may contain `pdf.yaml` (settings, merged key by key), `cover.tex`, `
 
 Only downloads explicitly declared `handling: generated` in the edition's `pdf.yaml` are eligible for generation. All other PDFs remain supplied/protected and retain their bytes. Use the [installed PDF workflow](../../.agents/skills/guide.genpdfs/SKILL.md) to inspect the plan, check fonts and tools, generate, visually review actual pages and record the required receipt. Prepare validates generated-PDF receipts; ordinary builds do not generate PDFs automatically. See the [maintainer guide](../../docs/maintainer.md#pdf-generation) for preservation and replacement requirements.
 
-Cover credits come from `site/data/contributions/<guide>.yml` (role `creator` = authors) and `<guide>.<lang>.yml` (translation teams). Do not put fonts, `dir`, `author` or `translators` in guide front matter.
+Cover credits come from `site/content/<guide>/data/contributors.yml` (role `creator` = authors) and `site/content/<guide>/data/translators.<lang>.yml` (translation teams). Do not put fonts, `dir`, `author` or `translators` in guide front matter.

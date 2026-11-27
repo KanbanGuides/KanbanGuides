@@ -1,5 +1,21 @@
 # OpenGuidePlatform adoption
 
+## Current installation: v2.2.0-Preview.1
+
+On 2026-11-27 the coordinated Update workflow selected OGP `v2.2.0-Preview.1`, source `e3a623c0926095eb14968075b43f364103c61cc6`, with platform ring `preview`. The installation record, native Hugo dependency and both workflow callers select that release. Site delivery destinations and publication exclusions are unchanged; the platform ring does not determine the site deployment ring.
+
+All 13 attribution files moved byte-for-byte from `site/data/contributions/` to each guide's `site/content/<guide>/data/` directory. Guide records use `contributors.yml`; translation teams use `translators.<language>.yml`. All 45 resolved edition/language credit selections match the pre-update baseline, and all 35 PDF hashes are unchanged. See [the maintained file layout](maintainer.md#contributor-attribution).
+
+Full local preview and production builds passed with no ERROR lines, validating 323 and 242 output files respectively. Prepare evidence is in `.processing/attribution-preview/prepare` and `.processing/attribution-production/prepare`. Browser inspection confirmed the bespoke homepage's author bylines, both guides' contributor listings, and Persian contributor/translation-team credits. Independent read-only review found no actionable findings. These are technical adoption checks, not production-promotion approval or a claim of exhaustive editorial review.
+
+`gh actions-lock --no-narrow` and `gh actions-lock --verify` succeeded. The tool covers the setup/stale workflows' action dependencies; reusable main/close workflow calls remain outside its lockfile coverage. Their version references were updated by coordinated Update while preserving triggers, inputs and secrets.
+
+Existing caveats remain: The Kanban Guide's French translation has no translator record; the preview-versus-stable module warning and existing Hugo warnings remain; and the installation's independent-agent-controls adoption blocker is still recorded. This change does not invent translator identities, change content, regenerate PDFs or configure contributor machines.
+
+## Earlier adoption record
+
+The following sections retain historical decisions and evidence; the current installation above supersedes their version and file-location descriptions.
+
 Status (2026-09-27): `.OpenGuidePlatform/installation.json` records stable OGP `v1.1.2`, from source `7c3f0af967191104478df2198be42558fbf6aaff`. User settings retain the `v1` version family and now select the `production` platform ring. Both workflow callers select `@v1`, and the native Hugo dependency is `v1.1.2`. The platform ring is independent of the site's deployment ring.
 
 Local preview and production builds passed with zero ERROR lines and artifact validation passed (310 and 233 files respectively). Both recorded the same OGP version and source identity in `platform-context.json`. All 35 supplied PDF hashes and the production language-exclusion configuration are unchanged. [Hosted stages through Verify](https://github.com/KanbanGuides/KanbanGuides/actions/runs/36334270611) passed at consumer revision `4edbd5bc0bb92dad763b4f323d725217d461c863`. These are adoption-candidate checks, not proof of a production site deployment or exhaustive visual review.

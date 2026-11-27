@@ -71,7 +71,7 @@ The administrator(s) of the official website(s) for accessing Open Guide to Kanb
 11. The translator may not exchange a translation related to the Open Guide to Kanban for monetary gain.
 12. The translation group name, social media handles, and email addresses must not bring the Open Guide to Kanban into disrepute, as decided by the translation guardian..
 
-Structured translation-team credits in `site/data/contributions/{guide}.{lang}.yml` supply website and PDF credits; they do not replace the Translator Acknowledgement section required above or the change history required by Section 6. Follow the [Translation Guide](./translations.md#where-the-translated-experience-lives) for their technical location, preserving the consent requirements in this policy.
+Structured translation-team credits in `site/content/{guide}/data/translators.{lang}.yml` supply website and PDF credits; they do not replace the Translator Acknowledgement section required above or the change history required by Section 6. Follow the [Translation Guide](./translations.md#where-the-translated-experience-lives) for their technical location, preserving the consent requirements in this policy.
 
 # 5\. Reserved Words
 

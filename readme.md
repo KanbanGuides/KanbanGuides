@@ -51,7 +51,7 @@ Making Kanban knowledge accessible globally is essential.
 
 ## How to Contribute
 
-Start with the [shared OGP contributor guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.8/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md) for plain-English explanations, diagrams and task instructions. For Kanban-specific translation decisions, read [site translation guidance](./docs/translations.md).
+Start with the [shared OGP contributor guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v2.2.0-Preview.1/system/OpenGuidePlatform.Agents.Integration/contributor-guide/README.md) for plain-English explanations, diagrams and task instructions. For Kanban-specific translation decisions, read [site translation guidance](./docs/translations.md).
 
 ### Content Contributors
 
@@ -75,7 +75,7 @@ Contributions include:
 **Guidance:**
 
 - [Documentation Overview](./docs/README.md)
-- [Shared setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v1.1.8/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md)
+- [Shared setup guide](https://github.com/nkdAgility/OpenGuidePlatform/blob/v2.2.0-Preview.1/system/OpenGuidePlatform.Agents.Integration/contributor-guide/setup.md)
 - [Contributing Guidelines](./docs/contributing.md)
 
 ## About the Authors
@@ -108,14 +108,16 @@ Run these commands from the repository root:
 ```powershell
 ./build.ps1 -Target preview
 ./build.ps1 -Target production
-./build.ps1 -Stage Serve -Target local
+./build.ps1 -Stage Serve -Target local -BaseUrl http://localhost:1313/
 ./build.ps1 Update -WhatIf
 ./build.ps1 Update
 ```
 
 The installed release is recorded in `.OpenGuidePlatform/installation.json`; updates belong on a review branch. Prepare selects one site ring using GitVersion; CI builds, validates and deploys that ring. PRs select canary, and the current main-branch configuration selects preview. The separate production command above validates production locally without deploying it. Windows requires symbolic-link support and `git config --global core.symlinks true` before cloning.
 
-The current platform selection is `v1.1.8` with ring `production` in `.OpenGuidePlatform/settings.yaml`. The installation records OGP `v1.1.8` in `.OpenGuidePlatform/installation.json`; use the shared instructions matching that release. `Update` refreshes the installed adapters and recorded release using that selection. Site deployment rings remain independent of the platform ring. Edit user settings in `settings.yaml`; do not edit the generated installation record.
+The current platform selection is `v2.2.0-Preview.1` with ring `preview` in `.OpenGuidePlatform/settings.yaml`. The installation records OGP `v2.2.0-Preview.1` in `.OpenGuidePlatform/installation.json`; use the shared instructions matching that release. `Update` refreshes the installed adapters and recorded release using that selection. Site deployment rings remain independent of the platform ring. Edit user settings in `settings.yaml`; do not edit the generated installation record.
+
+Guide attribution lives beside each guide in `site/content/<guide>/data/contributors.yml` and `translators.<language>.yml`. Edition associations, translation teams and supplied PDFs are preserved. See [contributor attribution](docs/maintainer.md#contributor-attribution) for the layout and [current adoption evidence](docs/open-guide-platform-adoption.md) for verification. This preview package selection is separate from production promotion.
 
 **Historical adoption verification:** stable OGP `v1.1.2`, from source `7c3f0af967191104478df2198be42558fbf6aaff`. Local preview and production builds passed, and [hosted stages through Verify](https://github.com/KanbanGuides/KanbanGuides/actions/runs/36334270611) passed at consumer revision `4edbd5b`. This verifies the adoption candidate; it does not establish a production site deployment. See the [adoption checklist and evidence](docs/open-guide-platform-adoption.md). Shared skills are in `.agents/skills`; all 35 supplied PDFs remain unchanged.
 
